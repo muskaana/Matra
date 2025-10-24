@@ -66,14 +66,14 @@ export default function PracticePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-sm mx-auto pt-4">
-        <div className="text-center mb-3">
+    <div className="min-h-screen bg-white p-5">
+      <div className="w-full max-w-sm mx-auto">
+        <div className="text-center mb-4">
           <p className="text-xs text-gray-400 mb-0.5">1.1 {practice.pageNumber}</p>
           <h2 className="text-sm font-medium text-gray-500">{practice.title}</h2>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 text-center">
+        <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
           <p className="text-base text-gray-700 mb-6">{practice.question}</p>
 
           <div className="space-y-3 mb-6">

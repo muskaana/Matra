@@ -150,14 +150,14 @@ export default function QuizPage() {
 
   if (showFeedback) {
     return (
-      <div className="min-h-screen bg-gray-100 p-4">
-        <div className="w-full max-w-sm mx-auto pt-4">
-          <div className="text-center mb-3">
+      <div className="min-h-screen bg-white p-5">
+        <div className="w-full max-w-sm mx-auto">
+          <div className="text-center mb-4">
             <p className="text-xs text-gray-400 mb-0.5">1.1 {quiz.pageNumber}</p>
             <h2 className="text-sm font-medium text-gray-500">{quiz.title}</h2>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 text-center">
+          <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
             <div className="mb-6">
               <div className="text-2xl font-bold text-black mb-3">{quiz.question}</div>
               <p className="text-gray-600 text-sm mb-4">{quiz.subQuestion}</p>
@@ -204,14 +204,14 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-sm mx-auto pt-4">
-        <div className="text-center mb-3">
+    <div className="min-h-screen bg-white p-5">
+      <div className="w-full max-w-sm mx-auto">
+        <div className="text-center mb-4">
           <p className="text-xs text-gray-400 mb-0.5">1.1 {quiz.pageNumber}</p>
           <h2 className="text-sm font-medium text-gray-500">{quiz.title}</h2>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 text-center">
+        <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
           <div className="mb-6">
             <div className="text-3xl font-bold text-black mb-3">{quiz.question}</div>
             <p className="text-gray-600 mb-6 text-sm">{quiz.subQuestion}</p>

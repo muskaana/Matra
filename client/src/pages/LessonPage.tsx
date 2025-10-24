@@ -1,0 +1,245 @@
+import React from "react";
+import { Link, useParams } from "wouter";
+import { Volume2, Book, MessageSquare, FileText } from "lucide-react";
+
+const lessonData: Record<string, any> = {
+  "1": {
+    title: "Lesson 1 : Vowels",
+    character: "अ",
+    transliteration: "a",
+    sound: '"uh"',
+    sampleWords: [
+      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "🍎" },
+      { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "⏰" },
+      { word: "अलग", transliteration: "alag", meaning: "Different", icon: "↔️" },
+      { word: "अचार", transliteration: "achaar", meaning: "Pickle", icon: "🥒" },
+    ],
+    sentence: "अbhi toh party shuru hui hai",
+    nextLesson: "2",
+    pageNumber: 1,
+  },
+  "2": {
+    title: "Lesson 1 : Vowels",
+    character: "आ",
+    transliteration: "aa",
+    sound: '"aa"',
+    sampleWords: [
+      { word: "आम", transliteration: "aam", meaning: "Mango", icon: "🥭" },
+      { word: "आसान", transliteration: "aasan", meaning: "Easy", icon: "✅" },
+    ],
+    sentence: "आराम से करो (Aaram se karo - Do it slowly)",
+    nextLesson: "practice/1",
+    pageNumber: 2,
+  },
+  "3": {
+    title: "Lesson 1 : Vowels",
+    character: "इ",
+    transliteration: "i",
+    sound: '"ee"',
+    sampleWords: [
+      { word: "इमली", transliteration: "imli", meaning: "Tamarind", icon: "🌿" },
+      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", icon: "🙏" },
+    ],
+    sentence: "इधर आओ (Idhar aao - Come here)",
+    nextLesson: "4",
+    pageNumber: 3,
+  },
+  "4": {
+    title: "Lesson 1 : Vowels",
+    character: "ई",
+    transliteration: "ee",
+    sound: '"eee"',
+    sampleWords: [
+      { word: "ईद", transliteration: "eed", meaning: "Eid", icon: "🌙" },
+      { word: "ईमान", transliteration: "eeman", meaning: "Faith", icon: "💫" },
+    ],
+    sentence: "ईश्वर है (Eeshwar hai - God exists)",
+    nextLesson: "practice/2",
+    pageNumber: 4,
+  },
+  "5": {
+    title: "Lesson 1 : Vowels",
+    character: "उ",
+    transliteration: "u",
+    sound: '"oo"',
+    sampleWords: [
+      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", icon: "🦉" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", icon: "🌟" },
+    ],
+    sentence: "उठो (Utho - Get up)",
+    nextLesson: "6",
+    pageNumber: 5,
+  },
+  "6": {
+    title: "Lesson 1 : Vowels",
+    character: "ऊ",
+    transliteration: "oo",
+    sound: '"ooo"',
+    sampleWords: [
+      { word: "ऊन", transliteration: "oon", meaning: "Wool", icon: "🧶" },
+      { word: "ऊपर", transliteration: "oopar", meaning: "Above", icon: "⬆️" },
+    ],
+    sentence: "ऊपर देखो (Oopar dekho - Look up)",
+    nextLesson: "practice/3",
+    pageNumber: 6,
+  },
+  "7": {
+    title: "Lesson 1 : Vowels",
+    character: "ऋ",
+    transliteration: "ri",
+    sound: '"ree"',
+    sampleWords: [
+      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", icon: "🧘" },
+      { word: "ऋण", transliteration: "rin", meaning: "Debt", icon: "💰" },
+    ],
+    sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
+    nextLesson: "8",
+    pageNumber: 7,
+  },
+  "8": {
+    title: "Lesson 1 : Vowels",
+    character: "ए",
+    transliteration: "e",
+    sound: '"ay"',
+    sampleWords: [
+      { word: "एक", transliteration: "ek", meaning: "One", icon: "1️⃣" },
+      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", icon: "🤝" },
+    ],
+    sentence: "एक बार और (Ek baar aur - One more time)",
+    nextLesson: "9",
+    pageNumber: 8,
+  },
+  "9": {
+    title: "Lesson 1 : Vowels",
+    character: "ऐ",
+    transliteration: "ai",
+    sound: '"aa-ay"',
+    sampleWords: [
+      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", icon: "👓" },
+      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", icon: "👉" },
+    ],
+    sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
+    nextLesson: "practice/4",
+    pageNumber: 9,
+  },
+  "10": {
+    title: "Lesson 1 : Vowels",
+    character: "ओ",
+    transliteration: "o",
+    sound: '"oh"',
+    sampleWords: [
+      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", icon: "🫚" },
+      { word: "ओस", transliteration: "os", meaning: "Dew", icon: "💧" },
+    ],
+    sentence: "ओ भाई (O bhai - Hey brother)",
+    nextLesson: "11",
+    pageNumber: 10,
+  },
+  "11": {
+    title: "Lesson 1 : Vowels",
+    character: "औ",
+    transliteration: "ao",
+    sound: '"aa-oh"',
+    sampleWords: [
+      { word: "और", transliteration: "aur", meaning: "And/More", icon: "➕" },
+      { word: "औरत", transliteration: "aurat", meaning: "Woman", icon: "👩" },
+    ],
+    sentence: "और क्या? (Aur kya? - What else?)",
+    nextLesson: "practice/5",
+    pageNumber: 11,
+  },
+};
+
+export default function LessonPage() {
+  const params = useParams();
+  const lessonId = params.id as string;
+  const lesson = lessonData[lessonId];
+
+  if (!lesson) {
+    return <div className="min-h-screen bg-white flex items-center justify-center"><p>Lesson not found</p></div>;
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-sm mx-auto pt-4">
+        <div className="text-center mb-3">
+          <p className="text-xs text-gray-400 mb-0.5">1.1 Page {lesson.pageNumber}</p>
+          <h2 className="text-sm font-medium text-gray-500">{lesson.title}</h2>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6 text-center">
+          <div className="mb-6">
+            <div className="text-8xl font-bold text-black mb-2">{lesson.character}</div>
+            <p className="text-gray-400 text-xs mb-0.5">{lesson.transliteration}</p>
+            <p className="text-gray-600 text-base">{lesson.sound}</p>
+          </div>
+
+          {lesson.sampleWords && lesson.sampleWords.length > 0 && (
+            <div className="mb-6">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <p className="text-xs text-gray-500">Sample Word{lesson.sampleWords.length > 1 ? 's' : ''}</p>
+                <button className="text-[#ff9930]">
+                  <Volume2 className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {lesson.sampleWords.map((sample: any, index: number) => (
+                  <div key={index} className="bg-gray-50 rounded-md p-3 flex items-center gap-3">
+                    {sample.icon && <div className="text-3xl flex-shrink-0">{sample.icon}</div>}
+                    <div className="flex-1 text-left">
+                      <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
+                      <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
+                      <p className="text-gray-600 text-xs">{sample.meaning}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {lesson.sentence && (
+            <div className="mb-6 bg-orange-50 rounded-md p-3">
+              <p className="text-xs text-gray-500 mb-1">Example Sentence:</p>
+              <p className="text-gray-700 text-sm italic">{lesson.sentence}</p>
+            </div>
+          )}
+
+          <div className="flex gap-2 justify-center">
+            <Link href="/script/vowels">
+              <button className="px-6 py-2 bg-white border-2 border-[#ff9930] text-[#ff9930] rounded-md hover:bg-orange-50 transition-colors text-sm font-medium">
+                Back
+              </button>
+            </Link>
+            <Link href={`/script/lesson/vowels/${lesson.nextLesson}`}>
+              <button className="px-6 py-2 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors text-sm font-medium">
+                Next
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex justify-around items-center bg-[#ff9930] rounded-md mt-4 py-2">
+          <Link href="/reading">
+            <button className="flex flex-col items-center text-white p-1.5 opacity-70">
+              <Book className="w-5 h-5 mb-0.5" />
+              <span className="text-xs">Read</span>
+            </button>
+          </Link>
+          <Link href="/script">
+            <button className="flex flex-col items-center text-white p-1.5">
+              <FileText className="w-5 h-5 mb-0.5" />
+              <span className="text-xs font-semibold">Script</span>
+            </button>
+          </Link>
+          <Link href="/conversation">
+            <button className="flex flex-col items-center text-white p-1.5 opacity-70">
+              <MessageSquare className="w-5 h-5 mb-0.5" />
+              <span className="text-xs">Talk</span>
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -14,18 +14,18 @@ export default function ReadingPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         <div className="flex-1 flex flex-col">
-          <div className="bg-[#ff9930] text-white px-5 py-3 rounded-t-lg font-semibold text-lg">
+          <div className="bg-[#ff9930] text-white px-6 py-3.5 rounded-t-xl font-semibold text-lg">
             Reading Practice
           </div>
           
-          <div className="bg-white p-5 rounded-b-lg shadow-md flex-1 border-x border-b border-gray-200">
-            <div className="grid grid-cols-2 gap-3">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
+            <div className="grid grid-cols-2 gap-4">
               {readings.map((reading) => (
-                <div key={reading.id} className="flex flex-col items-center gap-1.5">
-                  <div className="w-24 h-24 bg-[#ff9930] rounded-lg shadow-md"></div>
-                  <span className="text-sm font-medium text-black">{reading.title}</span>
+                <div key={reading.id} className="flex flex-col items-center gap-2">
+                  <div className="w-28 h-28 bg-[#ff9930] rounded-xl shadow-lg"></div>
+                  <span className="text-sm font-medium text-black text-center">{reading.title}</span>
                 </div>
               ))}
             </div>

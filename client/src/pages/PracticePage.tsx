@@ -68,16 +68,12 @@ export default function PracticePage() {
   return (
     <div className="min-h-screen bg-white p-5">
       <div className="w-full max-w-sm mx-auto">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
           </Link>
-          <div className="text-center flex-1">
-            <p className="text-xs text-gray-400 mb-0.5">1.1 {practice.pageNumber}</p>
-            <h2 className="text-sm font-medium text-gray-500">{practice.title}</h2>
-          </div>
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-600" />
@@ -100,7 +96,7 @@ export default function PracticePage() {
           {!completed && (
             <button
               onClick={() => setCompleted(true)}
-              className="px-8 py-2.5 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-sm"
+              className="w-full py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-semibold text-base"
             >
               I understand
             </button>
@@ -108,7 +104,7 @@ export default function PracticePage() {
 
           {completed && (
             <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
-              <button className="px-8 py-2.5 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-sm shadow-md">
+              <button className="w-full py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-semibold text-base shadow-md">
                 Continue to Quiz
               </button>
             </Link>

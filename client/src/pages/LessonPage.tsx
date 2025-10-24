@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "wouter";
-import { Volume2, X, ChevronLeft } from "lucide-react";
+import { Volume2, X, ChevronLeft, Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, Glasses, MoveRight, Droplet, Plus, UserCircle } from "lucide-react";
 
 const lessonData: Record<string, any> = {
   "1": {
@@ -9,10 +9,10 @@ const lessonData: Record<string, any> = {
     transliteration: "a",
     sound: '"uh"',
     sampleWords: [
-      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "🍎" },
-      { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "⏰" },
-      { word: "अलग", transliteration: "alag", meaning: "Different", icon: "↔️" },
-      { word: "अचार", transliteration: "achaar", meaning: "Pickle", icon: "🥒" },
+      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "Apple" },
+      { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "Clock" },
+      { word: "अलग", transliteration: "alag", meaning: "Different", icon: "ArrowLeftRight" },
+      { word: "अचार", transliteration: "achaar", meaning: "Pickle", icon: "Salad" },
     ],
     sentence: "अbhi toh party shuru hui hai",
     nextLesson: "2",
@@ -24,8 +24,8 @@ const lessonData: Record<string, any> = {
     transliteration: "aa",
     sound: '"aa"',
     sampleWords: [
-      { word: "आम", transliteration: "aam", meaning: "Mango", icon: "🥭" },
-      { word: "आसान", transliteration: "aasan", meaning: "Easy", icon: "✅" },
+      { word: "आम", transliteration: "aam", meaning: "Mango", icon: "Cherry" },
+      { word: "आसान", transliteration: "aasan", meaning: "Easy", icon: "CheckCircle" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
     nextLesson: "practice/1",
@@ -37,8 +37,8 @@ const lessonData: Record<string, any> = {
     transliteration: "i",
     sound: '"ee"',
     sampleWords: [
-      { word: "इमली", transliteration: "imli", meaning: "Tamarind", icon: "🌿" },
-      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", icon: "🙏" },
+      { word: "इमली", transliteration: "imli", meaning: "Tamarind", icon: "Leaf" },
+      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", icon: "HandHeart" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
     nextLesson: "4",
@@ -50,8 +50,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ee",
     sound: '"eee"',
     sampleWords: [
-      { word: "ईद", transliteration: "eed", meaning: "Eid", icon: "🌙" },
-      { word: "ईमान", transliteration: "eeman", meaning: "Faith", icon: "💫" },
+      { word: "ईद", transliteration: "eed", meaning: "Eid", icon: "Moon" },
+      { word: "ईमान", transliteration: "eeman", meaning: "Faith", icon: "Sparkles" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
     nextLesson: "practice/2",
@@ -63,8 +63,8 @@ const lessonData: Record<string, any> = {
     transliteration: "u",
     sound: '"oo"',
     sampleWords: [
-      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", icon: "🦉" },
-      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", icon: "🌟" },
+      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", icon: "Bird" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", icon: "Star" },
     ],
     sentence: "उठो (Utho - Get up)",
     nextLesson: "6",
@@ -76,8 +76,8 @@ const lessonData: Record<string, any> = {
     transliteration: "oo",
     sound: '"ooo"',
     sampleWords: [
-      { word: "ऊन", transliteration: "oon", meaning: "Wool", icon: "🧶" },
-      { word: "ऊपर", transliteration: "oopar", meaning: "Above", icon: "⬆️" },
+      { word: "ऊन", transliteration: "oon", meaning: "Wool", icon: "Shirt" },
+      { word: "ऊपर", transliteration: "oopar", meaning: "Above", icon: "ArrowUp" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
     nextLesson: "practice/3",
@@ -89,8 +89,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ri",
     sound: '"ree"',
     sampleWords: [
-      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", icon: "🧘" },
-      { word: "ऋण", transliteration: "rin", meaning: "Debt", icon: "💰" },
+      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", icon: "User" },
+      { word: "ऋण", transliteration: "rin", meaning: "Debt", icon: "DollarSign" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
     nextLesson: "8",
@@ -102,8 +102,8 @@ const lessonData: Record<string, any> = {
     transliteration: "e",
     sound: '"ay"',
     sampleWords: [
-      { word: "एक", transliteration: "ek", meaning: "One", icon: "1️⃣" },
-      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", icon: "🤝" },
+      { word: "एक", transliteration: "ek", meaning: "One", icon: "Hash" },
+      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", icon: "Users" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
     nextLesson: "9",
@@ -115,8 +115,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ai",
     sound: '"aa-ay"',
     sampleWords: [
-      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", icon: "👓" },
-      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", icon: "👉" },
+      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", icon: "Glasses" },
+      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", icon: "MoveRight" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
     nextLesson: "practice/4",
@@ -128,8 +128,8 @@ const lessonData: Record<string, any> = {
     transliteration: "o",
     sound: '"oh"',
     sampleWords: [
-      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", icon: "🫚" },
-      { word: "ओस", transliteration: "os", meaning: "Dew", icon: "💧" },
+      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", icon: "Salad" },
+      { word: "ओस", transliteration: "os", meaning: "Dew", icon: "Droplet" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
     nextLesson: "11",
@@ -141,8 +141,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ao",
     sound: '"aa-oh"',
     sampleWords: [
-      { word: "और", transliteration: "aur", meaning: "And/More", icon: "➕" },
-      { word: "औरत", transliteration: "aurat", meaning: "Woman", icon: "👩" },
+      { word: "और", transliteration: "aur", meaning: "And/More", icon: "Plus" },
+      { word: "औरत", transliteration: "aurat", meaning: "Woman", icon: "UserCircle" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
     nextLesson: "practice/5",
@@ -162,16 +162,12 @@ export default function LessonPage() {
   return (
     <div className="min-h-screen bg-white p-5">
       <div className="w-full max-w-sm mx-auto">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
           </Link>
-          <div className="text-center flex-1">
-            <p className="text-xs text-gray-400 mb-0.5">1.1 Page {lesson.pageNumber}</p>
-            <h2 className="text-sm font-medium text-gray-500">{lesson.title}</h2>
-          </div>
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-600" />
@@ -196,16 +192,28 @@ export default function LessonPage() {
               </div>
 
               <div className="space-y-2">
-                {lesson.sampleWords.map((sample: any, index: number) => (
-                  <div key={index} className="bg-gray-50 rounded-md p-3 flex items-center gap-3">
-                    {sample.icon && <div className="text-3xl flex-shrink-0">{sample.icon}</div>}
-                    <div className="flex-1 text-left">
-                      <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
-                      <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
-                      <p className="text-gray-600 text-xs">{sample.meaning}</p>
+                {lesson.sampleWords.map((sample: any, index: number) => {
+                  const IconComponent = sample.icon ? {
+                    Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart,
+                    Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash,
+                    Users, Glasses, MoveRight, Droplet, Plus, UserCircle
+                  }[sample.icon] : null;
+                  
+                  return (
+                    <div key={index} className="bg-gray-50 rounded-md p-3 flex items-center gap-3">
+                      {IconComponent && (
+                        <div className="flex-shrink-0 w-10 h-10 bg-[#ff9930] rounded-full flex items-center justify-center">
+                          <IconComponent className="w-6 h-6 text-white" />
+                        </div>
+                      )}
+                      <div className="flex-1 text-left">
+                        <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
+                        <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
+                        <p className="text-gray-600 text-xs">{sample.meaning}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -217,9 +225,9 @@ export default function LessonPage() {
             </div>
           )}
 
-          <div className="flex gap-2 justify-center mt-6">
+          <div className="flex justify-center mt-6">
             <Link href={`/script/lesson/vowels/${lesson.nextLesson}`}>
-              <button className="px-8 py-2.5 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors text-sm font-medium shadow-md">
+              <button className="w-full py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors text-base font-semibold shadow-md">
                 Next
               </button>
             </Link>

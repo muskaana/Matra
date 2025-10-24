@@ -13,20 +13,20 @@ export default function ConversationPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         <div className="flex-1 flex flex-col">
-          <div className="bg-[#ff9930] text-white px-5 py-3 rounded-t-lg font-semibold text-lg">
+          <div className="bg-[#ff9930] text-white px-6 py-3.5 rounded-t-xl font-semibold text-lg">
             Casual Conversation Skills
           </div>
           
-          <div className="bg-white p-5 rounded-b-lg shadow-md flex-1 border-x border-b border-gray-200">
-            <div className="space-y-2.5">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
+            <div className="space-y-3.5">
               {topics.map((topic, index) => (
                 <button
                   key={topic.id}
-                  className="w-full flex items-center gap-3 p-2.5 bg-white border-2 border-gray-200 rounded-full hover:border-[#ff9930] transition-colors shadow-sm"
+                  className="w-full flex items-center gap-4 p-3 bg-white border-2 border-gray-200 rounded-full hover:border-[#ff9930] transition-colors shadow-md"
                 >
-                  <div className="w-11 h-11 bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 shadow-sm">
+                  <div className="w-12 h-12 bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 shadow-lg">
                     {index + 1}
                   </div>
                   <span className="text-left font-medium text-black text-base">{topic.title}</span>

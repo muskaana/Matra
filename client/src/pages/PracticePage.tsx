@@ -96,7 +96,7 @@ export default function PracticePage() {
           {!completed && (
             <button
               onClick={() => setCompleted(true)}
-              className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors font-semibold text-lg shadow-lg"
+              className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
             >
               I understand
             </button>
@@ -104,7 +104,7 @@ export default function PracticePage() {
 
           {completed && (
             <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
-              <button className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors font-semibold text-lg shadow-lg">
+              <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
                 Continue to Quiz
               </button>
             </Link>

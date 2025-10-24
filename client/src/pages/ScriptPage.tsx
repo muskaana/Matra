@@ -37,22 +37,22 @@ export default function ScriptPage() {
           </div>
         </div>
         
-        <div className="flex justify-around items-center bg-[#ff9930] rounded-lg mt-4 py-2.5 shadow-md">
+        <div className="flex justify-around items-center bg-[#ff9930] hover:bg-[#CF7B24] transition-colors rounded-xl mt-6 py-3 shadow-lg">
           <Link href="/reading">
-            <button className="flex flex-col items-center text-white p-1.5 opacity-70 hover:opacity-100 transition-opacity">
-              <Book className="w-5 h-5 mb-0.5" />
+            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 transition-opacity">
+              <Book className="w-6 h-6 mb-1" />
               <span className="text-xs font-medium">Read</span>
             </button>
           </Link>
           <Link href="/script">
-            <button className="flex flex-col items-center text-white p-1.5">
-              <FileText className="w-5 h-5 mb-0.5" />
+            <button className="flex flex-col items-center text-white p-2">
+              <FileText className="w-6 h-6 mb-1" />
               <span className="text-xs font-bold">Script</span>
             </button>
           </Link>
           <Link href="/conversation">
-            <button className="flex flex-col items-center text-white p-1.5 opacity-70 hover:opacity-100 transition-opacity">
-              <MessageSquare className="w-5 h-5 mb-0.5" />
+            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 transition-opacity">
+              <MessageSquare className="w-6 h-6 mb-1" />
               <span className="text-xs font-medium">Talk</span>
             </button>
           </Link>

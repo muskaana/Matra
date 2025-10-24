@@ -178,7 +178,7 @@ export default function QuizPage() {
             )}
 
             <Link href={typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/') ? quiz.nextLesson : `/script/lesson/vowels/${quiz.nextLesson}`}>
-              <button className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors font-semibold text-lg shadow-lg">
+              <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
                 Next
               </button>
             </Link>

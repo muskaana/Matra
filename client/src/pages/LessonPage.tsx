@@ -184,49 +184,49 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white p-5">
-      <div className="w-full max-w-sm mx-auto">
-        <div className="flex items-center justify-between mb-6">
+    <div className="min-h-screen bg-white px-4 py-6">
+      <div className="w-full max-w-md mx-auto">
+        <div className="flex items-center justify-between mb-8">
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
           <Link href="/script/vowels">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X className="w-5 h-5 text-gray-600" />
+              <X className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
-          <div className="mb-6">
-            <div className="text-8xl font-bold text-black mb-2">{lesson.character}</div>
-            <p className="text-gray-400 text-xs mb-0.5">{lesson.transliteration}</p>
-            <p className="text-gray-600 text-base">{lesson.sound}</p>
+        <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gray-100">
+          <div className="mb-8">
+            <div className="text-9xl font-bold text-black mb-3">{lesson.character}</div>
+            <p className="text-gray-400 text-sm mb-1">{lesson.transliteration}</p>
+            <p className="text-gray-600 text-lg">{lesson.sound}</p>
           </div>
 
           {lesson.sampleWords && lesson.sampleWords.length > 0 && (
-            <div className="mb-6">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <p className="text-xs text-gray-500">Sample Word{lesson.sampleWords.length > 1 ? 's' : ''}</p>
-                <button className="text-[#ff9930]">
-                  <Volume2 className="w-4 h-4" />
+            <div className="mb-8">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <p className="text-sm text-gray-500 font-medium">Sample Word{lesson.sampleWords.length > 1 ? 's' : ''}</p>
+                <button className="text-[#ff9930] hover:text-[#CF7B24] transition-colors">
+                  <Volume2 className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {lesson.sampleWords.map((sample: any, index: number) => (
-                  <div key={index} className="bg-gray-50 rounded-lg p-3 flex items-center gap-4">
+                  <div key={index} className="bg-gray-50 rounded-xl p-4 flex items-center gap-4">
                     {sample.emoji && (
-                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-[#ff9930] to-[#ff8800] rounded-xl flex items-center justify-center shadow-md">
-                        <span className="text-3xl">{sample.emoji}</span>
+                      <div className="flex-shrink-0 w-16 h-16 bg-[#ff9930] rounded-2xl flex items-center justify-center shadow-lg">
+                        <span className="text-4xl filter drop-shadow-sm">{sample.emoji}</span>
                       </div>
                     )}
                     <div className="flex-1 text-left">
-                      <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
-                      <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
-                      <p className="text-gray-600 text-xs">{sample.meaning}</p>
+                      <div className="text-3xl font-bold text-black mb-1">{sample.word}</div>
+                      <p className="text-gray-400 italic text-sm">{sample.transliteration}</p>
+                      <p className="text-gray-600 text-sm">{sample.meaning}</p>
                     </div>
                   </div>
                 ))}
@@ -235,15 +235,15 @@ export default function LessonPage() {
           )}
 
           {lesson.sentence && (
-            <div className="mb-6 bg-orange-50 rounded-md p-3">
-              <p className="text-xs text-gray-500 mb-1">Example Sentence:</p>
-              <p className="text-gray-700 text-sm italic">{lesson.sentence}</p>
+            <div className="mb-8 bg-orange-50 rounded-xl p-4">
+              <p className="text-sm text-gray-500 mb-2 font-medium">Example Sentence:</p>
+              <p className="text-gray-700 text-base italic">{lesson.sentence}</p>
             </div>
           )}
 
           <button 
             onClick={handleNext}
-            className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors text-lg font-semibold shadow-lg mt-6"
+            className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg"
           >
             Next
           </button>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft, Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, Glasses, MoveRight, Droplet, Plus, UserCircle } from "lucide-react";
 
 const lessonData: Record<string, any> = {
@@ -15,11 +15,12 @@ const lessonData: Record<string, any> = {
       { word: "अचार", transliteration: "achaar", meaning: "Pickle", emoji: "🥒" },
     ],
     sentence: "अbhi toh party shuru hui hai",
-    nextLesson: "2",
+    returnToHome: true,
+    lessonNumber: 1,
     pageNumber: 1,
   },
   "2": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 2 : Vowels",
     character: "आ",
     transliteration: "aa",
     sound: '"aa"',
@@ -28,11 +29,12 @@ const lessonData: Record<string, any> = {
       { word: "आसान", transliteration: "aasan", meaning: "Easy", emoji: "✅" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
-    nextLesson: "practice/1",
+    returnToHome: true,
+    lessonNumber: 2,
     pageNumber: 2,
   },
   "3": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 3 : Vowels",
     character: "इ",
     transliteration: "i",
     sound: '"ee"',
@@ -41,11 +43,12 @@ const lessonData: Record<string, any> = {
       { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", emoji: "🙏" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
-    nextLesson: "4",
+    returnToHome: true,
+    lessonNumber: 3,
     pageNumber: 3,
   },
   "4": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 4 : Vowels",
     character: "ई",
     transliteration: "ee",
     sound: '"eee"',
@@ -54,11 +57,12 @@ const lessonData: Record<string, any> = {
       { word: "ईमान", transliteration: "eeman", meaning: "Faith", emoji: "✨" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
-    nextLesson: "practice/2",
+    returnToHome: true,
+    lessonNumber: 4,
     pageNumber: 4,
   },
   "5": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 5 : Vowels",
     character: "उ",
     transliteration: "u",
     sound: '"oo"',
@@ -67,11 +71,12 @@ const lessonData: Record<string, any> = {
       { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", emoji: "⭐" },
     ],
     sentence: "उठो (Utho - Get up)",
-    nextLesson: "6",
+    returnToHome: true,
+    lessonNumber: 5,
     pageNumber: 5,
   },
   "6": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 6 : Vowels",
     character: "ऊ",
     transliteration: "oo",
     sound: '"ooo"',
@@ -80,11 +85,12 @@ const lessonData: Record<string, any> = {
       { word: "ऊपर", transliteration: "oopar", meaning: "Above", emoji: "⬆️" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
-    nextLesson: "practice/3",
+    returnToHome: true,
+    lessonNumber: 6,
     pageNumber: 6,
   },
   "7": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 7 : Vowels",
     character: "ऋ",
     transliteration: "ri",
     sound: '"ree"',
@@ -93,11 +99,12 @@ const lessonData: Record<string, any> = {
       { word: "ऋण", transliteration: "rin", meaning: "Debt", emoji: "💰" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
-    nextLesson: "8",
+    returnToHome: true,
+    lessonNumber: 7,
     pageNumber: 7,
   },
   "8": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 8 : Vowels",
     character: "ए",
     transliteration: "e",
     sound: '"ay"',
@@ -106,11 +113,12 @@ const lessonData: Record<string, any> = {
       { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", emoji: "🤝" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
-    nextLesson: "9",
+    returnToHome: true,
+    lessonNumber: 8,
     pageNumber: 8,
   },
   "9": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 9 : Vowels",
     character: "ऐ",
     transliteration: "ai",
     sound: '"aa-ay"',
@@ -119,11 +127,12 @@ const lessonData: Record<string, any> = {
       { word: "ऐसा", transliteration: "aisa", meaning: "Like this", emoji: "👉" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
-    nextLesson: "practice/4",
+    returnToHome: true,
+    lessonNumber: 9,
     pageNumber: 9,
   },
   "10": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 10 : Vowels",
     character: "ओ",
     transliteration: "o",
     sound: '"oh"',
@@ -132,11 +141,12 @@ const lessonData: Record<string, any> = {
       { word: "ओस", transliteration: "os", meaning: "Dew", emoji: "💧" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
-    nextLesson: "11",
+    returnToHome: true,
+    lessonNumber: 10,
     pageNumber: 10,
   },
   "11": {
-    title: "Lesson 1 : Vowels",
+    title: "Lesson 11 : Vowels",
     character: "औ",
     transliteration: "ao",
     sound: '"aa-oh"',
@@ -145,19 +155,33 @@ const lessonData: Record<string, any> = {
       { word: "औरत", transliteration: "aurat", meaning: "Woman", emoji: "👩" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
-    nextLesson: "practice/5",
+    returnToHome: true,
+    lessonNumber: 11,
     pageNumber: 11,
   },
 };
 
 export default function LessonPage() {
   const params = useParams();
+  const [, setLocation] = useLocation();
   const lessonId = params.id as string;
   const lesson = lessonData[lessonId];
 
   if (!lesson) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Lesson not found</p></div>;
   }
+
+  const handleNext = () => {
+    if (lesson.returnToHome && lesson.lessonNumber) {
+      const currentProgress = parseInt(localStorage.getItem('vowelsProgress') || '0');
+      if (lesson.lessonNumber > currentProgress) {
+        localStorage.setItem('vowelsProgress', lesson.lessonNumber.toString());
+      }
+      setLocation('/script/vowels');
+    } else if (lesson.nextLesson) {
+      setLocation(`/script/lesson/vowels/${lesson.nextLesson}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white p-5">
@@ -217,11 +241,12 @@ export default function LessonPage() {
             </div>
           )}
 
-          <Link href={`/script/lesson/vowels/${lesson.nextLesson}`}>
-            <button className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors text-lg font-semibold shadow-lg mt-6">
-              Next
-            </button>
-          </Link>
+          <button 
+            onClick={handleNext}
+            className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors text-lg font-semibold shadow-lg mt-6"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

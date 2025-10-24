@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Book, MessageSquare, FileText, XCircle } from "lucide-react";
 
 export default function VowelsPage() {
+  const [completedLessons, setCompletedLessons] = useState<number>(0);
+  const totalVowelLessons = 11;
+  
+  useEffect(() => {
+    const saved = localStorage.getItem('vowelsProgress');
+    if (saved) {
+      setCompletedLessons(parseInt(saved));
+    }
+  }, []);
+  
+  const progress = Math.round((completedLessons / totalVowelLessons) * 100);
+  const nextLesson = Math.min(completedLessons + 1, totalVowelLessons);
+  
   const lessons = [
-    { id: 1, title: "Vowels", href: "/script/lesson/vowels/1", icon: "अ", progress: 30 },
+    { id: 1, title: "Vowels", href: `/script/lesson/vowels/${nextLesson}`, icon: "अ", progress: progress },
     { id: 2, title: "Consonants", icon: "क" },
-    { id: 3, title: "Matra (Vowel Symbols)", icon: "्ा" },
+    { id: 3, title: "Matra (Vowel Symbols)", icon: "ा" },
     { id: 4, title: "स, श, घ?", icon: "स" },
     { id: 5, title: "Numbers", icon: "१" },
   ];
@@ -22,39 +35,39 @@ export default function VowelsPage() {
             </Link>
           </div>
           
-          <div className="bg-white px-8 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
-            <div className="space-y-6">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
+            <div className="space-y-[22px]">
               {lessons.map((lesson) => (
                 <Link key={lesson.id} href={lesson.href || "#"}>
-                  <div className="flex items-center gap-5 cursor-pointer group">
+                  <div className="flex items-center gap-5 cursor-pointer">
                     <div className="relative flex-shrink-0">
                       {lesson.progress !== undefined && (
-                        <svg className="absolute inset-0 w-[70px] h-[70px] -rotate-90">
+                        <svg className="absolute -inset-[3px] w-[74px] h-[74px] -rotate-90">
                           <circle
-                            cx="35"
-                            cy="35"
-                            r="32"
+                            cx="37"
+                            cy="37"
+                            r="35"
                             fill="none"
                             stroke="#FFE5CC"
-                            strokeWidth="3"
+                            strokeWidth="2"
+                            strokeDasharray="1 6"
                           />
                           <circle
-                            cx="35"
-                            cy="35"
-                            r="32"
+                            cx="37"
+                            cy="37"
+                            r="35"
                             fill="none"
-                            stroke="#ff9930"
-                            strokeWidth="3"
-                            strokeDasharray={`${lesson.progress * 2.01} ${200 - lesson.progress * 2.01}`}
-                            strokeLinecap="round"
+                            stroke="#F7941D"
+                            strokeWidth="2"
+                            strokeDasharray={`${lesson.progress * 2.2} ${220 - lesson.progress * 2.2}`}
                           />
                         </svg>
                       )}
-                      <div className="w-[70px] h-[70px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-2xl group-hover:bg-[#ff8800] transition-colors shadow-lg">
+                      <div className="w-[68px] h-[68px] bg-[#F7941D] rounded-full flex items-center justify-center text-white font-bold text-[30px] border-[3px] border-white shadow-md">
                         {lesson.icon}
                       </div>
                     </div>
-                    <span className="text-xl font-normal text-black group-hover:text-[#ff9930] transition-colors">
+                    <span className="text-[20px] leading-6 font-medium text-black">
                       {lesson.title}
                     </span>
                   </div>

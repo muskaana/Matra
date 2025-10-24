@@ -9,11 +9,6 @@ export const Box = (): JSX.Element => {
           alt="Image"
           src="/figmaAssets/image-3.png"
         />
-
-        <p className="absolute top-0 left-0 w-px [font-family:'Tiro_Devanagari_Hindi',Helvetica] font-normal text-black text-[26px] tracking-[0] leading-[normal] whitespace-nowrap">
-          if you want to try out animation, we can introduce a character like
-          this. otherwise, lets skip. regardless we&apos;ll get to this later
-        </p>
       </div>
     </div>
   );

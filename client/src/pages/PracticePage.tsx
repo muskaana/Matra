@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "wouter";
-import { Book, MessageSquare, FileText } from "lucide-react";
+import { X, ChevronLeft } from "lucide-react";
 
 const practiceData: Record<string, any> = {
   "1": {
@@ -68,9 +68,21 @@ export default function PracticePage() {
   return (
     <div className="min-h-screen bg-white p-5">
       <div className="w-full max-w-sm mx-auto">
-        <div className="text-center mb-4">
-          <p className="text-xs text-gray-400 mb-0.5">1.1 {practice.pageNumber}</p>
-          <h2 className="text-sm font-medium text-gray-500">{practice.title}</h2>
+        <div className="flex items-center justify-between mb-4">
+          <Link href="/script/vowels">
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
+            </button>
+          </Link>
+          <div className="text-center flex-1">
+            <p className="text-xs text-gray-400 mb-0.5">1.1 {practice.pageNumber}</p>
+            <h2 className="text-sm font-medium text-gray-500">{practice.title}</h2>
+          </div>
+          <Link href="/script/vowels">
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+          </Link>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
@@ -96,32 +108,11 @@ export default function PracticePage() {
 
           {completed && (
             <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
-              <button className="px-8 py-2.5 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-sm">
+              <button className="px-8 py-2.5 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-sm shadow-md">
                 Continue to Quiz
               </button>
             </Link>
           )}
-        </div>
-
-        <div className="flex justify-around items-center bg-[#ff9930] rounded-md mt-4 py-2">
-          <Link href="/reading">
-            <button className="flex flex-col items-center text-white p-1.5 opacity-70">
-              <Book className="w-5 h-5 mb-0.5" />
-              <span className="text-xs">Read</span>
-            </button>
-          </Link>
-          <Link href="/script">
-            <button className="flex flex-col items-center text-white p-1.5">
-              <FileText className="w-5 h-5 mb-0.5" />
-              <span className="text-xs font-semibold">Script</span>
-            </button>
-          </Link>
-          <Link href="/conversation">
-            <button className="flex flex-col items-center text-white p-1.5 opacity-70">
-              <MessageSquare className="w-5 h-5 mb-0.5" />
-              <span className="text-xs">Talk</span>
-            </button>
-          </Link>
         </div>
       </div>
     </div>

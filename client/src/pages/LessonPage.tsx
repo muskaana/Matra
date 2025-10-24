@@ -2,6 +2,12 @@ import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft, Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, Glasses, MoveRight, Droplet, Plus, UserCircle } from "lucide-react";
 
+const iconMap: Record<string, any> = {
+  Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, 
+  Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, 
+  Glasses, MoveRight, Droplet, Plus, UserCircle
+};
+
 const lessonData: Record<string, any> = {
   "1": {
     title: "Lesson 1 : Vowels",
@@ -200,7 +206,7 @@ export default function LessonPage() {
 
               <div className="space-y-3">
                 {lesson.sampleWords.map((sample: any, index: number) => {
-                  const IconComponent = sample.icon ? eval(sample.icon) : null;
+                  const IconComponent = sample.icon ? iconMap[sample.icon] : null;
                   return (
                     <div key={index} className="bg-gray-50 rounded-xl p-4 flex items-center gap-4">
                       {IconComponent && (

@@ -29,8 +29,7 @@ const lessonData: Record<string, any> = {
       { word: "आसान", transliteration: "aasan", meaning: "Easy", emoji: "✅" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
-    returnToHome: true,
-    lessonNumber: 2,
+    nextLesson: "practice/1",
     pageNumber: 2,
   },
   "3": {
@@ -43,8 +42,7 @@ const lessonData: Record<string, any> = {
       { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", emoji: "🙏" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
-    returnToHome: true,
-    lessonNumber: 3,
+    nextLesson: "4",
     pageNumber: 3,
   },
   "4": {
@@ -57,8 +55,7 @@ const lessonData: Record<string, any> = {
       { word: "ईमान", transliteration: "eeman", meaning: "Faith", emoji: "✨" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
-    returnToHome: true,
-    lessonNumber: 4,
+    nextLesson: "practice/2",
     pageNumber: 4,
   },
   "5": {
@@ -71,8 +68,7 @@ const lessonData: Record<string, any> = {
       { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", emoji: "⭐" },
     ],
     sentence: "उठो (Utho - Get up)",
-    returnToHome: true,
-    lessonNumber: 5,
+    nextLesson: "6",
     pageNumber: 5,
   },
   "6": {
@@ -85,8 +81,7 @@ const lessonData: Record<string, any> = {
       { word: "ऊपर", transliteration: "oopar", meaning: "Above", emoji: "⬆️" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
-    returnToHome: true,
-    lessonNumber: 6,
+    nextLesson: "practice/3",
     pageNumber: 6,
   },
   "7": {
@@ -99,8 +94,7 @@ const lessonData: Record<string, any> = {
       { word: "ऋण", transliteration: "rin", meaning: "Debt", emoji: "💰" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
-    returnToHome: true,
-    lessonNumber: 7,
+    nextLesson: "8",
     pageNumber: 7,
   },
   "8": {
@@ -113,8 +107,7 @@ const lessonData: Record<string, any> = {
       { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", emoji: "🤝" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
-    returnToHome: true,
-    lessonNumber: 8,
+    nextLesson: "9",
     pageNumber: 8,
   },
   "9": {
@@ -127,8 +120,7 @@ const lessonData: Record<string, any> = {
       { word: "ऐसा", transliteration: "aisa", meaning: "Like this", emoji: "👉" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
-    returnToHome: true,
-    lessonNumber: 9,
+    nextLesson: "practice/4",
     pageNumber: 9,
   },
   "10": {
@@ -141,8 +133,7 @@ const lessonData: Record<string, any> = {
       { word: "ओस", transliteration: "os", meaning: "Dew", emoji: "💧" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
-    returnToHome: true,
-    lessonNumber: 10,
+    nextLesson: "11",
     pageNumber: 10,
   },
   "11": {
@@ -155,8 +146,7 @@ const lessonData: Record<string, any> = {
       { word: "औरत", transliteration: "aurat", meaning: "Woman", emoji: "👩" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
-    returnToHome: true,
-    lessonNumber: 11,
+    nextLesson: "practice/5",
     pageNumber: 11,
   },
 };
@@ -172,11 +162,7 @@ export default function LessonPage() {
   }
 
   const handleNext = () => {
-    if (lesson.returnToHome && lesson.lessonNumber) {
-      const currentProgress = parseInt(localStorage.getItem('vowelsProgress') || '0');
-      if (lesson.lessonNumber > currentProgress) {
-        localStorage.setItem('vowelsProgress', lesson.lessonNumber.toString());
-      }
+    if (lesson.returnToHome) {
       setLocation('/script/vowels');
     } else if (lesson.nextLesson) {
       setLocation(`/script/lesson/vowels/${lesson.nextLesson}`);

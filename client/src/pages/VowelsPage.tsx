@@ -3,21 +3,29 @@ import { Link } from "wouter";
 import { Book, MessageSquare, FileText, XCircle } from "lucide-react";
 
 export default function VowelsPage() {
-  const [completedLessons, setCompletedLessons] = useState<number>(0);
-  const totalVowelLessons = 11;
+  const [completedQuizzes, setCompletedQuizzes] = useState<number>(0);
+  const totalQuizzes = 5;
   
   useEffect(() => {
-    const saved = localStorage.getItem('vowelsProgress');
+    const saved = localStorage.getItem('vowelsQuizzesCompleted');
     if (saved) {
-      setCompletedLessons(parseInt(saved));
+      setCompletedQuizzes(parseInt(saved));
     }
   }, []);
   
-  const progress = Math.round((completedLessons / totalVowelLessons) * 100);
-  const nextLesson = Math.min(completedLessons + 1, totalVowelLessons);
+  const progress = Math.round((completedQuizzes / totalQuizzes) * 100);
+  
+  const getNextLesson = () => {
+    if (completedQuizzes === 0) return 1;
+    if (completedQuizzes === 1) return 3;
+    if (completedQuizzes === 2) return 5;
+    if (completedQuizzes === 3) return 7;
+    if (completedQuizzes === 4) return 10;
+    return 1;
+  };
   
   const lessons = [
-    { id: 1, title: "Vowels", href: `/script/lesson/vowels/${nextLesson}`, icon: "अ", progress: progress },
+    { id: 1, title: "Vowels", href: `/script/lesson/vowels/${getNextLesson()}`, icon: "अ", progress: progress },
     { id: 2, title: "Consonants", icon: "क" },
     { id: 3, title: "Matra (Vowel Symbols)", icon: "ा" },
     { id: 4, title: "स, श, घ?", icon: "स" },
@@ -77,21 +85,21 @@ export default function VowelsPage() {
           </div>
         </div>
 
-        <div className="flex justify-around items-center bg-[#ff9930] hover:bg-[#CF7B24] transition-colors rounded-xl mt-6 py-3 shadow-lg">
+        <div className="flex justify-around items-center bg-[#ff9930] rounded-xl mt-6 py-3 shadow-lg">
           <Link href="/reading">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 transition-opacity">
+            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
               <Book className="w-6 h-6 mb-1" />
               <span className="text-xs font-medium">Read</span>
             </button>
           </Link>
           <Link href="/script">
-            <button className="flex flex-col items-center text-white p-2">
+            <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all">
               <FileText className="w-6 h-6 mb-1" />
               <span className="text-xs font-bold">Script</span>
             </button>
           </Link>
           <Link href="/conversation">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 transition-opacity">
+            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
               <MessageSquare className="w-6 h-6 mb-1" />
               <span className="text-xs font-medium">Talk</span>
             </button>

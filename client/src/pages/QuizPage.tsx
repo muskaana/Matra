@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
 
 const quizData: Record<string, any> = {
@@ -132,6 +132,7 @@ const quizData: Record<string, any> = {
 
 export default function QuizPage() {
   const params = useParams();
+  const [, setLocation] = useLocation();
   const quizId = params.id as string;
   const quiz = quizData[quizId];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -144,6 +145,22 @@ export default function QuizPage() {
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);
     setShowFeedback(true);
+  };
+
+  const handleNext = () => {
+    if (isCorrect && quiz.nextLesson === '/script/vowels') {
+      const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+      const quizNumber = parseInt(quizId);
+      if (quizNumber > currentQuizzes) {
+        localStorage.setItem('vowelsQuizzesCompleted', quizNumber.toString());
+      }
+    }
+    
+    if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
+      setLocation(quiz.nextLesson);
+    } else {
+      setLocation(`/script/lesson/vowels/${quiz.nextLesson}`);
+    }
   };
 
   const isCorrect = selectedAnswer !== null && quiz.options[selectedAnswer].correct;
@@ -177,11 +194,12 @@ export default function QuizPage() {
               <p className="text-xs text-gray-500 mb-6">Try again to learn the difference!</p>
             )}
 
-            <Link href={typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/') ? quiz.nextLesson : `/script/lesson/vowels/${quiz.nextLesson}`}>
-              <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
-                Next
-              </button>
-            </Link>
+            <button 
+              onClick={handleNext}
+              className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

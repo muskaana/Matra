@@ -9,10 +9,10 @@ const lessonData: Record<string, any> = {
     transliteration: "a",
     sound: '"uh"',
     sampleWords: [
-      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "Apple" },
-      { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "Clock" },
-      { word: "अलग", transliteration: "alag", meaning: "Different", icon: "ArrowLeftRight" },
-      { word: "अचार", transliteration: "achaar", meaning: "Pickle", icon: "Salad" },
+      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", emoji: "🍎" },
+      { word: "अभी", transliteration: "abhi", meaning: "Now", emoji: "⏰" },
+      { word: "अलग", transliteration: "alag", meaning: "Different", emoji: "↔️" },
+      { word: "अचार", transliteration: "achaar", meaning: "Pickle", emoji: "🥒" },
     ],
     sentence: "अbhi toh party shuru hui hai",
     nextLesson: "2",
@@ -24,8 +24,8 @@ const lessonData: Record<string, any> = {
     transliteration: "aa",
     sound: '"aa"',
     sampleWords: [
-      { word: "आम", transliteration: "aam", meaning: "Mango", icon: "Cherry" },
-      { word: "आसान", transliteration: "aasan", meaning: "Easy", icon: "CheckCircle" },
+      { word: "आम", transliteration: "aam", meaning: "Mango", emoji: "🥭" },
+      { word: "आसान", transliteration: "aasan", meaning: "Easy", emoji: "✅" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
     nextLesson: "practice/1",
@@ -37,8 +37,8 @@ const lessonData: Record<string, any> = {
     transliteration: "i",
     sound: '"ee"',
     sampleWords: [
-      { word: "इमली", transliteration: "imli", meaning: "Tamarind", icon: "Leaf" },
-      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", icon: "HandHeart" },
+      { word: "इमली", transliteration: "imli", meaning: "Tamarind", emoji: "🌿" },
+      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", emoji: "🙏" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
     nextLesson: "4",
@@ -50,8 +50,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ee",
     sound: '"eee"',
     sampleWords: [
-      { word: "ईद", transliteration: "eed", meaning: "Eid", icon: "Moon" },
-      { word: "ईमान", transliteration: "eeman", meaning: "Faith", icon: "Sparkles" },
+      { word: "ईद", transliteration: "eed", meaning: "Eid", emoji: "🌙" },
+      { word: "ईमान", transliteration: "eeman", meaning: "Faith", emoji: "✨" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
     nextLesson: "practice/2",
@@ -63,8 +63,8 @@ const lessonData: Record<string, any> = {
     transliteration: "u",
     sound: '"oo"',
     sampleWords: [
-      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", icon: "Bird" },
-      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", icon: "Star" },
+      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", emoji: "🦉" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", emoji: "⭐" },
     ],
     sentence: "उठो (Utho - Get up)",
     nextLesson: "6",
@@ -76,8 +76,8 @@ const lessonData: Record<string, any> = {
     transliteration: "oo",
     sound: '"ooo"',
     sampleWords: [
-      { word: "ऊन", transliteration: "oon", meaning: "Wool", icon: "Shirt" },
-      { word: "ऊपर", transliteration: "oopar", meaning: "Above", icon: "ArrowUp" },
+      { word: "ऊन", transliteration: "oon", meaning: "Wool", emoji: "🧶" },
+      { word: "ऊपर", transliteration: "oopar", meaning: "Above", emoji: "⬆️" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
     nextLesson: "practice/3",
@@ -89,8 +89,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ri",
     sound: '"ree"',
     sampleWords: [
-      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", icon: "User" },
-      { word: "ऋण", transliteration: "rin", meaning: "Debt", icon: "DollarSign" },
+      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", emoji: "🧘" },
+      { word: "ऋण", transliteration: "rin", meaning: "Debt", emoji: "💰" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
     nextLesson: "8",
@@ -102,8 +102,8 @@ const lessonData: Record<string, any> = {
     transliteration: "e",
     sound: '"ay"',
     sampleWords: [
-      { word: "एक", transliteration: "ek", meaning: "One", icon: "Hash" },
-      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", icon: "Users" },
+      { word: "एक", transliteration: "ek", meaning: "One", emoji: "1️⃣" },
+      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", emoji: "🤝" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
     nextLesson: "9",
@@ -115,8 +115,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ai",
     sound: '"aa-ay"',
     sampleWords: [
-      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", icon: "Glasses" },
-      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", icon: "MoveRight" },
+      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", emoji: "👓" },
+      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", emoji: "👉" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
     nextLesson: "practice/4",
@@ -128,8 +128,8 @@ const lessonData: Record<string, any> = {
     transliteration: "o",
     sound: '"oh"',
     sampleWords: [
-      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", icon: "Salad" },
-      { word: "ओस", transliteration: "os", meaning: "Dew", icon: "Droplet" },
+      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", emoji: "🫚" },
+      { word: "ओस", transliteration: "os", meaning: "Dew", emoji: "💧" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
     nextLesson: "11",
@@ -141,8 +141,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ao",
     sound: '"aa-oh"',
     sampleWords: [
-      { word: "और", transliteration: "aur", meaning: "And/More", icon: "Plus" },
-      { word: "औरत", transliteration: "aurat", meaning: "Woman", icon: "UserCircle" },
+      { word: "और", transliteration: "aur", meaning: "And/More", emoji: "➕" },
+      { word: "औरत", transliteration: "aurat", meaning: "Woman", emoji: "👩" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
     nextLesson: "practice/5",
@@ -192,28 +192,20 @@ export default function LessonPage() {
               </div>
 
               <div className="space-y-2">
-                {lesson.sampleWords.map((sample: any, index: number) => {
-                  const IconComponent = sample.icon ? {
-                    Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart,
-                    Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash,
-                    Users, Glasses, MoveRight, Droplet, Plus, UserCircle
-                  }[sample.icon] : null;
-                  
-                  return (
-                    <div key={index} className="bg-gray-50 rounded-md p-3 flex items-center gap-3">
-                      {IconComponent && (
-                        <div className="flex-shrink-0 w-10 h-10 bg-[#ff9930] rounded-full flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                      )}
-                      <div className="flex-1 text-left">
-                        <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
-                        <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
-                        <p className="text-gray-600 text-xs">{sample.meaning}</p>
+                {lesson.sampleWords.map((sample: any, index: number) => (
+                  <div key={index} className="bg-gray-50 rounded-lg p-3 flex items-center gap-4">
+                    {sample.emoji && (
+                      <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-[#ff9930] to-[#ff8800] rounded-xl flex items-center justify-center shadow-md">
+                        <span className="text-3xl">{sample.emoji}</span>
                       </div>
+                    )}
+                    <div className="flex-1 text-left">
+                      <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
+                      <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
+                      <p className="text-gray-600 text-xs">{sample.meaning}</p>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -225,13 +217,11 @@ export default function LessonPage() {
             </div>
           )}
 
-          <div className="flex justify-center mt-6">
-            <Link href={`/script/lesson/vowels/${lesson.nextLesson}`}>
-              <button className="w-full py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors text-base font-semibold shadow-md">
-                Next
-              </button>
-            </Link>
-          </div>
+          <Link href={`/script/lesson/vowels/${lesson.nextLesson}`}>
+            <button className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#ff8800] transition-colors text-lg font-semibold shadow-lg mt-6">
+              Next
+            </button>
+          </Link>
         </div>
       </div>
     </div>

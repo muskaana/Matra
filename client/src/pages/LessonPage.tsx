@@ -2,12 +2,12 @@ import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft } from "lucide-react";
 
-import pomegranateImg from '@assets/generated_images/Colorful_pomegranate_icon_illustration_81ade7f4.png';
-import mangoImg from '@assets/generated_images/Colorful_mango_icon_illustration_7156411b.png';
-import tamarindImg from '@assets/generated_images/Colorful_tamarind_icon_illustration_043a9b40.png';
-import owlImg from '@assets/generated_images/Colorful_owl_icon_illustration_a9ea4e1a.png';
-import clockImg from '@assets/generated_images/Colorful_clock_icon_illustration_5fb52ffc.png';
-import moonImg from '@assets/generated_images/Colorful_moon_icon_illustration_15e2d22a.png';
+import pomegranateImg from '@assets/generated_images/Pomegranate_icon_transparent_background_f9ef7753.png';
+import mangoImg from '@assets/generated_images/Mango_icon_transparent_background_3190c532.png';
+import tamarindImg from '@assets/generated_images/Tamarind_icon_transparent_background_7bf84154.png';
+import owlImg from '@assets/generated_images/Owl_icon_transparent_background_3fcb5c0a.png';
+import clockImg from '@assets/generated_images/Clock_icon_transparent_background_8d7a58b1.png';
+import moonImg from '@assets/generated_images/Moon_icon_transparent_background_61fb089c.png';
 
 const imageMap: Record<string, string> = {
   pomegranate: pomegranateImg,
@@ -219,7 +219,7 @@ export default function LessonPage() {
                   return (
                     <div key={index} className="bg-gray-50 rounded-xl p-3 flex items-center gap-3">
                       {imageUrl && (
-                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden shadow-lg bg-white p-1">
+                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden shadow-md p-1">
                           <img src={imageUrl} alt={sample.meaning} className="w-full h-full object-contain" />
                         </div>
                       )}

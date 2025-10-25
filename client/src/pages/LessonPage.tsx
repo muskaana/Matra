@@ -1,11 +1,21 @@
 import React from "react";
 import { Link, useParams, useLocation } from "wouter";
-import { Volume2, X, ChevronLeft, Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, Glasses, MoveRight, Droplet, Plus, UserCircle } from "lucide-react";
+import { Volume2, X, ChevronLeft } from "lucide-react";
 
-const iconMap: Record<string, any> = {
-  Apple, Clock, ArrowLeftRight, Salad, Cherry, CheckCircle, Leaf, HandHeart, 
-  Moon, Sparkles, Bird, Star, Shirt, ArrowUp, User, DollarSign, Hash, Users, 
-  Glasses, MoveRight, Droplet, Plus, UserCircle
+import pomegranateImg from '@assets/stock_images/pomegranate_fruit_il_046f2f89.jpg';
+import mangoImg from '@assets/stock_images/mango_fruit_illustra_d97507a0.jpg';
+import tamarindImg from '@assets/stock_images/tamarind_fruit_b8f0aeb9.jpg';
+import owlImg from '@assets/stock_images/owl_bird_illustratio_811c8c7d.jpg';
+import clockImg from '@assets/stock_images/clock_time_019830c1.jpg';
+import moonImg from '@assets/stock_images/moon_crescent_d824978a.jpg';
+
+const imageMap: Record<string, string> = {
+  pomegranate: pomegranateImg,
+  mango: mangoImg,
+  tamarind: tamarindImg,
+  owl: owlImg,
+  clock: clockImg,
+  moon: moonImg,
 };
 
 const lessonData: Record<string, any> = {
@@ -15,9 +25,9 @@ const lessonData: Record<string, any> = {
     transliteration: "a",
     sound: '"uh"',
     sampleWords: [
-      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "Apple" },
-      { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "Clock" },
-      { word: "अलग", transliteration: "alag", meaning: "Different", icon: "ArrowLeftRight" },
+      { word: "अनार", transliteration: "anar", meaning: "Pomegranate", image: "pomegranate" },
+      { word: "अभी", transliteration: "abhi", meaning: "Now", image: "clock" },
+      { word: "अलग", transliteration: "alag", meaning: "Different", image: "clock" },
     ],
     sentence: "अbhi toh party shuru hui hai",
     nextLesson: "2",
@@ -29,8 +39,8 @@ const lessonData: Record<string, any> = {
     transliteration: "aa",
     sound: '"aa"',
     sampleWords: [
-      { word: "आम", transliteration: "aam", meaning: "Mango", icon: "Cherry" },
-      { word: "आसान", transliteration: "aasan", meaning: "Easy", icon: "CheckCircle" },
+      { word: "आम", transliteration: "aam", meaning: "Mango", image: "mango" },
+      { word: "आसान", transliteration: "aasan", meaning: "Easy", image: "mango" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
     nextLesson: "practice/1",
@@ -42,8 +52,8 @@ const lessonData: Record<string, any> = {
     transliteration: "i",
     sound: '"ee"',
     sampleWords: [
-      { word: "इमली", transliteration: "imli", meaning: "Tamarind", icon: "Leaf" },
-      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", icon: "HandHeart" },
+      { word: "इमली", transliteration: "imli", meaning: "Tamarind", image: "tamarind" },
+      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", image: "tamarind" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
     nextLesson: "4",
@@ -55,8 +65,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ee",
     sound: '"eee"',
     sampleWords: [
-      { word: "ईद", transliteration: "eed", meaning: "Eid", icon: "Moon" },
-      { word: "ईमान", transliteration: "eeman", meaning: "Faith", icon: "Sparkles" },
+      { word: "ईद", transliteration: "eed", meaning: "Eid", image: "moon" },
+      { word: "ईमान", transliteration: "eeman", meaning: "Faith", image: "moon" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
     nextLesson: "practice/2",
@@ -68,8 +78,8 @@ const lessonData: Record<string, any> = {
     transliteration: "u",
     sound: '"oo"',
     sampleWords: [
-      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", icon: "Bird" },
-      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", icon: "Star" },
+      { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", image: "owl" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", image: "owl" },
     ],
     sentence: "उठो (Utho - Get up)",
     nextLesson: "6",
@@ -81,8 +91,8 @@ const lessonData: Record<string, any> = {
     transliteration: "oo",
     sound: '"ooo"',
     sampleWords: [
-      { word: "ऊन", transliteration: "oon", meaning: "Wool", icon: "Shirt" },
-      { word: "ऊपर", transliteration: "oopar", meaning: "Above", icon: "ArrowUp" },
+      { word: "ऊन", transliteration: "oon", meaning: "Wool", image: "owl" },
+      { word: "ऊपर", transliteration: "oopar", meaning: "Above", image: "owl" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
     nextLesson: "practice/3",
@@ -94,8 +104,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ri",
     sound: '"ree"',
     sampleWords: [
-      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", icon: "User" },
-      { word: "ऋण", transliteration: "rin", meaning: "Debt", icon: "DollarSign" },
+      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", image: "pomegranate" },
+      { word: "ऋण", transliteration: "rin", meaning: "Debt", image: "pomegranate" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
     nextLesson: "8",
@@ -107,8 +117,8 @@ const lessonData: Record<string, any> = {
     transliteration: "e",
     sound: '"ay"',
     sampleWords: [
-      { word: "एक", transliteration: "ek", meaning: "One", icon: "Hash" },
-      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", icon: "Users" },
+      { word: "एक", transliteration: "ek", meaning: "One", image: "mango" },
+      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", image: "mango" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
     nextLesson: "9",
@@ -120,8 +130,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ai",
     sound: '"aa-ay"',
     sampleWords: [
-      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", icon: "Glasses" },
-      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", icon: "MoveRight" },
+      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", image: "clock" },
+      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", image: "clock" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
     nextLesson: "practice/4",
@@ -133,8 +143,8 @@ const lessonData: Record<string, any> = {
     transliteration: "o",
     sound: '"oh"',
     sampleWords: [
-      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", icon: "Salad" },
-      { word: "ओस", transliteration: "os", meaning: "Dew", icon: "Droplet" },
+      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", image: "pomegranate" },
+      { word: "ओस", transliteration: "os", meaning: "Dew", image: "pomegranate" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
     nextLesson: "11",
@@ -146,8 +156,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ao",
     sound: '"aa-oh"',
     sampleWords: [
-      { word: "और", transliteration: "aur", meaning: "And/More", icon: "Plus" },
-      { word: "औरत", transliteration: "aurat", meaning: "Woman", icon: "UserCircle" },
+      { word: "और", transliteration: "aur", meaning: "And/More", image: "tamarind" },
+      { word: "औरत", transliteration: "aurat", meaning: "Woman", image: "tamarind" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
     nextLesson: "practice/5",
@@ -205,12 +215,12 @@ export default function LessonPage() {
 
               <div className="space-y-2">
                 {lesson.sampleWords.slice(0, 3).map((sample: any, index: number) => {
-                  const IconComponent = sample.icon ? iconMap[sample.icon] : null;
+                  const imageUrl = sample.image ? imageMap[sample.image] : null;
                   return (
                     <div key={index} className="bg-gray-50 rounded-xl p-3 flex items-center gap-3">
-                      {IconComponent && (
-                        <div className="flex-shrink-0 w-12 h-12 bg-[#ff9930] rounded-xl flex items-center justify-center shadow-lg">
-                          <IconComponent className="w-6 h-6 text-white" strokeWidth={2} />
+                      {imageUrl && (
+                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden shadow-lg bg-white">
+                          <img src={imageUrl} alt={sample.meaning} className="w-full h-full object-cover" />
                         </div>
                       )}
                       <div className="flex-1 text-left">

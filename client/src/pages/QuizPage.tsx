@@ -15,7 +15,7 @@ const quizData: Record<string, any> = {
     nextLesson: "/script/vowels/sections",
   },
   "2": {
-    title: "Quiz 1 : Vowels",
+    title: "Quiz 2 : Vowels",
     question: "इ vs ई",
     subQuestion: "What is ई ?",
     options: [
@@ -23,10 +23,10 @@ const quizData: Record<string, any> = {
       { text: "eee", correct: true },
     ],
     pageNumber: "Quiz 2",
-    nextLesson: "5",
+    nextLesson: "/script/vowels/sections",
   },
   "3": {
-    title: "Quiz 1 : Vowels",
+    title: "Quiz 3 : Vowels",
     question: "उ vs ऊ",
     subQuestion: "What is उ ?",
     options: [
@@ -34,21 +34,21 @@ const quizData: Record<string, any> = {
       { text: "ooo", correct: false },
     ],
     pageNumber: "Quiz 3",
-    nextLesson: "7",
+    nextLesson: "/script/vowels/sections",
   },
   "4": {
-    title: "Quiz 1 : Vowels",
-    question: "ए vs ऐ",
+    title: "Quiz 4 : Vowels",
+    question: "ऋ, ए, ऐ",
     subQuestion: "What is ऐ ?",
     options: [
       { text: "ay", correct: false },
       { text: "aa-ay", correct: true },
     ],
     pageNumber: "Quiz 4",
-    nextLesson: "6",
+    nextLesson: "/script/vowels/sections",
   },
   "5": {
-    title: "Quiz 1 : Vowels",
+    title: "Quiz 5 : Vowels",
     question: "ओ vs औ",
     subQuestion: "What is औ ?",
     options: [
@@ -56,7 +56,7 @@ const quizData: Record<string, any> = {
       { text: "aa-oh", correct: true },
     ],
     pageNumber: "Quiz 5",
-    nextLesson: "8",
+    nextLesson: "/script/vowels/sections",
   },
   "6": {
     title: "Quiz 1 : Vowels",

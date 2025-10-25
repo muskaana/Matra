@@ -34,11 +34,12 @@ const practiceData: Record<string, any> = {
     pageNumber: "Practice 3",
   },
   "4": {
-    title: "Practice: ए vs ऐ",
+    title: "Practice: ऋ, ए, ऐ",
     question: "Match the sound to the letter",
     pairs: [
+      { character: "ऋ", sound: "ree" },
       { character: "ए", sound: "ay" },
-      { character: "ऐ", sound: "ah-ay" },
+      { character: "ऐ", sound: "aa-ay" },
     ],
     nextLesson: "quiz/4",
     pageNumber: "Practice 4",
@@ -48,7 +49,7 @@ const practiceData: Record<string, any> = {
     question: "Match the sound to the letter",
     pairs: [
       { character: "ओ", sound: "oh" },
-      { character: "औ", sound: "ah-oh" },
+      { character: "औ", sound: "aa-oh" },
     ],
     nextLesson: "quiz/5",
     pageNumber: "Practice 5",

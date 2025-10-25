@@ -10,6 +10,7 @@ import ReadingPage from "@/pages/ReadingPage";
 import ConversationPage from "@/pages/ConversationPage";
 import ScriptPage from "@/pages/ScriptPage";
 import VowelsPage from "@/pages/VowelsPage";
+import VowelSectionsPage from "@/pages/VowelSectionsPage";
 import LessonPage from "@/pages/LessonPage";
 import QuizPage from "@/pages/QuizPage";
 import PracticePage from "@/pages/PracticePage";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/conversation" component={ConversationPage} />
       <Route path="/script" component={ScriptPage} />
       <Route path="/script/vowels" component={VowelsPage} />
+      <Route path="/script/vowels/sections" component={VowelSectionsPage} />
       <Route path="/script/lesson/vowels/:id" component={LessonPage} />
       <Route path="/script/lesson/vowels/practice/:id" component={PracticePage} />
       <Route path="/script/lesson/vowels/quiz/:id" component={QuizPage} />

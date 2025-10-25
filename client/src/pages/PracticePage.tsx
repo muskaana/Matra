@@ -69,12 +69,12 @@ export default function PracticePage() {
     <div className="min-h-screen bg-white p-5">
       <div className="w-full max-w-sm mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <Link href="/script/vowels">
+          <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
           </Link>
-          <Link href="/script/vowels">
+          <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-600" />
             </button>

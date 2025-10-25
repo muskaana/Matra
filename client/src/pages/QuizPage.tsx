@@ -12,7 +12,7 @@ const quizData: Record<string, any> = {
       { text: "aa", correct: false },
     ],
     pageNumber: "Quiz 1",
-    nextLesson: "3",
+    nextLesson: "/script/vowels/sections",
   },
   "2": {
     title: "Quiz 1 : Vowels",
@@ -148,7 +148,7 @@ export default function QuizPage() {
   };
 
   const handleNext = () => {
-    if (isCorrect && quiz.nextLesson === '/script/vowels') {
+    if (isCorrect && (quiz.nextLesson === '/script/vowels' || quiz.nextLesson === '/script/vowels/sections')) {
       const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
       const quizNumber = parseInt(quizId);
       if (quizNumber > currentQuizzes) {
@@ -173,7 +173,7 @@ export default function QuizPage() {
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
-            <Link href="/script/vowels">
+            <Link href="/script/vowels/sections">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <X className="w-5 h-5 text-gray-600" />
               </button>
@@ -211,7 +211,7 @@ export default function QuizPage() {
       <div className="w-full max-w-sm mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="w-10"></div>
-          <Link href="/script/vowels">
+          <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-600" />
             </button>

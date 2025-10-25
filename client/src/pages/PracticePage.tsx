@@ -10,7 +10,7 @@ const practiceData: Record<string, any> = {
       { character: "अ", sound: "uh" },
       { character: "आ", sound: "aa" },
     ],
-    nextLesson: "quiz/1",
+    nextLesson: "quiz/1a",
     pageNumber: "Practice 1",
   },
   "2": {
@@ -20,7 +20,7 @@ const practiceData: Record<string, any> = {
       { character: "इ", sound: "ee" },
       { character: "ई", sound: "eee" },
     ],
-    nextLesson: "quiz/2",
+    nextLesson: "quiz/2a",
     pageNumber: "Practice 2",
   },
   "3": {
@@ -30,7 +30,7 @@ const practiceData: Record<string, any> = {
       { character: "उ", sound: "oo" },
       { character: "ऊ", sound: "ooo" },
     ],
-    nextLesson: "quiz/3",
+    nextLesson: "quiz/3a",
     pageNumber: "Practice 3",
   },
   "4": {
@@ -41,7 +41,7 @@ const practiceData: Record<string, any> = {
       { character: "ए", sound: "ay" },
       { character: "ऐ", sound: "aa-ay" },
     ],
-    nextLesson: "quiz/4",
+    nextLesson: "quiz/4a",
     pageNumber: "Practice 4",
   },
   "5": {
@@ -51,7 +51,7 @@ const practiceData: Record<string, any> = {
       { character: "ओ", sound: "oh" },
       { character: "औ", sound: "aa-oh" },
     ],
-    nextLesson: "quiz/5",
+    nextLesson: "quiz/5a",
     pageNumber: "Practice 5",
   },
 };

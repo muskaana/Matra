@@ -3,7 +3,7 @@ import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
 
 const quizData: Record<string, any> = {
-  "1": {
+  "1a": {
     title: "Quiz 1 : Vowels",
     char1: "अ",
     char2: "आ",
@@ -13,10 +13,25 @@ const quizData: Record<string, any> = {
       { text: "uh", correct: true },
       { text: "aa", correct: false },
     ],
-    pageNumber: "Quiz 1",
+    pageNumber: "Quiz 1a",
+    nextLesson: "1b",
+  },
+  "1b": {
+    title: "Quiz 1 : Vowels",
+    char1: "अ",
+    char2: "आ",
+    subQuestion: "Which word starts with आ?",
+    type: "word",
+    options: [
+      { text: "Aam", correct: true },
+      { text: "Anar", correct: false },
+      { text: "Imli", correct: false },
+      { text: "Abhi", correct: false },
+    ],
+    pageNumber: "Quiz 1b",
     nextLesson: "/script/vowels/sections",
   },
-  "2": {
+  "2a": {
     title: "Quiz 2 : Vowels",
     char1: "इ",
     char2: "ई",
@@ -26,10 +41,25 @@ const quizData: Record<string, any> = {
       { text: "ee", correct: false },
       { text: "eee", correct: true },
     ],
-    pageNumber: "Quiz 2",
+    pageNumber: "Quiz 2a",
+    nextLesson: "2b",
+  },
+  "2b": {
+    title: "Quiz 2 : Vowels",
+    char1: "इ",
+    char2: "ई",
+    subQuestion: "Which word starts with ई?",
+    type: "word",
+    options: [
+      { text: "Imli", correct: false },
+      { text: "Eed", correct: true },
+      { text: "Idli", correct: false },
+      { text: "Izzat", correct: false },
+    ],
+    pageNumber: "Quiz 2b",
     nextLesson: "/script/vowels/sections",
   },
-  "3": {
+  "3a": {
     title: "Quiz 3 : Vowels",
     char1: "उ",
     char2: "ऊ",
@@ -39,10 +69,25 @@ const quizData: Record<string, any> = {
       { text: "oo", correct: true },
       { text: "ooo", correct: false },
     ],
-    pageNumber: "Quiz 3",
+    pageNumber: "Quiz 3a",
+    nextLesson: "3b",
+  },
+  "3b": {
+    title: "Quiz 3 : Vowels",
+    char1: "उ",
+    char2: "ऊ",
+    subQuestion: "Which word starts with ऊ?",
+    type: "word",
+    options: [
+      { text: "Ullu", correct: false },
+      { text: "Oon", correct: true },
+      { text: "Ummeed", correct: false },
+      { text: "Oopar", correct: true },
+    ],
+    pageNumber: "Quiz 3b",
     nextLesson: "/script/vowels/sections",
   },
-  "4": {
+  "4a": {
     title: "Quiz 4 : Vowels",
     char1: "ए",
     char2: "ऐ",
@@ -52,10 +97,25 @@ const quizData: Record<string, any> = {
       { text: "ay", correct: false },
       { text: "aa-ay", correct: true },
     ],
-    pageNumber: "Quiz 4",
+    pageNumber: "Quiz 4a",
+    nextLesson: "4b",
+  },
+  "4b": {
+    title: "Quiz 4 : Vowels",
+    char1: "ए",
+    char2: "ऐ",
+    subQuestion: "Which word starts with ऐ?",
+    type: "word",
+    options: [
+      { text: "Ek", correct: false },
+      { text: "Ainak", correct: true },
+      { text: "Aisa", correct: true },
+      { text: "Ehsaan", correct: false },
+    ],
+    pageNumber: "Quiz 4b",
     nextLesson: "/script/vowels/sections",
   },
-  "5": {
+  "5a": {
     title: "Quiz 5 : Vowels",
     char1: "ओ",
     char2: "औ",
@@ -65,7 +125,22 @@ const quizData: Record<string, any> = {
       { text: "oh", correct: false },
       { text: "aa-oh", correct: true },
     ],
-    pageNumber: "Quiz 5",
+    pageNumber: "Quiz 5a",
+    nextLesson: "5b",
+  },
+  "5b": {
+    title: "Quiz 5 : Vowels",
+    char1: "ओ",
+    char2: "औ",
+    subQuestion: "Which word starts with औ?",
+    type: "word",
+    options: [
+      { text: "Okhli", correct: false },
+      { text: "Aurat", correct: true },
+      { text: "Aur", correct: true },
+      { text: "Os", correct: false },
+    ],
+    pageNumber: "Quiz 5b",
     nextLesson: "/script/vowels/sections",
   },
 };
@@ -90,16 +165,16 @@ export default function QuizPage() {
   const handleNext = () => {
     if (isCorrect && (quiz.nextLesson === '/script/vowels' || quiz.nextLesson === '/script/vowels/sections')) {
       const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-      const quizNumber = parseInt(quizId);
-      if (quizNumber > currentQuizzes) {
-        localStorage.setItem('vowelsQuizzesCompleted', quizNumber.toString());
+      const sectionNumber = parseInt(quizId.replace(/[ab]/, ''));
+      if (sectionNumber > currentQuizzes) {
+        localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
       }
     }
     
     if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
       setLocation(quiz.nextLesson);
     } else {
-      setLocation(`/script/lesson/vowels/${quiz.nextLesson}`);
+      setLocation(`/script/lesson/vowels/quiz/${quiz.nextLesson}`);
     }
   };
 

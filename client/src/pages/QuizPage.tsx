@@ -5,128 +5,73 @@ import { X, ChevronLeft } from "lucide-react";
 const quizData: Record<string, any> = {
   "1": {
     title: "Quiz 1 : Vowels",
-    question: "अ vs आ",
-    subQuestion: "What is अ ?",
+    char1: "अ",
+    char2: "आ",
+    subQuestion: "Which word starts with आ?",
     options: [
-      { text: "uh", correct: true },
-      { text: "aa", correct: false },
+      { text: "Aam", correct: true },
+      { text: "Anar", correct: false },
+      { text: "Imli", correct: false },
+      { text: "Amma", correct: false },
     ],
     pageNumber: "Quiz 1",
     nextLesson: "/script/vowels/sections",
   },
   "2": {
     title: "Quiz 2 : Vowels",
-    question: "इ vs ई",
-    subQuestion: "What is ई ?",
+    char1: "इ",
+    char2: "ई",
+    subQuestion: "Which word starts with ई?",
     options: [
-      { text: "ee", correct: false },
-      { text: "eee", correct: true },
+      { text: "Imli", correct: false },
+      { text: "Eed", correct: true },
+      { text: "Idli", correct: false },
+      { text: "Eemaan", correct: true },
     ],
     pageNumber: "Quiz 2",
     nextLesson: "/script/vowels/sections",
   },
   "3": {
     title: "Quiz 3 : Vowels",
-    question: "उ vs ऊ",
-    subQuestion: "What is उ ?",
+    char1: "उ",
+    char2: "ऊ",
+    subQuestion: "Which word starts with ऊ?",
     options: [
-      { text: "oo", correct: true },
-      { text: "ooo", correct: false },
+      { text: "Ullu", correct: false },
+      { text: "Oon", correct: true },
+      { text: "Ummeed", correct: false },
+      { text: "Oopar", correct: true },
     ],
     pageNumber: "Quiz 3",
     nextLesson: "/script/vowels/sections",
   },
   "4": {
     title: "Quiz 4 : Vowels",
-    question: "ऋ, ए, ऐ",
-    subQuestion: "What is ऐ ?",
+    char1: "ए",
+    char2: "ऐ",
+    subQuestion: "Which word starts with ऐ?",
     options: [
-      { text: "ay", correct: false },
-      { text: "aa-ay", correct: true },
+      { text: "Ek", correct: false },
+      { text: "Ainak", correct: true },
+      { text: "Aisa", correct: true },
+      { text: "Ehsaan", correct: false },
     ],
     pageNumber: "Quiz 4",
     nextLesson: "/script/vowels/sections",
   },
   "5": {
     title: "Quiz 5 : Vowels",
-    question: "ओ vs औ",
-    subQuestion: "What is औ ?",
+    char1: "ओ",
+    char2: "औ",
+    subQuestion: "Which word starts with औ?",
     options: [
-      { text: "oh", correct: false },
-      { text: "aa-oh", correct: true },
+      { text: "Okhli", correct: false },
+      { text: "Aurat", correct: true },
+      { text: "Aur", correct: true },
+      { text: "Os", correct: false },
     ],
     pageNumber: "Quiz 5",
     nextLesson: "/script/vowels/sections",
-  },
-  "6": {
-    title: "Quiz 1 : Vowels",
-    question: "अ vs आ",
-    subQuestion: "Which word starts with आ?",
-    type: "word-identification",
-    options: [
-      { text: "Aam", correct: true },
-      { text: "Anar", correct: true },
-      { text: "Imli", correct: false },
-      { text: "Amma", correct: true },
-    ],
-    pageNumber: "Quiz 6",
-    nextLesson: "9",
-  },
-  "7": {
-    title: "Quiz 1 : Vowels",
-    question: "उ vs ऊ",
-    subQuestion: "Which word starts with ऊ?",
-    type: "word-identification",
-    options: [
-      { text: "Ullu", correct: true },
-      { text: "Unt", correct: false },
-      { text: "Upar", correct: false },
-      { text: "Oon", correct: true },
-    ],
-    pageNumber: "Quiz 7",
-    nextLesson: "10",
-  },
-  "8": {
-    title: "Quiz 1 : Vowels",
-    question: "ओ vs औ",
-    subQuestion: "Which word starts with औ?",
-    type: "word-identification",
-    options: [
-      { text: "Aurat", correct: true },
-      { text: "Om", correct: false },
-      { text: "Aur", correct: true },
-      { text: "Okhli", correct: false },
-    ],
-    pageNumber: "Quiz 8",
-    nextLesson: "11",
-  },
-  "9": {
-    title: "Quiz 1 : Vowels",
-    question: "इ vs ई",
-    subQuestion: "Which word starts with ई?",
-    type: "word-identification",
-    options: [
-      { text: "Imli", correct: false },
-      { text: "Eent", correct: true },
-      { text: "Idli", correct: false },
-      { text: "ईख", correct: true },
-    ],
-    pageNumber: "Quiz 9",
-    nextLesson: "11",
-  },
-  "10": {
-    title: "Quiz 1 : Vowels",
-    question: "ए vs ऐ",
-    subQuestion: "Which word starts with ऐ?",
-    type: "word-identification",
-    options: [
-      { text: "Ek", correct: false },
-      { text: "Ainák", correct: true },
-      { text: "Aisa", correct: true },
-      { text: "Elephant", correct: false },
-    ],
-    pageNumber: "Quiz 10",
-    nextLesson: "/script/vowels",
   },
 };
 
@@ -167,31 +112,36 @@ export default function QuizPage() {
 
   if (showFeedback) {
     return (
-      <div className="min-h-screen bg-white p-5">
-        <div className="w-full max-w-sm mx-auto">
+      <div className="h-screen bg-white px-4 py-4 flex flex-col">
+        <div className="w-full max-w-md mx-auto flex flex-col h-full">
           <div className="flex items-center justify-between mb-6">
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
             <Link href="/script/vowels/sections">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <X className="w-5 h-5 text-gray-600" />
+                <X className="w-6 h-6 text-gray-600" />
               </button>
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
-            <div className="mb-6">
-              <div className="text-2xl font-bold text-black mb-3">{quiz.question}</div>
-              <p className="text-gray-600 text-sm mb-4">{quiz.subQuestion}</p>
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100 flex-1 flex flex-col justify-center">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-black mb-4">{quiz.title}</h2>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="text-5xl font-bold text-black">{quiz.char1}</span>
+                <span className="text-xl font-semibold text-gray-500">vs</span>
+                <span className="text-5xl font-bold text-black">{quiz.char2}</span>
+              </div>
+              <p className="text-gray-600 text-base mb-4">{quiz.subQuestion}</p>
             </div>
 
-            <div className={`text-2xl font-bold mb-6 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
+            <div className={`text-3xl font-bold mb-8 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
               {isCorrect ? "CORRECT" : "INCORRECT"}
             </div>
 
             {!isCorrect && (
-              <p className="text-xs text-gray-500 mb-6">Try again to learn the difference!</p>
+              <p className="text-sm text-gray-500 mb-8">Try again to learn the difference!</p>
             )}
 
             <button 
@@ -207,48 +157,45 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white p-5">
-      <div className="w-full max-w-sm mx-auto">
+    <div className="h-screen bg-white px-4 py-4 flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col h-full">
         <div className="flex items-center justify-between mb-6">
           <div className="w-10"></div>
           <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X className="w-5 h-5 text-gray-600" />
+              <X className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
-          <div className="mb-6">
-            <div className="text-3xl font-bold text-black mb-3">{quiz.question}</div>
-            <p className="text-gray-600 mb-6 text-sm">{quiz.subQuestion}</p>
+        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
+            
+            <div className="flex items-center justify-center gap-4 mb-12">
+              <span className="text-7xl font-bold text-black">{quiz.char1}</span>
+              <span className="text-2xl font-semibold text-gray-500">vs</span>
+              <span className="text-7xl font-bold text-black">{quiz.char2}</span>
+            </div>
           </div>
 
-          {quiz.type === "word-identification" ? (
-            <div className="grid grid-cols-2 gap-3">
+          <div className="flex-1 flex flex-col justify-between">
+            <div className="mb-8">
+              <p className="text-xl text-black mb-6">{quiz.subQuestion}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mb-4">
               {quiz.options.map((option: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => handleAnswer(index)}
-                  className="px-6 py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-base shadow-md"
+                  className="px-6 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg"
                 >
                   {option.text}
                 </button>
               ))}
             </div>
-          ) : (
-            <div className="flex gap-3 justify-center">
-              {quiz.options.map((option: any, index: number) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(index)}
-                  className="px-8 py-3 bg-[#ff9930] text-white rounded-md hover:bg-[#ff8800] transition-colors font-medium text-base"
-                >
-                  {option.text}
-                </button>
-              ))}
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

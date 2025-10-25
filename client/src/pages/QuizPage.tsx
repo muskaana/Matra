@@ -7,12 +7,11 @@ const quizData: Record<string, any> = {
     title: "Quiz 1 : Vowels",
     char1: "अ",
     char2: "आ",
-    subQuestion: "Which word starts with आ?",
+    subQuestion: "What is अ?",
+    type: "sound",
     options: [
-      { text: "Aam", correct: true },
-      { text: "Anar", correct: false },
-      { text: "Imli", correct: false },
-      { text: "Amma", correct: false },
+      { text: "uh", correct: true },
+      { text: "aa", correct: false },
     ],
     pageNumber: "Quiz 1",
     nextLesson: "/script/vowels/sections",
@@ -21,12 +20,11 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Vowels",
     char1: "इ",
     char2: "ई",
-    subQuestion: "Which word starts with ई?",
+    subQuestion: "What is ई?",
+    type: "sound",
     options: [
-      { text: "Imli", correct: false },
-      { text: "Eed", correct: true },
-      { text: "Idli", correct: false },
-      { text: "Eemaan", correct: true },
+      { text: "ee", correct: false },
+      { text: "eee", correct: true },
     ],
     pageNumber: "Quiz 2",
     nextLesson: "/script/vowels/sections",
@@ -35,12 +33,11 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Vowels",
     char1: "उ",
     char2: "ऊ",
-    subQuestion: "Which word starts with ऊ?",
+    subQuestion: "What is उ?",
+    type: "sound",
     options: [
-      { text: "Ullu", correct: false },
-      { text: "Oon", correct: true },
-      { text: "Ummeed", correct: false },
-      { text: "Oopar", correct: true },
+      { text: "oo", correct: true },
+      { text: "ooo", correct: false },
     ],
     pageNumber: "Quiz 3",
     nextLesson: "/script/vowels/sections",
@@ -49,12 +46,11 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Vowels",
     char1: "ए",
     char2: "ऐ",
-    subQuestion: "Which word starts with ऐ?",
+    subQuestion: "What is ऐ?",
+    type: "sound",
     options: [
-      { text: "Ek", correct: false },
-      { text: "Ainak", correct: true },
-      { text: "Aisa", correct: true },
-      { text: "Ehsaan", correct: false },
+      { text: "ay", correct: false },
+      { text: "aa-ay", correct: true },
     ],
     pageNumber: "Quiz 4",
     nextLesson: "/script/vowels/sections",
@@ -63,12 +59,11 @@ const quizData: Record<string, any> = {
     title: "Quiz 5 : Vowels",
     char1: "ओ",
     char2: "औ",
-    subQuestion: "Which word starts with औ?",
+    subQuestion: "What is औ?",
+    type: "sound",
     options: [
-      { text: "Okhli", correct: false },
-      { text: "Aurat", correct: true },
-      { text: "Aur", correct: true },
-      { text: "Os", correct: false },
+      { text: "oh", correct: false },
+      { text: "aa-oh", correct: true },
     ],
     pageNumber: "Quiz 5",
     nextLesson: "/script/vowels/sections",
@@ -184,12 +179,12 @@ export default function QuizPage() {
               <p className="text-xl text-black mb-6">{quiz.subQuestion}</p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>
               {quiz.options.map((option: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => handleAnswer(index)}
-                  className="px-6 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg"
+                  className="px-8 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg"
                 >
                   {option.text}
                 </button>

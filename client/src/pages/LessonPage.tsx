@@ -18,7 +18,6 @@ const lessonData: Record<string, any> = {
       { word: "अनार", transliteration: "anar", meaning: "Pomegranate", icon: "Apple" },
       { word: "अभी", transliteration: "abhi", meaning: "Now", icon: "Clock" },
       { word: "अलग", transliteration: "alag", meaning: "Different", icon: "ArrowLeftRight" },
-      { word: "अचार", transliteration: "achaar", meaning: "Pickle", icon: "Salad" },
     ],
     sentence: "अbhi toh party shuru hui hai",
     nextLesson: "2",
@@ -173,9 +172,9 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white px-4 py-6">
-      <div className="w-full max-w-md mx-auto">
-        <div className="flex items-center justify-between mb-8">
+    <div className="h-screen bg-white px-4 py-4 flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col h-full">
+        <div className="flex items-center justify-between mb-4">
           <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
@@ -188,36 +187,36 @@ export default function LessonPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gray-100">
-          <div className="mb-8">
-            <div className="text-9xl font-bold text-black mb-3">{lesson.character}</div>
-            <p className="text-gray-400 text-sm mb-1">{lesson.transliteration}</p>
-            <p className="text-gray-600 text-lg">{lesson.sound}</p>
+        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden">
+          <div className="mb-4">
+            <div className="text-8xl font-bold text-black mb-2">{lesson.character}</div>
+            <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
+            <p className="text-gray-600 text-base">{lesson.sound}</p>
           </div>
 
           {lesson.sampleWords && lesson.sampleWords.length > 0 && (
-            <div className="mb-8">
-              <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="mb-4">
+              <div className="flex items-center justify-center gap-2 mb-3">
                 <p className="text-sm text-gray-500 font-medium">Sample Word{lesson.sampleWords.length > 1 ? 's' : ''}</p>
                 <button className="text-[#ff9930] hover:text-[#CF7B24] transition-colors">
-                  <Volume2 className="w-5 h-5" />
+                  <Volume2 className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="space-y-3">
-                {lesson.sampleWords.map((sample: any, index: number) => {
+              <div className="space-y-2">
+                {lesson.sampleWords.slice(0, 3).map((sample: any, index: number) => {
                   const IconComponent = sample.icon ? iconMap[sample.icon] : null;
                   return (
-                    <div key={index} className="bg-gray-50 rounded-xl p-4 flex items-center gap-4">
+                    <div key={index} className="bg-gray-50 rounded-xl p-3 flex items-center gap-3">
                       {IconComponent && (
-                        <div className="flex-shrink-0 w-16 h-16 bg-[#ff9930] rounded-2xl flex items-center justify-center shadow-lg">
-                          <IconComponent className="w-8 h-8 text-white" strokeWidth={2} />
+                        <div className="flex-shrink-0 w-12 h-12 bg-[#ff9930] rounded-xl flex items-center justify-center shadow-lg">
+                          <IconComponent className="w-6 h-6 text-white" strokeWidth={2} />
                         </div>
                       )}
                       <div className="flex-1 text-left">
-                        <div className="text-3xl font-bold text-black mb-1">{sample.word}</div>
-                        <p className="text-gray-400 italic text-sm">{sample.transliteration}</p>
-                        <p className="text-gray-600 text-sm">{sample.meaning}</p>
+                        <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
+                        <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
+                        <p className="text-gray-600 text-xs">{sample.meaning}</p>
                       </div>
                     </div>
                   );
@@ -227,15 +226,15 @@ export default function LessonPage() {
           )}
 
           {lesson.sentence && (
-            <div className="mb-8 bg-orange-50 rounded-xl p-4">
-              <p className="text-sm text-gray-500 mb-2 font-medium">Example Sentence:</p>
-              <p className="text-gray-700 text-base italic">{lesson.sentence}</p>
+            <div className="mb-4 bg-orange-50 rounded-xl p-3">
+              <p className="text-xs text-gray-500 mb-1 font-medium">Example Sentence:</p>
+              <p className="text-gray-700 text-sm italic">{lesson.sentence}</p>
             </div>
           )}
 
           <button 
             onClick={handleNext}
-            className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg"
+            className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg"
           >
             Next
           </button>

@@ -19,15 +19,15 @@ export default function ScriptPage() {
             Hindi (Devanagari) Script
           </div>
           
-          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
-            <div className="space-y-[22px]">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
+            <div className="flex flex-col justify-around flex-1">
               {levels.map((level, index) => (
                 <Link key={level.id} href={level.href || "#"}>
                   <div className="flex items-center gap-5 cursor-pointer">
-                    <div className="w-[68px] h-[68px] bg-[#F7941D] rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 border-[3px] border-white shadow-md">
+                    <div className="w-[68px] h-[68px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 border-[3px] border-white shadow-md">
                       {index + 1}
                     </div>
-                    <span className="text-[20px] leading-6 font-medium text-black">
+                    <span className="text-[36px] leading-10 font-medium text-black">
                       {level.title}
                     </span>
                   </div>

@@ -43,8 +43,8 @@ export default function VowelsPage() {
             </Link>
           </div>
           
-          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
-            <div className="space-y-[22px]">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
+            <div className="flex flex-col justify-around flex-1">
               {lessons.map((lesson) => (
                 <Link key={lesson.id} href={lesson.href || "#"}>
                   <div className="flex items-center gap-5 cursor-pointer">
@@ -75,7 +75,7 @@ export default function VowelsPage() {
                         {lesson.icon}
                       </div>
                     </div>
-                    <span className="text-[20px] leading-6 font-medium text-black">
+                    <span className="text-[36px] leading-10 font-medium text-black">
                       {lesson.title}
                     </span>
                   </div>

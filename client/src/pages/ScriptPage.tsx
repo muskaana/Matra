@@ -27,7 +27,7 @@ export default function ScriptPage() {
                     <div className="w-[80px] h-[80px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-3xl flex-shrink-0 border-[3px] border-white shadow-md">
                       {index + 1}
                     </div>
-                    <span className="text-[36px] leading-10 font-medium text-black">
+                    <span className={`leading-10 font-medium text-black ${level.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>
                       {level.title}
                     </span>
                   </div>

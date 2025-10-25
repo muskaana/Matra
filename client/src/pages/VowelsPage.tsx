@@ -75,7 +75,7 @@ export default function VowelsPage() {
                         {lesson.icon}
                       </div>
                     </div>
-                    <span className="text-[36px] leading-10 font-medium text-black">
+                    <span className={`leading-10 font-medium text-black ${lesson.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>
                       {lesson.title}
                     </span>
                   </div>

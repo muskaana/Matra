@@ -2,12 +2,12 @@ import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft } from "lucide-react";
 
-import pomegranateImg from '@assets/stock_images/pomegranate_fruit_il_046f2f89.jpg';
-import mangoImg from '@assets/stock_images/mango_fruit_illustra_d97507a0.jpg';
-import tamarindImg from '@assets/stock_images/tamarind_fruit_b8f0aeb9.jpg';
-import owlImg from '@assets/stock_images/owl_bird_illustratio_811c8c7d.jpg';
-import clockImg from '@assets/stock_images/clock_time_019830c1.jpg';
-import moonImg from '@assets/stock_images/moon_crescent_d824978a.jpg';
+import pomegranateImg from '@assets/generated_images/Colorful_pomegranate_icon_illustration_81ade7f4.png';
+import mangoImg from '@assets/generated_images/Colorful_mango_icon_illustration_7156411b.png';
+import tamarindImg from '@assets/generated_images/Colorful_tamarind_icon_illustration_043a9b40.png';
+import owlImg from '@assets/generated_images/Colorful_owl_icon_illustration_a9ea4e1a.png';
+import clockImg from '@assets/generated_images/Colorful_clock_icon_illustration_5fb52ffc.png';
+import moonImg from '@assets/generated_images/Colorful_moon_icon_illustration_15e2d22a.png';
 
 const imageMap: Record<string, string> = {
   pomegranate: pomegranateImg,
@@ -219,8 +219,8 @@ export default function LessonPage() {
                   return (
                     <div key={index} className="bg-gray-50 rounded-xl p-3 flex items-center gap-3">
                       {imageUrl && (
-                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden shadow-lg bg-white">
-                          <img src={imageUrl} alt={sample.meaning} className="w-full h-full object-cover" />
+                        <div className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden shadow-lg bg-white p-1">
+                          <img src={imageUrl} alt={sample.meaning} className="w-full h-full object-contain" />
                         </div>
                       )}
                       <div className="flex-1 text-left">

@@ -65,13 +65,13 @@ export default function VowelsPage() {
                             cy="37"
                             r="35"
                             fill="none"
-                            stroke="#F7941D"
+                            stroke="#ff9930"
                             strokeWidth="2"
                             strokeDasharray={`${lesson.progress * 2.2} ${220 - lesson.progress * 2.2}`}
                           />
                         </svg>
                       )}
-                      <div className="w-[68px] h-[68px] bg-[#F7941D] rounded-full flex items-center justify-center text-white font-bold text-[30px] border-[3px] border-white shadow-md">
+                      <div className="w-[68px] h-[68px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-[30px] border-[3px] border-white shadow-md">
                         {lesson.icon}
                       </div>
                     </div>

@@ -89,19 +89,19 @@ export default function VowelsPage() {
           <Link href="/reading">
             <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
               <Book className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium">Read</span>
+              <span className="text-sm font-medium">Read</span>
             </button>
           </Link>
           <Link href="/script">
             <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all">
               <FileText className="w-6 h-6 mb-1" />
-              <span className="text-xs font-bold">Script</span>
+              <span className="text-sm font-bold">Script</span>
             </button>
           </Link>
           <Link href="/conversation">
             <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
               <MessageSquare className="w-6 h-6 mb-1" />
-              <span className="text-xs font-medium">Talk</span>
+              <span className="text-sm font-medium">Talk</span>
             </button>
           </Link>
         </div>

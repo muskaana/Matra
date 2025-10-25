@@ -50,28 +50,28 @@ export default function VowelsPage() {
                   <div className="flex items-center gap-5 cursor-pointer">
                     <div className="relative flex-shrink-0">
                       {lesson.progress !== undefined && (
-                        <svg className="absolute -inset-[3px] w-[74px] h-[74px] -rotate-90">
+                        <svg className="absolute -inset-[3px] w-[86px] h-[86px] -rotate-90">
                           <circle
-                            cx="37"
-                            cy="37"
-                            r="35"
+                            cx="43"
+                            cy="43"
+                            r="40"
                             fill="none"
                             stroke="#FFE5CC"
                             strokeWidth="2"
                             strokeDasharray="1 6"
                           />
                           <circle
-                            cx="37"
-                            cy="37"
-                            r="35"
+                            cx="43"
+                            cy="43"
+                            r="40"
                             fill="none"
                             stroke="#ff9930"
                             strokeWidth="2"
-                            strokeDasharray={`${lesson.progress * 2.2} ${220 - lesson.progress * 2.2}`}
+                            strokeDasharray={`${lesson.progress * 2.51} ${251 - lesson.progress * 2.51}`}
                           />
                         </svg>
                       )}
-                      <div className="w-[68px] h-[68px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-[30px] border-[3px] border-white shadow-md">
+                      <div className="w-[80px] h-[80px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-[34px] border-[3px] border-white shadow-md">
                         {lesson.icon}
                       </div>
                     </div>

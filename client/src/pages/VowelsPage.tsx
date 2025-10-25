@@ -47,7 +47,7 @@ export default function VowelsPage() {
             <div className="flex flex-col justify-around flex-1">
               {lessons.map((lesson) => (
                 <Link key={lesson.id} href={lesson.href || "#"}>
-                  <div className="flex items-center gap-5 cursor-pointer">
+                  <div className="flex items-center gap-5 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors">
                     <div className="relative flex-shrink-0">
                       {lesson.progress !== undefined && (
                         <svg className="absolute -inset-[3px] w-[86px] h-[86px] -rotate-90">
@@ -71,7 +71,7 @@ export default function VowelsPage() {
                           />
                         </svg>
                       )}
-                      <div className="w-[80px] h-[80px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-[34px] border-[3px] border-white shadow-md">
+                      <div className="w-[80px] h-[80px] bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-[34px] border-[3px] border-white shadow-md transition-colors">
                         {lesson.icon}
                       </div>
                     </div>

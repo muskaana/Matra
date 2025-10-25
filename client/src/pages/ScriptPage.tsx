@@ -23,8 +23,8 @@ export default function ScriptPage() {
             <div className="flex flex-col justify-around flex-1">
               {levels.map((level, index) => (
                 <Link key={level.id} href={level.href || "#"}>
-                  <div className="flex items-center gap-5 cursor-pointer">
-                    <div className="w-[80px] h-[80px] bg-[#ff9930] rounded-full flex items-center justify-center text-white font-bold text-3xl flex-shrink-0 border-[3px] border-white shadow-md">
+                  <div className="flex items-center gap-5 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors">
+                    <div className="w-[80px] h-[80px] bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-3xl flex-shrink-0 border-[3px] border-white shadow-md transition-colors">
                       {index + 1}
                     </div>
                     <span className={`leading-10 font-medium text-black ${level.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>

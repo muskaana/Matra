@@ -82,7 +82,7 @@ const quizData: Record<string, any> = {
       { text: "Ullu", correct: false },
       { text: "Oon", correct: true },
       { text: "Ummeed", correct: false },
-      { text: "Oopar", correct: true },
+      { text: "Utho", correct: false },
     ],
     pageNumber: "Quiz 3b",
     nextLesson: "/script/vowels/sections",
@@ -109,8 +109,8 @@ const quizData: Record<string, any> = {
     options: [
       { text: "Ek", correct: false },
       { text: "Ainak", correct: true },
-      { text: "Aisa", correct: true },
       { text: "Ehsaan", correct: false },
+      { text: "Alag", correct: false },
     ],
     pageNumber: "Quiz 4b",
     nextLesson: "/script/vowels/sections",
@@ -137,8 +137,8 @@ const quizData: Record<string, any> = {
     options: [
       { text: "Okhli", correct: false },
       { text: "Aurat", correct: true },
-      { text: "Aur", correct: true },
       { text: "Os", correct: false },
+      { text: "Om", correct: false },
     ],
     pageNumber: "Quiz 5b",
     nextLesson: "/script/vowels/sections",

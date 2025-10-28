@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Cute_tiger_mascot_character_95699dd7.png';
+import tigerMascot from '@assets/generated_images/Light_pastel_tiger_mascot_85a3b175.png';
 
 const quizData: Record<string, any> = {
   "1a": {

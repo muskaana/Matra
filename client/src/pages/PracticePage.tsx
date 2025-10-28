@@ -84,7 +84,7 @@ export default function PracticePage() {
         </div>
 
         <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative animate-slide-in-up">
-          <div className="absolute bottom-24 left-6 w-16 h-16 opacity-45 animate-bounce-subtle" style={{ transform: 'rotate(8deg)' }}>
+          <div className="absolute top-6 left-6 w-16 h-16 opacity-45 animate-bounce-subtle" style={{ transform: 'rotate(8deg)' }}>
             <img src={tigerHappy} alt="Happy tiger" className="w-full h-full object-contain" />
           </div>
           

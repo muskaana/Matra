@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
+import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 
 export default function VowelSectionsPage() {
   const sections = [
@@ -59,8 +59,8 @@ export default function VowelSectionsPage() {
             );
           })}
           
-          <div className="absolute bottom-12 right-8 w-24 h-24 opacity-65" style={{ transform: 'rotate(-8deg)' }}>
-            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-70" style={{ transform: 'rotate(-5deg)' }}>
+            <img src={tigerExcited} alt="Excited tiger" className="w-full h-full object-contain" />
           </div>
         </div>
       </div>

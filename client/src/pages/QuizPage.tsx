@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
+import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
+import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
 
 const quizData: Record<string, any> = {
   "1a": {
@@ -220,8 +221,8 @@ export default function QuizPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute top-2 left-2 w-12 h-12 opacity-40" style={{ transform: 'rotate(-10deg)' }}>
-              <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+            <div className="absolute bottom-16 right-8 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)' }}>
+              <img src={tigerThinking} alt="Thinking tiger" className="w-full h-full object-contain" />
             </div>
             
             <div className="px-8 pt-8 pb-4 flex-shrink-0">
@@ -280,8 +281,8 @@ export default function QuizPage() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
-          <div className="absolute bottom-2 left-2 w-14 h-14 opacity-40" style={{ transform: 'rotate(8deg)' }}>
-            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+          <div className="absolute bottom-24 left-8 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)' }}>
+            <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
           </div>
           
           <div className="mb-8">

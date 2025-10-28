@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
+import tigerHappy from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
 
 const practiceData: Record<string, any> = {
   "1": {
@@ -84,8 +84,8 @@ export default function PracticePage() {
         </div>
 
         <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative">
-          <div className="absolute top-2 right-2 w-12 h-12 opacity-35" style={{ transform: 'rotate(-8deg)' }}>
-            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+          <div className="absolute bottom-24 left-6 w-16 h-16 opacity-45" style={{ transform: 'rotate(8deg)' }}>
+            <img src={tigerHappy} alt="Happy tiger" className="w-full h-full object-contain" />
           </div>
           
           <p className="text-base text-gray-700 mb-6">{practice.question}</p>

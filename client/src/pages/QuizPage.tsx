@@ -220,7 +220,7 @@ export default function QuizPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute top-2 right-2 w-14 h-14 opacity-70">
+            <div className="absolute bottom-4 left-4 w-20 h-20 opacity-60" style={{ transform: 'rotate(-15deg)' }}>
               <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
             </div>
             
@@ -279,7 +279,11 @@ export default function QuizPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col">
+        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
+          <div className="absolute top-4 right-4 w-16 h-16 opacity-55" style={{ transform: 'rotate(20deg)' }}>
+            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+          </div>
+          
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
             

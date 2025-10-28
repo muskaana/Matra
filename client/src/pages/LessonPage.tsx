@@ -233,7 +233,7 @@ export default function LessonPage() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden relative">
-          <div className="absolute top-2 right-2 w-12 h-12 opacity-60">
+          <div className="absolute top-3 right-3 w-16 h-16 opacity-50" style={{ transform: 'rotate(12deg)' }}>
             <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
           </div>
           

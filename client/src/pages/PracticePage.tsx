@@ -83,12 +83,12 @@ export default function PracticePage() {
           </Link>
         </div>
 
-        <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto">
-          <p className="text-base text-gray-700 mb-6 relative">
-            <span className="absolute -top-3 -left-2 w-16 h-16 opacity-45" style={{ transform: 'rotate(8deg)', zIndex: 10 }}>
-              <img src={tigerHappy} alt="Happy tiger" className="w-full h-full object-contain" />
-            </span>
-          </p>
+        <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative">
+          <div className="absolute top-2 left-4 w-16 h-16 opacity-45" style={{ transform: 'rotate(8deg)' }}>
+            <img src={tigerHappy} alt="Happy tiger" className="w-full h-full object-contain" />
+          </div>
+          
+          <p className="text-base text-gray-700 mb-6">{practice.question}</p>
 
           <div className="space-y-3 mb-6">
             {practice.pairs.map((pair: any, index: number) => (

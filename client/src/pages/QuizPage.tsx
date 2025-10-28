@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
 
 const quizData: Record<string, any> = {
   "1a": {
@@ -219,11 +218,7 @@ export default function QuizPage() {
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute bottom-6 left-6 w-18 h-18 opacity-55" style={{ transform: 'rotate(-15deg)' }}>
-              <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
-            </div>
-            
+          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden">
             <div className="px-8 pt-8 pb-4 flex-shrink-0">
               <h2 className="text-2xl font-bold text-black mb-4">{quiz.title}</h2>
               <div className="flex items-center justify-center gap-4 mb-4">
@@ -279,11 +274,7 @@ export default function QuizPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
-          <div className="absolute top-6 right-6 w-16 h-16 opacity-50" style={{ transform: 'rotate(20deg)' }}>
-            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
-          </div>
-          
+        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
             

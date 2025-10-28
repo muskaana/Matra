@@ -213,40 +213,44 @@ export default function QuizPage() {
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100 flex-1 flex flex-col justify-center">
-            <div className="mb-8">
+          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden">
+            <div className="px-8 pt-8 pb-4 flex-shrink-0">
               <h2 className="text-2xl font-bold text-black mb-4">{quiz.title}</h2>
               <div className="flex items-center justify-center gap-4 mb-4">
                 <span className="text-5xl font-bold text-black">{quiz.char1}</span>
                 <span className="text-xl font-semibold text-gray-500">vs</span>
                 <span className="text-5xl font-bold text-black">{quiz.char2}</span>
               </div>
-              <p className="text-gray-600 text-base mb-4">{quiz.subQuestion}</p>
+              <p className="text-gray-600 text-base">{quiz.subQuestion}</p>
             </div>
 
-            <div className={`text-3xl font-bold mb-4 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
-              {isCorrect ? "✓ CORRECT" : "✗ INCORRECT"}
+            <div className="flex-1 flex flex-col justify-center px-8 overflow-y-auto">
+              <div className={`text-3xl font-bold mb-4 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
+                {isCorrect ? "✓ CORRECT" : "✗ INCORRECT"}
+              </div>
+
+              {!isCorrect && (
+                <div className="bg-red-50 rounded-xl p-4">
+                  <p className="text-sm text-gray-700 mb-2">You selected: <span className="font-bold text-red-600">{selectedAnswerText}</span></p>
+                  <p className="text-sm text-gray-700">Correct answer: <span className="font-bold text-green-600">{correctAnswerText}</span></p>
+                </div>
+              )}
+
+              {isCorrect && (
+                <div className="bg-green-50 rounded-xl p-4">
+                  <p className="text-sm text-gray-700">Your answer: <span className="font-bold text-green-600">{selectedAnswerText}</span></p>
+                </div>
+              )}
             </div>
 
-            {!isCorrect && (
-              <div className="bg-red-50 rounded-xl p-4 mb-4">
-                <p className="text-sm text-gray-700 mb-2">You selected: <span className="font-bold text-red-600">{selectedAnswerText}</span></p>
-                <p className="text-sm text-gray-700">Correct answer: <span className="font-bold text-green-600">{correctAnswerText}</span></p>
-              </div>
-            )}
-
-            {isCorrect && (
-              <div className="bg-green-50 rounded-xl p-4 mb-4">
-                <p className="text-sm text-gray-700">Your answer: <span className="font-bold text-green-600">{selectedAnswerText}</span></p>
-              </div>
-            )}
-
-            <button 
-              onClick={handleNext}
-              className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
-            >
-              {isCorrect ? "Next" : "Try Again"}
-            </button>
+            <div className="px-8 pb-8 pt-4 flex-shrink-0">
+              <button 
+                onClick={handleNext}
+                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
+              >
+                {isCorrect ? "Next" : "Try Again"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

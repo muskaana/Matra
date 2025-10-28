@@ -23,16 +23,15 @@ export default function VowelSectionsPage() {
           </Link>
         </div>
 
-        <div className="flex-1 relative py-8">
+        <div className="flex-1 flex flex-col gap-8 py-8 overflow-y-auto">
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
-            const yPosition = index * 160;
             
             return (
-              <div key={section.id} className="absolute w-full" style={{ top: `${yPosition}px` }}>
+              <div key={section.id} className="relative w-full min-h-[100px]">
                 <Link href={`/script/lesson/vowels/${section.startLesson}`}>
                   <button
-                    className={`w-24 h-24 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 border-white transition-all relative ${
+                    className={`w-24 h-24 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 border-white transition-all ${
                       isEven ? 'ml-8' : 'ml-auto mr-8'
                     }`}
                   >
@@ -42,9 +41,10 @@ export default function VowelSectionsPage() {
                 
                 {index < sections.length - 1 && (
                   <div
-                    className="absolute top-20 border-t-2 border-gray-400"
+                    className="absolute border-t-2 border-gray-400"
                     style={{
                       width: '180px',
+                      top: '80px',
                       left: isEven ? '110px' : 'auto',
                       right: isEven ? 'auto' : '110px',
                       transform: isEven ? 'rotate(25deg)' : 'rotate(-25deg)',

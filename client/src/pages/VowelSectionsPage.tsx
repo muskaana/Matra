@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { ChevronLeft } from "lucide-react";
+import tigerMascot from '@assets/generated_images/Cute_tiger_mascot_character_95699dd7.png';
 
 export default function VowelSectionsPage() {
   const sections = [
@@ -25,7 +26,7 @@ export default function VowelSectionsPage() {
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto">
+        <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
             
@@ -57,6 +58,10 @@ export default function VowelSectionsPage() {
               </div>
             );
           })}
+          
+          <div className="absolute bottom-4 right-4 w-20 h-20 opacity-80">
+            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+          </div>
         </div>
       </div>
     </div>

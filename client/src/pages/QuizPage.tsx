@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
+import tigerMascot from '@assets/generated_images/Cute_tiger_mascot_character_95699dd7.png';
 
 const quizData: Record<string, any> = {
   "1a": {
@@ -218,7 +219,11 @@ export default function QuizPage() {
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
+            <div className="absolute top-2 right-2 w-14 h-14 opacity-70">
+              <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
+            </div>
+            
             <div className="px-8 pt-8 pb-4 flex-shrink-0">
               <h2 className="text-2xl font-bold text-black mb-4">{quiz.title}</h2>
               <div className="flex items-center justify-center gap-4 mb-4">

@@ -20,6 +20,7 @@ import hopeImg from '@assets/generated_images/Hope_star_icon_transparent_1f5afee
 import sageImg from '@assets/generated_images/Sage_wise_person_icon_69e81458.png';
 import moneyImg from '@assets/generated_images/Money_debt_icon_transparent_26198913.png';
 import oneImg from '@assets/generated_images/Number_one_icon_transparent_878eed63.png';
+import faithImg from '@assets/generated_images/Faith_prayer_icon_transparent_1ef4ca7d.png';
 import mortarImg from '@assets/generated_images/Mortar_pestle_icon_transparent_d4a60752.png';
 import plusImg from '@assets/generated_images/Plus_more_icon_transparent_f5b63372.png';
 import womanImg from '@assets/generated_images/Woman_figure_icon_transparent_a626ddea.png';
@@ -44,6 +45,7 @@ const imageMap: Record<string, string> = {
   sage: sageImg,
   money: moneyImg,
   one: oneImg,
+  faith: faithImg,
   mortar: mortarImg,
   plus: plusImg,
   woman: womanImg,
@@ -98,7 +100,7 @@ const lessonData: Record<string, any> = {
     sound: '"eee"',
     sampleWords: [
       { word: "ईद", transliteration: "eed", meaning: "Eid", image: "moon" },
-      { word: "ईमान", transliteration: "eeman", meaning: "Faith", image: "moon" },
+      { word: "ईमान", transliteration: "eeman", meaning: "Faith", image: "faith" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
     nextLesson: "practice/2",

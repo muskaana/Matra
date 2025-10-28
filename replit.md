@@ -1,0 +1,109 @@
+# Overview
+
+This is a Hindi language learning application called "Matra" that teaches users the Devanagari script, reading comprehension, and conversational skills. The application is built as a full-stack web application with a React frontend and Express backend, designed to provide an interactive, gamified learning experience for Hindi language learners.
+
+The application follows a structured learning path starting with basic script characters (vowels and consonants), progressing through word formation, and advancing to sentences and reading comprehension. Users complete lessons, practice exercises, and quizzes with progress tracking and encouraging feedback.
+
+# User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+# System Architecture
+
+## Frontend Architecture
+
+**Technology Stack:**
+- React 18 with TypeScript for the UI framework
+- Wouter for lightweight client-side routing
+- TanStack Query (React Query) for server state management
+- Tailwind CSS for styling with shadcn/ui component library
+- Vite as the build tool and development server
+
+**Design Patterns:**
+- Component-based architecture with reusable UI components from shadcn/ui
+- Page-based routing structure under `client/src/pages/`
+- Custom hooks for mobile detection and toast notifications
+- Local storage for persisting user progress (quiz completion tracking)
+
+**Key Design Decisions:**
+- Mobile-first responsive design optimized for phone screens (max-width: 540px containers)
+- Indian cultural theming with decorative patterns (Rangoli, Mandala) and orange (#ff9930) primary color
+- Gamification elements including confetti celebrations, tiger mascot characters, and encouraging Hindi/English messages
+- Asset management through a dedicated `attached_assets` directory for generated images
+
+## Backend Architecture
+
+**Technology Stack:**
+- Express.js server with TypeScript
+- Drizzle ORM for database operations
+- PostgreSQL as the primary database (configured via Neon serverless driver)
+- Session management with connect-pg-simple for PostgreSQL-backed sessions
+
+**Design Patterns:**
+- Modular route registration pattern via `registerRoutes` function
+- Storage abstraction layer with `IStorage` interface
+- In-memory storage implementation (`MemStorage`) as a development/testing fallback
+- Middleware pipeline for request logging and error handling
+- Custom logging with timestamp formatting
+
+**Key Design Decisions:**
+- API routes prefixed with `/api` for clear separation from static assets
+- Development/production environment detection via `NODE_ENV`
+- Vite integration in development mode with HMR support
+- Request/response logging truncated to 80 characters for readability
+- User authentication schema ready with username/password fields
+
+## Data Storage
+
+**Database:**
+- PostgreSQL database configured via `DATABASE_URL` environment variable
+- Drizzle ORM with schema-first approach defined in `shared/schema.ts`
+- Migration files stored in `./migrations` directory
+- UUID primary keys generated via PostgreSQL's `gen_random_uuid()`
+
+**Schema Design:**
+- Users table with id, username (unique), and password fields
+- Zod validation schemas derived from Drizzle schemas for type safety
+- Shared types between client and server via `shared/` directory
+
+**Storage Abstraction:**
+- `IStorage` interface defining CRUD operations
+- `MemStorage` class providing in-memory implementation for development
+- Database implementation expected to replace MemStorage in production
+- Methods for user retrieval by ID and username, plus user creation
+
+## External Dependencies
+
+**UI Component Libraries:**
+- Radix UI primitives for accessible, unstyled components
+- shadcn/ui configuration with "new-york" style variant
+- Canvas-confetti for celebration animations
+- Lucide React for iconography
+
+**Development Tools:**
+- Replit-specific plugins: runtime error overlay, cartographer, dev banner
+- PostCSS with Tailwind CSS and Autoprefixer
+- tsx for TypeScript execution in development
+- esbuild for production server bundling
+
+**Database & ORM:**
+- @neondatabase/serverless for PostgreSQL connections
+- Drizzle ORM and Drizzle Kit for migrations
+- drizzle-zod for schema-to-validation integration
+
+**Form & Validation:**
+- React Hook Form with @hookform/resolvers
+- Zod for schema validation
+
+**Routing & State:**
+- wouter for client-side routing
+- @tanstack/react-query for server state with infinite stale time
+
+**Styling:**
+- Tailwind CSS with CSS variables for theming
+- Custom fonts: DM Sans, Fira Code, Geist Mono, Architects Daughter, Tiro Devanagari Hindi
+- class-variance-authority and clsx for conditional styling
+
+**Session Management:**
+- connect-pg-simple for PostgreSQL session storage
+- Express session middleware (implied by connect-pg-simple dependency)

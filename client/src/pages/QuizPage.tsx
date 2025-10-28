@@ -189,6 +189,10 @@ export default function QuizPage() {
   const isCorrect = selectedAnswer !== null && quiz.options[selectedAnswer].correct;
 
   if (showFeedback) {
+    const correctAnswerIndex = quiz.options.findIndex((opt: any) => opt.correct);
+    const correctAnswerText = quiz.options[correctAnswerIndex]?.text;
+    const selectedAnswerText = selectedAnswer !== null ? quiz.options[selectedAnswer]?.text : '';
+
     return (
       <div className="h-screen bg-white px-4 py-4 flex flex-col">
         <div className="w-full max-w-md mx-auto flex flex-col h-full">
@@ -214,12 +218,21 @@ export default function QuizPage() {
               <p className="text-gray-600 text-base mb-4">{quiz.subQuestion}</p>
             </div>
 
-            <div className={`text-3xl font-bold mb-8 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
-              {isCorrect ? "CORRECT" : "INCORRECT"}
+            <div className={`text-3xl font-bold mb-4 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
+              {isCorrect ? "✓ CORRECT" : "✗ INCORRECT"}
             </div>
 
             {!isCorrect && (
-              <p className="text-sm text-gray-500 mb-8">Try again to learn the difference!</p>
+              <div className="bg-red-50 rounded-xl p-4 mb-4">
+                <p className="text-sm text-gray-700 mb-2">You selected: <span className="font-bold text-red-600">{selectedAnswerText}</span></p>
+                <p className="text-sm text-gray-700">Correct answer: <span className="font-bold text-green-600">{correctAnswerText}</span></p>
+              </div>
+            )}
+
+            {isCorrect && (
+              <div className="bg-green-50 rounded-xl p-4 mb-4">
+                <p className="text-sm text-gray-700">Your answer: <span className="font-bold text-green-600">{selectedAnswerText}</span></p>
+              </div>
             )}
 
             <button 

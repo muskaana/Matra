@@ -163,18 +163,26 @@ export default function QuizPage() {
   };
 
   const handleNext = () => {
-    if (isCorrect && (quiz.nextLesson === '/script/vowels' || quiz.nextLesson === '/script/vowels/sections')) {
-      const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-      const sectionNumber = parseInt(quizId.replace(/[ab]/, ''));
-      if (sectionNumber > currentQuizzes) {
-        localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+    if (isCorrect) {
+      // Mark quiz as completed only if answer is correct
+      if (quiz.nextLesson === '/script/vowels' || quiz.nextLesson === '/script/vowels/sections') {
+        const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+        const sectionNumber = parseInt(quizId.replace(/[ab]/, ''));
+        if (sectionNumber > currentQuizzes) {
+          localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+        }
       }
-    }
-    
-    if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
-      setLocation(quiz.nextLesson);
+      
+      // Navigate to next quiz/page
+      if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
+        setLocation(quiz.nextLesson);
+      } else {
+        setLocation(`/script/lesson/vowels/quiz/${quiz.nextLesson}`);
+      }
     } else {
-      setLocation(`/script/lesson/vowels/quiz/${quiz.nextLesson}`);
+      // If incorrect, go back to the quiz to try again
+      setShowFeedback(false);
+      setSelectedAnswer(null);
     }
   };
 
@@ -218,7 +226,7 @@ export default function QuizPage() {
               onClick={handleNext}
               className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
             >
-              Next
+              {isCorrect ? "Next" : "Try Again"}
             </button>
           </div>
         </div>

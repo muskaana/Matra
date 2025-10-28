@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
-import HomePage from "@/pages/HomePage";
 import ReadingPage from "@/pages/ReadingPage";
 import ConversationPage from "@/pages/ConversationPage";
 import ScriptPage from "@/pages/ScriptPage";
@@ -19,7 +18,7 @@ function Router() {
   return (
     <Switch>
       {/* Add pages below */}
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={ScriptPage} />
       <Route path="/reading" component={ReadingPage} />
       <Route path="/conversation" component={ConversationPage} />
       <Route path="/script" component={ScriptPage} />

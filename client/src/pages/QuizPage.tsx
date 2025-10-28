@@ -221,7 +221,7 @@ export default function QuizPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute bottom-16 right-8 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)' }}>
+            <div className="absolute top-20 right-6 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)' }}>
               <img src={tigerThinking} alt="Thinking tiger" className="w-full h-full object-contain" />
             </div>
             
@@ -281,7 +281,7 @@ export default function QuizPage() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
-          <div className="absolute bottom-24 left-8 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)' }}>
+          <div className="absolute top-32 left-6 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)' }}>
             <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
           </div>
           

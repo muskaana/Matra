@@ -64,7 +64,7 @@ export default function VowelSectionsPage() {
             );
           })}
           
-          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-70 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }}>
+          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }}>
             <img src={tigerExcited} alt="Excited tiger" className="w-full h-full object-contain" />
           </div>
         </div>

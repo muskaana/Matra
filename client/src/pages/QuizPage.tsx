@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
 
@@ -152,6 +152,12 @@ export default function QuizPage() {
   const quiz = quizData[quizId];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+
+  // Reset state when quiz changes
+  useEffect(() => {
+    setSelectedAnswer(null);
+    setShowFeedback(false);
+  }, [quizId]);
 
   if (!quiz) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Quiz not found</p></div>;

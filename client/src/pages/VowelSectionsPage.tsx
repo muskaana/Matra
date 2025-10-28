@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Light_pastel_tiger_mascot_85a3b175.png';
+import tigerMascot from '@assets/generated_images/Transparent_light_tiger_mascot_b3011079.png';
 
 export default function VowelSectionsPage() {
   const sections = [

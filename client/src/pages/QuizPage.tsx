@@ -200,9 +200,9 @@ export default function QuizPage() {
     const selectedAnswerText = selectedAnswer !== null ? quiz.options[selectedAnswer]?.text : '';
 
     return (
-      <div className="h-screen bg-white px-4 py-4 flex flex-col">
-        <div className="w-full max-w-md mx-auto flex flex-col h-full">
-          <div className="flex items-center justify-between mb-6">
+      <div className="h-screen bg-white flex flex-col">
+        <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+          <div className="flex items-center justify-between mb-6 flex-shrink-0">
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
@@ -254,9 +254,9 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="h-screen bg-white px-4 py-4 flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full">
-        <div className="flex items-center justify-between mb-6">
+    <div className="h-screen bg-white flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+        <div className="flex items-center justify-between mb-6 flex-shrink-0">
           <div className="w-10"></div>
           <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">

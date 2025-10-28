@@ -216,9 +216,9 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="h-screen bg-white px-4 py-4 flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full">
-        <div className="flex items-center justify-between mb-4">
+    <div className="h-screen bg-white flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+        <div className="flex items-center justify-between mb-4 flex-shrink-0">
           <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />

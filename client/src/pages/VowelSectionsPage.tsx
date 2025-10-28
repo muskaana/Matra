@@ -12,18 +12,20 @@ export default function VowelSectionsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <div className="w-full max-w-md mx-auto flex-1 flex flex-col px-6 py-6 bg-white shadow-lg">
-        <div className="bg-[#ff9930] text-white px-6 py-4 rounded-xl font-semibold text-2xl mb-6 flex items-center justify-between">
-          <span>Vowels</span>
-          <Link href="/script/vowels">
-            <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-          </Link>
+    <div className="h-screen bg-gray-100 flex flex-col">
+      <div className="w-full max-w-md mx-auto flex-1 flex flex-col bg-white shadow-lg">
+        <div className="px-6 pt-6 pb-4 flex-shrink-0">
+          <div className="bg-[#ff9930] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
+            <span>Vowels</span>
+            <Link href="/script/vowels">
+              <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            </Link>
+          </div>
         </div>
 
-        <div className="flex-1 flex flex-col gap-8 py-8 overflow-y-auto">
+        <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto">
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
             

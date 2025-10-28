@@ -67,9 +67,9 @@ export default function PracticePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white p-5">
-      <div className="w-full max-w-sm mx-auto">
-        <div className="flex items-center justify-between mb-6">
+    <div className="h-screen bg-white flex flex-col">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
+        <div className="flex items-center justify-between mb-6 flex-shrink-0">
           <Link href="/script/vowels/sections">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
@@ -82,7 +82,7 @@ export default function PracticePage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-5 text-center border border-gray-200">
+        <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto">
           <p className="text-base text-gray-700 mb-6">{practice.question}</p>
 
           <div className="space-y-3 mb-6">
@@ -94,22 +94,24 @@ export default function PracticePage() {
             ))}
           </div>
 
-          {!completed && (
-            <button
-              onClick={() => setCompleted(true)}
-              className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
-            >
-              I understand
-            </button>
-          )}
-
-          {completed && (
-            <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
-              <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
-                Continue to Quiz
+          <div className="mt-auto">
+            {!completed && (
+              <button
+                onClick={() => setCompleted(true)}
+                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
+              >
+                I understand
               </button>
-            </Link>
-          )}
+            )}
+
+            {completed && (
+              <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
+                <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
+                  Continue to Quiz
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

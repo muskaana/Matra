@@ -59,7 +59,7 @@ export default function VowelSectionsPage() {
             );
           })}
           
-          <div className="absolute bottom-8 right-6 w-24 h-24 opacity-70" style={{ transform: 'rotate(-8deg)' }}>
+          <div className="absolute bottom-12 right-8 w-24 h-24 opacity-65" style={{ transform: 'rotate(-8deg)' }}>
             <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
           </div>
         </div>

@@ -84,7 +84,7 @@ export default function PracticePage() {
         </div>
 
         <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative">
-          <div className="absolute bottom-3 right-3 w-18 h-18 opacity-65" style={{ transform: 'rotate(5deg)' }}>
+          <div className="absolute bottom-20 right-4 w-16 h-16 opacity-60" style={{ transform: 'rotate(5deg)' }}>
             <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
           </div>
           

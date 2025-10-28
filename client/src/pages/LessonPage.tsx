@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft } from "lucide-react";
-import tigerMascot from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
 
 import pomegranateImg from '@assets/generated_images/Transparent_pomegranate_simple_icon_5f275640.png';
 import mangoImg from '@assets/generated_images/Transparent_mango_simple_icon_3f4bb5ae.png';
@@ -232,11 +231,7 @@ export default function LessonPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden relative">
-          <div className="absolute top-3 right-3 w-16 h-16 opacity-50" style={{ transform: 'rotate(12deg)' }}>
-            <img src={tigerMascot} alt="Tiger mascot" className="w-full h-full object-contain" />
-          </div>
-          
+        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden">
           <div className="mb-4">
             <div className="text-8xl font-bold text-black mb-2">{lesson.character}</div>
             <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>

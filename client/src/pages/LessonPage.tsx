@@ -8,6 +8,22 @@ import tamarindImg from '@assets/generated_images/Tamarind_icon_transparent_back
 import owlImg from '@assets/generated_images/Owl_icon_transparent_background_3fcb5c0a.png';
 import clockImg from '@assets/generated_images/Clock_icon_transparent_background_8d7a58b1.png';
 import moonImg from '@assets/generated_images/Moon_icon_transparent_background_61fb089c.png';
+import glassesImg from '@assets/generated_images/Eyeglasses_icon_transparent_background_4efeb6c5.png';
+import woolImg from '@assets/generated_images/Wool_yarn_icon_transparent_fbf24e85.png';
+import upArrowImg from '@assets/generated_images/Up_arrow_icon_transparent_18d337c8.png';
+import dewImg from '@assets/generated_images/Dew_droplets_icon_transparent_027f87db.png';
+import helpingHandsImg from '@assets/generated_images/Helping_hands_icon_transparent_29438d30.png';
+import pointingImg from '@assets/generated_images/Pointing_finger_icon_transparent_502be25c.png';
+import easyImg from '@assets/generated_images/Easy_checkmark_icon_transparent_3e61e5d2.png';
+import respectImg from '@assets/generated_images/Respect_heart_icon_transparent_97f6235a.png';
+import hopeImg from '@assets/generated_images/Hope_star_icon_transparent_1f5afeeb.png';
+import sageImg from '@assets/generated_images/Sage_wise_person_icon_69e81458.png';
+import moneyImg from '@assets/generated_images/Money_debt_icon_transparent_26198913.png';
+import oneImg from '@assets/generated_images/Number_one_icon_transparent_878eed63.png';
+import mortarImg from '@assets/generated_images/Mortar_pestle_icon_transparent_d4a60752.png';
+import plusImg from '@assets/generated_images/Plus_more_icon_transparent_f5b63372.png';
+import womanImg from '@assets/generated_images/Woman_figure_icon_transparent_a626ddea.png';
+import differentImg from '@assets/generated_images/Different_arrows_icon_transparent_04af20b6.png';
 
 const imageMap: Record<string, string> = {
   pomegranate: pomegranateImg,
@@ -16,6 +32,22 @@ const imageMap: Record<string, string> = {
   owl: owlImg,
   clock: clockImg,
   moon: moonImg,
+  glasses: glassesImg,
+  wool: woolImg,
+  upArrow: upArrowImg,
+  dew: dewImg,
+  helpingHands: helpingHandsImg,
+  pointing: pointingImg,
+  easy: easyImg,
+  respect: respectImg,
+  hope: hopeImg,
+  sage: sageImg,
+  money: moneyImg,
+  one: oneImg,
+  mortar: mortarImg,
+  plus: plusImg,
+  woman: womanImg,
+  different: differentImg,
 };
 
 const lessonData: Record<string, any> = {
@@ -27,7 +59,7 @@ const lessonData: Record<string, any> = {
     sampleWords: [
       { word: "अनार", transliteration: "anar", meaning: "Pomegranate", image: "pomegranate" },
       { word: "अभी", transliteration: "abhi", meaning: "Now", image: "clock" },
-      { word: "अलग", transliteration: "alag", meaning: "Different", image: "clock" },
+      { word: "अलग", transliteration: "alag", meaning: "Different", image: "different" },
     ],
     sentence: "अbhi toh party shuru hui hai",
     nextLesson: "2",
@@ -40,7 +72,7 @@ const lessonData: Record<string, any> = {
     sound: '"aa"',
     sampleWords: [
       { word: "आम", transliteration: "aam", meaning: "Mango", image: "mango" },
-      { word: "आसान", transliteration: "aasan", meaning: "Easy", image: "mango" },
+      { word: "आसान", transliteration: "aasan", meaning: "Easy", image: "easy" },
     ],
     sentence: "आराम से करो (Aaram se karo - Do it slowly)",
     nextLesson: "practice/1",
@@ -53,7 +85,7 @@ const lessonData: Record<string, any> = {
     sound: '"ee"',
     sampleWords: [
       { word: "इमली", transliteration: "imli", meaning: "Tamarind", image: "tamarind" },
-      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", image: "tamarind" },
+      { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", image: "respect" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
     nextLesson: "4",
@@ -79,7 +111,7 @@ const lessonData: Record<string, any> = {
     sound: '"oo"',
     sampleWords: [
       { word: "उल्लू", transliteration: "ulloo", meaning: "Owl", image: "owl" },
-      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", image: "owl" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope", image: "hope" },
     ],
     sentence: "उठो (Utho - Get up)",
     nextLesson: "6",
@@ -91,8 +123,8 @@ const lessonData: Record<string, any> = {
     transliteration: "oo",
     sound: '"ooo"',
     sampleWords: [
-      { word: "ऊन", transliteration: "oon", meaning: "Wool", image: "owl" },
-      { word: "ऊपर", transliteration: "oopar", meaning: "Above", image: "owl" },
+      { word: "ऊन", transliteration: "oon", meaning: "Wool", image: "wool" },
+      { word: "ऊपर", transliteration: "oopar", meaning: "Above", image: "upArrow" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
     nextLesson: "practice/3",
@@ -104,8 +136,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ri",
     sound: '"ree"',
     sampleWords: [
-      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", image: "pomegranate" },
-      { word: "ऋण", transliteration: "rin", meaning: "Debt", image: "pomegranate" },
+      { word: "ऋषि", transliteration: "rishi", meaning: "Sage", image: "sage" },
+      { word: "ऋण", transliteration: "rin", meaning: "Debt", image: "money" },
     ],
     sentence: "ऋषि महान थे (Rishi mahaan the - The sage was great)",
     nextLesson: "8",
@@ -117,8 +149,8 @@ const lessonData: Record<string, any> = {
     transliteration: "e",
     sound: '"ay"',
     sampleWords: [
-      { word: "एक", transliteration: "ek", meaning: "One", image: "mango" },
-      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", image: "mango" },
+      { word: "एक", transliteration: "ek", meaning: "One", image: "one" },
+      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", image: "helpingHands" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
     nextLesson: "9",
@@ -130,8 +162,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ai",
     sound: '"aa-ay"',
     sampleWords: [
-      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", image: "clock" },
-      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", image: "clock" },
+      { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", image: "glasses" },
+      { word: "ऐसा", transliteration: "aisa", meaning: "Like this", image: "pointing" },
     ],
     sentence: "ऐसा मत करो (Aisa mat karo - Don't do it like this)",
     nextLesson: "practice/4",
@@ -143,8 +175,8 @@ const lessonData: Record<string, any> = {
     transliteration: "o",
     sound: '"oh"',
     sampleWords: [
-      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", image: "pomegranate" },
-      { word: "ओस", transliteration: "os", meaning: "Dew", image: "pomegranate" },
+      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", image: "mortar" },
+      { word: "ओस", transliteration: "os", meaning: "Dew", image: "dew" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
     nextLesson: "11",
@@ -156,8 +188,8 @@ const lessonData: Record<string, any> = {
     transliteration: "ao",
     sound: '"aa-oh"',
     sampleWords: [
-      { word: "और", transliteration: "aur", meaning: "And/More", image: "tamarind" },
-      { word: "औरत", transliteration: "aurat", meaning: "Woman", image: "tamarind" },
+      { word: "और", transliteration: "aur", meaning: "And/More", image: "plus" },
+      { word: "औरत", transliteration: "aurat", meaning: "Woman", image: "woman" },
     ],
     sentence: "और क्या? (Aur kya? - What else?)",
     nextLesson: "practice/5",

@@ -311,7 +311,7 @@ export default function QuizPage() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative animate-slide-in-up">
-          <div className="absolute top-40 left-8 w-18 h-18 opacity-45 animate-wiggle" style={{ transform: 'rotate(-12deg)' }}>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-18 h-18 opacity-45 animate-wiggle" style={{ transform: 'rotate(-12deg)' }}>
             <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
           </div>
           

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
 
@@ -152,11 +152,15 @@ export default function QuizPage() {
   const quiz = quizData[quizId];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const currentQuizIdRef = useRef(quizId);
 
   // Reset state when quiz changes
   useEffect(() => {
-    setSelectedAnswer(null);
-    setShowFeedback(false);
+    if (currentQuizIdRef.current !== quizId) {
+      setSelectedAnswer(null);
+      setShowFeedback(false);
+      currentQuizIdRef.current = quizId;
+    }
   }, [quizId]);
 
   if (!quiz) {
@@ -194,7 +198,8 @@ export default function QuizPage() {
 
   const isCorrect = selectedAnswer !== null && quiz.options[selectedAnswer].correct;
 
-  if (showFeedback) {
+  // Only show feedback if we're still on the same quiz that was answered
+  if (showFeedback && currentQuizIdRef.current === quizId && selectedAnswer !== null) {
     const correctAnswerIndex = quiz.options.findIndex((opt: any) => opt.correct);
     const correctAnswerText = quiz.options[correctAnswerIndex]?.text;
     const selectedAnswerText = selectedAnswer !== null ? quiz.options[selectedAnswer]?.text : '';

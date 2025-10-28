@@ -83,8 +83,8 @@ export default function PracticePage() {
           </Link>
         </div>
 
-        <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative">
-          <div className="absolute bottom-24 left-6 w-16 h-16 opacity-45" style={{ transform: 'rotate(8deg)' }}>
+        <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative animate-slide-in-up">
+          <div className="absolute bottom-24 left-6 w-16 h-16 opacity-45 animate-bounce-subtle" style={{ transform: 'rotate(8deg)' }}>
             <img src={tigerHappy} alt="Happy tiger" className="w-full h-full object-contain" />
           </div>
           
@@ -103,7 +103,7 @@ export default function PracticePage() {
             {!completed && (
               <button
                 onClick={() => setCompleted(true)}
-                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
+                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg btn-bounce"
               >
                 I understand
               </button>
@@ -111,7 +111,7 @@ export default function PracticePage() {
 
             {completed && (
               <Link href={`/script/lesson/vowels/${practice.nextLesson}`}>
-                <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg">
+                <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg btn-bounce">
                   Continue to Quiz
                 </button>
               </Link>

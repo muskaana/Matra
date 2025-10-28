@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft } from "lucide-react";
+import { MandalaPattern } from '../components/DecorativePattern';
 
 import pomegranateImg from '@assets/generated_images/Transparent_pomegranate_simple_icon_5f275640.png';
 import mangoImg from '@assets/generated_images/Transparent_mango_simple_icon_3f4bb5ae.png';
@@ -231,9 +232,11 @@ export default function LessonPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden animate-slide-in-up relative">
+          <MandalaPattern className="absolute top-2 right-2 w-12 h-12 opacity-20" color="#2E86AB" />
+          
           <div className="mb-4">
-            <div className="text-8xl font-bold text-black mb-2">{lesson.character}</div>
+            <div className="text-8xl font-bold text-black mb-2 animate-slide-in-right">{lesson.character}</div>
             <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
             <p className="text-gray-600 text-base">{lesson.sound}</p>
           </div>
@@ -278,7 +281,7 @@ export default function LessonPage() {
 
           <button 
             onClick={handleNext}
-            className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg"
+            className="w-full py-3.5 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg btn-bounce"
           >
             Next
           </button>

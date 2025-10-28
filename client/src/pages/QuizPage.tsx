@@ -1,8 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
+import confetti from 'canvas-confetti';
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+
+const encouragingMessages = [
+  "शाबाश! (Shaabash!)",
+  "बहुत अच्छे! (Bahut acche!)",
+  "कमाल है! (Kamaal hai!)",
+  "Fantastic!",
+  "Excellent!",
+  "Amazing work!",
+  "You're doing great!",
+  "Perfect!",
+];
+
+const getRandomMessage = () => {
+  return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+};
 
 const quizData: Record<string, any> = {
   "1a": {
@@ -172,6 +188,16 @@ export default function QuizPage() {
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);
     setShowFeedback(true);
+    
+    // Trigger confetti if correct answer with Indian flag colors
+    if (quiz.options[index].correct) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff9930', '#138808', '#FFFFFF', '#2E86AB', '#FFD700']
+      });
+    }
   };
 
   const handleNext = () => {
@@ -220,8 +246,8 @@ export default function QuizPage() {
             </Link>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute bottom-16 right-8 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)' }}>
+          <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative animate-slide-in-up">
+            <div className="absolute bottom-16 right-8 w-20 h-20 opacity-50 animate-bounce-subtle" style={{ transform: 'rotate(10deg)' }}>
               <img src={tigerThinking} alt="Thinking tiger" className="w-full h-full object-contain" />
             </div>
             
@@ -239,6 +265,10 @@ export default function QuizPage() {
               <div className={`text-3xl font-bold mb-4 ${isCorrect ? "text-green-500" : "text-red-500"}`}>
                 {isCorrect ? "✓ CORRECT" : "✗ INCORRECT"}
               </div>
+              
+              {isCorrect && (
+                <p className="text-xl font-semibold bg-gradient-to-r from-[#ff9930] to-[#FFD700] bg-clip-text text-transparent mb-4">{getRandomMessage()}</p>
+              )}
 
               {!isCorrect && (
                 <div className="bg-red-50 rounded-xl p-4">
@@ -257,7 +287,7 @@ export default function QuizPage() {
             <div className="px-8 pb-8 pt-4 flex-shrink-0">
               <button 
                 onClick={handleNext}
-                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
+                className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg btn-bounce"
               >
                 {isCorrect ? "Next" : "Try Again"}
               </button>
@@ -280,8 +310,8 @@ export default function QuizPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
-          <div className="absolute bottom-24 left-8 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)' }}>
+        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative animate-slide-in-up">
+          <div className="absolute bottom-24 left-8 w-18 h-18 opacity-45 animate-wiggle" style={{ transform: 'rotate(-12deg)' }}>
             <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
           </div>
           
@@ -305,7 +335,7 @@ export default function QuizPage() {
                 <button
                   key={index}
                   onClick={() => handleAnswer(index)}
-                  className="px-8 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg"
+                  className="px-8 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg btn-bounce"
                 >
                   {option.text}
                 </button>

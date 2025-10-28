@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import { ChevronLeft } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
+import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
 
 export default function VowelSectionsPage() {
   const sections = [
@@ -16,7 +17,7 @@ export default function VowelSectionsPage() {
     <div className="h-screen bg-gray-100 flex flex-col">
       <div className="w-full max-w-md mx-auto flex-1 flex flex-col bg-white shadow-lg">
         <div className="px-6 pt-6 pb-4 flex-shrink-0">
-          <div className="bg-[#ff9930] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
+          <div className="bg-gradient-to-r from-[#ff9930] to-[#FFD700] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
             <span>Vowels</span>
             <Link href="/script/vowels">
               <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
@@ -27,6 +28,10 @@ export default function VowelSectionsPage() {
         </div>
 
         <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
+          <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-30" color="#ff9930" />
+          <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-30" color="#2E86AB" />
+          <RangoliPattern className="absolute bottom-32 left-4 w-12 h-12 opacity-25" color="#138808" />
+          
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
             
@@ -34,7 +39,7 @@ export default function VowelSectionsPage() {
               <div key={section.id} className="relative w-full min-h-[100px]">
                 <Link href={`/script/lesson/vowels/${section.startLesson}`}>
                   <button
-                    className={`w-24 h-24 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 border-white transition-all ${
+                    className={`w-24 h-24 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 border-white transition-all btn-bounce ${
                       isEven ? 'ml-8' : 'ml-auto mr-8'
                     }`}
                   >
@@ -59,7 +64,7 @@ export default function VowelSectionsPage() {
             );
           })}
           
-          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-70" style={{ transform: 'rotate(-5deg)' }}>
+          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-70 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }}>
             <img src={tigerExcited} alt="Excited tiger" className="w-full h-full object-contain" />
           </div>
         </div>

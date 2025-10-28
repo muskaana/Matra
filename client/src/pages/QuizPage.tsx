@@ -221,10 +221,6 @@ export default function QuizPage() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative">
-            <div className="absolute top-20 right-6 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)' }}>
-              <img src={tigerThinking} alt="Thinking tiger" className="w-full h-full object-contain" />
-            </div>
-            
             <div className="px-8 pt-8 pb-4 flex-shrink-0">
               <h2 className="text-2xl font-bold text-black mb-4">{quiz.title}</h2>
               <div className="flex items-center justify-center gap-4 mb-4">
@@ -254,7 +250,11 @@ export default function QuizPage() {
               )}
             </div>
 
-            <div className="px-8 pb-8 pt-4 flex-shrink-0">
+            <div className="px-8 pb-8 pt-4 flex-shrink-0 relative">
+              <div className="absolute -bottom-2 -right-6 w-20 h-20 opacity-50" style={{ transform: 'rotate(10deg)', zIndex: 10 }}>
+                <img src={tigerThinking} alt="Thinking tiger" className="w-full h-full object-contain" />
+              </div>
+              
               <button 
                 onClick={handleNext}
                 className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg"
@@ -280,12 +280,11 @@ export default function QuizPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative">
-          <div className="absolute top-32 left-6 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)' }}>
-            <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
-          </div>
-          
-          <div className="mb-8">
+        <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col">
+          <div className="mb-8 relative">
+            <div className="absolute -top-4 -left-4 w-18 h-18 opacity-45" style={{ transform: 'rotate(-12deg)', zIndex: 10 }}>
+              <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
+            </div>
             <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
             
             <div className="flex items-center justify-center gap-4 mb-12">

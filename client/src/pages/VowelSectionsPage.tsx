@@ -6,6 +6,8 @@ import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern'
 
 export default function VowelSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
+  const [showCompletedModal, setShowCompletedModal] = useState(false);
+  const [selectedSection, setSelectedSection] = useState<any>(null);
   
   useEffect(() => {
     const completed = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
@@ -15,6 +17,15 @@ export default function VowelSectionsPage() {
   const handleReset = () => {
     localStorage.setItem('vowelsQuizzesCompleted', '0');
     setCompletedSections(0);
+    setShowCompletedModal(false);
+  };
+  
+  const handleSectionClick = (section: any, isCompleted: boolean, e: React.MouseEvent) => {
+    if (isCompleted) {
+      e.preventDefault();
+      setSelectedSection(section);
+      setShowCompletedModal(true);
+    }
   };
   
   const sections = [
@@ -55,7 +66,7 @@ export default function VowelSectionsPage() {
             
             return (
               <div key={section.id} className="relative w-full min-h-[100px]">
-                <Link href={`/script/lesson/vowels/${section.startLesson}`}>
+                <Link href={`/script/lesson/vowels/${section.startLesson}`} onClick={(e) => handleSectionClick(section, isCompleted, e)}>
                   <button
                     className={`relative w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 transition-all btn-bounce ${
                       isCompleted 
@@ -94,6 +105,45 @@ export default function VowelSectionsPage() {
           </div>
         </div>
       </div>
+      
+      {showCompletedModal && selectedSection && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-in-up">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Check className="w-8 h-8 text-green-500" strokeWidth={3} />
+              </div>
+              <h3 className="text-xl font-bold text-black mb-2">Section Completed!</h3>
+              <p className="text-gray-600">You have completed this lesson. Either reset your progress or continue to the next section.</p>
+            </div>
+            
+            <div className="space-y-3">
+              <Link href={`/script/lesson/vowels/${sections[selectedSection.id]?.startLesson || 'sections'}`}>
+                <button 
+                  onClick={() => setShowCompletedModal(false)}
+                  className="w-full py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold btn-bounce"
+                >
+                  Continue to Next Section
+                </button>
+              </Link>
+              
+              <button 
+                onClick={handleReset}
+                className="w-full py-3 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-colors font-semibold btn-bounce"
+              >
+                Reset Progress
+              </button>
+              
+              <button 
+                onClick={() => setShowCompletedModal(false)}
+                className="w-full py-3 text-gray-500 hover:text-gray-700 transition-colors font-medium"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

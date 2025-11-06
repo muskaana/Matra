@@ -686,10 +686,34 @@ export default function LessonPage() {
   const speak = (text: string) => {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+      
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'hi-IN';
       utterance.rate = 0.8;
-      window.speechSynthesis.speak(utterance);
+      
+      // Wait for voices to load and select a Hindi voice
+      const setVoice = () => {
+        const voices = window.speechSynthesis.getVoices();
+        const hindiVoice = voices.find(voice => 
+          voice.lang.startsWith('hi') || 
+          voice.lang === 'hi-IN' ||
+          voice.name.toLowerCase().includes('hindi')
+        );
+        
+        if (hindiVoice) {
+          utterance.voice = hindiVoice;
+        }
+        
+        window.speechSynthesis.speak(utterance);
+      };
+      
+      // Check if voices are already loaded
+      if (window.speechSynthesis.getVoices().length > 0) {
+        setVoice();
+      } else {
+        // Wait for voices to load
+        window.speechSynthesis.onvoiceschanged = setVoice;
+      }
     }
   };
 

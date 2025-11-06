@@ -235,7 +235,7 @@ export default function PracticePage() {
     if (isConsonant) {
       const practiceNum = parseInt(practiceId.replace('c', '')) || 0;
       const lessonNum = practiceNum * 2;
-      const progress = (lessonNum / 33) * 100;
+      const progress = (lessonNum / 32) * 100;
       return Math.min(Math.max(progress, 0), 100);
     } else {
       const practiceNum = parseInt(practiceId) || 0;

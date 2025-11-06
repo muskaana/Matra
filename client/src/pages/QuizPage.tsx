@@ -642,7 +642,7 @@ export default function QuizPage() {
     if (isConsonant) {
       const quizNum = parseInt(baseId.replace('c', '')) || 0;
       const lessonNum = quizNum * 2;
-      const progress = (lessonNum / 33) * 100;
+      const progress = (lessonNum / 32) * 100;
       return Math.min(Math.max(progress, 0), 100);
     } else {
       const quizNum = parseInt(baseId) || 0;
@@ -674,12 +674,19 @@ export default function QuizPage() {
       // Mark quiz as completed only if answer is correct
       const storageKey = isConsonant ? 'consonantsQuizzesCompleted' : 'vowelsQuizzesCompleted';
       const sectionsPath = isConsonant ? '/script/consonants/sections' : '/script/vowels/sections';
+      const totalSections = isConsonant ? 16 : 5;
       
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
         const sectionNumber = parseInt(quizId.replace(/[abc]/, ''));
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
+        }
+        
+        // Check if all sections are complete
+        if (sectionNumber >= totalSections) {
+          setLocation('/script');
+          return;
         }
       }
       

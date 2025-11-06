@@ -32,9 +32,9 @@ export default function ConsonantsPage() {
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: vowelsProgress, locked: false },
     { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: false },
-    { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: !isConsonantsComplete, lockReason: "Coming soon" },
-    { id: 4, title: "स,श, ष", icon: "स", locked: true, lockReason: "Coming soon" },
-    { id: 5, title: "Numbers", icon: "१", locked: true, lockReason: "Coming soon" },
+    { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: !isConsonantsComplete, lockReason: !isConsonantsComplete ? "Complete Consonants" : "" },
+    { id: 4, title: "स,श, ष", icon: "स", locked: true, lockReason: "In development" },
+    { id: 5, title: "Numbers", icon: "१", locked: true, lockReason: "In development" },
   ];
 
   return (

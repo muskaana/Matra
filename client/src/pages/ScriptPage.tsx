@@ -27,10 +27,10 @@ export default function ScriptPage() {
   
   const levels = [
     { id: 1, title: "The Characters", href: "/script/vowels", locked: false },
-    { id: 2, title: "Beginner Words", locked: !allCharactersComplete, lockReason: "Complete all characters first" },
-    { id: 3, title: "Advanced Words", locked: true, lockReason: "Coming soon" },
-    { id: 4, title: "Sentences", locked: true, lockReason: "Coming soon" },
-    { id: 5, title: "Reading", href: "/reading", locked: !allCharactersComplete, lockReason: "Complete all characters first" },
+    { id: 2, title: "Beginner Words", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "" },
+    { id: 3, title: "Advanced Words", locked: true, lockReason: "In development" },
+    { id: 4, title: "Sentences", locked: true, lockReason: "In development" },
+    { id: 5, title: "Reading", href: "/reading", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "" },
   ];
 
   return (

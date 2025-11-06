@@ -650,7 +650,7 @@ const lessonData: Record<string, any> = {
       { word: "दिल", transliteration: "Dil", meaning: "Heart", image: "love" },
     ],
     sentence: "मुझे मिठाई चाहिए (Mujhe mithai chahiye - I want sweets)",
-    nextLesson: "practice/m1",
+    nextLesson: "m3",
     pageNumber: 2,
   },
   "m3": {
@@ -663,7 +663,7 @@ const lessonData: Record<string, any> = {
       { word: "दीप", transliteration: "Deep", meaning: "Lamp", image: "hope" },
     ],
     sentence: "चाबी मेज़ पर है (Chaabi mez par hai - The key is on the table)",
-    nextLesson: "m4",
+    nextLesson: "practice/m1",
     pageNumber: 3,
   },
   "m4": {
@@ -676,7 +676,7 @@ const lessonData: Record<string, any> = {
       { word: "गुड़", transliteration: "Gur", meaning: "Jaggery", image: "pomegranate" },
     ],
     sentence: "मुझे कुछ चाहिए (Mujhe kuch chahiye - I want something)",
-    nextLesson: "practice/m2",
+    nextLesson: "m5",
     pageNumber: 4,
   },
   "m5": {
@@ -689,7 +689,7 @@ const lessonData: Record<string, any> = {
       { word: "झूला", transliteration: "Jhoola", meaning: "Swing", image: "hope" },
     ],
     sentence: "बच्चे झूला झूल रहे हैं (Bacche jhoola jhool rahe hain - The children are swinging)",
-    nextLesson: "m6",
+    nextLesson: "practice/m2",
     pageNumber: 5,
   },
   "m6": {
@@ -701,7 +701,7 @@ const lessonData: Record<string, any> = {
       { word: "कृपा", transliteration: "Kripa", meaning: "Blessing", image: "faith" },
     ],
     sentence: "भगवान की कृपा है (Bhagwan ki kripa hai - It's God's blessing)",
-    nextLesson: "practice/m3",
+    nextLesson: "m7",
     pageNumber: 6,
   },
   "m7": {
@@ -727,7 +727,7 @@ const lessonData: Record<string, any> = {
       { word: "ऐनक", transliteration: "Ainak", meaning: "Glasses", image: "glasses" },
     ],
     sentence: "मेरी ऐनक नई है (Meri ainak nayi hai - My glasses are new)",
-    nextLesson: "practice/m4",
+    nextLesson: "practice/m3",
     pageNumber: 8,
   },
   "m9": {
@@ -753,7 +753,7 @@ const lessonData: Record<string, any> = {
       { word: "दौड़", transliteration: "Daud", meaning: "Race", image: "upArrow" },
     ],
     sentence: "कौआ उड़ गया (Kauaa ud gaya - The crow flew away)",
-    nextLesson: "practice/m5",
+    nextLesson: "practice/m4",
     pageNumber: 10,
   },
   "m11": {
@@ -766,7 +766,7 @@ const lessonData: Record<string, any> = {
       { word: "अंगूर", transliteration: "Angoor", meaning: "Grapes", image: "pomegranate" },
     ],
     sentence: "संगीत अच्छा है (Sangeet accha hai - The music is good)",
-    nextLesson: "m12",
+    nextLesson: "m13",
     pageNumber: 11,
   },
   "m12": {
@@ -791,7 +791,7 @@ const lessonData: Record<string, any> = {
       { word: "साँप", transliteration: "Saap", meaning: "Snake", image: "wool" },
     ],
     sentence: "साँप पेड़ पर है (Saap ped par hai - The snake is on the tree)",
-    nextLesson: "practice/m7",
+    nextLesson: "m12",
     pageNumber: 13,
   },
 };

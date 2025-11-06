@@ -665,6 +665,22 @@ export default function LessonPage() {
     );
   };
 
+  const parseSentence = (sentence: string) => {
+    const match = sentence.match(/^(.*?)\s*\((.*?)\s*-\s*(.*?)\)$/);
+    if (match) {
+      return {
+        hindi: match[1].trim(),
+        transliteration: match[2].trim(),
+        translation: match[3].trim()
+      };
+    }
+    return {
+      hindi: sentence,
+      transliteration: '',
+      translation: ''
+    };
+  };
+
   const calculateProgress = () => {
     if (lessonId.includes('practice/')) {
       return 0;
@@ -751,7 +767,16 @@ export default function LessonPage() {
           {lesson.sentence && (
             <div className="mb-4 bg-orange-50 rounded-xl p-3">
               <p className="text-xs text-gray-500 mb-1 font-medium">Example Sentence:</p>
-              <p className="text-gray-700 text-sm italic">{highlightCharacter(lesson.sentence, lesson.character)}</p>
+              {(() => {
+                const parsed = parseSentence(lesson.sentence);
+                return (
+                  <div className="space-y-1">
+                    <p className="text-gray-900 text-base font-semibold">{highlightCharacter(parsed.hindi, lesson.character)}</p>
+                    {parsed.transliteration && <p className="text-gray-600 text-sm italic">{parsed.transliteration}</p>}
+                    {parsed.translation && <p className="text-gray-500 text-xs">{parsed.translation}</p>}
+                  </div>
+                );
+              })()}
             </div>
           )}
 

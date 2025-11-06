@@ -751,7 +751,7 @@ export default function LessonPage() {
           {lesson.sentence && (
             <div className="mb-4 bg-orange-50 rounded-xl p-3">
               <p className="text-xs text-gray-500 mb-1 font-medium">Example Sentence:</p>
-              <p className="text-gray-700 text-sm italic">{lesson.sentence}</p>
+              <p className="text-gray-700 text-sm italic">{highlightCharacter(lesson.sentence, lesson.character)}</p>
             </div>
           )}
 

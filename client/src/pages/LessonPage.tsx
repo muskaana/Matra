@@ -87,7 +87,7 @@ const lessonData: Record<string, any> = {
     transliteration: "i",
     sound: '"ee"',
     sampleWords: [
-      { word: "इमली", transliteration: "imli", meaning: "Tamarind", image: "tamarind" },
+      { word: "इंडिया", transliteration: "india", meaning: "India", image: "different" },
       { word: "इज्ज़त", transliteration: "izzat", meaning: "Respect", image: "respect" },
     ],
     sentence: "इधर आओ (Idhar aao - Come here)",
@@ -101,7 +101,7 @@ const lessonData: Record<string, any> = {
     sound: '"eee"',
     sampleWords: [
       { word: "ईद", transliteration: "eed", meaning: "Eid", image: "moon" },
-      { word: "ईमान", transliteration: "eeman", meaning: "Faith", image: "faith" },
+      { word: "ईंट", transliteration: "eent", meaning: "Brick", image: "different" },
     ],
     sentence: "ईश्वर है (Eeshwar hai - God exists)",
     nextLesson: "practice/2",
@@ -126,7 +126,7 @@ const lessonData: Record<string, any> = {
     transliteration: "oo",
     sound: '"ooo"',
     sampleWords: [
-      { word: "ऊन", transliteration: "oon", meaning: "Wool", image: "wool" },
+      { word: "ऊंचा", transliteration: "ooncha", meaning: "Tall/High", image: "upArrow" },
       { word: "ऊपर", transliteration: "oopar", meaning: "Above", image: "upArrow" },
     ],
     sentence: "ऊपर देखो (Oopar dekho - Look up)",
@@ -153,7 +153,7 @@ const lessonData: Record<string, any> = {
     sound: '"ay"',
     sampleWords: [
       { word: "एक", transliteration: "ek", meaning: "One", image: "one" },
-      { word: "एहसान", transliteration: "ehsaan", meaning: "Favor", image: "helpingHands" },
+      { word: "एक्टर", transliteration: "actor", meaning: "Actor", image: "woman" },
     ],
     sentence: "एक बार और (Ek baar aur - One more time)",
     nextLesson: "9",
@@ -178,8 +178,8 @@ const lessonData: Record<string, any> = {
     transliteration: "o",
     sound: '"oh"',
     sampleWords: [
-      { word: "ओखली", transliteration: "okhli", meaning: "Mortar", image: "mortar" },
-      { word: "ओस", transliteration: "os", meaning: "Dew", image: "dew" },
+      { word: "ओके", transliteration: "okay", meaning: "Okay", image: "easy" },
+      { word: "ओर", transliteration: "or", meaning: "Side/Direction", image: "pointing" },
     ],
     sentence: "ओ भाई (O bhai - Hey brother)",
     nextLesson: "11",
@@ -204,7 +204,7 @@ const lessonData: Record<string, any> = {
     transliteration: "ka",
     sound: '"k" as in kite',
     sampleWords: [
-      { word: "कमल", transliteration: "kamal", meaning: "Lotus", image: "different" },
+      { word: "कल", transliteration: "kal", meaning: "Tomorrow", image: "clock" },
       { word: "कम", transliteration: "kam", meaning: "Less", image: "easy" },
     ],
     sentence: "कल आना (Kal aana - Come tomorrow)",
@@ -230,7 +230,7 @@ const lessonData: Record<string, any> = {
     transliteration: "ga",
     sound: '"g"',
     sampleWords: [
-      { word: "गमला", transliteration: "gamla", meaning: "Pot", image: "different" },
+      { word: "गाड़ी", transliteration: "gaadi", meaning: "Car", image: "different" },
       { word: "गाना", transliteration: "gaana", meaning: "Song", image: "easy" },
     ],
     sentence: "वह गाना गा रहा है (Vah gaana ga raha hai - He is singing)",
@@ -334,10 +334,10 @@ const lessonData: Record<string, any> = {
     transliteration: "ḍa",
     sound: '"d" (retroflex)',
     sampleWords: [
-      { word: "डमरू", transliteration: "damru", meaning: "Small drum", image: "different" },
-      { word: "डाल", transliteration: "daal", meaning: "Branch", image: "hope" },
+      { word: "डॉक्टर", transliteration: "doctor", meaning: "Doctor", image: "respect" },
+      { word: "डर", transliteration: "dar", meaning: "Fear", image: "different" },
     ],
-    sentence: "डमरू बज रहा है (Damru baj raha hai - The drum is playing)",
+    sentence: "डॉक्टर अच्छे हैं (Doctor acche hain - The doctor is good)",
     nextLesson: "c12",
     pageNumber: 11,
   },
@@ -374,7 +374,7 @@ const lessonData: Record<string, any> = {
     sound: '"th" (dental)',
     sampleWords: [
       { word: "थाली", transliteration: "thaali", meaning: "Plate", image: "mortar" },
-      { word: "थैला", transliteration: "thaila", meaning: "Bag", image: "different" },
+      { word: "थक", transliteration: "thak", meaning: "Tired", image: "different" },
     ],
     sentence: "थाली में खाना है (Thaali mein khaana hai - Food is on the plate)",
     nextLesson: "practice/c7",
@@ -399,10 +399,10 @@ const lessonData: Record<string, any> = {
     transliteration: "dha",
     sound: '"dh"',
     sampleWords: [
-      { word: "धान", transliteration: "dhaan", meaning: "Rice crop", image: "pomegranate" },
+      { word: "धोना", transliteration: "dhona", meaning: "To wash", image: "dew" },
       { word: "धूप", transliteration: "dhoop", meaning: "Sunlight", image: "moon" },
     ],
-    sentence: "धान खेत में है (Dhaan khet mein hai - Rice is in the field)",
+    sentence: "हाथ धोना है (Haath dhona hai - Need to wash hands)",
     nextLesson: "practice/c8",
     pageNumber: 16,
   },

@@ -991,7 +991,7 @@ export default function LessonPage() {
             </div>
           )}
 
-          {lesson.sentence && (
+          {lesson.sentence && !isMatra && (
             <div className="mb-4 bg-orange-50 rounded-xl p-3">
               <div className="flex items-center justify-between mb-1">
                 <p className="text-xs text-gray-500 font-medium">Example Sentence:</p>

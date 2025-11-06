@@ -627,6 +627,173 @@ const lessonData: Record<string, any> = {
     nextLesson: "practice/c16",
     pageNumber: 33,
   },
+  "m1": {
+    title: "Lesson 1 : Matra",
+    character: "◌ा (का)",
+    transliteration: "aa",
+    sound: '"aa"',
+    sampleWords: [
+      { word: "राम", transliteration: "Raam", meaning: "Ram", image: "sage" },
+      { word: "नाम", transliteration: "Naam", meaning: "Name", image: "pointing" },
+    ],
+    sentence: "मेरा नाम राहुल है (Mera naam Rahul hai - My name is Rahul)",
+    nextLesson: "m2",
+    pageNumber: 1,
+  },
+  "m2": {
+    title: "Lesson 2 : Matra",
+    character: "◌ि (कि)",
+    transliteration: "i",
+    sound: '"i" (short "ee")',
+    sampleWords: [
+      { word: "मिठाई", transliteration: "Mithai", meaning: "Sweet", image: "respect" },
+      { word: "दिल", transliteration: "Dil", meaning: "Heart", image: "love" },
+    ],
+    sentence: "मुझे मिठाई चाहिए (Mujhe mithai chahiye - I want sweets)",
+    nextLesson: "practice/m1",
+    pageNumber: 2,
+  },
+  "m3": {
+    title: "Lesson 3 : Matra",
+    character: "◌ी (की)",
+    transliteration: "ee",
+    sound: '"ee" (long)',
+    sampleWords: [
+      { word: "चाबी", transliteration: "Chaabi", meaning: "Key", image: "helpingHands" },
+      { word: "दीप", transliteration: "Deep", meaning: "Lamp", image: "hope" },
+    ],
+    sentence: "चाबी मेज़ पर है (Chaabi mez par hai - The key is on the table)",
+    nextLesson: "m4",
+    pageNumber: 3,
+  },
+  "m4": {
+    title: "Lesson 4 : Matra",
+    character: "◌ु (कु)",
+    transliteration: "u",
+    sound: '"oo" (short)',
+    sampleWords: [
+      { word: "कुछ", transliteration: "Kuch", meaning: "Something", image: "pointing" },
+      { word: "गुड़", transliteration: "Gur", meaning: "Jaggery", image: "pomegranate" },
+    ],
+    sentence: "मुझे कुछ चाहिए (Mujhe kuch chahiye - I want something)",
+    nextLesson: "practice/m2",
+    pageNumber: 4,
+  },
+  "m5": {
+    title: "Lesson 5 : Matra",
+    character: "◌ू (कू)",
+    transliteration: "oo",
+    sound: '"ooo" (long)',
+    sampleWords: [
+      { word: "सूई", transliteration: "Sui", meaning: "Needle", image: "helpingHands" },
+      { word: "झूला", transliteration: "Jhoola", meaning: "Swing", image: "hope" },
+    ],
+    sentence: "बच्चे झूला झूल रहे हैं (Bacche jhoola jhool rahe hain - The children are swinging)",
+    nextLesson: "m6",
+    pageNumber: 5,
+  },
+  "m6": {
+    title: "Lesson 6 : Matra",
+    character: "◌ृ (कृ)",
+    transliteration: "ri",
+    sound: '"ree"',
+    sampleWords: [
+      { word: "कृपा", transliteration: "Kripa", meaning: "Blessing", image: "faith" },
+    ],
+    sentence: "भगवान की कृपा है (Bhagwan ki kripa hai - It's God's blessing)",
+    nextLesson: "practice/m3",
+    pageNumber: 6,
+  },
+  "m7": {
+    title: "Lesson 7 : Matra",
+    character: "◌े (के)",
+    transliteration: "e",
+    sound: '"ay"',
+    sampleWords: [
+      { word: "देव", transliteration: "Dev", meaning: "God", image: "faith" },
+      { word: "नेल", transliteration: "Nail", meaning: "Nail", image: "helpingHands" },
+    ],
+    sentence: "देव मंदिर में हैं (Dev mandir mein hain - The god is in the temple)",
+    nextLesson: "m8",
+    pageNumber: 7,
+  },
+  "m8": {
+    title: "Lesson 8 : Matra",
+    character: "◌ै (कै)",
+    transliteration: "ai",
+    sound: '"ah-ay"',
+    sampleWords: [
+      { word: "मैला", transliteration: "Maila", meaning: "Dirty", image: "dew" },
+      { word: "ऐनक", transliteration: "Ainak", meaning: "Glasses", image: "glasses" },
+    ],
+    sentence: "मेरी ऐनक नई है (Meri ainak nayi hai - My glasses are new)",
+    nextLesson: "practice/m4",
+    pageNumber: 8,
+  },
+  "m9": {
+    title: "Lesson 9 : Matra",
+    character: "◌ो (को)",
+    transliteration: "o",
+    sound: '"oh"',
+    sampleWords: [
+      { word: "मोती", transliteration: "Moti", meaning: "Pearl", image: "hope" },
+      { word: "सोना", transliteration: "Sona", meaning: "Gold", image: "money" },
+    ],
+    sentence: "सोना महँगा है (Sona mahanga hai - Gold is expensive)",
+    nextLesson: "m10",
+    pageNumber: 9,
+  },
+  "m10": {
+    title: "Lesson 10 : Matra",
+    character: "◌ौ (कौ)",
+    transliteration: "ao",
+    sound: '"ah-oh"',
+    sampleWords: [
+      { word: "कौआ", transliteration: "Kauaa", meaning: "Crow", image: "owl" },
+      { word: "दौड़", transliteration: "Daud", meaning: "Race", image: "upArrow" },
+    ],
+    sentence: "कौआ उड़ गया (Kauaa ud gaya - The crow flew away)",
+    nextLesson: "practice/m5",
+    pageNumber: 10,
+  },
+  "m11": {
+    title: "Lesson 11 : Matra",
+    character: "◌ं (कं)",
+    transliteration: "an",
+    sound: '"nasal n"',
+    sampleWords: [
+      { word: "संगीत", transliteration: "Sangeet", meaning: "Music", image: "hope" },
+      { word: "अंगूर", transliteration: "Angoor", meaning: "Grapes", image: "pomegranate" },
+    ],
+    sentence: "संगीत अच्छा है (Sangeet accha hai - The music is good)",
+    nextLesson: "m12",
+    pageNumber: 11,
+  },
+  "m12": {
+    title: "Lesson 12 : Matra",
+    character: "◌ः (कः)",
+    transliteration: "h",
+    sound: '"visarga h"',
+    sampleWords: [
+      { word: "दुःख", transliteration: "Dukh", meaning: "Sorrow", image: "hope" },
+    ],
+    sentence: "दुःख और सुख जीवन का भाग हैं (Dukh aur sukh jeevan ka bhaag hain - Joy and sorrow are part of life)",
+    nextLesson: "practice/m6",
+    pageNumber: 12,
+  },
+  "m13": {
+    title: "Lesson 13 : Matra",
+    character: "◌ँ (कँ)",
+    transliteration: "añ",
+    sound: '"nasalized vowel"',
+    sampleWords: [
+      { word: "अँधेरा", transliteration: "Andhera", meaning: "Darkness", image: "moon" },
+      { word: "साँप", transliteration: "Saap", meaning: "Snake", image: "wool" },
+    ],
+    sentence: "साँप पेड़ पर है (Saap ped par hai - The snake is on the tree)",
+    nextLesson: "practice/m7",
+    pageNumber: 13,
+  },
 };
 
 export default function LessonPage() {
@@ -637,6 +804,7 @@ export default function LessonPage() {
   const lesson = lessonData[lessonId];
   
   const isConsonant = location.includes('/consonants/');
+  const isMatra = location.includes('/matra/');
 
   if (!lesson) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Lesson not found</p></div>;
@@ -644,7 +812,9 @@ export default function LessonPage() {
 
   const handleNext = () => {
     if (lesson.nextLesson) {
-      const basePath = isConsonant ? '/script/lesson/consonants/' : '/script/lesson/vowels/';
+      let basePath = '/script/lesson/vowels/';
+      if (isConsonant) basePath = '/script/lesson/consonants/';
+      if (isMatra) basePath = '/script/lesson/matra/';
       setLocation(`${basePath}${lesson.nextLesson}`);
     }
   };
@@ -721,12 +891,12 @@ export default function LessonPage() {
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
-          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
-          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-6 h-6 text-gray-600" />
             </button>

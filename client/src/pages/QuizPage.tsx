@@ -610,6 +610,202 @@ const quizData: Record<string, any> = {
     pageNumber: "Quiz C16b",
     nextLesson: "/script/consonants/sections",
   },
+  "m1a": {
+    title: "Quiz 1 : Matra",
+    char1: "◌ा",
+    char2: "◌ि",
+    subQuestion: "What is ◌ा?",
+    type: "sound",
+    options: [
+      { text: "aa", correct: true },
+      { text: "i", correct: false },
+    ],
+    pageNumber: "Quiz M1a",
+    nextLesson: "m1b",
+  },
+  "m1b": {
+    title: "Quiz 1 : Matra",
+    char1: "◌ा",
+    char2: "◌ि",
+    subQuestion: "Which word uses ◌ि?",
+    type: "word",
+    options: [
+      { text: "Raam", correct: false },
+      { text: "Naam", correct: false },
+      { text: "Dil", correct: true },
+      { text: "Kin", correct: true },
+    ],
+    pageNumber: "Quiz M1b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m2a": {
+    title: "Quiz 2 : Matra",
+    char1: "◌ी",
+    char2: "◌ु",
+    subQuestion: "What is ◌ी?",
+    type: "sound",
+    options: [
+      { text: "ee", correct: true },
+      { text: "u", correct: false },
+    ],
+    pageNumber: "Quiz M2a",
+    nextLesson: "m2b",
+  },
+  "m2b": {
+    title: "Quiz 2 : Matra",
+    char1: "◌ी",
+    char2: "◌ु",
+    subQuestion: "Which word uses ◌ु?",
+    type: "word",
+    options: [
+      { text: "Chaabi", correct: false },
+      { text: "Deep", correct: false },
+      { text: "Kuch", correct: true },
+      { text: "Gur", correct: true },
+    ],
+    pageNumber: "Quiz M2b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m3a": {
+    title: "Quiz 3 : Matra",
+    char1: "◌ू",
+    char2: "◌ृ",
+    subQuestion: "What is ◌ू?",
+    type: "sound",
+    options: [
+      { text: "oo", correct: true },
+      { text: "ri", correct: false },
+    ],
+    pageNumber: "Quiz M3a",
+    nextLesson: "m3b",
+  },
+  "m3b": {
+    title: "Quiz 3 : Matra",
+    char1: "◌ू",
+    char2: "◌ृ",
+    subQuestion: "Which word uses ◌ृ?",
+    type: "word",
+    options: [
+      { text: "Bhool", correct: false },
+      { text: "Jhoola", correct: false },
+      { text: "Kripa", correct: true },
+      { text: "Smriti", correct: true },
+    ],
+    pageNumber: "Quiz M3b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m4a": {
+    title: "Quiz 4 : Matra",
+    char1: "◌े",
+    char2: "◌ै",
+    subQuestion: "What is ◌े?",
+    type: "sound",
+    options: [
+      { text: "e", correct: true },
+      { text: "ai", correct: false },
+    ],
+    pageNumber: "Quiz M4a",
+    nextLesson: "m4b",
+  },
+  "m4b": {
+    title: "Quiz 4 : Matra",
+    char1: "◌े",
+    char2: "◌ै",
+    subQuestion: "Which word uses ◌ै?",
+    type: "word",
+    options: [
+      { text: "Dev", correct: false },
+      { text: "Ped", correct: false },
+      { text: "Baith", correct: true },
+      { text: "Kaise", correct: true },
+    ],
+    pageNumber: "Quiz M4b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m5a": {
+    title: "Quiz 5 : Matra",
+    char1: "◌ो",
+    char2: "◌ौ",
+    subQuestion: "What is ◌ो?",
+    type: "sound",
+    options: [
+      { text: "o", correct: true },
+      { text: "ao", correct: false },
+    ],
+    pageNumber: "Quiz M5a",
+    nextLesson: "m5b",
+  },
+  "m5b": {
+    title: "Quiz 5 : Matra",
+    char1: "◌ो",
+    char2: "◌ौ",
+    subQuestion: "Which word uses ◌ौ?",
+    type: "word",
+    options: [
+      { text: "Moti", correct: false },
+      { text: "Sona", correct: false },
+      { text: "Kaun", correct: true },
+      { text: "Maun", correct: true },
+    ],
+    pageNumber: "Quiz M5b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m6a": {
+    title: "Quiz 6 : Matra",
+    char1: "◌ं",
+    char2: "◌ः",
+    subQuestion: "What is ◌ं?",
+    type: "sound",
+    options: [
+      { text: "an", correct: true },
+      { text: "h", correct: false },
+    ],
+    pageNumber: "Quiz M6a",
+    nextLesson: "m6b",
+  },
+  "m6b": {
+    title: "Quiz 6 : Matra",
+    char1: "◌ं",
+    char2: "◌ः",
+    subQuestion: "Which word uses ◌ः?",
+    type: "word",
+    options: [
+      { text: "Sangeet", correct: false },
+      { text: "Angoor", correct: false },
+      { text: "Namah", correct: true },
+      { text: "Antah", correct: true },
+    ],
+    pageNumber: "Quiz M6b",
+    nextLesson: "/script/matra/sections",
+  },
+  "m7a": {
+    title: "Quiz 7 : Matra",
+    char1: "◌ँ",
+    char2: "◌ं",
+    subQuestion: "What is ◌ँ?",
+    type: "sound",
+    options: [
+      { text: "añ", correct: true },
+      { text: "an", correct: false },
+    ],
+    pageNumber: "Quiz M7a",
+    nextLesson: "m7b",
+  },
+  "m7b": {
+    title: "Quiz 7 : Matra",
+    char1: "◌ँ",
+    char2: "◌ं",
+    subQuestion: "Which word uses ◌ँ?",
+    type: "word",
+    options: [
+      { text: "Sangeet", correct: false },
+      { text: "Angoor", correct: false },
+      { text: "Aankhein", correct: true },
+      { text: "Haan", correct: true },
+    ],
+    pageNumber: "Quiz M7b",
+    nextLesson: "/script/matra/sections",
+  },
 };
 
 export default function QuizPage() {
@@ -623,6 +819,7 @@ export default function QuizPage() {
   const currentQuizIdRef = useRef(quizId);
   
   const isConsonant = location.includes('/consonants/');
+  const isMatra = location.includes('/matra/');
 
   // Reset state when quiz changes
   useEffect(() => {
@@ -657,13 +854,23 @@ export default function QuizPage() {
   const handleNext = () => {
     if (isCorrect) {
       // Mark quiz as completed only if answer is correct
-      const storageKey = isConsonant ? 'consonantsQuizzesCompleted' : 'vowelsQuizzesCompleted';
-      const sectionsPath = isConsonant ? '/script/consonants/sections' : '/script/vowels/sections';
-      const totalSections = isConsonant ? 16 : 5;
+      let storageKey = 'vowelsQuizzesCompleted';
+      let sectionsPath = '/script/vowels/sections';
+      let totalSections = 5;
+      
+      if (isConsonant) {
+        storageKey = 'consonantsQuizzesCompleted';
+        sectionsPath = '/script/consonants/sections';
+        totalSections = 16;
+      } else if (isMatra) {
+        storageKey = 'matraQuizzesCompleted';
+        sectionsPath = '/script/matra/sections';
+        totalSections = 7;
+      }
       
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
-        const sectionNumber = parseInt(quizId.replace(/[abc]/, ''));
+        const sectionNumber = parseInt(quizId.replace(/[abcm]/, ''));
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
         }
@@ -679,7 +886,9 @@ export default function QuizPage() {
       if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
         setLocation(quiz.nextLesson);
       } else {
-        const basePath = isConsonant ? '/script/lesson/consonants/quiz/' : '/script/lesson/vowels/quiz/';
+        let basePath = '/script/lesson/vowels/quiz/';
+        if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
+        if (isMatra) basePath = '/script/lesson/matra/quiz/';
         setLocation(`${basePath}${quiz.nextLesson}`);
       }
     } else {
@@ -704,7 +913,7 @@ export default function QuizPage() {
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
-            <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+            <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <X className="w-6 h-6 text-gray-600" />
               </button>
@@ -775,7 +984,7 @@ export default function QuizPage() {
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="w-10"></div>
-          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-6 h-6 text-gray-600" />
             </button>

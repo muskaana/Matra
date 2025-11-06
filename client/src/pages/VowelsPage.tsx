@@ -27,7 +27,7 @@ export default function VowelsPage() {
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: progress },
     { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क" },
-    { id: 3, title: "Matra (Vowel Symbols)", icon: "ा" },
+    { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा" },
     { id: 4, title: "स, श, घ?", icon: "स" },
     { id: 5, title: "Numbers", icon: "१" },
   ];

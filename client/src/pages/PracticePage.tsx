@@ -216,6 +216,75 @@ const practiceData: Record<string, any> = {
     nextLesson: "quiz/c16a",
     pageNumber: "Practice C16",
   },
+  "m1": {
+    title: "Practice: ◌ा vs ◌ि",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ा (का)", sound: "aa" },
+      { character: "◌ि (कि)", sound: "i" },
+    ],
+    nextLesson: "quiz/m1a",
+    pageNumber: "Practice M1",
+  },
+  "m2": {
+    title: "Practice: ◌ी vs ◌ु",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ी (की)", sound: "ee" },
+      { character: "◌ु (कु)", sound: "u" },
+    ],
+    nextLesson: "quiz/m2a",
+    pageNumber: "Practice M2",
+  },
+  "m3": {
+    title: "Practice: ◌ू vs ◌ृ",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ू (कू)", sound: "oo" },
+      { character: "◌ृ (कृ)", sound: "ri" },
+    ],
+    nextLesson: "quiz/m3a",
+    pageNumber: "Practice M3",
+  },
+  "m4": {
+    title: "Practice: ◌े vs ◌ै",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌े (के)", sound: "e" },
+      { character: "◌ै (कै)", sound: "ai" },
+    ],
+    nextLesson: "quiz/m4a",
+    pageNumber: "Practice M4",
+  },
+  "m5": {
+    title: "Practice: ◌ो vs ◌ौ",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ो (को)", sound: "o" },
+      { character: "◌ौ (कौ)", sound: "ao" },
+    ],
+    nextLesson: "quiz/m5a",
+    pageNumber: "Practice M5",
+  },
+  "m6": {
+    title: "Practice: ◌ं vs ◌ः",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ं (कं)", sound: "an" },
+      { character: "◌ः (कः)", sound: "h" },
+    ],
+    nextLesson: "quiz/m6a",
+    pageNumber: "Practice M6",
+  },
+  "m7": {
+    title: "Practice: ◌ँ",
+    question: "Match the sound to the matra",
+    pairs: [
+      { character: "◌ँ (कँ)", sound: "añ" },
+    ],
+    nextLesson: "quiz/m7a",
+    pageNumber: "Practice M7",
+  },
 };
 
 export default function PracticePage() {
@@ -226,6 +295,7 @@ export default function PracticePage() {
   const [completed, setCompleted] = useState(false);
   
   const isConsonant = location.includes('/consonants/');
+  const isMatra = location.includes('/matra/');
 
   if (!practice) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Practice not found</p></div>;
@@ -237,12 +307,12 @@ export default function PracticePage() {
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
-          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
           </Link>
-          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
+          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-600" />
             </button>
@@ -283,7 +353,7 @@ export default function PracticePage() {
             )}
 
             {completed && (
-              <Link href={`/script/lesson/${isConsonant ? 'consonants' : 'vowels'}/${practice.nextLesson}`}>
+              <Link href={`/script/lesson/${isMatra ? 'matra' : (isConsonant ? 'consonants' : 'vowels')}/${practice.nextLesson}`}>
                 <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg btn-bounce">
                   Continue to Quiz
                 </button>

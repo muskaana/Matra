@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Book, MessageSquare, FileText, XCircle } from "lucide-react";
 
-export default function ConsonantsPage() {
+export default function MatraPage() {
   const [completedQuizzes, setCompletedQuizzes] = useState<number>(0);
-  const totalQuizzes = 16;
+  const totalQuizzes = 7;
   
   useEffect(() => {
-    const saved = localStorage.getItem('consonantsQuizzesCompleted');
+    const saved = localStorage.getItem('matraQuizzesCompleted');
     if (saved) {
       setCompletedQuizzes(parseInt(saved));
     }
@@ -17,8 +17,8 @@ export default function ConsonantsPage() {
   
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ" },
-    { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: progress },
-    { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा" },
+    { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क" },
+    { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: progress },
     { id: 4, title: "स, श, घ?", icon: "स" },
     { id: 5, title: "Numbers", icon: "१" },
   ];

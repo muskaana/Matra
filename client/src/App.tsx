@@ -12,6 +12,8 @@ import VowelsPage from "@/pages/VowelsPage";
 import VowelSectionsPage from "@/pages/VowelSectionsPage";
 import ConsonantsPage from "@/pages/ConsonantsPage";
 import ConsonantSectionsPage from "@/pages/ConsonantSectionsPage";
+import MatraPage from "@/pages/MatraPage";
+import MatraSectionsPage from "@/pages/MatraSectionsPage";
 import LessonPage from "@/pages/LessonPage";
 import QuizPage from "@/pages/QuizPage";
 import PracticePage from "@/pages/PracticePage";
@@ -34,6 +36,11 @@ function Router() {
       <Route path="/script/lesson/consonants/:id" component={LessonPage} />
       <Route path="/script/lesson/consonants/practice/:id" component={PracticePage} />
       <Route path="/script/lesson/consonants/quiz/:id" component={QuizPage} />
+      <Route path="/script/matra" component={MatraPage} />
+      <Route path="/script/matra/sections" component={MatraSectionsPage} />
+      <Route path="/script/lesson/matra/:id" component={LessonPage} />
+      <Route path="/script/lesson/matra/practice/:id" component={PracticePage} />
+      <Route path="/script/lesson/matra/quiz/:id" component={QuizPage} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>

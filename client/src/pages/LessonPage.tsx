@@ -651,15 +651,15 @@ export default function LessonPage() {
 
   const highlightCharacter = (word: string, character: string) => {
     const parts = word.split(character);
-    if (parts.length === 1) return <>{word}</>;
+    if (parts.length === 1) return word;
     
     return (
       <>
         {parts.map((part, index) => (
-          <React.Fragment key={index}>
+          <span key={index}>
             {part}
             {index < parts.length - 1 && <strong className="font-extrabold">{character}</strong>}
-          </React.Fragment>
+          </span>
         ))}
       </>
     );

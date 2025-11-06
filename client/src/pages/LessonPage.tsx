@@ -699,6 +699,16 @@ export default function LessonPage() {
 
   const progress = calculateProgress();
 
+  const speak = (text: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'hi-IN';
+      utterance.rate = 0.8;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   return (
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
@@ -726,7 +736,16 @@ export default function LessonPage() {
           <MandalaPattern className="absolute top-2 right-2 w-12 h-12 opacity-20" color="#2E86AB" />
           
           <div className="mb-4">
-            <div className="text-8xl font-bold text-black mb-2 animate-slide-in-right">{lesson.character}</div>
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>
+              <button 
+                onClick={() => speak(lesson.character)}
+                className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-full"
+                data-testid="button-speak-character"
+              >
+                <Volume2 className="w-6 h-6" />
+              </button>
+            </div>
             <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
             <p className="text-gray-600 text-base">{lesson.sound}</p>
           </div>
@@ -735,9 +754,6 @@ export default function LessonPage() {
             <div className="mb-4">
               <div className="flex items-center justify-center gap-2 mb-3">
                 <p className="text-sm text-gray-500 font-medium">Sample Word{lesson.sampleWords.length > 1 ? 's' : ''}</p>
-                <button className="text-[#ff9930] hover:text-[#CF7B24] transition-colors">
-                  <Volume2 className="w-4 h-4" />
-                </button>
               </div>
 
               <div className="space-y-2">
@@ -757,6 +773,13 @@ export default function LessonPage() {
                         <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
                         <p className="text-gray-600 text-xs">{sample.meaning}</p>
                       </div>
+                      <button 
+                        onClick={() => speak(sample.word)}
+                        className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-full flex-shrink-0"
+                        data-testid={`button-speak-word-${index}`}
+                      >
+                        <Volume2 className="w-5 h-5" />
+                      </button>
                     </div>
                   );
                 })}
@@ -766,7 +789,16 @@ export default function LessonPage() {
 
           {lesson.sentence && (
             <div className="mb-4 bg-orange-50 rounded-xl p-3">
-              <p className="text-xs text-gray-500 mb-1 font-medium">Example Sentence:</p>
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-xs text-gray-500 font-medium">Example Sentence:</p>
+                <button 
+                  onClick={() => speak(parseSentence(lesson.sentence).hindi)}
+                  className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-1 hover:bg-orange-100 rounded-full"
+                  data-testid="button-speak-sentence"
+                >
+                  <Volume2 className="w-4 h-4" />
+                </button>
+              </div>
               {(() => {
                 const parsed = parseSentence(lesson.sentence);
                 return (

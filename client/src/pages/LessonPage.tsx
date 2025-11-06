@@ -916,8 +916,13 @@ export default function LessonPage() {
           <div className="mb-4">
             {isMatra && lesson.character.includes('(') ? (
               <>
-                <div className="flex items-center justify-center gap-3 mb-2">
-                  <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>
+                <div className="flex flex-col items-center justify-center mb-2">
+                  <div className="text-8xl font-bold text-black animate-slide-in-right">
+                    {lesson.character.match(/◌[^\s(]+/)?.[0] || lesson.character.split('(')[0].trim()}
+                  </div>
+                  <div className="text-5xl font-bold text-gray-600 mt-2">
+                    {lesson.character.match(/\(([^)]+)\)/)?.[1] || ''}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center gap-2 mb-3">
                   <button 

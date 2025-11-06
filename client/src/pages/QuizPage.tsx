@@ -161,16 +161,45 @@ const quizData: Record<string, any> = {
     pageNumber: "Quiz 5b",
     nextLesson: "/script/vowels/sections",
   },
+  "c1a": {
+    title: "Quiz 1 : Consonants",
+    char1: "क",
+    char2: "ख",
+    subQuestion: "What is क?",
+    type: "sound",
+    options: [
+      { text: "ka", correct: true },
+      { text: "kha", correct: false },
+    ],
+    pageNumber: "Quiz C1a",
+    nextLesson: "c1b",
+  },
+  "c1b": {
+    title: "Quiz 1 : Consonants",
+    char1: "क",
+    char2: "ख",
+    subQuestion: "Which sound is ख?",
+    type: "sound",
+    options: [
+      { text: "ka", correct: false },
+      { text: "kha", correct: true },
+    ],
+    pageNumber: "Quiz C1b",
+    nextLesson: "/script/consonants/sections",
+  },
 };
 
 export default function QuizPage() {
   const params = useParams();
+  const location = useLocation()[0];
   const [, setLocation] = useLocation();
   const quizId = params.id as string;
   const quiz = quizData[quizId];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const currentQuizIdRef = useRef(quizId);
+  
+  const isConsonant = location.includes('/consonants/');
 
   // Reset state when quiz changes
   useEffect(() => {
@@ -203,11 +232,14 @@ export default function QuizPage() {
   const handleNext = () => {
     if (isCorrect) {
       // Mark quiz as completed only if answer is correct
-      if (quiz.nextLesson === '/script/vowels' || quiz.nextLesson === '/script/vowels/sections') {
-        const currentQuizzes = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-        const sectionNumber = parseInt(quizId.replace(/[ab]/, ''));
+      const storageKey = isConsonant ? 'consonantsQuizzesCompleted' : 'vowelsQuizzesCompleted';
+      const sectionsPath = isConsonant ? '/script/consonants/sections' : '/script/vowels/sections';
+      
+      if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
+        const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
+        const sectionNumber = parseInt(quizId.replace(/[abc]/, ''));
         if (sectionNumber > currentQuizzes) {
-          localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+          localStorage.setItem(storageKey, sectionNumber.toString());
         }
       }
       
@@ -215,7 +247,8 @@ export default function QuizPage() {
       if (typeof quiz.nextLesson === 'string' && quiz.nextLesson.startsWith('/')) {
         setLocation(quiz.nextLesson);
       } else {
-        setLocation(`/script/lesson/vowels/quiz/${quiz.nextLesson}`);
+        const basePath = isConsonant ? '/script/lesson/consonants/quiz/' : '/script/lesson/vowels/quiz/';
+        setLocation(`${basePath}${quiz.nextLesson}`);
       }
     } else {
       // If incorrect, go back to the quiz to try again
@@ -239,7 +272,7 @@ export default function QuizPage() {
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
-            <Link href="/script/vowels/sections">
+            <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <X className="w-6 h-6 text-gray-600" />
               </button>
@@ -303,7 +336,7 @@ export default function QuizPage() {
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-6 flex-shrink-0">
           <div className="w-10"></div>
-          <Link href="/script/vowels/sections">
+          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-6 h-6 text-gray-600" />
             </button>

@@ -198,13 +198,42 @@ const lessonData: Record<string, any> = {
     nextLesson: "practice/5",
     pageNumber: 11,
   },
+  "c1": {
+    title: "Lesson 1 : Consonants",
+    character: "क",
+    transliteration: "ka",
+    sound: '"k" as in kite',
+    sampleWords: [
+      { word: "कमल", transliteration: "kamal", meaning: "Lotus", image: "different" },
+      { word: "कम", transliteration: "kam", meaning: "Less", image: "easy" },
+    ],
+    sentence: "कल आना (Kal aana - Come tomorrow)",
+    nextLesson: "c2",
+    pageNumber: 1,
+  },
+  "c2": {
+    title: "Lesson 2 : Consonants",
+    character: "ख",
+    transliteration: "kha",
+    sound: '"kh" as in khaki',
+    sampleWords: [
+      { word: "खत", transliteration: "khat", meaning: "Letter", image: "respect" },
+      { word: "खाना", transliteration: "khana", meaning: "Food", image: "mango" },
+    ],
+    sentence: "खाना खा लो (Khana kha lo - Eat the food)",
+    nextLesson: "practice/c1",
+    pageNumber: 2,
+  },
 };
 
 export default function LessonPage() {
   const params = useParams();
   const [, setLocation] = useLocation();
+  const location = useLocation()[0];
   const lessonId = params.id as string;
   const lesson = lessonData[lessonId];
+  
+  const isConsonant = location.includes('/consonants/');
 
   if (!lesson) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Lesson not found</p></div>;
@@ -212,7 +241,8 @@ export default function LessonPage() {
 
   const handleNext = () => {
     if (lesson.nextLesson) {
-      setLocation(`/script/lesson/vowels/${lesson.nextLesson}`);
+      const basePath = isConsonant ? '/script/lesson/consonants/' : '/script/lesson/vowels/';
+      setLocation(`${basePath}${lesson.nextLesson}`);
     }
   };
 
@@ -220,12 +250,12 @@ export default function LessonPage() {
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-4 flex-shrink-0">
-          <Link href="/script/vowels/sections">
+          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
-          <Link href="/script/vowels/sections">
+          <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-6 h-6 text-gray-600" />
             </button>

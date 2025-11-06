@@ -4,7 +4,7 @@ import { Book, MessageSquare, FileText, XCircle } from "lucide-react";
 
 export default function ConsonantsPage() {
   const [completedQuizzes, setCompletedQuizzes] = useState<number>(0);
-  const totalQuizzes = 5;
+  const totalQuizzes = 16;
   
   useEffect(() => {
     const saved = localStorage.getItem('consonantsQuizzesCompleted');

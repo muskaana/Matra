@@ -32,11 +32,22 @@ export default function ConsonantSectionsPage() {
   };
   
   const sections = [
-    { id: 1, name: "Section 1", startLesson: "c1" },
-    { id: 2, name: "Section 2", startLesson: "c3" },
-    { id: 3, name: "Section 3", startLesson: "c5" },
-    { id: 4, name: "Section 4", startLesson: "c7" },
-    { id: 5, name: "Section 5", startLesson: "c9" },
+    { id: 1, name: "क vs ख", startLesson: "c1" },
+    { id: 2, name: "ग vs घ", startLesson: "c3" },
+    { id: 3, name: "च vs छ", startLesson: "c5" },
+    { id: 4, name: "ज vs झ", startLesson: "c7" },
+    { id: 5, name: "ट vs ठ", startLesson: "c9" },
+    { id: 6, name: "ड vs ढ", startLesson: "c11" },
+    { id: 7, name: "त vs थ", startLesson: "c13" },
+    { id: 8, name: "द vs ध", startLesson: "c15" },
+    { id: 9, name: "प vs फ", startLesson: "c17" },
+    { id: 10, name: "ब vs भ", startLesson: "c19" },
+    { id: 11, name: "न vs म", startLesson: "c21" },
+    { id: 12, name: "य vs र", startLesson: "c23" },
+    { id: 13, name: "ल vs व", startLesson: "c25" },
+    { id: 14, name: "श vs ष", startLesson: "c27" },
+    { id: 15, name: "स vs ह", startLesson: "c29" },
+    { id: 16, name: "क्ष त्र ज्ञ", startLesson: "c31" },
   ];
 
   return (

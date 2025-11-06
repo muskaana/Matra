@@ -914,16 +914,42 @@ export default function LessonPage() {
           <MandalaPattern className="absolute top-2 right-2 w-12 h-12 opacity-20" color="#2E86AB" />
           
           <div className="mb-4">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>
-              <button 
-                onClick={() => speak(lesson.character)}
-                className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-full"
-                data-testid="button-speak-character"
-              >
-                <Volume2 className="w-6 h-6" />
-              </button>
-            </div>
+            {isMatra && lesson.character.includes('(') ? (
+              <>
+                <div className="flex items-center justify-center gap-3 mb-2">
+                  <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>
+                </div>
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <button 
+                    onClick={() => speak(lesson.character.match(/◌[^\s(]+/)?.[0] || lesson.character.split('(')[0].trim())}
+                    className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-lg flex items-center gap-1 text-xs"
+                    data-testid="button-speak-matra"
+                  >
+                    <Volume2 className="w-4 h-4" />
+                    <span>Matra</span>
+                  </button>
+                  <button 
+                    onClick={() => speak(lesson.character.match(/\(([^)]+)\)/)?.[1] || lesson.character)}
+                    className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-lg flex items-center gap-1 text-xs"
+                    data-testid="button-speak-example"
+                  >
+                    <Volume2 className="w-4 h-4" />
+                    <span>Example</span>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>
+                <button 
+                  onClick={() => speak(lesson.character)}
+                  className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-full"
+                  data-testid="button-speak-character"
+                >
+                  <Volume2 className="w-6 h-6" />
+                </button>
+              </div>
+            )}
             <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
             <p className="text-gray-600 text-base">{lesson.sound}</p>
           </div>

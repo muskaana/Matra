@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
@@ -8,6 +8,7 @@ export default function VowelSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
   const [showCompletedModal, setShowCompletedModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<any>(null);
+  const [, setLocation] = useLocation();
   
   useEffect(() => {
     const completed = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
@@ -21,10 +22,8 @@ export default function VowelSectionsPage() {
   
   const handleRedoSection = () => {
     if (selectedSection) {
-      const newCompleted = selectedSection.id - 1;
-      localStorage.setItem('vowelsQuizzesCompleted', newCompleted.toString());
-      setCompletedSections(newCompleted);
       setShowCompletedModal(false);
+      setLocation(`/script/lesson/vowels/${selectedSection.startLesson}`);
     }
   };
   
@@ -121,14 +120,16 @@ export default function VowelSectionsPage() {
             </div>
             
             <div className="space-y-3">
-              <Link href={`/script/lesson/vowels/${sections[selectedSection.id]?.startLesson || 'sections'}`}>
-                <button 
-                  onClick={() => setShowCompletedModal(false)}
-                  className="w-full py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold btn-bounce"
-                >
-                  Continue to Next Section
-                </button>
-              </Link>
+              {selectedSection.id < sections.length && (
+                <Link href={`/script/lesson/vowels/${sections.find(s => s.id === selectedSection.id + 1)?.startLesson || 'sections'}`}>
+                  <button 
+                    onClick={() => setShowCompletedModal(false)}
+                    className="w-full py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold btn-bounce"
+                  >
+                    Continue to Next Section
+                  </button>
+                </Link>
+              )}
               
               <button 
                 onClick={handleRedoSection}

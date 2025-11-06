@@ -50,16 +50,11 @@ export default function VowelSectionsPage() {
         <div className="px-6 pt-6 pb-4 flex-shrink-0">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#FFD700] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
             <span>Vowels</span>
-            <div className="flex gap-2">
-              <button onClick={handleReset} className="px-3 py-1 text-xs bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
-                Reset
+            <Link href="/script/vowels">
+              <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
+                <ChevronLeft className="w-6 h-6" />
               </button>
-              <Link href="/script/vowels">
-                <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-              </Link>
-            </div>
+            </Link>
           </div>
         </div>
 

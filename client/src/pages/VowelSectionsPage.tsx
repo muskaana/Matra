@@ -65,25 +65,40 @@ export default function VowelSectionsPage() {
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
             const isCompleted = section.id <= completedSections;
+            const isUnlocked = section.id <= completedSections + 1;
             
             return (
               <div key={section.id} className="relative w-full min-h-[100px]">
-                <Link href={`/script/lesson/vowels/${section.startLesson}`} onClick={(e) => handleSectionClick(section, isCompleted, e)}>
+                {isUnlocked ? (
+                  <Link href={`/script/lesson/vowels/${section.startLesson}`} onClick={(e) => handleSectionClick(section, isCompleted, e)}>
+                    <button
+                      className={`relative w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 transition-all btn-bounce ${
+                        isCompleted 
+                          ? 'bg-green-500 hover:bg-green-600 border-green-300' 
+                          : 'bg-[#ff9930] hover:bg-[#CF7B24] border-white'
+                      } ${isEven ? 'ml-8' : 'ml-auto mr-8'}`}
+                    >
+                      {section.id}
+                      {isCompleted && (
+                        <div className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow-lg">
+                          <Check className="w-5 h-5 text-green-500" strokeWidth={3} />
+                        </div>
+                      )}
+                    </button>
+                  </Link>
+                ) : (
                   <button
-                    className={`relative w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 transition-all btn-bounce ${
-                      isCompleted 
-                        ? 'bg-green-500 hover:bg-green-600 border-green-300' 
-                        : 'bg-[#ff9930] hover:bg-[#CF7B24] border-white'
-                    } ${isEven ? 'ml-8' : 'ml-auto mr-8'}`}
+                    disabled
+                    className={`relative w-24 h-24 rounded-full flex items-center justify-center text-gray-400 font-bold text-5xl shadow-lg border-4 bg-gray-300 border-gray-400 cursor-not-allowed opacity-50 ${isEven ? 'ml-8' : 'ml-auto mr-8'}`}
                   >
                     {section.id}
-                    {isCompleted && (
-                      <div className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow-lg">
-                        <Check className="w-5 h-5 text-green-500" strokeWidth={3} />
-                      </div>
-                    )}
+                    <div className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow-lg">
+                      <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
                   </button>
-                </Link>
+                )}
                 
                 {index < sections.length - 1 && (
                   <div

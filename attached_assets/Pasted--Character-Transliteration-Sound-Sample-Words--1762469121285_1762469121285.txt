@@ -1,0 +1,38 @@
+| Character | Transliteration | Sound                       | Sample Words                                    | Sample Sentence                                          |
+| --------- | --------------- | --------------------------- | ----------------------------------------------- | -------------------------------------------------------- |
+| क         | ka              | “k”                         | किताब(Kitaab) - Book,कमल(Kamal) - Lotus         | कमल एक फूल है- Kamal is a flower.                        |
+| ख         | kha             | “kh”                        | खिलाड़ी(Khilaadi) - Player,खाना(Khaana) - Food  | खाना स्वादिष्ट है- The food is delicious.                |
+| ग         | ga              | “g”                         | गमला(Gamla) - Pot,गाना(Gaana) - Song            | वह गाना गा रहा है- He is singing a song.                 |
+| घ         | gha             | “gh”                        | घर(Ghar) - House,घड़ी(Ghadi) - Clock            | यह मेरा घर है- This is my house.                         |
+| ङ         | ṅa              | “ng” (nasal)                | अंगूर(Angoor) - Grapes,आँगन(Aangan) - Courtyard | आँगन साफ है- The courtyard is clean.                     |
+| च         | cha             | “ch”                        | चाय(Chaay) - Tea,चाबी(Chaabi) - Key             | मुझे चाय पसंद है- I like tea.                            |
+| छ         | chha            | “chh”                       | छाता(Chhaata) - Umbrella,छोटा(Chhota) - Small   | वह छोटा लड़का है- He is a small boy.                     |
+| ज         | ja              | “j”                         | जहाज़(Jahaaz) - Ship,जंगल(Jangal) - Forest      | जंगल में जानवर रहते हैं- Animals live in the forest.     |
+| झ         | jha             | “jh”                        | झंडा(Jhanda) - Flag,झरना(Jharna) - Waterfall    | झरना सुंदर है- The waterfall is beautiful.               |
+| ञ         | ña              | “ny” (nasal)                | ज्ञान(Gyaan) - Knowledge                        | ज्ञान से शक्ति मिलती है- Knowledge gives power.          |
+| ट         | ṭa              | “t” (retroflex)             | टमाटर(Tamaatar) - Tomato                        | टमाटर लाल है- The tomato is red.                         |
+| ठ         | ṭha             | “th” (aspirated)            | ठंडा(Thanda) - Cold                             | पानी ठंडा है- The water is cold.                         |
+| ड         | ḍa              | “d” (retroflex)             | डमरू(Damru) - Small drum                        | डमरू बज रहा है- The drum is playing.                     |
+| ढ         | ḍha             | “dh” (retroflex, aspirated) | ढोल(Dhol) - Drum                                | ढोल की आवाज़ तेज़ है- The drum sound is loud.            |
+| ण         | ṇa              | “n” (retroflex)             | पुण्य(Punya) - Virtue                           | पुण्य कर्म करो- Do good deeds.                           |
+| त         | ta              | “t” (dental)                | तरबूज(Tarbooz) - Watermelon                     | तरबूज मीठा है- The watermelon is sweet.                  |
+| थ         | tha             | “th” (aspirated dental)     | थाली(Thaali) - Plate                            | थाली में खाना है- Food is on the plate.                  |
+| द         | da              | “d”                         | दरवाज़ा(Darwaza) - Door                         | दरवाज़ा खोलो- Open the door.                             |
+| ध         | dha             | “dh”                        | धान(Dhaan) - Rice crop                          | धान खेत में है- Rice is in the field.                    |
+| न         | na              | “n”                         | नमक(Namak) - Salt                               | नमक ज़रूरी है- Salt is essential.                        |
+| प         | pa              | “p”                         | पानी(Paani) - Water                             | पानी पी लो- Drink water.                                 |
+| फ         | pha             | “ph/f”                      | फल(Phal) - Fruit                                | फल सेहतमंद है- Fruit is healthy.                         |
+| ब         | ba              | “b”                         | बंदर(Bandar) - Monkey                           | बंदर पेड़ पर है- The monkey is on the tree.              |
+| भ         | bha             | “bh”                        | भालू(Bhaalu) - Bear                             | भालू बड़ा है- The bear is big.                           |
+| म         | ma              | “m”                         | मकान(Makaan) - House                            | यह मेरा मकान है- This is my house.                       |
+| य         | ya              | “y”                         | यात्रा(Yaatra) - Journey                        | यात्रा लंबी थी- The journey was long.                    |
+| र         | ra              | “r”                         | रोटी(Roti) - Bread                              | रोटी तैयार है- The bread is ready.                       |
+| ल         | la              | “l”                         | लड़का(Ladka) - Boy                              | लड़का पढ़ रहा है- The boy is studying.                   |
+| व         | va              | “v/w”                       | वृक्ष(Vriksh) - Tree                            | वृक्ष हरा है- The tree is green.                         |
+| श         | sha             | “sh”                        | शेर(Sher) - Lion                                | शेर जंगल में है- The lion is in the forest.              |
+| ष         | ṣa              | “sh” (retroflex)            | षट्कोण(Shatkona) - Hexagon                      | षट्कोण में छह भुजाएँ हैं- The hexagon has six sides.     |
+| स         | sa              | “s”                         | सूरज(Sooraj) - Sun                              | सूरज उगा है- The sun has risen.                          |
+| ह         | ha              | “h”                         | हाथी(Haathi) - Elephant                         | हाथी बड़ा है- The elephant is big.                       |
+| क्ष       | kṣa             | “ksha”                      | क्षमता(Kshamata) - Ability                      | उसमें क्षमता है- He has ability.                         |
+| त्र       | tra             | “tra”                       | त्रिकोण(Trikon) - Triangle                      | त्रिकोण के तीन भुजाएँ हैं- The triangle has three sides. |
+| ज्ञ       | gya             | “gya”                       | ज्ञान(Gyaan) - Knowledge                        | ज्ञान महत्वपूर्ण है- Knowledge is important.             |

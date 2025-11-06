@@ -946,7 +946,7 @@ export default function LessonPage() {
                       )}
                       <div className="flex-1 text-left">
                         <div className="text-2xl font-bold text-black mb-0.5">
-                          {highlightCharacter(sample.word, lesson.character)}
+                          {sample.word}
                         </div>
                         <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
                         <p className="text-gray-600 text-xs">{sample.meaning}</p>

@@ -681,23 +681,7 @@ export default function LessonPage() {
     };
   };
 
-  const calculateProgress = () => {
-    if (lessonId.includes('practice/')) {
-      return 0;
-    }
-    
-    if (isConsonant) {
-      const lessonNum = parseInt(lessonId.replace('c', '')) || 0;
-      const progress = (lessonNum / 32) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    } else {
-      const lessonNum = parseInt(lessonId) || 0;
-      const progress = (lessonNum / 12) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    }
-  };
-
-  const progress = calculateProgress();
+  const progress = 25;
 
   const speak = (text: string) => {
     if ('speechSynthesis' in window) {

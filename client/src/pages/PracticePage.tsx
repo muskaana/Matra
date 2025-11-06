@@ -231,21 +231,7 @@ export default function PracticePage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Practice not found</p></div>;
   }
 
-  const calculateProgress = () => {
-    if (isConsonant) {
-      const practiceNum = parseInt(practiceId.replace('c', '')) || 0;
-      const lessonNum = practiceNum * 2;
-      const progress = (lessonNum / 32) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    } else {
-      const practiceNum = parseInt(practiceId) || 0;
-      const lessonNum = practiceNum * 2;
-      const progress = (lessonNum / 12) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    }
-  };
-
-  const progress = calculateProgress();
+  const progress = 50;
 
   return (
     <div className="h-screen bg-white flex flex-col">

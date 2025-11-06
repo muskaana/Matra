@@ -637,22 +637,7 @@ export default function QuizPage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Quiz not found</p></div>;
   }
 
-  const calculateProgress = () => {
-    const baseId = quizId.replace(/[ab]$/, '');
-    if (isConsonant) {
-      const quizNum = parseInt(baseId.replace('c', '')) || 0;
-      const lessonNum = quizNum * 2;
-      const progress = (lessonNum / 32) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    } else {
-      const quizNum = parseInt(baseId) || 0;
-      const lessonNum = quizNum * 2;
-      const progress = (lessonNum / 12) * 100;
-      return Math.min(Math.max(progress, 0), 100);
-    }
-  };
-
-  const progress = calculateProgress();
+  const progress = quizId.endsWith('b') ? 100 : 75;
 
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);

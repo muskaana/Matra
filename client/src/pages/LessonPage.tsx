@@ -981,7 +981,7 @@ export default function LessonPage() {
                 const parsed = parseSentence(lesson.sentence);
                 return (
                   <div className="space-y-1">
-                    <p className="text-gray-900 text-base font-semibold">{parsed.hindi}</p>
+                    <p className="text-gray-900 text-base font-semibold">{highlightCharacter(parsed.hindi, lesson.character)}</p>
                     {parsed.transliteration && <p className="text-gray-600 text-sm italic">{parsed.transliteration}</p>}
                     {parsed.translation && <p className="text-gray-500 text-xs">{parsed.translation}</p>}
                   </div>

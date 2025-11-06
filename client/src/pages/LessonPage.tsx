@@ -649,6 +649,22 @@ export default function LessonPage() {
     }
   };
 
+  const highlightCharacter = (word: string, character: string) => {
+    const parts = word.split(character);
+    if (parts.length === 1) return <>{word}</>;
+    
+    return (
+      <>
+        {parts.map((part, index) => (
+          <React.Fragment key={index}>
+            {part}
+            {index < parts.length - 1 && <strong className="font-extrabold">{character}</strong>}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
@@ -694,7 +710,9 @@ export default function LessonPage() {
                         </div>
                       )}
                       <div className="flex-1 text-left">
-                        <div className="text-2xl font-bold text-black mb-0.5">{sample.word}</div>
+                        <div className="text-2xl font-bold text-black mb-0.5">
+                          {highlightCharacter(sample.word, lesson.character)}
+                        </div>
                         <p className="text-gray-400 italic text-xs">{sample.transliteration}</p>
                         <p className="text-gray-600 text-xs">{sample.meaning}</p>
                       </div>

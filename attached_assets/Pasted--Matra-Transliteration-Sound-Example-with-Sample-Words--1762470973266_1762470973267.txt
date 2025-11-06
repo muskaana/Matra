@@ -1,0 +1,15 @@
+| Matra | Transliteration | Sound             | Example withक | Sample Words                                  | Sample Sentence                                               |
+| ----- | --------------- | ----------------- | ------------- | --------------------------------------------- | ------------------------------------------------------------- |
+| ◌ा    | aa              | “aa”              | का(kaa)       | राम(Raam) - Ram,नाम(Naam) - Name              | मेरा नाम राहुल है- My name is Rahul.                          |
+| ◌ि    | i               | “i” (short “ee”)  | कि(ki)        | मिठाई(Mithai) - Sweet,पानी(Paani) - Water     | मुझे मिठाई चाहिए- I want sweets.                              |
+| ◌ी    | ee              | “ee” (long)       | की(kee)       | चाबी(Chaabi) - Key,दीप(Deep) - Lamp           | चाबी मेज़ पर है- The key is on the table.                     |
+| ◌ु    | u               | “oo” (short)      | कु(ku)        | फूल(Phool) - Flower,सुरा(Sura) - Tune         | फूल सुंदर है- The flower is beautiful.                        |
+| ◌ू    | oo              | “ooo” (long)      | कू(koo)       | सूई(Sui) - Needle,झूला(Jhoola) - Swing        | बच्चे झूला झूल रहे हैं- The children are swinging.            |
+| ◌ृ    | ri              | “ree”             | कृ(kri)       | कृपा(Kripa) - Blessing                        | भगवान की कृपा है- It’s God’s blessing.                        |
+| ◌े    | e               | “ay”              | के(ke)        | देव(Dev) - God,नेल(Nail) - Nail               | देव मंदिर में हैं- The god is in the temple.                  |
+| ◌ै    | ai              | “ah-ay”           | कै(kai)       | मैला(Maila) - Dirty,ऐनक(Ainak) - Glasses      | मेरी ऐनक नई है- My glasses are new.                           |
+| ◌ो    | o               | “oh”              | को(ko)        | मोती(Moti) - Pearl,सोना(Sona) - Gold          | सोना महँगा है- Gold is expensive.                             |
+| ◌ौ    | ao              | “ah-oh”           | कौ(kau)       | कौआ(Kauaa) - Crow,दौड़(Daud) - Race           | कौआ उड़ गया- The crow flew away.                              |
+| ◌ं    | an              | “nasal n”         | कं(kan)       | संगीत(Sangeet) - Music,अंगूर(Angoor) - Grapes | संगीत अच्छा है- The music is good.                            |
+| ◌ः    | h               | “visarga h”       | कः(kah)       | दुःख(Dukh) - Sorrow                           | दुःख और सुख जीवन का भाग हैं- Joy and sorrow are part of life. |
+| ◌ँ    | añ             | “nasalized vowel” | कँ(kañ)      | अँधेरा(Andhera) - Darkness,साँप(Saap) - Snake | साँप पेड़ पर है- The snake is on the tree.                    |

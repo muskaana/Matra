@@ -12,6 +12,11 @@ export default function VowelSectionsPage() {
     setCompletedSections(completed);
   }, []);
   
+  const handleReset = () => {
+    localStorage.setItem('vowelsQuizzesCompleted', '0');
+    setCompletedSections(0);
+  };
+  
   const sections = [
     { id: 1, name: "Section 1", startLesson: "1" },
     { id: 2, name: "Section 2", startLesson: "3" },
@@ -26,11 +31,16 @@ export default function VowelSectionsPage() {
         <div className="px-6 pt-6 pb-4 flex-shrink-0">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#FFD700] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
             <span>Vowels</span>
-            <Link href="/script/vowels">
-              <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
-                <ChevronLeft className="w-6 h-6" />
+            <div className="flex gap-2">
+              <button onClick={handleReset} className="px-3 py-1 text-xs bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
+                Reset
               </button>
-            </Link>
+              <Link href="/script/vowels">
+                <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
 

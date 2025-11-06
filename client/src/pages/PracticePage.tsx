@@ -231,10 +231,26 @@ export default function PracticePage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Practice not found</p></div>;
   }
 
+  const calculateProgress = () => {
+    if (isConsonant) {
+      const practiceNum = parseInt(practiceId.replace('c', '')) || 0;
+      const lessonNum = practiceNum * 2;
+      const progress = (lessonNum / 33) * 100;
+      return Math.min(Math.max(progress, 0), 100);
+    } else {
+      const practiceNum = parseInt(practiceId) || 0;
+      const lessonNum = practiceNum * 2;
+      const progress = (lessonNum / 12) * 100;
+      return Math.min(Math.max(progress, 0), 100);
+    }
+  };
+
+  const progress = calculateProgress();
+
   return (
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
-        <div className="flex items-center justify-between mb-6 flex-shrink-0">
+        <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-5 h-5 text-gray-600" />
@@ -245,6 +261,13 @@ export default function PracticePage() {
               <X className="w-5 h-5 text-gray-600" />
             </button>
           </Link>
+        </div>
+        
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-4 flex-shrink-0">
+          <div 
+            className="bg-[#ff9930] h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
 
         <div className="flex-1 bg-white rounded-lg shadow-md p-5 text-center border border-gray-200 flex flex-col overflow-y-auto relative animate-slide-in-up">

@@ -637,6 +637,23 @@ export default function QuizPage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Quiz not found</p></div>;
   }
 
+  const calculateProgress = () => {
+    const baseId = quizId.replace(/[ab]$/, '');
+    if (isConsonant) {
+      const quizNum = parseInt(baseId.replace('c', '')) || 0;
+      const lessonNum = quizNum * 2;
+      const progress = (lessonNum / 33) * 100;
+      return Math.min(Math.max(progress, 0), 100);
+    } else {
+      const quizNum = parseInt(baseId) || 0;
+      const lessonNum = quizNum * 2;
+      const progress = (lessonNum / 12) * 100;
+      return Math.min(Math.max(progress, 0), 100);
+    }
+  };
+
+  const progress = calculateProgress();
+
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);
     setShowFeedback(true);
@@ -691,7 +708,7 @@ export default function QuizPage() {
     return (
       <div className="h-screen bg-white flex flex-col">
         <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
-          <div className="flex items-center justify-between mb-6 flex-shrink-0">
+          <div className="flex items-center justify-between mb-2 flex-shrink-0">
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
@@ -700,6 +717,13 @@ export default function QuizPage() {
                 <X className="w-6 h-6 text-gray-600" />
               </button>
             </Link>
+          </div>
+          
+          <div className="w-full bg-gray-200 rounded-full h-2 mb-4 flex-shrink-0">
+            <div 
+              className="bg-[#ff9930] h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl text-center border border-gray-100 flex-1 flex flex-col overflow-hidden relative animate-slide-in-up">
@@ -757,13 +781,20 @@ export default function QuizPage() {
   return (
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
-        <div className="flex items-center justify-between mb-6 flex-shrink-0">
+        <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="w-10"></div>
           <Link href={isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"}>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-6 h-6 text-gray-600" />
             </button>
           </Link>
+        </div>
+        
+        <div className="w-full bg-gray-200 rounded-full h-2 mb-4 flex-shrink-0">
+          <div 
+            className="bg-[#ff9930] h-2 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative animate-slide-in-up">

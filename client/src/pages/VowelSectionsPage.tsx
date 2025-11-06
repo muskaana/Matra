@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Check } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
 
 export default function VowelSectionsPage() {
+  const [completedSections, setCompletedSections] = useState(0);
+  
+  useEffect(() => {
+    const completed = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+    setCompletedSections(completed);
+  }, []);
+  
   const sections = [
     { id: 1, name: "Section 1", startLesson: "1" },
     { id: 2, name: "Section 2", startLesson: "3" },
@@ -34,16 +41,24 @@ export default function VowelSectionsPage() {
           
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
+            const isCompleted = section.id <= completedSections;
             
             return (
               <div key={section.id} className="relative w-full min-h-[100px]">
                 <Link href={`/script/lesson/vowels/${section.startLesson}`}>
                   <button
-                    className={`w-24 h-24 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 border-white transition-all btn-bounce ${
-                      isEven ? 'ml-8' : 'ml-auto mr-8'
-                    }`}
+                    className={`relative w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg border-4 transition-all btn-bounce ${
+                      isCompleted 
+                        ? 'bg-green-500 hover:bg-green-600 border-green-300' 
+                        : 'bg-[#ff9930] hover:bg-[#CF7B24] border-white'
+                    } ${isEven ? 'ml-8' : 'ml-auto mr-8'}`}
                   >
                     {section.id}
+                    {isCompleted && (
+                      <div className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow-lg">
+                        <Check className="w-5 h-5 text-green-500" strokeWidth={3} />
+                      </div>
+                    )}
                   </button>
                 </Link>
                 

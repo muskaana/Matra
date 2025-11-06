@@ -17,7 +17,15 @@ export default function VowelSectionsPage() {
   const handleReset = () => {
     localStorage.setItem('vowelsQuizzesCompleted', '0');
     setCompletedSections(0);
-    setShowCompletedModal(false);
+  };
+  
+  const handleRedoSection = () => {
+    if (selectedSection) {
+      const newCompleted = selectedSection.id - 1;
+      localStorage.setItem('vowelsQuizzesCompleted', newCompleted.toString());
+      setCompletedSections(newCompleted);
+      setShowCompletedModal(false);
+    }
   };
   
   const handleSectionClick = (section: any, isCompleted: boolean, e: React.MouseEvent) => {
@@ -114,7 +122,7 @@ export default function VowelSectionsPage() {
                 <Check className="w-8 h-8 text-green-500" strokeWidth={3} />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">Section Completed!</h3>
-              <p className="text-gray-600">You have completed this lesson. Either reset your progress or continue to the next section.</p>
+              <p className="text-gray-600">You have completed this lesson. Continue to the next section or redo this one.</p>
             </div>
             
             <div className="space-y-3">
@@ -128,10 +136,10 @@ export default function VowelSectionsPage() {
               </Link>
               
               <button 
-                onClick={handleReset}
+                onClick={handleRedoSection}
                 className="w-full py-3 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-colors font-semibold btn-bounce"
               >
-                Reset Progress
+                Redo This Lesson
               </button>
               
               <button 

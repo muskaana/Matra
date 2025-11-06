@@ -77,8 +77,13 @@ export default function ConsonantsPage() {
                         </svg>
                       )}
                       <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[34px] border-[3px] border-white shadow-md transition-colors ${lesson.locked ? 'bg-gray-400' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
-                        {lesson.locked ? <Lock className="w-8 h-8" /> : lesson.icon}
+                        {lesson.icon}
                       </div>
+                      {lesson.locked && (
+                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
+                          <Lock className="w-3.5 h-3.5 text-white" />
+                        </div>
+                      )}
                     </div>
                     <div className="flex-1">
                       <span className={`leading-10 font-medium ${lesson.locked ? 'text-gray-500' : 'text-black'} ${lesson.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>

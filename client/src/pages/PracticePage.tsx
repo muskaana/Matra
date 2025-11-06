@@ -40,7 +40,7 @@ const practiceData: Record<string, any> = {
     pairs: [
       { character: "ऋ", sound: "ree" },
       { character: "ए", sound: "ay" },
-      { character: "ऐ", sound: "aa-ay" },
+      { character: "ऐ", sound: "ai" },
     ],
     nextLesson: "quiz/4a",
     pageNumber: "Practice 4",
@@ -50,7 +50,7 @@ const practiceData: Record<string, any> = {
     question: "Match the sound to the letter",
     pairs: [
       { character: "ओ", sound: "oh" },
-      { character: "औ", sound: "aa-oh" },
+      { character: "औ", sound: "aw" },
     ],
     nextLesson: "quiz/5a",
     pageNumber: "Practice 5",

@@ -113,7 +113,7 @@ const quizData: Record<string, any> = {
     type: "sound",
     options: [
       { text: "ay", correct: false },
-      { text: "aa-ay", correct: true },
+      { text: "ai", correct: true },
     ],
     pageNumber: "Quiz 4a",
     nextLesson: "4b",
@@ -141,7 +141,7 @@ const quizData: Record<string, any> = {
     type: "sound",
     options: [
       { text: "oh", correct: false },
-      { text: "aa-oh", correct: true },
+      { text: "aw", correct: true },
     ],
     pageNumber: "Quiz 5a",
     nextLesson: "5b",

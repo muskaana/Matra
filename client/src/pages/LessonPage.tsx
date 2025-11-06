@@ -163,7 +163,7 @@ const lessonData: Record<string, any> = {
     title: "Lesson 9 : Vowels",
     character: "ऐ",
     transliteration: "ai",
-    sound: '"aa-ay"',
+    sound: '"ai" (like "e" in bet)',
     sampleWords: [
       { word: "ऐनक", transliteration: "ainak", meaning: "Glasses", image: "glasses" },
       { word: "ऐसा", transliteration: "aisa", meaning: "Like this", image: "pointing" },
@@ -189,7 +189,7 @@ const lessonData: Record<string, any> = {
     title: "Lesson 11 : Vowels",
     character: "औ",
     transliteration: "ao",
-    sound: '"aa-oh"',
+    sound: '"aw"',
     sampleWords: [
       { word: "और", transliteration: "aur", meaning: "And/More", image: "plus" },
       { word: "औरत", transliteration: "aurat", meaning: "Woman", image: "woman" },

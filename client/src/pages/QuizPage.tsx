@@ -4,6 +4,12 @@ import { X, ChevronLeft } from "lucide-react";
 import confetti from 'canvas-confetti';
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import { 
+  VOWEL_SECTIONS, 
+  CONSONANT_SECTIONS, 
+  MATRA_SECTIONS,
+  calculateProgress as calcProgress
+} from '../utils/sectionStructure';
 
 const encouragingMessages = [
   "शाबाश! (Shaabash!)",
@@ -1224,7 +1230,26 @@ export default function QuizPage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Quiz not found</p></div>;
   }
 
-  const progress = quizId.endsWith('b') ? 100 : 75;
+  // Calculate progress based on quiz question position
+  const progress = (() => {
+    // Extract quiz letter (a, b, c, d, e, f) from quizId
+    const quizLetter = quizId.match(/[a-f]$/)?.[0] || 'a';
+    const questionNumber = quizLetter.charCodeAt(0) - 'a'.charCodeAt(0) + 1;
+    
+    if (isMatra) {
+      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, '').replace('m', ''));
+      const sectionStructure = MATRA_SECTIONS[sectionNumber - 1];
+      return calcProgress('quiz', sectionStructure, questionNumber);
+    } else if (isConsonant) {
+      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, '').replace('c', ''));
+      const sectionStructure = CONSONANT_SECTIONS[sectionNumber - 1];
+      return calcProgress('quiz', sectionStructure, questionNumber);
+    } else {
+      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, ''));
+      const sectionStructure = VOWEL_SECTIONS[sectionNumber - 1];
+      return calcProgress('quiz', sectionStructure, questionNumber);
+    }
+  })();
 
   const handleAnswer = (index: number) => {
     setSelectedAnswer(index);

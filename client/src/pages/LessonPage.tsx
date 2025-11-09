@@ -2,6 +2,15 @@ import React from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { Volume2, X, ChevronLeft } from "lucide-react";
 import { MandalaPattern } from '../components/DecorativePattern';
+import { 
+  VOWEL_SECTIONS, 
+  CONSONANT_SECTIONS, 
+  MATRA_SECTIONS,
+  getVowelSectionInfo,
+  getConsonantSectionInfo,
+  getMatraSectionInfo,
+  calculateProgress as calcProgress
+} from '../utils/sectionStructure';
 
 import pomegranateImg from '@assets/generated_images/Transparent_pomegranate_simple_icon_5f275640.png';
 import mangoImg from '@assets/generated_images/Transparent_mango_simple_icon_3f4bb5ae.png';
@@ -851,7 +860,22 @@ export default function LessonPage() {
     };
   };
 
-  const progress = 25;
+  // Calculate progress based on lesson position using centralized structure
+  const progress = (() => {
+    if (isMatra) {
+      const { section, lessonInSection } = getMatraSectionInfo(lessonId);
+      const sectionStructure = MATRA_SECTIONS[section - 1];
+      return calcProgress('lesson', sectionStructure, lessonInSection);
+    } else if (isConsonant) {
+      const { section, lessonInSection } = getConsonantSectionInfo(lesson.pageNumber);
+      const sectionStructure = CONSONANT_SECTIONS[section - 1];
+      return calcProgress('lesson', sectionStructure, lessonInSection);
+    } else {
+      const { section, lessonInSection } = getVowelSectionInfo(lesson.pageNumber);
+      const sectionStructure = VOWEL_SECTIONS[section - 1];
+      return calcProgress('lesson', sectionStructure, lessonInSection);
+    }
+  })();
 
   const speak = (text: string) => {
     if ('speechSynthesis' in window) {

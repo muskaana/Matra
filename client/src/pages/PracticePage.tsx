@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Link, useParams, useLocation } from "wouter";
 import { X, ChevronLeft, Volume2 } from "lucide-react";
 import tigerHappy from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
+import { 
+  VOWEL_SECTIONS, 
+  CONSONANT_SECTIONS, 
+  MATRA_SECTIONS,
+  calculateProgress as calcProgress
+} from '../utils/sectionStructure';
 
 const practiceData: Record<string, any> = {
   "1": {
@@ -301,7 +307,22 @@ export default function PracticePage() {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Practice not found</p></div>;
   }
 
-  const progress = 50;
+  // Calculate progress - practice comes after all lessons in a section
+  const progress = (() => {
+    if (isMatra) {
+      const sectionNumber = parseInt(practiceId.replace('m', ''));
+      const sectionStructure = MATRA_SECTIONS[sectionNumber - 1];
+      return calcProgress('practice', sectionStructure, 1);
+    } else if (isConsonant) {
+      const sectionNumber = parseInt(practiceId.replace('c', ''));
+      const sectionStructure = CONSONANT_SECTIONS[sectionNumber - 1];
+      return calcProgress('practice', sectionStructure, 1);
+    } else {
+      const sectionNumber = parseInt(practiceId);
+      const sectionStructure = VOWEL_SECTIONS[sectionNumber - 1];
+      return calcProgress('practice', sectionStructure, 1);
+    }
+  })();
 
   const speak = (text: string) => {
     if ('speechSynthesis' in window) {

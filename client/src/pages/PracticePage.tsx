@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams, useLocation } from "wouter";
-import { X, ChevronLeft } from "lucide-react";
+import { X, ChevronLeft, Volume2 } from "lucide-react";
 import tigerHappy from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
 
 const practiceData: Record<string, any> = {
@@ -303,6 +303,15 @@ export default function PracticePage() {
 
   const progress = 50;
 
+  const speak = (text: string) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'hi-IN';
+      utterance.rate = 0.8;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   return (
     <div className="h-screen bg-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col p-5">
@@ -336,8 +345,18 @@ export default function PracticePage() {
           <div className="space-y-3 mb-6">
             {practice.pairs.map((pair: any, index: number) => (
               <div key={index} className="flex items-center justify-between bg-gray-50 rounded-md p-4">
-                <div className="text-4xl font-bold text-black">{pair.character}</div>
-                <div className="text-base text-gray-600 italic">"{pair.sound}"</div>
+                <div className="flex items-center gap-3">
+                  <div className="text-4xl font-bold text-black" data-testid={`text-character-${index}`}>{pair.character}</div>
+                  <button 
+                    onClick={() => speak(pair.character.replace(/[()◌]/g, ''))}
+                    className="p-2 bg-[#ff9930] hover:bg-[#CF7B24] rounded-full transition-colors"
+                    data-testid={`button-audio-${index}`}
+                    aria-label={`Listen to ${pair.character}`}
+                  >
+                    <Volume2 className="w-5 h-5 text-white" />
+                  </button>
+                </div>
+                <div className="text-base text-gray-600 italic" data-testid={`text-sound-${index}`}>"{pair.sound}"</div>
               </div>
             ))}
           </div>

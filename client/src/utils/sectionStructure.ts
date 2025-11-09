@@ -43,16 +43,16 @@ export const CONSONANT_SECTIONS: SectionStructure[] = [
 ];
 
 // Matra sections: 7 sections total
-// All sections have 2 lessons except section 7 which has 1
+// Grouped by short/long pairs and similar sounds for pedagogical effectiveness
 // All sections have 4 quiz questions
 export const MATRA_SECTIONS: SectionStructure[] = [
-  { lessons: 2, quizQuestions: 4 },  // Section 1: ◌ा, ◌ि
-  { lessons: 2, quizQuestions: 4 },  // Section 2: ◌ी, ◌ु
-  { lessons: 2, quizQuestions: 4 },  // Section 3: ◌ू, ◌ृ
-  { lessons: 2, quizQuestions: 4 },  // Section 4: ◌े, ◌ै
-  { lessons: 2, quizQuestions: 4 },  // Section 5: ◌ो, ◌ौ
-  { lessons: 2, quizQuestions: 4 },  // Section 6: ◌ं, ◌ः
-  { lessons: 1, quizQuestions: 4 },  // Section 7: ◌ँ (with comparison to ◌ं)
+  { lessons: 1, quizQuestions: 4 },  // Section 1: ◌ा (intro)
+  { lessons: 2, quizQuestions: 4 },  // Section 2: ◌ि, ◌ी (short/long i pair)
+  { lessons: 2, quizQuestions: 4 },  // Section 3: ◌ु, ◌ू (short/long u pair)
+  { lessons: 2, quizQuestions: 4 },  // Section 4: ◌े, ◌ै (e-sound pair)
+  { lessons: 2, quizQuestions: 4 },  // Section 5: ◌ो, ◌ौ (o-sound pair)
+  { lessons: 2, quizQuestions: 4 },  // Section 6: ◌ृ, ◌ं (remaining vowel + nasal)
+  { lessons: 2, quizQuestions: 4 },  // Section 7: ◌ः, ◌ँ (nasal marks)
 ];
 
 /**

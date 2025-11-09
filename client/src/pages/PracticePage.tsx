@@ -223,31 +223,30 @@ const practiceData: Record<string, any> = {
     pageNumber: "Practice C16",
   },
   "m1": {
-    title: "Practice: ◌ा vs ◌ि",
+    title: "Practice: ◌ा",
     question: "Match the sound to the matra",
     pairs: [
       { character: "◌ा (का)", sound: "aa" },
-      { character: "◌ि (कि)", sound: "i" },
     ],
     nextLesson: "quiz/m1a",
     pageNumber: "Practice M1",
   },
   "m2": {
-    title: "Practice: ◌ी vs ◌ु",
+    title: "Practice: ◌ि vs ◌ी (short i vs long i)",
     question: "Match the sound to the matra",
     pairs: [
-      { character: "◌ी (की)", sound: "ee" },
-      { character: "◌ु (कु)", sound: "u" },
+      { character: "◌ि (कि)", sound: "i (short)" },
+      { character: "◌ी (की)", sound: "ee (long)" },
     ],
     nextLesson: "quiz/m2a",
     pageNumber: "Practice M2",
   },
   "m3": {
-    title: "Practice: ◌ू vs ◌ृ",
+    title: "Practice: ◌ु vs ◌ू (short u vs long u)",
     question: "Match the sound to the matra",
     pairs: [
-      { character: "◌ू (कू)", sound: "oo" },
-      { character: "◌ृ (कृ)", sound: "ri" },
+      { character: "◌ु (कु)", sound: "u (short)" },
+      { character: "◌ू (कू)", sound: "oo (long)" },
     ],
     nextLesson: "quiz/m3a",
     pageNumber: "Practice M3",
@@ -273,19 +272,20 @@ const practiceData: Record<string, any> = {
     pageNumber: "Practice M5",
   },
   "m6": {
-    title: "Practice: ◌ं vs ◌ः",
+    title: "Practice: ◌ृ vs ◌ं",
     question: "Match the sound to the matra",
     pairs: [
+      { character: "◌ृ (कृ)", sound: "ri" },
       { character: "◌ं (कं)", sound: "an" },
-      { character: "◌ः (कः)", sound: "h" },
     ],
     nextLesson: "quiz/m6a",
     pageNumber: "Practice M6",
   },
   "m7": {
-    title: "Practice: ◌ँ",
+    title: "Practice: ◌ः vs ◌ँ (nasal marks)",
     question: "Match the sound to the matra",
     pairs: [
+      { character: "◌ः (कः)", sound: "h" },
       { character: "◌ँ (कँ)", sound: "añ" },
     ],
     nextLesson: "quiz/m7a",

@@ -31,13 +31,13 @@ export default function MatraSectionsPage() {
   };
   
   const sections = [
-    { id: 1, name: "Section 1", startLesson: "m1" },
-    { id: 2, name: "Section 2", startLesson: "m3" },
-    { id: 3, name: "Section 3", startLesson: "m5" },
-    { id: 4, name: "Section 4", startLesson: "m7" },
-    { id: 5, name: "Section 5", startLesson: "m9" },
-    { id: 6, name: "Section 6", startLesson: "m11" },
-    { id: 7, name: "Section 7", startLesson: "m13" },
+    { id: 1, name: "Section 1: ◌ा", startLesson: "m1" },
+    { id: 2, name: "Section 2: i/ee", startLesson: "m2" },
+    { id: 3, name: "Section 3: u/oo", startLesson: "m4" },
+    { id: 4, name: "Section 4: e/ai", startLesson: "m7" },
+    { id: 5, name: "Section 5: o/ao", startLesson: "m9" },
+    { id: 6, name: "Section 6: ri/an", startLesson: "m6" },
+    { id: 7, name: "Section 7: Nasals", startLesson: "m12" },
   ];
 
   return (

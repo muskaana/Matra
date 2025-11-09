@@ -1430,7 +1430,12 @@ export default function QuizPage() {
 
           <div className="flex-1 flex flex-col justify-between">
             <div className="mb-8">
-              <p className="text-xl text-black mb-6">{quiz.subQuestion}</p>
+              <p className="text-xl text-black mb-4" data-testid="text-question">{quiz.subQuestion}</p>
+              {quiz.options.filter((opt: any) => opt.correct).length > 1 && (
+                <p className="text-sm text-gray-600 italic" data-testid="text-multiple-answers">
+                  (Multiple answers possible)
+                </p>
+              )}
             </div>
 
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>
@@ -1439,6 +1444,7 @@ export default function QuizPage() {
                   key={index}
                   onClick={() => handleAnswer(index)}
                   className="px-8 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg btn-bounce"
+                  data-testid={`button-answer-${index}`}
                 >
                   {option.text}
                 </button>

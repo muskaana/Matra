@@ -896,7 +896,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Matra (Short i vs Long i)",
     char1: "◌ि",
     char2: "◌ी",
-    subQuestion: "Which syllable makes the sound 'ki'?",
+    subQuestion: "Which syllable makes the short sound?",
     type: "sound",
     options: [
       { text: "कि", correct: true },
@@ -950,7 +950,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Matra (Short u vs Long u)",
     char1: "◌ु",
     char2: "◌ू",
-    subQuestion: "Which syllable makes the sound 'ku'?",
+    subQuestion: "Which syllable makes the short sound?",
     type: "sound",
     options: [
       { text: "कु", correct: true },

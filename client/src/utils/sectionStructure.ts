@@ -55,6 +55,17 @@ export const MATRA_SECTIONS: SectionStructure[] = [
   { lessons: 2, quizQuestions: 4 },  // Section 7: ◌ः, ◌ँ (nasal marks)
 ];
 
+// Similar Characters sections: 5 sections total
+// Focused on explaining differences between confusingly similar characters
+// All sections have 4 quiz questions
+export const SIMILAR_SECTIONS: SectionStructure[] = [
+  { lessons: 2, quizQuestions: 4 },  // Section 1: न vs ण (dental vs retroflex na)
+  { lessons: 2, quizQuestions: 4 },  // Section 2: ज्ञ vs ग (conjunct vs ga)
+  { lessons: 2, quizQuestions: 4 },  // Section 3: ऋ vs री (vowel vs ra+matra)
+  { lessons: 3, quizQuestions: 4 },  // Section 4: स vs श vs ष (three 's' sounds)
+  { lessons: 2, quizQuestions: 4 },  // Section 5: ं vs ँ (bindu vs chandrabindu)
+];
+
 /**
  * Get the section number and lesson position for a vowel lesson
  * @param lessonPageNumber - The pageNumber field from lesson data (1-11)
@@ -114,6 +125,23 @@ export function getMatraSectionInfo(lessonId: string): { section: number; lesson
   const section = parseInt(match[1]);
   const lessonLetter = match[2] || 'a'; // 'a' or 'b'
   const lessonInSection = lessonLetter === 'a' ? 1 : 2;
+  
+  return { section, lessonInSection };
+}
+
+/**
+ * Get the section number for a similar characters lesson
+ * @param lessonId - The lesson ID (e.g., "s1a", "s1b", "s4a", "s4b", "s4c")
+ * @returns section number (1-5) and lesson position
+ */
+export function getSimilarSectionInfo(lessonId: string): { section: number; lessonInSection: number } {
+  // Extract section number from lesson ID (s1a → 1, s2b → 2, s4c → 4)
+  const match = lessonId.match(/^s(\d+)([abc]?)$/);
+  if (!match) return { section: 1, lessonInSection: 1 };
+  
+  const section = parseInt(match[1]);
+  const lessonLetter = match[2] || 'a'; // 'a', 'b', or 'c'
+  const lessonInSection = lessonLetter === 'a' ? 1 : lessonLetter === 'b' ? 2 : 3;
   
   return { section, lessonInSection };
 }

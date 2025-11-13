@@ -69,7 +69,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 1 : Vowels",
     char1: "अ",
     char2: "आ",
-    subQuestion: "Which word starts with अ?",
+    subQuestion: "Which word starts with a short 'a' sound?",
     type: "word",
     options: [
       { hindi: "आम", transliteration: "Aam", correct: false },
@@ -84,7 +84,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 1 : Vowels",
     char1: "अ",
     char2: "आ",
-    subQuestion: "Which word starts with आ?",
+    subQuestion: "Which word starts with a long 'a' sound?",
     type: "word",
     options: [
       { hindi: "आम", transliteration: "Aam", correct: true },
@@ -125,7 +125,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Vowels",
     char1: "इ",
     char2: "ई",
-    subQuestion: "Which word starts with इ?",
+    subQuestion: "Which word starts with a short 'i' sound?",
     type: "word",
     options: [
       { hindi: "इंडिया", transliteration: "India", correct: true },
@@ -140,7 +140,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Vowels",
     char1: "इ",
     char2: "ई",
-    subQuestion: "Which word starts with ई?",
+    subQuestion: "Which word starts with a long 'i' sound?",
     type: "word",
     options: [
       { hindi: "इंडिया", transliteration: "India", correct: false },
@@ -181,7 +181,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Vowels",
     char1: "उ",
     char2: "ऊ",
-    subQuestion: "Which word starts with उ?",
+    subQuestion: "Which word starts with a short 'u' sound?",
     type: "word",
     options: [
       { hindi: "उल्लू", transliteration: "Ullu", correct: true },
@@ -196,7 +196,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Vowels",
     char1: "उ",
     char2: "ऊ",
-    subQuestion: "Which word starts with ऊ?",
+    subQuestion: "Which word starts with a long 'u' sound?",
     type: "word",
     options: [
       { hindi: "उल्लू", transliteration: "Ullu", correct: false },
@@ -237,7 +237,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Vowels",
     char1: "ए",
     char2: "ऐ",
-    subQuestion: "Which word starts with ए?",
+    subQuestion: "Which word starts with an 'e' sound?",
     type: "word",
     options: [
       { hindi: "एक", transliteration: "Ek", correct: true },
@@ -252,7 +252,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Vowels",
     char1: "ए",
     char2: "ऐ",
-    subQuestion: "Which word starts with ऐ?",
+    subQuestion: "Which word starts with an 'ai' sound?",
     type: "word",
     options: [
       { hindi: "एक", transliteration: "Ek", correct: false },
@@ -319,10 +319,10 @@ const quizData: Record<string, any> = {
     title: "Quiz 5 : Vowels",
     char1: "ओ",
     char2: "औ",
-    subQuestion: "Which word starts with ओ?",
+    subQuestion: "Which word starts with an 'o' sound?",
     type: "word",
     options: [
-      { hindi: "कल", transliteration: "Kal", correct: true },
+      { hindi: "ओम", transliteration: "Om", correct: true },
       { hindi: "औरत", transliteration: "Aurat", correct: false },
       { hindi: "ओखली", transliteration: "Okhli", correct: true },
       { hindi: "ऐनक", transliteration: "Ainak", correct: false },
@@ -334,7 +334,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 5 : Vowels",
     char1: "ओ",
     char2: "औ",
-    subQuestion: "Which word starts with औ?",
+    subQuestion: "Which word starts with an 'aw' sound?",
     type: "word",
     options: [
       { hindi: "कल", transliteration: "Kal", correct: false },

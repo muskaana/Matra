@@ -1,0 +1,15 @@
+create next chapter, here is curriculum. 
+main focus= explain differences between confusingly similar characters. mimic format of other chapters. 
+| Character | Name/Type           | Pronunciation    | Example(s)                       | Usage Tip                                          |
+| --------- | ------------------- | ---------------- | -------------------------------- | -------------------------------------------------- |
+| न         | Na (Dental)         | na               | नदी(nadī - river)                | Tip of tongue on teeth, used in everyday Hindi     |
+| ण         | Na (Retroflex)      | ṇa               | कण(kaṇ - particle)               | Tongue curled back, occurs in Sanskrit/older words |
+| ज्ञ       | Jña/Gya (Conjunct)  | gya/jña          | ज्ञान(gyān - knowledge)          | Looks like 'ja' + 'nya', never pronounced as ‘ga’  |
+| ग         | Ga                  | ga               | गमला(gamlā - flower pot)         | Simple ‘ga’ sound and circular shape               |
+| ऋ         | Ṛi (Vowel)          | ṛi               | ऋषि(ṛṣi - sage)                  | Rare, short Sanskrit vowel                         |
+| री        | Rī (ra + ī-matra)   | rī               | रीत(rīt - tradition)             | Common ‘ree’ sound, ra + long ‘ee’ matra           |
+| स         | Sa (Dental 's')     | sa               | सफर(safar - travel)              | Dental ‘s’, tongue touches teeth                   |
+| श         | Sha (Palatal 'sh')  | sha              | शक्ति(shakti - power)            | Palatal ‘sh’, tongue to roof, softer sound         |
+| ष         | Sha (Retroflex 'ṣ') | ṣa               | षड्यंत्र(ṣaḍyantra - conspiracy) | Retroflex ‘sha’, tongue curled back                |
+| ं         | Bindu (anusvara)    | ṁ (nasal sound)  | संघ(saṁgh - union)               | Dot above, nasalizes preceding vowel/consonant     |
+| ँ         | Chandrabindu        | ̃ (nasalization) | माँ(mā̃ - mother)                | Moon-dot above, nasalizes entire syllable/vowel

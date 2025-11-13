@@ -1198,6 +1198,7 @@ export default function QuizPage() {
   const quiz = quizData[quizId];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const currentQuizIdRef = useRef(quizId);
   
   const isConsonant = location.includes('/consonants/');
@@ -1250,6 +1251,19 @@ export default function QuizPage() {
         colors: ['#ff9930', '#138808', '#FFFFFF', '#2E86AB', '#FFD700']
       });
     }
+  };
+
+  const handleExitClick = () => {
+    setShowExitConfirmation(true);
+  };
+
+  const handleConfirmExit = () => {
+    const exitPath = isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections");
+    setLocation(exitPath);
+  };
+
+  const handleCancelExit = () => {
+    setShowExitConfirmation(false);
   };
 
   const handleNext = () => {
@@ -1314,11 +1328,9 @@ export default function QuizPage() {
             <button onClick={() => setShowFeedback(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
-            <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
-              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <X className="w-6 h-6 text-gray-600" />
-              </button>
-            </Link>
+            <button onClick={handleExitClick} className="p-2 hover:bg-gray-100 rounded-full transition-colors" data-testid="button-exit">
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
           </div>
           
           <div className="w-full bg-gray-200 rounded-full h-2 mb-4 flex-shrink-0">
@@ -1385,11 +1397,9 @@ export default function QuizPage() {
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="w-10"></div>
-          <Link href={isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections")}>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X className="w-6 h-6 text-gray-600" />
-            </button>
-          </Link>
+          <button onClick={handleExitClick} className="p-2 hover:bg-gray-100 rounded-full transition-colors" data-testid="button-exit">
+            <X className="w-6 h-6 text-gray-600" />
+          </button>
         </div>
         
         <div className="w-full bg-gray-200 rounded-full h-2 mb-4 flex-shrink-0">
@@ -1439,6 +1449,33 @@ export default function QuizPage() {
           </div>
         </div>
       </div>
+
+      {showExitConfirmation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full animate-slide-in-up">
+            <h3 className="text-xl font-bold text-black mb-3">Exit Quiz?</h3>
+            <p className="text-gray-600 mb-6">
+              If you exit now, your progress in this quiz will be reset and you'll need to start over.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={handleCancelExit}
+                className="flex-1 px-6 py-3 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition-colors font-medium"
+                data-testid="button-cancel-exit"
+              >
+                Stay
+              </button>
+              <button
+                onClick={handleConfirmExit}
+                className="flex-1 px-6 py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium"
+                data-testid="button-confirm-exit"
+              >
+                Exit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -135,16 +135,19 @@ export default function VowelSectionsPage() {
             </div>
             
             <div className="space-y-3">
-              {selectedSection.id < sections.length && (
-                <Link href={`/script/lesson/vowels/${sections.find(s => s.id === selectedSection.id + 1)?.startLesson || 'sections'}`}>
-                  <button 
-                    onClick={() => setShowCompletedModal(false)}
-                    className="w-full py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold btn-bounce"
-                  >
-                    Continue to Next Section
-                  </button>
-                </Link>
-              )}
+              {(() => {
+                const nextIncompleteSection = sections.find(s => s.id > completedSections);
+                return nextIncompleteSection && (
+                  <Link href={`/script/lesson/vowels/${nextIncompleteSection.startLesson}`}>
+                    <button 
+                      onClick={() => setShowCompletedModal(false)}
+                      className="w-full py-3 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold btn-bounce"
+                    >
+                      Continue to Next Section
+                    </button>
+                  </Link>
+                );
+              })()}
               
               <button 
                 onClick={handleRedoSection}

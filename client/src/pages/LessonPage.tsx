@@ -51,6 +51,7 @@ const imageMap: Record<string, string> = {
   pointing: pointingImg,
   easy: easyImg,
   respect: respectImg,
+  love: respectImg,
   hope: hopeImg,
   sage: sageImg,
   money: moneyImg,

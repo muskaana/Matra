@@ -841,7 +841,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 1 : Matra",
     char1: "◌ा",
     char2: "",
-    subQuestion: "Which words use ◌ा? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ा?",
     type: "word",
     options: [
       { text: "Raam (राम)", correct: true },
@@ -909,7 +909,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Matra (Short i vs Long i)",
     char1: "◌ि",
     char2: "◌ी",
-    subQuestion: "Which words use ◌ी (long i)? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ी (long i)?",
     type: "word",
     options: [
       { text: "Chaabi (चाबी)", correct: true },
@@ -963,7 +963,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Matra (Short u vs Long u)",
     char1: "◌ु",
     char2: "◌ू",
-    subQuestion: "Which words use ◌ू (long u)? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ू (long u)?",
     type: "word",
     options: [
       { text: "Sui (सूई)", correct: true },
@@ -1017,7 +1017,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
-    subQuestion: "Which words use ◌ै? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ै?",
     type: "word",
     options: [
       { text: "Maila (मैला)", correct: true },
@@ -1071,7 +1071,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
-    subQuestion: "Which words use ◌ौ? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ौ?",
     type: "word",
     options: [
       { text: "Kauaa (कौआ)", correct: true },
@@ -1125,7 +1125,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
-    subQuestion: "Which words use ◌ं? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ं?",
     type: "word",
     options: [
       { text: "Sangeet (संगीत)", correct: true },
@@ -1178,7 +1178,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
-    subQuestion: "Which words use ◌ँ? (Multiple answers possible)",
+    subQuestion: "Which words use ◌ँ?",
     type: "word",
     options: [
       { text: "Andhera (अँधेरा)", correct: true },

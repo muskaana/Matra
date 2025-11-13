@@ -1502,19 +1502,20 @@ export default function QuizPage() {
     const questionNumber = quizLetter.charCodeAt(0) - 'a'.charCodeAt(0) + 1;
     
     if (isSimilar) {
-      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, '').replace('s', ''));
+      const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/s/g, ''));
       const sectionStructure = SIMILAR_SECTIONS[sectionNumber - 1];
+      console.log('Similar quiz progress calc:', { quizId, sectionNumber, hasStructure: !!sectionStructure });
       return calcProgress('quiz', sectionStructure, questionNumber);
     } else if (isMatra) {
-      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, '').replace('m', ''));
+      const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/m/g, ''));
       const sectionStructure = MATRA_SECTIONS[sectionNumber - 1];
       return calcProgress('quiz', sectionStructure, questionNumber);
     } else if (isConsonant) {
-      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, '').replace('c', ''));
+      const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/c/g, ''));
       const sectionStructure = CONSONANT_SECTIONS[sectionNumber - 1];
       return calcProgress('quiz', sectionStructure, questionNumber);
     } else {
-      const sectionNumber = parseInt(quizId.replace(/[a-f]/g, ''));
+      const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, ''));
       const sectionStructure = VOWEL_SECTIONS[sectionNumber - 1];
       return calcProgress('quiz', sectionStructure, questionNumber);
     }
@@ -1571,9 +1572,11 @@ export default function QuizPage() {
       
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
-        const sectionNumber = parseInt(quizId.replace(/[abcdefs]/g, '').replace(/[cms]/g, ''));
+        const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/[cms]/g, ''));
+        console.log('Quiz completion:', { quizId, storageKey, currentQuizzes, sectionNumber, willUpdate: sectionNumber > currentQuizzes });
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
+          console.log('Updated', storageKey, 'to', sectionNumber);
         }
         
         // Check if all sections are complete

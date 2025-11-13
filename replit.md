@@ -4,6 +4,26 @@ This is a Hindi language learning application called "Matra" that teaches users 
 
 The application follows a structured learning path starting with basic script characters (vowels and consonants), progressing through word formation, and advancing to sentences and reading comprehension. Users complete lessons, practice exercises, and quizzes with progress tracking and encouraging feedback.
 
+## Curriculum Structure
+
+The app currently includes four main chapters in the script learning section:
+1. **Vowels** (5 sections/12 lessons) - Basic vowel sounds and characters
+2. **Consonants** (16 sections/33 lessons) - Consonant characters and sounds
+3. **Matra/Vowel Symbols** (7 sections/13 lessons) - Vowel modifiers that attach to consonants
+4. **Similar Characters** (5 sections/11 lessons) - Confusing character pairs commonly mistaken by learners:
+   - Section 1: न vs ण (dental vs retroflex 'na')
+   - Section 2: ज्ञ vs ग (conjunct 'gya' vs simple 'ga')
+   - Section 3: ऋ vs री (vowel vs ra+matra combination)
+   - Section 4: स, श, ष (three variants of 's' sounds)
+   - Section 5: ं vs ँ (anusvara vs chandrabindu nasalization marks)
+
+## Recent Changes (November 13, 2025)
+
+- **Quiz Updates**: Changed all quiz questions to ask about sounds instead of displaying Devanagari characters (e.g., "Which word starts with a short 'a' sound?" instead of "Which word starts with अ?")
+- **Display Format**: Implemented discriminated quiz display - showing only Hindi script during active quizzes, but showing "Hindi (transliteration)" format in results
+- **New Chapter**: Added complete Similar Characters chapter with lessons, practice exercises, and quizzes to help learners distinguish between commonly confused Devanagari characters
+- **Navigation**: Replaced the locked "स,श,ष" placeholder with the new unlocked Similar Characters chapter across all hub pages
+
 # User Preferences
 
 Preferred communication style: Simple, everyday language.

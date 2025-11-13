@@ -1540,7 +1540,7 @@ export default function QuizPage() {
   };
 
   const handleConfirmExit = () => {
-    const exitPath = isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections");
+    const exitPath = isSimilar ? "/script/similar/sections" : (isMatra ? "/script/matra/sections" : (isConsonant ? "/script/consonants/sections" : "/script/vowels/sections"));
     setLocation(exitPath);
   };
 
@@ -1563,11 +1563,15 @@ export default function QuizPage() {
         storageKey = 'matraQuizzesCompleted';
         sectionsPath = '/script/matra/sections';
         totalSections = 7;
+      } else if (isSimilar) {
+        storageKey = 'similarQuizzesCompleted';
+        sectionsPath = '/script/similar/sections';
+        totalSections = 5;
       }
       
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
-        const sectionNumber = parseInt(quizId.replace(/[abcm]/, ''));
+        const sectionNumber = parseInt(quizId.replace(/[abcms]/, ''));
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
         }
@@ -1586,6 +1590,7 @@ export default function QuizPage() {
         let basePath = '/script/lesson/vowels/quiz/';
         if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
         if (isMatra) basePath = '/script/lesson/matra/quiz/';
+        if (isSimilar) basePath = '/script/lesson/similar/quiz/';
         setLocation(`${basePath}${quiz.nextLesson}`);
       }
     } else {

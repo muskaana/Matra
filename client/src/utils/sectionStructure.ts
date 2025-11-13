@@ -155,9 +155,15 @@ export function getSimilarSectionInfo(lessonId: string): { section: number; less
  */
 export function calculateProgress(
   type: 'lesson' | 'practice' | 'quiz',
-  sectionStructure: SectionStructure,
+  sectionStructure: SectionStructure | undefined,
   currentStep: number
 ): number {
+  // Fallback if sectionStructure is undefined
+  if (!sectionStructure) {
+    console.warn('calculateProgress called with undefined sectionStructure, returning 0');
+    return 0;
+  }
+  
   const { lessons, quizQuestions } = sectionStructure;
   const totalSteps = lessons + 1 + quizQuestions; // lessons + practice + quiz questions
   

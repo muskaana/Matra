@@ -975,7 +975,7 @@ const quizData: Record<string, any> = {
     nextLesson: "/script/matra/sections",
   },
   "m4a": {
-    title: "Quiz 4 : Matra",
+    title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
     subQuestion: "What is ◌े?",
@@ -988,7 +988,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m4b",
   },
   "m4b": {
-    title: "Quiz 4 : Matra",
+    title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
     subQuestion: "What is ◌ै?",
@@ -1001,7 +1001,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m4c",
   },
   "m4c": {
-    title: "Quiz 4 : Matra",
+    title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
     subQuestion: "Which syllable makes the sound 'ke'?",
@@ -1014,7 +1014,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m4d",
   },
   "m4d": {
-    title: "Quiz 4 : Matra",
+    title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
     subQuestion: "Which words use ◌ै? (Multiple answers possible)",
@@ -1029,7 +1029,7 @@ const quizData: Record<string, any> = {
     nextLesson: "/script/matra/sections",
   },
   "m5a": {
-    title: "Quiz 5 : Matra",
+    title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
     subQuestion: "What is ◌ो?",
@@ -1042,7 +1042,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m5b",
   },
   "m5b": {
-    title: "Quiz 5 : Matra",
+    title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
     subQuestion: "What is ◌ौ?",
@@ -1055,7 +1055,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m5c",
   },
   "m5c": {
-    title: "Quiz 5 : Matra",
+    title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
     subQuestion: "Which syllable makes the sound 'ko'?",
@@ -1068,7 +1068,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m5d",
   },
   "m5d": {
-    title: "Quiz 5 : Matra",
+    title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
     subQuestion: "Which words use ◌ौ? (Multiple answers possible)",
@@ -1083,7 +1083,7 @@ const quizData: Record<string, any> = {
     nextLesson: "/script/matra/sections",
   },
   "m6a": {
-    title: "Quiz 6 : Matra",
+    title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
     subQuestion: "What is ◌ृ?",
@@ -1096,7 +1096,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m6b",
   },
   "m6b": {
-    title: "Quiz 6 : Matra",
+    title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
     subQuestion: "What is ◌ं?",
@@ -1109,7 +1109,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m6c",
   },
   "m6c": {
-    title: "Quiz 6 : Matra",
+    title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
     subQuestion: "Which syllable makes the sound 'kri'?",
@@ -1122,7 +1122,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m6d",
   },
   "m6d": {
-    title: "Quiz 6 : Matra",
+    title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
     subQuestion: "Which words use ◌ं? (Multiple answers possible)",
@@ -1136,7 +1136,7 @@ const quizData: Record<string, any> = {
     nextLesson: "/script/matra/sections",
   },
   "m7a": {
-    title: "Quiz 7 : Matra (Nasal Marks)",
+    title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
     subQuestion: "What is ◌ः?",
@@ -1149,7 +1149,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m7b",
   },
   "m7b": {
-    title: "Quiz 7 : Matra (Nasal Marks)",
+    title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
     subQuestion: "What is ◌ँ?",
@@ -1162,7 +1162,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m7c",
   },
   "m7c": {
-    title: "Quiz 7 : Matra (Nasal Marks)",
+    title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
     subQuestion: "Which syllable makes the sound 'kah' (with visarga)?",
@@ -1175,7 +1175,7 @@ const quizData: Record<string, any> = {
     nextLesson: "m7d",
   },
   "m7d": {
-    title: "Quiz 7 : Matra (Nasal Marks)",
+    title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
     subQuestion: "Which words use ◌ँ? (Multiple answers possible)",

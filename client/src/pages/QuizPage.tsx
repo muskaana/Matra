@@ -1429,7 +1429,7 @@ export default function QuizPage() {
                 <button
                   key={index}
                   onClick={() => handleAnswer(index)}
-                  className="px-8 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-lg shadow-lg btn-bounce"
+                  className="px-4 py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-medium text-base shadow-lg btn-bounce whitespace-nowrap overflow-hidden text-ellipsis"
                   data-testid={`button-answer-${index}`}
                 >
                   {option.text}

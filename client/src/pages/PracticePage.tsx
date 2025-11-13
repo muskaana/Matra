@@ -6,6 +6,7 @@ import {
   VOWEL_SECTIONS, 
   CONSONANT_SECTIONS, 
   MATRA_SECTIONS,
+  SIMILAR_SECTIONS,
   calculateProgress as calcProgress
 } from '../utils/sectionStructure';
 
@@ -291,6 +292,57 @@ const practiceData: Record<string, any> = {
     nextLesson: "quiz/m7a",
     pageNumber: "Practice M7",
   },
+  "s1": {
+    title: "Practice: न vs ण",
+    question: "Match the sound to the letter",
+    pairs: [
+      { character: "न", sound: "na (dental)" },
+      { character: "ण", sound: "ṇa (retroflex)" },
+    ],
+    nextLesson: "quiz/s1a",
+    pageNumber: "Practice S1",
+  },
+  "s2": {
+    title: "Practice: ज्ञ vs ग",
+    question: "Match the sound to the letter",
+    pairs: [
+      { character: "ज्ञ", sound: "gya/jña" },
+      { character: "ग", sound: "ga" },
+    ],
+    nextLesson: "quiz/s2a",
+    pageNumber: "Practice S2",
+  },
+  "s3": {
+    title: "Practice: ऋ vs री",
+    question: "Match the sound to the letter",
+    pairs: [
+      { character: "ऋ", sound: "ṛi (vowel)" },
+      { character: "री", sound: "rī (ra + ◌ी)" },
+    ],
+    nextLesson: "quiz/s3a",
+    pageNumber: "Practice S3",
+  },
+  "s4": {
+    title: "Practice: स vs श vs ष",
+    question: "Match the sound to the letter",
+    pairs: [
+      { character: "स", sound: "sa (dental)" },
+      { character: "श", sound: "sha (palatal)" },
+      { character: "ष", sound: "ṣa (retroflex)" },
+    ],
+    nextLesson: "quiz/s4a",
+    pageNumber: "Practice S4",
+  },
+  "s5": {
+    title: "Practice: ं vs ँ",
+    question: "Match the sound to the letter",
+    pairs: [
+      { character: "ं", sound: "ṁ (anusvara)" },
+      { character: "ँ", sound: "̃ (chandrabindu)" },
+    ],
+    nextLesson: "quiz/s5a",
+    pageNumber: "Practice S5",
+  },
 };
 
 export default function PracticePage() {
@@ -302,6 +354,7 @@ export default function PracticePage() {
   
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
+  const isSimilar = location.includes('/similar/');
 
   if (!practice) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Practice not found</p></div>;
@@ -309,7 +362,11 @@ export default function PracticePage() {
 
   // Calculate progress - practice comes after all lessons in a section
   const progress = (() => {
-    if (isMatra) {
+    if (isSimilar) {
+      const sectionNumber = parseInt(practiceId.replace('s', ''));
+      const sectionStructure = SIMILAR_SECTIONS[sectionNumber - 1];
+      return calcProgress('practice', sectionStructure, 1);
+    } else if (isMatra) {
       const sectionNumber = parseInt(practiceId.replace('m', ''));
       const sectionStructure = MATRA_SECTIONS[sectionNumber - 1];
       return calcProgress('practice', sectionStructure, 1);

@@ -6,9 +6,11 @@ import {
   VOWEL_SECTIONS, 
   CONSONANT_SECTIONS, 
   MATRA_SECTIONS,
+  SIMILAR_SECTIONS,
   getVowelSectionInfo,
   getConsonantSectionInfo,
   getMatraSectionInfo,
+  getSimilarSectionInfo,
   calculateProgress as calcProgress
 } from '../utils/sectionStructure';
 
@@ -804,6 +806,138 @@ const lessonData: Record<string, any> = {
     nextLesson: "practice/m7",
     pageNumber: 13,
   },
+  "s1a": {
+    title: "Similar Characters : न vs ण",
+    character: "न",
+    transliteration: "na (dental)",
+    sound: '"na" (tongue on teeth)',
+    sampleWords: [
+      { word: "नदी", transliteration: "Nadee", meaning: "River", image: "dew" },
+      { word: "नया", transliteration: "Naya", meaning: "New", image: "different" },
+    ],
+    sentence: "नदी में पानी है (Nadee mein paani hai - There is water in the river)",
+    nextLesson: "s1b",
+  },
+  "s1b": {
+    title: "Similar Characters : न vs ण",
+    character: "ण",
+    transliteration: "ṇa (retroflex)",
+    sound: '"na" (tongue curled back)',
+    sampleWords: [
+      { word: "कण", transliteration: "Kaṇ", meaning: "Particle", image: "different" },
+      { word: "गुण", transliteration: "Guṇ", meaning: "Quality", image: "hope" },
+    ],
+    sentence: "यह एक गुण है (Yeh ek guṇ hai - This is a quality)",
+    nextLesson: "practice/s1",
+  },
+  "s2a": {
+    title: "Similar Characters : ज्ञ vs ग",
+    character: "ज्ञ",
+    transliteration: "gya/jña",
+    sound: '"gya" sound',
+    sampleWords: [
+      { word: "ज्ञान", transliteration: "Gyaan", meaning: "Knowledge", image: "sage" },
+      { word: "विज्ञान", transliteration: "Vigyaan", meaning: "Science", image: "hope" },
+    ],
+    sentence: "ज्ञान शक्ति है (Gyaan shakti hai - Knowledge is power)",
+    nextLesson: "s2b",
+  },
+  "s2b": {
+    title: "Similar Characters : ज्ञ vs ग",
+    character: "ग",
+    transliteration: "ga",
+    sound: '"ga" sound',
+    sampleWords: [
+      { word: "गमला", transliteration: "Gamlaa", meaning: "Flower pot", image: "pomegranate" },
+      { word: "गाना", transliteration: "Gaana", meaning: "Song", image: "hope" },
+    ],
+    sentence: "गमला में फूल हैं (Gamlaa mein phool hain - There are flowers in the pot)",
+    nextLesson: "practice/s2",
+  },
+  "s3a": {
+    title: "Similar Characters : ऋ vs री",
+    character: "ऋ",
+    transliteration: "ṛi",
+    sound: '"ree" (vowel)',
+    sampleWords: [
+      { word: "ऋषि", transliteration: "Ṛṣi", meaning: "Sage", image: "sage" },
+      { word: "ऋतु", transliteration: "Ṛtu", meaning: "Season", image: "hope" },
+    ],
+    sentence: "ऋषि बुद्धिमान था (Ṛṣi buddhiman tha - The sage was wise)",
+    nextLesson: "s3b",
+  },
+  "s3b": {
+    title: "Similar Characters : ऋ vs री",
+    character: "री (र + ◌ी)",
+    transliteration: "rī",
+    sound: '"ree" (ra + long i)',
+    sampleWords: [
+      { word: "रीत", transliteration: "Reet", meaning: "Tradition", image: "sage" },
+      { word: "रीति", transliteration: "Reeti", meaning: "Custom", image: "respect" },
+    ],
+    sentence: "यह पुरानी रीत है (Yeh puraani reet hai - This is an old tradition)",
+    nextLesson: "practice/s3",
+  },
+  "s4a": {
+    title: "Similar Characters : स, श, ष",
+    character: "स",
+    transliteration: "sa (dental)",
+    sound: '"sa" (tongue on teeth)',
+    sampleWords: [
+      { word: "सफर", transliteration: "Safar", meaning: "Travel", image: "upArrow" },
+      { word: "सच", transliteration: "Sach", meaning: "Truth", image: "respect" },
+    ],
+    sentence: "सफर लंबा था (Safar lamba tha - The journey was long)",
+    nextLesson: "s4b",
+  },
+  "s4b": {
+    title: "Similar Characters : स, श, ष",
+    character: "श",
+    transliteration: "sha (palatal)",
+    sound: '"sha" (softer)',
+    sampleWords: [
+      { word: "शक्ति", transliteration: "Shakti", meaning: "Power", image: "hope" },
+      { word: "शांति", transliteration: "Shaanti", meaning: "Peace", image: "respect" },
+    ],
+    sentence: "शांति सबसे महत्वपूर्ण है (Shaanti sabse mahatvapurn hai - Peace is most important)",
+    nextLesson: "s4c",
+  },
+  "s4c": {
+    title: "Similar Characters : स, श, ष",
+    character: "ष",
+    transliteration: "ṣa (retroflex)",
+    sound: '"sha" (tongue curled)',
+    sampleWords: [
+      { word: "षड्यंत्र", transliteration: "Ṣaḍyantra", meaning: "Conspiracy", image: "different" },
+      { word: "विष", transliteration: "Viṣ", meaning: "Poison", image: "moon" },
+    ],
+    sentence: "यह एक षड्यंत्र था (Yeh ek ṣaḍyantra tha - This was a conspiracy)",
+    nextLesson: "practice/s4",
+  },
+  "s5a": {
+    title: "Similar Characters : ं vs ँ",
+    character: "ं (कं)",
+    transliteration: "ṁ (anusvara)",
+    sound: '"nasal sound"',
+    sampleWords: [
+      { word: "संघ", transliteration: "Sangh", meaning: "Union", image: "helpingHands" },
+      { word: "हिंदी", transliteration: "Hindi", meaning: "Hindi", image: "respect" },
+    ],
+    sentence: "हिंदी एक भाषा है (Hindi ek bhaasha hai - Hindi is a language)",
+    nextLesson: "s5b",
+  },
+  "s5b": {
+    title: "Similar Characters : ं vs ँ",
+    character: "ँ (कँ)",
+    transliteration: "̃ (chandrabindu)",
+    sound: '"nasalized vowel"',
+    sampleWords: [
+      { word: "माँ", transliteration: "Maa", meaning: "Mother", image: "woman" },
+      { word: "चाँद", transliteration: "Chaand", meaning: "Moon", image: "moon" },
+    ],
+    sentence: "माँ घर पर है (Maa ghar par hai - Mother is at home)",
+    nextLesson: "practice/s5",
+  },
 };
 
 export default function LessonPage() {
@@ -815,6 +949,7 @@ export default function LessonPage() {
   
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
+  const isSimilar = location.includes('/similar/');
 
   if (!lesson) {
     return <div className="min-h-screen bg-white flex items-center justify-center"><p>Lesson not found</p></div>;
@@ -825,6 +960,7 @@ export default function LessonPage() {
       let basePath = '/script/lesson/vowels/';
       if (isConsonant) basePath = '/script/lesson/consonants/';
       if (isMatra) basePath = '/script/lesson/matra/';
+      if (isSimilar) basePath = '/script/lesson/similar/';
       setLocation(`${basePath}${lesson.nextLesson}`);
     }
   };
@@ -863,7 +999,11 @@ export default function LessonPage() {
 
   // Calculate progress based on lesson position using centralized structure
   const progress = (() => {
-    if (isMatra) {
+    if (isSimilar) {
+      const { section, lessonInSection } = getSimilarSectionInfo(lessonId);
+      const sectionStructure = SIMILAR_SECTIONS[section - 1];
+      return calcProgress('lesson', sectionStructure, lessonInSection);
+    } else if (isMatra) {
       const { section, lessonInSection } = getMatraSectionInfo(lessonId);
       const sectionStructure = MATRA_SECTIONS[section - 1];
       return calcProgress('lesson', sectionStructure, lessonInSection);

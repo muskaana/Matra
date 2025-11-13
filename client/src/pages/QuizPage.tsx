@@ -1571,7 +1571,7 @@ export default function QuizPage() {
       
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
-        const sectionNumber = parseInt(quizId.replace(/[abcms]/, ''));
+        const sectionNumber = parseInt(quizId.replace(/[abcdefs]/g, '').replace(/[cms]/g, ''));
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
         }

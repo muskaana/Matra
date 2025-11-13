@@ -2,45 +2,41 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Book, MessageSquare, FileText, XCircle, Lock } from "lucide-react";
 
-export default function VowelsPage() {
+export default function SimilarPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
   const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
   const [matraCompleted, setMatraCompleted] = useState<number>(0);
+  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
+  const totalSimilar = 5;
   
   useEffect(() => {
     const vowels = localStorage.getItem('vowelsQuizzesCompleted');
     const consonants = localStorage.getItem('consonantsQuizzesCompleted');
     const matra = localStorage.getItem('matraQuizzesCompleted');
+    const similar = localStorage.getItem('similarQuizzesCompleted');
     
     if (vowels) setVowelsCompleted(parseInt(vowels));
     if (consonants) setConsonantsCompleted(parseInt(consonants));
     if (matra) setMatraCompleted(parseInt(matra));
+    if (similar) setSimilarCompleted(parseInt(similar));
   }, []);
   
   const vowelsProgress = Math.round((vowelsCompleted / totalVowels) * 100);
   const consonantsProgress = Math.round((consonantsCompleted / totalConsonants) * 100);
   const matraProgress = Math.round((matraCompleted / totalMatra) * 100);
+  const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
   const isConsonantsComplete = consonantsCompleted >= totalConsonants;
   const isMatraComplete = matraCompleted >= totalMatra;
   const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete;
   
-  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
-  const totalSimilar = 5;
-  const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
-  
-  useEffect(() => {
-    const similar = localStorage.getItem('similarQuizzesCompleted');
-    if (similar) setSimilarCompleted(parseInt(similar));
-  }, []);
-
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: vowelsProgress, locked: false },
-    { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: !isVowelsComplete, lockReason: !isVowelsComplete ? "Complete Vowels" : "" },
+    { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: false },
     { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: !isConsonantsComplete, lockReason: !isConsonantsComplete ? "Complete Consonants" : "" },
     { id: 4, title: "Similar Characters", href: `/script/similar/sections`, icon: "स", progress: similarProgress, locked: false },
     { id: 5, title: "Numbers", icon: "१", locked: true, lockReason: "In development" },
@@ -61,7 +57,7 @@ export default function VowelsPage() {
             <div className="flex flex-col justify-around flex-1">
               {lessons.map((lesson) => {
                 const content = (
-                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${lesson.locked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`button-${lesson.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${lesson.locked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`button-${lesson.title.toLowerCase().replace(/\s+/g, '-').replace(/[\(\)]/g, '')}`}>
                     <div className="relative flex-shrink-0">
                       {lesson.progress !== undefined && !lesson.locked && (
                         <svg className="absolute -inset-[3px] w-[86px] h-[86px] -rotate-90">
@@ -132,22 +128,13 @@ export default function VowelsPage() {
           <Link href="/script">
             <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-script">
               <FileText className="w-6 h-6 mb-1" />
-              <span className="text-sm font-bold">Script</span>
+              <span className="text-sm font-medium">Script</span>
             </button>
           </Link>
-          {allCharactersComplete ? (
-            <Link href="/conversation">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-talk">
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Talk</span>
-              </button>
-            </Link>
-          ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-talk-locked" title="Complete all character lessons first">
-              <Lock className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Talk</span>
-            </button>
-          )}
+          <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-conversation-locked" title="Complete all character lessons first">
+            <Lock className="w-6 h-6 mb-1" />
+            <span className="text-sm font-medium">Speak</span>
+          </button>
         </div>
       </div>
     </div>

@@ -29,11 +29,20 @@ export default function MatraPage() {
   const isMatraComplete = matraCompleted >= totalMatra;
   const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete;
   
+  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
+  const totalSimilar = 5;
+  const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
+  
+  useEffect(() => {
+    const similar = localStorage.getItem('similarQuizzesCompleted');
+    if (similar) setSimilarCompleted(parseInt(similar));
+  }, []);
+
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: vowelsProgress, locked: false },
     { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: false },
     { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: false },
-    { id: 4, title: "स,श, ष", icon: "स", locked: true, lockReason: "In development" },
+    { id: 4, title: "Similar Characters", href: `/script/similar/sections`, icon: "स", progress: similarProgress, locked: false },
     { id: 5, title: "Numbers", icon: "१", locked: true, lockReason: "In development" },
   ];
 

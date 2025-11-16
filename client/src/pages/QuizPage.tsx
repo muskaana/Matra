@@ -854,7 +854,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 1 : Matra",
     char1: "◌ा",
     char2: "",
-    subQuestion: "Which words use the 'aa' sound?",
+    subQuestion: "Which words use the 'aa' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "राम", transliteration: "Raam", correct: true },
@@ -922,7 +922,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 2 : Matra (Short i vs Long i)",
     char1: "◌ि",
     char2: "◌ी",
-    subQuestion: "Which words use the long 'i' sound?",
+    subQuestion: "Which words use the long 'i' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "चाबी", transliteration: "Chaabi", correct: true },
@@ -976,7 +976,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 3 : Matra (Short u vs Long u)",
     char1: "◌ु",
     char2: "◌ू",
-    subQuestion: "Which words use the long 'u' sound?",
+    subQuestion: "Which words use the long 'u' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "सूई", transliteration: "Sui", correct: true },
@@ -1030,7 +1030,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
-    subQuestion: "Which words use the 'ai' sound?",
+    subQuestion: "Which words use the 'ai' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "मैला", transliteration: "Maila", correct: true },
@@ -1084,7 +1084,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 5 : Matra (o vs ao)",
     char1: "◌ो",
     char2: "◌ौ",
-    subQuestion: "Which words use the 'ao' sound?",
+    subQuestion: "Which words use the 'ao' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "कौआ", transliteration: "Kauaa", correct: true },
@@ -1138,7 +1138,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 6 : Matra (ri vs an)",
     char1: "◌ृ",
     char2: "◌ं",
-    subQuestion: "Which words use the nasal 'an' sound?",
+    subQuestion: "Which words use the nasal 'an' sound? (Select all)",
     type: "word",
     options: [
       { hindi: "संगीत", transliteration: "Sangeet", correct: true },
@@ -1191,7 +1191,7 @@ const quizData: Record<string, any> = {
     title: "Quiz 7 : Matra (h vs añ)",
     char1: "◌ः",
     char2: "◌ँ",
-    subQuestion: "Which words use the nasalized vowel?",
+    subQuestion: "Which words use the nasalized vowel? (Select all)",
     type: "word",
     options: [
       { hindi: "अँधेरा", transliteration: "Andhera", correct: true },
@@ -1718,11 +1718,6 @@ export default function QuizPage() {
           <div className="flex-1 flex flex-col justify-between">
             <div className="mb-8">
               <p className="text-xl text-black mb-4" data-testid="text-question">{quiz.subQuestion}</p>
-              {quiz.options.filter((opt: any) => opt.correct).length > 1 && (
-                <p className="text-sm text-gray-600 italic" data-testid="text-multiple-answers">
-                  (Multiple answers possible)
-                </p>
-              )}
             </div>
 
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>

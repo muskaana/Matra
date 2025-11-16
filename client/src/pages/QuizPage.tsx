@@ -1481,6 +1481,8 @@ export default function QuizPage() {
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
   const isSimilar = location.includes('/similar/');
+  
+  console.log('QuizPage location check:', { location, quizId, isConsonant, isMatra, isSimilar });
 
   // Reset state when quiz changes
   useEffect(() => {

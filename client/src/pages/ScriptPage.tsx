@@ -6,24 +6,29 @@ export default function ScriptPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
   const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
   const [matraCompleted, setMatraCompleted] = useState<number>(0);
+  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
+  const totalSimilar = 5;
   
   useEffect(() => {
     const vowels = localStorage.getItem('vowelsQuizzesCompleted');
     const consonants = localStorage.getItem('consonantsQuizzesCompleted');
     const matra = localStorage.getItem('matraQuizzesCompleted');
+    const similar = localStorage.getItem('similarQuizzesCompleted');
     
     if (vowels) setVowelsCompleted(parseInt(vowels));
     if (consonants) setConsonantsCompleted(parseInt(consonants));
     if (matra) setMatraCompleted(parseInt(matra));
+    if (similar) setSimilarCompleted(parseInt(similar));
   }, []);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
   const isConsonantsComplete = consonantsCompleted >= totalConsonants;
   const isMatraComplete = matraCompleted >= totalMatra;
-  const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete;
+  const isSimilarComplete = similarCompleted >= totalSimilar;
+  const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete && isSimilarComplete;
   
   const levels = [
     { id: 1, title: "The Characters", href: "/script/vowels", locked: false },

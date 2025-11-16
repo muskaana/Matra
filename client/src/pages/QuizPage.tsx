@@ -1550,6 +1550,7 @@ export default function QuizPage() {
   };
 
   const handleNext = () => {
+    console.log('handleNext called', { quizId, isCorrect, isSimilar, nextLesson: quiz.nextLesson });
     if (isCorrect) {
       // Mark quiz as completed only if answer is correct
       let storageKey = 'vowelsQuizzesCompleted';

@@ -36,8 +36,8 @@ export default function MatraSectionsPage() {
     { id: 3, name: "Section 3: u/oo", startLesson: "m4" },
     { id: 4, name: "Section 4: e/ai", startLesson: "m7" },
     { id: 5, name: "Section 5: o/ao", startLesson: "m9" },
-    { id: 6, name: "Section 6: ri/an", startLesson: "m6" },
-    { id: 7, name: "Section 7: Nasals", startLesson: "m12" },
+    { id: 6, name: "Section 6: ri/h", startLesson: "m6" },
+    { id: 7, name: "Section 7: Nasals", startLesson: "m11" },
   ];
 
   return (

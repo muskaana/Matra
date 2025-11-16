@@ -273,20 +273,20 @@ const practiceData: Record<string, any> = {
     pageNumber: "Practice M5",
   },
   "m6": {
-    title: "Practice: ◌ृ vs ◌ं",
+    title: "Practice: ◌ृ vs ◌ः",
     question: "Match the sound to the matra",
     pairs: [
       { character: "◌ृ (कृ)", sound: "ri" },
-      { character: "◌ं (कं)", sound: "an" },
+      { character: "◌ः (कः)", sound: "h" },
     ],
     nextLesson: "quiz/m6a",
     pageNumber: "Practice M6",
   },
   "m7": {
-    title: "Practice: ◌ः vs ◌ँ (nasal marks)",
+    title: "Practice: ◌ं vs ◌ँ (nasal marks)",
     question: "Match the sound to the matra",
     pairs: [
-      { character: "◌ः (कः)", sound: "h" },
+      { character: "◌ं (कं)", sound: "an" },
       { character: "◌ँ (कँ)", sound: "añ" },
     ],
     nextLesson: "quiz/m7a",

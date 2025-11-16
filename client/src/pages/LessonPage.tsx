@@ -713,7 +713,7 @@ const lessonData: Record<string, any> = {
       { word: "कृपा", transliteration: "Kripa", meaning: "Blessing", image: "faith" },
     ],
     sentence: "भगवान की कृपा है (Bhagwan ki kripa hai - It's God's blessing)",
-    nextLesson: "m11",
+    nextLesson: "m12",
     pageNumber: 6,
   },
   "m7": {
@@ -778,7 +778,7 @@ const lessonData: Record<string, any> = {
       { word: "अंगूर", transliteration: "Angoor", meaning: "Grapes", image: "pomegranate" },
     ],
     sentence: "संगीत अच्छा है (Sangeet accha hai - The music is good)",
-    nextLesson: "practice/m6",
+    nextLesson: "m13",
     pageNumber: 11,
   },
   "m12": {
@@ -790,7 +790,7 @@ const lessonData: Record<string, any> = {
       { word: "दुःख", transliteration: "Dukh", meaning: "Sorrow", image: "hope" },
     ],
     sentence: "दुःख और सुख जीवन का भाग हैं (Dukh aur sukh jeevan ka bhaag hain - Joy and sorrow are part of life)",
-    nextLesson: "m13",
+    nextLesson: "practice/m6",
     pageNumber: 12,
   },
   "m13": {

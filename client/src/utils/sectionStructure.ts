@@ -51,8 +51,8 @@ export const MATRA_SECTIONS: SectionStructure[] = [
   { lessons: 2, quizQuestions: 4 },  // Section 3: ◌ु, ◌ू (short/long u pair)
   { lessons: 2, quizQuestions: 4 },  // Section 4: ◌े, ◌ै (e-sound pair)
   { lessons: 2, quizQuestions: 4 },  // Section 5: ◌ो, ◌ौ (o-sound pair)
-  { lessons: 2, quizQuestions: 4 },  // Section 6: ◌ृ, ◌ं (remaining vowel + nasal)
-  { lessons: 2, quizQuestions: 4 },  // Section 7: ◌ः, ◌ँ (nasal marks)
+  { lessons: 2, quizQuestions: 4 },  // Section 6: ◌ृ, ◌ः (special matras)
+  { lessons: 2, quizQuestions: 4 },  // Section 7: ◌ं, ◌ँ (nasal marks: anusvara and chandrabindu)
 ];
 
 // Similar Characters sections: 5 sections total

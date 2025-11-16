@@ -1481,8 +1481,6 @@ export default function QuizPage() {
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
   const isSimilar = location.includes('/similar/');
-  
-  console.log('QuizPage location check:', { location, quizId, isConsonant, isMatra, isSimilar });
 
   // Reset state when quiz changes
   useEffect(() => {
@@ -1506,7 +1504,6 @@ export default function QuizPage() {
     if (isSimilar) {
       const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/s/g, ''));
       const sectionStructure = SIMILAR_SECTIONS[sectionNumber - 1];
-      console.log('Similar quiz progress calc:', { quizId, sectionNumber, hasStructure: !!sectionStructure });
       return calcProgress('quiz', sectionStructure, questionNumber);
     } else if (isMatra) {
       const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/m/g, ''));
@@ -1552,7 +1549,6 @@ export default function QuizPage() {
   };
 
   const handleNext = () => {
-    console.log('handleNext called', { quizId, isCorrect, isSimilar, nextLesson: quiz.nextLesson });
     if (isCorrect) {
       // Mark quiz as completed only if answer is correct
       let storageKey = 'vowelsQuizzesCompleted';
@@ -1576,10 +1572,8 @@ export default function QuizPage() {
       if (quiz.nextLesson === sectionsPath || quiz.nextLesson === sectionsPath.replace('/sections', '')) {
         const currentQuizzes = parseInt(localStorage.getItem(storageKey) || '0');
         const sectionNumber = parseInt(quizId.replace(/[abcdef]/g, '').replace(/[cms]/g, ''));
-        console.log('Quiz completion:', { quizId, storageKey, currentQuizzes, sectionNumber, willUpdate: sectionNumber > currentQuizzes });
         if (sectionNumber > currentQuizzes) {
           localStorage.setItem(storageKey, sectionNumber.toString());
-          console.log('Updated', storageKey, 'to', sectionNumber);
         }
         
         // Check if all sections are complete

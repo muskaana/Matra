@@ -17,8 +17,14 @@ The app currently includes four main chapters in the script learning section:
    - Section 4: स, श, ष (three variants of 's' sounds)
    - Section 5: ं vs ँ (anusvara vs chandrabindu nasalization marks)
 
-## Recent Changes (November 13, 2025)
+## Recent Changes
 
+### November 16, 2025
+- **Quiz Instructions**: Updated matra quiz questions to include "(Select all)" text directly in the question for multi-answer quizzes, removing the generic "Multiple answers possible" message
+- **Similar Characters Bug Fix**: Fixed navigation issue where Similar Characters quizzes were using the wrong URL path (vowels instead of similar), preventing section progress tracking
+- **Progress Tracking**: Added safety check to calculateProgress function to handle undefined section structures gracefully
+
+### November 13, 2025
 - **Quiz Updates**: Changed all quiz questions to ask about sounds instead of displaying Devanagari characters (e.g., "Which word starts with a short 'a' sound?" instead of "Which word starts with अ?")
 - **Display Format**: Implemented discriminated quiz display - showing only Hindi script during active quizzes, but showing "Hindi (transliteration)" format in results
 - **New Chapter**: Added complete Similar Characters chapter with lessons, practice exercises, and quizzes to help learners distinguish between commonly confused Devanagari characters

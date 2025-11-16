@@ -450,7 +450,7 @@ export default function PracticePage() {
             )}
 
             {completed && (
-              <Link href={`/script/lesson/${isMatra ? 'matra' : (isConsonant ? 'consonants' : 'vowels')}/${practice.nextLesson}`}>
+              <Link href={`/script/lesson/${isSimilar ? 'similar' : (isMatra ? 'matra' : (isConsonant ? 'consonants' : 'vowels'))}/${practice.nextLesson}`}>
                 <button className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors font-semibold text-lg shadow-lg btn-bounce">
                   Continue to Quiz
                 </button>

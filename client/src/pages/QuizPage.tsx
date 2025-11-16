@@ -1030,11 +1030,10 @@ const quizData: Record<string, any> = {
     title: "Quiz 4 : Matra (e vs ai)",
     char1: "◌े",
     char2: "◌ै",
-    subQuestion: "Which words use the 'ai' sound? (Select all)",
+    subQuestion: "Which word uses the 'ai' matra?",
     type: "word",
     options: [
       { hindi: "मैला", transliteration: "Maila", correct: true },
-      { hindi: "ऐनक", transliteration: "Ainak", correct: true },
       { hindi: "देव", transliteration: "Dev", correct: false },
       { hindi: "नेल", transliteration: "Nail", correct: false },
     ],

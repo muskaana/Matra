@@ -72,7 +72,7 @@ export default function QuizPage() {
 
   if (!quiz) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
         <p>Quiz not found</p>
       </div>
     );
@@ -179,7 +179,7 @@ export default function QuizPage() {
     const percentage = (score / 1) * 100;
 
     return (
-      <div className="h-screen bg-white flex flex-col">
+      <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
         <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
           <div className="flex items-center justify-between mb-2 flex-shrink-0">
             <div className="w-10"></div>
@@ -243,7 +243,7 @@ export default function QuizPage() {
 
   // Quiz question screen
   return (
-    <div className="h-screen bg-white flex flex-col">
+    <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="w-10"></div>

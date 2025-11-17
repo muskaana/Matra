@@ -50,7 +50,7 @@ export default function ConsonantSectionsPage() {
   ];
 
   return (
-    <div className="h-screen bg-gray-100 flex flex-col">
+    <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex-1 flex flex-col bg-white shadow-lg">
         <div className="sticky top-0 z-10 bg-white px-6 pt-6 pb-4 flex-shrink-0">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#FFD700] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">

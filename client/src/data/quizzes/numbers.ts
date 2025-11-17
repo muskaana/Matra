@@ -1,127 +1,166 @@
 import { QuizMap } from '../types';
 
 export const numberQuizzes: QuizMap = {
-  // Section 1 Quizzes (०-४)
+  // Section 1 Quizzes (०-२)
   "n1a": {
-    "title": "Quiz 1 : Numbers ०-④",
-    "char1": "०-४",
-    "char2": "0-4",
+    "title": "Quiz 1 : Numbers ०-②",
+    "char1": "०-२",
+    "char2": "0-2",
     "subQuestion": "Which Devanagari digit represents 'two' (दो)?",
     "type": "sound",
     "options": [
+      { "text": "०", "correct": false },
       { "text": "१", "correct": false },
-      { "text": "२", "correct": true },
-      { "text": "३", "correct": false },
-      { "text": "४", "correct": false }
+      { "text": "२", "correct": true }
     ],
     "nextLesson": "n1b",
     "pageNumber": "Quiz 1a"
   },
   "n1b": {
-    "title": "Quiz 1 : Numbers ०-④",
-    "char1": "०-४",
-    "char2": "0-4",
-    "subQuestion": "What is the Hindi word for ४?",
-    "type": "sound",
-    "options": [
-      { "text": "दो (Do)", "correct": false },
-      { "text": "तीन (Teen)", "correct": false },
-      { "text": "चार (Chaar)", "correct": true },
-      { "text": "शून्य (Shunya)", "correct": false }
-    ],
-    "nextLesson": "n1c",
-    "pageNumber": "Quiz 1b"
-  },
-  "n1c": {
-    "title": "Quiz 1 : Numbers ०-④",
-    "char1": "०-४",
-    "char2": "0-4",
+    "title": "Quiz 1 : Numbers ०-②",
+    "char1": "०-२",
+    "char2": "0-2",
     "subQuestion": "Which digit represents 'एक' (one)?",
     "type": "sound",
     "options": [
       { "text": "०", "correct": false },
       { "text": "१", "correct": true },
-      { "text": "२", "correct": false },
-      { "text": "३", "correct": false }
+      { "text": "२", "correct": false }
     ],
-    "nextLesson": "n1d",
-    "pageNumber": "Quiz 1c"
+    "nextLesson": "n1c",
+    "pageNumber": "Quiz 1b"
   },
-  "n1d": {
-    "title": "Quiz 1 : Numbers ०-④",
-    "char1": "०-४",
-    "char2": "0-4",
-    "subQuestion": "Which Devanagari digit represents 'three' (तीन)?",
+  "n1c": {
+    "title": "Quiz 1 : Numbers ०-②",
+    "char1": "०-२",
+    "char2": "0-2",
+    "subQuestion": "What is the Hindi word for ०?",
     "type": "sound",
     "options": [
-      { "text": "१", "correct": false },
-      { "text": "२", "correct": false },
-      { "text": "३", "correct": true },
-      { "text": "४", "correct": false }
+      { "text": "शून्य (Shunya)", "correct": true },
+      { "text": "एक (Ek)", "correct": false },
+      { "text": "दो (Do)", "correct": false }
     ],
     "nextLesson": "/script/numbers/sections",
-    "pageNumber": "Quiz 1d"
+    "pageNumber": "Quiz 1c"
   },
   
-  // Section 2 Quizzes (५-९)
+  // Section 2 Quizzes (३-५)
   "n2a": {
-    "title": "Quiz 2 : Numbers ⑤-⑨",
-    "char1": "५-९",
-    "char2": "5-9",
-    "subQuestion": "Which Devanagari digit represents 'six' (छह)?",
+    "title": "Quiz 2 : Numbers ③-⑤",
+    "char1": "३-५",
+    "char2": "3-5",
+    "subQuestion": "Which Devanagari digit represents 'four' (चार)?",
     "type": "sound",
     "options": [
-      { "text": "५", "correct": false },
-      { "text": "६", "correct": true },
-      { "text": "७", "correct": false },
-      { "text": "८", "correct": false }
+      { "text": "३", "correct": false },
+      { "text": "४", "correct": true },
+      { "text": "५", "correct": false }
     ],
     "nextLesson": "n2b",
     "pageNumber": "Quiz 2a"
   },
   "n2b": {
-    "title": "Quiz 2 : Numbers ⑤-⑨",
-    "char1": "५-९",
-    "char2": "5-9",
-    "subQuestion": "What is the Hindi word for ९?",
+    "title": "Quiz 2 : Numbers ③-⑤",
+    "char1": "३-५",
+    "char2": "3-5",
+    "subQuestion": "What is the Hindi word for ५?",
     "type": "sound",
     "options": [
-      { "text": "सात (Saat)", "correct": false },
-      { "text": "आठ (Aath)", "correct": false },
-      { "text": "नौ (Nau)", "correct": true },
-      { "text": "छह (Chhah)", "correct": false }
+      { "text": "तीन (Teen)", "correct": false },
+      { "text": "चार (Chaar)", "correct": false },
+      { "text": "पाँच (Paanch)", "correct": true }
     ],
     "nextLesson": "n2c",
     "pageNumber": "Quiz 2b"
   },
   "n2c": {
-    "title": "Quiz 2 : Numbers ⑤-⑨",
-    "char1": "५-९",
-    "char2": "5-9",
-    "subQuestion": "Which digit represents 'पाँच' (five)?",
+    "title": "Quiz 2 : Numbers ③-⑤",
+    "char1": "३-५",
+    "char2": "3-5",
+    "subQuestion": "Which digit represents 'तीन' (three)?",
     "type": "sound",
     "options": [
+      { "text": "३", "correct": true },
       { "text": "४", "correct": false },
-      { "text": "५", "correct": true },
-      { "text": "६", "correct": false },
-      { "text": "७", "correct": false }
+      { "text": "५", "correct": false }
     ],
-    "nextLesson": "n2d",
+    "nextLesson": "/script/numbers/sections",
     "pageNumber": "Quiz 2c"
   },
-  "n2d": {
-    "title": "Quiz 2 : Numbers ⑤-⑨",
-    "char1": "५-९",
-    "char2": "5-9",
-    "subQuestion": "Which Devanagari digit represents 'eight' (आठ)?",
+
+  // Section 3 Quizzes (६-८)
+  "n3a": {
+    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "char1": "६-८",
+    "char2": "6-8",
+    "subQuestion": "Which Devanagari digit represents 'seven' (सात)?",
+    "type": "sound",
+    "options": [
+      { "text": "६", "correct": false },
+      { "text": "७", "correct": true },
+      { "text": "८", "correct": false }
+    ],
+    "nextLesson": "n3b",
+    "pageNumber": "Quiz 3a"
+  },
+  "n3b": {
+    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "char1": "६-८",
+    "char2": "6-8",
+    "subQuestion": "What is the Hindi word for ६?",
+    "type": "sound",
+    "options": [
+      { "text": "छह (Chhah)", "correct": true },
+      { "text": "सात (Saat)", "correct": false },
+      { "text": "आठ (Aath)", "correct": false }
+    ],
+    "nextLesson": "n3c",
+    "pageNumber": "Quiz 3b"
+  },
+  "n3c": {
+    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "char1": "६-८",
+    "char2": "6-8",
+    "subQuestion": "Which digit represents 'आठ' (eight)?",
     "type": "sound",
     "options": [
       { "text": "६", "correct": false },
       { "text": "७", "correct": false },
-      { "text": "८", "correct": true },
-      { "text": "९", "correct": false }
+      { "text": "८", "correct": true }
     ],
     "nextLesson": "/script/numbers/sections",
-    "pageNumber": "Quiz 2d"
+    "pageNumber": "Quiz 3c"
+  },
+
+  // Section 4 Quizzes (९)
+  "n4a": {
+    "title": "Quiz 4 : Number ⑨",
+    "char1": "९",
+    "char2": "9",
+    "subQuestion": "Which Devanagari digit represents 'nine' (नौ)?",
+    "type": "sound",
+    "options": [
+      { "text": "६", "correct": false },
+      { "text": "७", "correct": false },
+      { "text": "८", "correct": false },
+      { "text": "९", "correct": true }
+    ],
+    "nextLesson": "n4b",
+    "pageNumber": "Quiz 4a"
+  },
+  "n4b": {
+    "title": "Quiz 4 : Number ⑨",
+    "char1": "९",
+    "char2": "9",
+    "subQuestion": "What is the Hindi word for ९?",
+    "type": "sound",
+    "options": [
+      { "text": "सात (Saat)", "correct": false },
+      { "text": "आठ (Aath)", "correct": false },
+      { "text": "नौ (Nau)", "correct": true }
+    ],
+    "nextLesson": "/script/numbers/sections",
+    "pageNumber": "Quiz 4b"
   }
 };

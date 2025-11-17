@@ -49,7 +49,7 @@ export const numberLessons: LessonMap = {
       }
     ],
     "sentence": "मुझे दो रोटी चाहिए (Mujhe do roti chahiye - I want two rotis)",
-    "nextLesson": "n3",
+    "nextLesson": "practice/n1",
     "pageNumber": 3
   },
   "n3": {
@@ -83,7 +83,7 @@ export const numberLessons: LessonMap = {
       }
     ],
     "sentence": "चलो चार बजे चाय पीते हैं (Chalo chaar baje chaay peete hain - Let's have tea at four o'clock)",
-    "nextLesson": "practice/n1",
+    "nextLesson": "n5",
     "pageNumber": 5
   },
   "n5": {
@@ -100,7 +100,7 @@ export const numberLessons: LessonMap = {
       }
     ],
     "sentence": "बस पाँच मिनट रुको (Bas paanch minute ruko - Just wait five minutes)",
-    "nextLesson": "n6",
+    "nextLesson": "practice/n2",
     "pageNumber": 6
   },
   "n6": {
@@ -151,7 +151,7 @@ export const numberLessons: LessonMap = {
       }
     ],
     "sentence": "हम आठ बजे खाना खाते हैं (Hum aath baje khaana khaate hain - We eat dinner at eight)",
-    "nextLesson": "n9",
+    "nextLesson": "practice/n3",
     "pageNumber": 9
   },
   "n9": {
@@ -168,7 +168,7 @@ export const numberLessons: LessonMap = {
       }
     ],
     "sentence": "मैं नौ बजे सोता हूँ (Main nau baje sota hoon - I sleep at nine)",
-    "nextLesson": "practice/n2",
+    "nextLesson": "practice/n4",
     "pageNumber": 10
   }
 };

@@ -372,15 +372,17 @@ export default function QuizPage() {
                     key={index}
                     onClick={() => handleAnswer(index)}
                     disabled={showFeedback && !isMultiSelect}
-                    className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce whitespace-nowrap overflow-hidden text-ellipsis ${buttonClass} ${
+                    className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce ${buttonClass} ${
                       showFeedback && !isMultiSelect ? 'cursor-default' : ''
                     }`}
                     data-testid={`button-answer-${index}`}
                   >
-                    <div className="flex items-center justify-center gap-2">
-                      {formatOptionLabel(quiz.type, option, 'quiz')}
-                      {showFeedback && !isMultiSelect && isSelected && isCorrectOption && <CheckCircle2 className="w-5 h-5" />}
-                      {showFeedback && !isMultiSelect && isSelected && !isCorrectOption && <XCircle className="w-5 h-5" />}
+                    <div className="flex flex-col items-center justify-center gap-1">
+                      <div className="flex items-center gap-2">
+                        {formatOptionLabel(quiz.type, option, showFeedback && !isMultiSelect ? 'results' : 'quiz')}
+                        {showFeedback && !isMultiSelect && isSelected && isCorrectOption && <CheckCircle2 className="w-5 h-5 flex-shrink-0" />}
+                        {showFeedback && !isMultiSelect && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 flex-shrink-0" />}
+                      </div>
                     </div>
                   </button>
                 );

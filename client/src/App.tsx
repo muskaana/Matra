@@ -36,6 +36,7 @@ import ReadingContentPage from "@/pages/ReadingContentPage";
 import ReadingQuizPage from "@/pages/ReadingQuizPage";
 import PlacementQuizPage from "@/pages/PlacementQuizPage";
 import DashboardPage from "@/pages/DashboardPage";
+import ReadingInstructionsPage from "@/pages/ReadingInstructionsPage";
 
 function LessonPersistence({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
@@ -97,6 +98,7 @@ function Router() {
         <Route path="/script/lesson/numbers/practice/:id" component={PracticePage} />
         <Route path="/script/lesson/numbers/quiz/:id" component={QuizPage} />
         <Route path="/review" component={ReviewPage} />
+        <Route path="/words/beginner/intro" component={ReadingInstructionsPage} />
         <Route path="/words/beginner" component={BeginnerWordsPage} />
         <Route path="/words/beginner/:packId/flashcards" component={FlashcardPage} />
         <Route path="/words/beginner/:packId/quiz" component={WordQuizPage} />

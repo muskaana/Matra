@@ -7,7 +7,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowLeft, Lock, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Lock, CheckCircle2, BookOpen } from "lucide-react";
 import { beginnerWordPacks } from '../data/words/beginner';
 
 export default function BeginnerWordsPage() {
@@ -45,9 +45,24 @@ export default function BeginnerWordsPage() {
         </div>
 
         {/* Description */}
-        <p className="text-gray-600 mb-6 text-center">
+        <p className="text-gray-600 mb-4 text-center">
           Learn simple, everyday words using flashcards
         </p>
+
+        {/* Reading Instructions Link */}
+        <Link href="/words/beginner/intro">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 mb-6 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all" data-testid="card-reading-intro">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 rounded-full p-3">
+                <BookOpen className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-bold text-lg">How to Read Hindi Words</h3>
+                <p className="text-white/90 text-sm">Quick lesson on reading words</p>
+              </div>
+            </div>
+          </div>
+        </Link>
 
         {/* Word Packs */}
         <div className="flex-1 space-y-4">

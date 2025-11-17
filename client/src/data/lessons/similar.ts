@@ -42,7 +42,7 @@ export const similarLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "यह एक गुण है (Yeh ek guṇ hai - This is a quality)",
+    "sentence": "यह अच्छी बात है (Yeh acchi baat hai - This is a good thing)",
     "nextLesson": "practice/s1"
   },
   "s2a": {
@@ -64,7 +64,7 @@ export const similarLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "मुझे इसका ज्ञान नहीं (Mujhe iska gyaan nahin - I don't know about this)",
+    "sentence": "मुझे इसके बारे में पता नहीं (Mujhe iske baare mein pata nahin - I don't know about this)",
     "nextLesson": "s2b"
   },
   "s2b": {
@@ -108,7 +108,7 @@ export const similarLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "ऋतु बदल गई (Ṛtu badal gayi - The season has changed)",
+    "sentence": "मौसम बदल गया (Mausam badal gaya - The weather has changed)",
     "nextLesson": "s3b"
   },
   "s3b": {
@@ -130,7 +130,7 @@ export const similarLessons: LessonMap = {
         "image": "respect"
       }
     ],
-    "sentence": "यह रीढ़ की हड्डी है (Yeh reedh ki haddi hai - This is the spine)",
+    "sentence": "वह फिर से आएगी (Vah phir se aayegi - She will come again)",
     "nextLesson": "practice/s3"
   },
   "s4a": {
@@ -196,7 +196,7 @@ export const similarLessons: LessonMap = {
         "image": "moon"
       }
     ],
-    "sentence": "षोडश का मतलब सोलह (Ṣoḍash ka matalab solah - Shodash means sixteen)",
+    "sentence": "कुछ खास नहीं है (Kuch khaas nahin hai - Nothing special)",
     "nextLesson": "practice/s4"
   },
   "s5a": {

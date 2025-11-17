@@ -164,7 +164,7 @@ export const vowelLessons: LessonMap = {
         "image": "money"
       }
     ],
-    "sentence": "ऋतु बदल रही है (Ritu badal rahi hai - The season is changing)",
+    "sentence": "मौसम बदल रहा है (Mausam badal raha hai - The weather is changing)",
     "nextLesson": "8",
     "pageNumber": 7
   },

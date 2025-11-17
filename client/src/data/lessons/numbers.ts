@@ -14,7 +14,7 @@ export const numberLessons: LessonMap = {
         "image": "clock"
       }
     ],
-    "sentence": "मेरे पास शून्य पैसे हैं (Mere paas shunya paise hain - I have zero money)",
+    "sentence": "मेरे पास पैसे नहीं हैं (Mere paas paise nahin hain - I have no money)",
     "nextLesson": "n1",
     "pageNumber": 1
   },

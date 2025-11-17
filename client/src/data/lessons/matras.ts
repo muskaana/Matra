@@ -129,7 +129,7 @@ export const matraLessons: LessonMap = {
         "image": "faith"
       }
     ],
-    "sentence": "कृपया बैठो (Kripya baitho - Please sit)",
+    "sentence": "यहाँ बैठ जाओ (Yahan baith jao - Sit here)",
     "nextLesson": "m12",
     "pageNumber": 6
   },

@@ -54,6 +54,9 @@ export default function SentenceQuizPage() {
     if (isLastQuestion) {
       setShowResults(true);
       
+      // Award XP for quiz completion (always, on every completion)
+      awardQuizXP();
+      
       // Save completion
       const completed = localStorage.getItem('sentencesCompleted');
       const completedSections = completed ? JSON.parse(completed) : [];
@@ -63,10 +66,7 @@ export default function SentenceQuizPage() {
         completedSections.push(sectionId);
         localStorage.setItem('sentencesCompleted', JSON.stringify(completedSections));
         
-        // Award XP for quiz completion
-        awardQuizXP();
-        
-        // Check if all sentence sections complete for unit bonus
+        // Check if all sentence sections complete for unit bonus (one-time only)
         if (completedSections.length === sentenceSections.length) {
           awardUnitXP();
         }

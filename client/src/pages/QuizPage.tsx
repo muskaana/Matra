@@ -173,7 +173,8 @@ export default function QuizPage() {
       // Navigate to next question or results after showing feedback
       setTimeout(() => {
         if (quiz.nextLesson.includes('/')) {
-          // End of quiz - go to sections page
+          // End of quiz section - award XP and show results
+          awardQuizXP();
           setShowResults(true);
         } else {
           // Next question - reset feedback state
@@ -214,6 +215,8 @@ export default function QuizPage() {
       });
     }
 
+    // Award XP for quiz completion (always, on every completion)
+    awardQuizXP();
     setShowResults(true);
   };
 
@@ -246,43 +249,32 @@ export default function QuizPage() {
       // Only save progress if score is 60% or higher
       if (percentage >= 60) {
         const sectionNumber = parseInt(quizSectionId);
-        let isNewCompletion = false;
         
         if (isNumbers) {
           const current = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('numbersQuizzesCompleted', sectionNumber.toString());
-            isNewCompletion = true;
           }
         } else if (isSimilar) {
           const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
-            isNewCompletion = true;
           }
         } else if (isMatra) {
           const current = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('matraQuizzesCompleted', sectionNumber.toString());
-            isNewCompletion = true;
           }
         } else if (isConsonant) {
           const current = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('consonantsQuizzesCompleted', sectionNumber.toString());
-            isNewCompletion = true;
           }
         } else {
           const current = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
-            isNewCompletion = true;
           }
-        }
-        
-        // Award XP for quiz completion (first time only)
-        if (isNewCompletion) {
-          awardQuizXP();
         }
         
         setLocation(quiz.nextLesson);

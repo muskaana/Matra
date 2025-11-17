@@ -55,6 +55,9 @@ export default function WordQuizPage() {
     if (isLastQuestion) {
       setShowResults(true);
       
+      // Award XP for quiz completion (always, on every completion)
+      awardQuizXP();
+      
       // Save completion
       const completed = localStorage.getItem('beginnerWordsCompleted');
       const completedPacks = completed ? JSON.parse(completed) : [];
@@ -64,10 +67,7 @@ export default function WordQuizPage() {
         completedPacks.push(packId);
         localStorage.setItem('beginnerWordsCompleted', JSON.stringify(completedPacks));
         
-        // Award XP for quiz completion
-        awardQuizXP();
-        
-        // Check if all beginner packs complete for unit bonus
+        // Check if all beginner packs complete for unit bonus (one-time only)
         if (completedPacks.length === beginnerWordPacks.length) {
           awardUnitXP();
         }

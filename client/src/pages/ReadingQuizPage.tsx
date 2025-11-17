@@ -55,6 +55,9 @@ export default function ReadingQuizPage() {
     if (isLastQuestion) {
       setShowResults(true);
       
+      // Award XP for quiz completion (always, on every completion)
+      awardQuizXP();
+      
       // Save completion
       const completed = localStorage.getItem('readingCompleted');
       const completedItems = completed ? JSON.parse(completed) : [];
@@ -63,9 +66,6 @@ export default function ReadingQuizPage() {
       if (isNewCompletion) {
         completedItems.push(contentId);
         localStorage.setItem('readingCompleted', JSON.stringify(completedItems));
-        
-        // Award XP for quiz completion
-        awardQuizXP();
       }
 
       // Confetti for any completion

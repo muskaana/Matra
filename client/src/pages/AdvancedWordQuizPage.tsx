@@ -55,6 +55,9 @@ export default function AdvancedWordQuizPage() {
     if (isLastQuestion) {
       setShowResults(true);
       
+      // Award XP for quiz completion (always, on every completion)
+      awardQuizXP();
+      
       // Save completion
       const completed = localStorage.getItem('advancedWordsCompleted');
       const completedPacks = completed ? JSON.parse(completed) : [];
@@ -64,10 +67,7 @@ export default function AdvancedWordQuizPage() {
         completedPacks.push(packId);
         localStorage.setItem('advancedWordsCompleted', JSON.stringify(completedPacks));
         
-        // Award XP for quiz completion
-        awardQuizXP();
-        
-        // Check if all advanced packs complete for unit bonus
+        // Check if all advanced packs complete for unit bonus (one-time only)
         if (completedPacks.length === advancedWordPacks.length) {
           awardUnitXP();
         }

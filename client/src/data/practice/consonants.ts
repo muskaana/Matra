@@ -1,0 +1,264 @@
+import { PracticeMap } from '../types';
+
+export const consonantPractice: PracticeMap = {
+  "c1": {
+    "title": "Practice: क vs ख",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "क",
+        "sound": "ka"
+      },
+      {
+        "character": "ख",
+        "sound": "kha"
+      }
+    ],
+    "nextLesson": "quiz/c1a",
+    "pageNumber": "Practice C1"
+  },
+  "c2": {
+    "title": "Practice: ग vs घ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ग",
+        "sound": "ga"
+      },
+      {
+        "character": "घ",
+        "sound": "gha"
+      }
+    ],
+    "nextLesson": "quiz/c2a",
+    "pageNumber": "Practice C2"
+  },
+  "c3": {
+    "title": "Practice: च vs छ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "च",
+        "sound": "cha"
+      },
+      {
+        "character": "छ",
+        "sound": "chha"
+      }
+    ],
+    "nextLesson": "quiz/c3a",
+    "pageNumber": "Practice C3"
+  },
+  "c4": {
+    "title": "Practice: ज vs झ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ज",
+        "sound": "ja"
+      },
+      {
+        "character": "झ",
+        "sound": "jha"
+      }
+    ],
+    "nextLesson": "quiz/c4a",
+    "pageNumber": "Practice C4"
+  },
+  "c5": {
+    "title": "Practice: ट vs ठ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ट",
+        "sound": "ṭa"
+      },
+      {
+        "character": "ठ",
+        "sound": "ṭha"
+      }
+    ],
+    "nextLesson": "quiz/c5a",
+    "pageNumber": "Practice C5"
+  },
+  "c6": {
+    "title": "Practice: ड vs ढ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ड",
+        "sound": "ḍa"
+      },
+      {
+        "character": "ढ",
+        "sound": "ḍha"
+      }
+    ],
+    "nextLesson": "quiz/c6a",
+    "pageNumber": "Practice C6"
+  },
+  "c7": {
+    "title": "Practice: त vs थ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "त",
+        "sound": "ta"
+      },
+      {
+        "character": "थ",
+        "sound": "tha"
+      }
+    ],
+    "nextLesson": "quiz/c7a",
+    "pageNumber": "Practice C7"
+  },
+  "c8": {
+    "title": "Practice: द vs ध",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "द",
+        "sound": "da"
+      },
+      {
+        "character": "ध",
+        "sound": "dha"
+      }
+    ],
+    "nextLesson": "quiz/c8a",
+    "pageNumber": "Practice C8"
+  },
+  "c9": {
+    "title": "Practice: प vs फ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "प",
+        "sound": "pa"
+      },
+      {
+        "character": "फ",
+        "sound": "pha"
+      }
+    ],
+    "nextLesson": "quiz/c9a",
+    "pageNumber": "Practice C9"
+  },
+  "c10": {
+    "title": "Practice: ब vs भ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ब",
+        "sound": "ba"
+      },
+      {
+        "character": "भ",
+        "sound": "bha"
+      }
+    ],
+    "nextLesson": "quiz/c10a",
+    "pageNumber": "Practice C10"
+  },
+  "c11": {
+    "title": "Practice: न vs म",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "न",
+        "sound": "na"
+      },
+      {
+        "character": "म",
+        "sound": "ma"
+      }
+    ],
+    "nextLesson": "quiz/c11a",
+    "pageNumber": "Practice C11"
+  },
+  "c12": {
+    "title": "Practice: य vs र",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "य",
+        "sound": "ya"
+      },
+      {
+        "character": "र",
+        "sound": "ra"
+      }
+    ],
+    "nextLesson": "quiz/c12a",
+    "pageNumber": "Practice C12"
+  },
+  "c13": {
+    "title": "Practice: ल vs व",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "ल",
+        "sound": "la"
+      },
+      {
+        "character": "व",
+        "sound": "va"
+      }
+    ],
+    "nextLesson": "quiz/c13a",
+    "pageNumber": "Practice C13"
+  },
+  "c14": {
+    "title": "Practice: श vs ष",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "श",
+        "sound": "sha"
+      },
+      {
+        "character": "ष",
+        "sound": "ṣa"
+      }
+    ],
+    "nextLesson": "quiz/c14a",
+    "pageNumber": "Practice C14"
+  },
+  "c15": {
+    "title": "Practice: स vs ह",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "स",
+        "sound": "sa"
+      },
+      {
+        "character": "ह",
+        "sound": "ha"
+      }
+    ],
+    "nextLesson": "quiz/c15a",
+    "pageNumber": "Practice C15"
+  },
+  "c16": {
+    "title": "Practice: क्ष त्र ज्ञ",
+    "question": "Match the sound to the letter",
+    "pairs": [
+      {
+        "character": "क्ष",
+        "sound": "kṣa"
+      },
+      {
+        "character": "त्र",
+        "sound": "tra"
+      },
+      {
+        "character": "ज्ञ",
+        "sound": "gya"
+      }
+    ],
+    "nextLesson": "quiz/c16a",
+    "pageNumber": "Practice C16"
+  }
+};

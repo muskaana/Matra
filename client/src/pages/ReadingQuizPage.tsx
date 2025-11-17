@@ -12,6 +12,7 @@ import confetti from "canvas-confetti";
 import { readingContent } from '../data/reading/content';
 import { readingQuizzes } from '../data/reading/quizzes';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import { awardQuizXP } from '../lib/progress';
 
 export default function ReadingQuizPage() {
   const params = useParams();
@@ -57,9 +58,14 @@ export default function ReadingQuizPage() {
       // Save completion
       const completed = localStorage.getItem('readingCompleted');
       const completedItems = completed ? JSON.parse(completed) : [];
-      if (!completedItems.includes(contentId)) {
+      const isNewCompletion = !completedItems.includes(contentId);
+      
+      if (isNewCompletion) {
         completedItems.push(contentId);
         localStorage.setItem('readingCompleted', JSON.stringify(completedItems));
+        
+        // Award XP for quiz completion
+        awardQuizXP();
       }
 
       // Confetti for any completion

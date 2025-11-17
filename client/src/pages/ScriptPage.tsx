@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, Lock, Brain, CheckCircle2 } from "lucide-react";
+import { Book, MessageSquare, FileText, Lock, Brain, CheckCircle2, Flame, Star } from "lucide-react";
 import { getItemsDueForReview } from '../utils/smartReview';
+import { getProgress } from '../lib/progress';
 
 export default function ScriptPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -12,6 +13,8 @@ export default function ScriptPage() {
   const [beginnerWordsCompleted, setBeginnerWordsCompleted] = useState<number>(0);
   const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
   const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
+  const [totalXP, setTotalXP] = useState<number>(0);
+  const [currentStreak, setCurrentStreak] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
@@ -49,6 +52,11 @@ export default function ScriptPage() {
     // Load review count
     const dueItems = getItemsDueForReview();
     setReviewCount(dueItems.length);
+    
+    // Load XP and streak
+    const progress = getProgress();
+    setTotalXP(progress.totalXP);
+    setCurrentStreak(progress.currentStreak);
   }, []);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
@@ -73,6 +81,24 @@ export default function ScriptPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
+        {/* XP and Streak Bar */}
+        <div className="flex gap-3 mb-4">
+          <div className="flex-1 bg-white rounded-xl px-4 py-3 shadow-md border border-gray-200 flex items-center gap-2">
+            <Star className="w-5 h-5 text-[#ff9930]" />
+            <div className="flex-1">
+              <p className="text-xs text-gray-500">Total XP</p>
+              <p className="text-lg font-bold text-black">{totalXP}</p>
+            </div>
+          </div>
+          <div className="flex-1 bg-white rounded-xl px-4 py-3 shadow-md border border-gray-200 flex items-center gap-2">
+            <Flame className="w-5 h-5 text-orange-500" />
+            <div className="flex-1">
+              <p className="text-xs text-gray-500">Streak</p>
+              <p className="text-lg font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
+            </div>
+          </div>
+        </div>
+        
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg shadow-lg">
             Hindi (Devanagari) Script

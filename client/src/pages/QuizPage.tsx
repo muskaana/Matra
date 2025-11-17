@@ -27,6 +27,7 @@ import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08b
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
+import { awardQuizXP } from '../lib/progress';
 
 // Encouraging messages shown on results screen
 const encouragingMessages = [
@@ -245,32 +246,43 @@ export default function QuizPage() {
       // Only save progress if score is 60% or higher
       if (percentage >= 60) {
         const sectionNumber = parseInt(quizSectionId);
+        let isNewCompletion = false;
         
         if (isNumbers) {
           const current = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('numbersQuizzesCompleted', sectionNumber.toString());
+            isNewCompletion = true;
           }
         } else if (isSimilar) {
           const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
+            isNewCompletion = true;
           }
         } else if (isMatra) {
           const current = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('matraQuizzesCompleted', sectionNumber.toString());
+            isNewCompletion = true;
           }
         } else if (isConsonant) {
           const current = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('consonantsQuizzesCompleted', sectionNumber.toString());
+            isNewCompletion = true;
           }
         } else {
           const current = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+            isNewCompletion = true;
           }
+        }
+        
+        // Award XP for quiz completion (first time only)
+        if (isNewCompletion) {
+          awardQuizXP();
         }
         
         setLocation(quiz.nextLesson);

@@ -12,6 +12,7 @@ import confetti from "canvas-confetti";
 import { advancedWordPacks } from '../data/words/advanced';
 import { advancedWordQuizzes } from '../data/words/advancedQuizzes';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function AdvancedWordQuizPage() {
   const params = useParams();
@@ -57,9 +58,19 @@ export default function AdvancedWordQuizPage() {
       // Save completion
       const completed = localStorage.getItem('advancedWordsCompleted');
       const completedPacks = completed ? JSON.parse(completed) : [];
-      if (!completedPacks.includes(packId)) {
+      const isNewCompletion = !completedPacks.includes(packId);
+      
+      if (isNewCompletion) {
         completedPacks.push(packId);
         localStorage.setItem('advancedWordsCompleted', JSON.stringify(completedPacks));
+        
+        // Award XP for quiz completion
+        awardQuizXP();
+        
+        // Check if all advanced packs complete for unit bonus
+        if (completedPacks.length === advancedWordPacks.length) {
+          awardUnitXP();
+        }
       }
 
       // Confetti for good score

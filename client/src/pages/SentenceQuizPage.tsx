@@ -11,6 +11,7 @@ import confetti from "canvas-confetti";
 import { sentenceSections } from '../data/sentences/beginner';
 import { sentenceQuizzes } from '../data/sentences/quizzes';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function SentenceQuizPage() {
   const params = useParams();
@@ -56,9 +57,19 @@ export default function SentenceQuizPage() {
       // Save completion
       const completed = localStorage.getItem('sentencesCompleted');
       const completedSections = completed ? JSON.parse(completed) : [];
-      if (!completedSections.includes(sectionId)) {
+      const isNewCompletion = !completedSections.includes(sectionId);
+      
+      if (isNewCompletion) {
         completedSections.push(sectionId);
         localStorage.setItem('sentencesCompleted', JSON.stringify(completedSections));
+        
+        // Award XP for quiz completion
+        awardQuizXP();
+        
+        // Check if all sentence sections complete for unit bonus
+        if (completedSections.length === sentenceSections.length) {
+          awardUnitXP();
+        }
       }
 
       // Confetti for good score

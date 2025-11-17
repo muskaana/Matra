@@ -12,6 +12,7 @@ import confetti from "canvas-confetti";
 import { beginnerWordPacks } from '../data/words/beginner';
 import { beginnerWordQuizzes } from '../data/words/quizzes';
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function WordQuizPage() {
   const params = useParams();
@@ -57,9 +58,19 @@ export default function WordQuizPage() {
       // Save completion
       const completed = localStorage.getItem('beginnerWordsCompleted');
       const completedPacks = completed ? JSON.parse(completed) : [];
-      if (!completedPacks.includes(packId)) {
+      const isNewCompletion = !completedPacks.includes(packId);
+      
+      if (isNewCompletion) {
         completedPacks.push(packId);
         localStorage.setItem('beginnerWordsCompleted', JSON.stringify(completedPacks));
+        
+        // Award XP for quiz completion
+        awardQuizXP();
+        
+        // Check if all beginner packs complete for unit bonus
+        if (completedPacks.length === beginnerWordPacks.length) {
+          awardUnitXP();
+        }
       }
 
       // Confetti for good score

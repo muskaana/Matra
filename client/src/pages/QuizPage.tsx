@@ -61,12 +61,31 @@ export default function QuizPage() {
   const quizId = params.id as string;
   const quiz = allQuizzes[quizId];
   
+  // Get quiz section ID (e.g., "1" from "1a", "1b", etc.)
+  const quizSectionId = quizId.replace(/[a-z]/i, '');
+  const quizStorageKey = `quiz_${location.split('/')[3]}_section_${quizSectionId}`;
+  
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
-  const [score, setScore] = useState(0);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(false);
+  
+  // Get cumulative score from localStorage
+  const getQuizScore = () => {
+    const stored = localStorage.getItem(quizStorageKey);
+    return stored ? JSON.parse(stored) : { correct: 0, total: 0 };
+  };
+  
+  const updateQuizScore = (isCorrect: boolean) => {
+    const current = getQuizScore();
+    const updated = {
+      correct: current.correct + (isCorrect ? 1 : 0),
+      total: current.total + 1
+    };
+    localStorage.setItem(quizStorageKey, JSON.stringify(updated));
+    return updated;
+  };
 
   // Determine quiz type based on URL path
   const isConsonant = location.includes('/consonants/');
@@ -137,8 +156,10 @@ export default function QuizPage() {
         quizTitle: quiz.title,
       });
       
+      // Update cumulative score
+      updateQuizScore(isCorrect);
+      
       if (isCorrect) {
-        setScore(1);
         confetti({
           particleCount: 100,
           spread: 70,
@@ -152,7 +173,9 @@ export default function QuizPage() {
           // End of quiz - go to sections page
           setShowResults(true);
         } else {
-          // Next question
+          // Next question - reset feedback state
+          setShowFeedback(false);
+          setSelectedAnswers([]);
           let basePath = '/script/lesson/vowels/quiz/';
           if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
           if (isMatra) basePath = '/script/lesson/matra/quiz/';
@@ -177,8 +200,10 @@ export default function QuizPage() {
       quizTitle: quiz.title,
     });
     
+    // Update cumulative score
+    updateQuizScore(isCorrect);
+    
     if (isCorrect) {
-      setScore(1);
       confetti({
         particleCount: 100,
         spread: 70,
@@ -208,6 +233,9 @@ export default function QuizPage() {
 
   // Handle continuing after quiz completion
   const handleContinue = () => {
+    // Clear the quiz score for this section
+    localStorage.removeItem(quizStorageKey);
+    
     if (quiz.nextLesson.includes('/')) {
       setLocation(quiz.nextLesson);
     }
@@ -215,7 +243,8 @@ export default function QuizPage() {
 
   // Results screen
   if (showResults) {
-    const percentage = (score / 1) * 100;
+    const finalScore = getQuizScore();
+    const percentage = finalScore.total > 0 ? Math.round((finalScore.correct / finalScore.total) * 100) : 0;
 
     return (
       <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
@@ -233,7 +262,7 @@ export default function QuizPage() {
                 <div className="text-6xl font-bold text-[#ff9930] mb-2">{percentage}%</div>
                 <p className="text-2xl font-bold text-black mb-1">{getRandomMessage()}</p>
                 <p className="text-gray-500">
-                  You got {score} out of 1 correct
+                  You got {finalScore.correct} out of {finalScore.total} correct
                 </p>
               </div>
 

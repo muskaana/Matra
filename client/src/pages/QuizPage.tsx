@@ -65,6 +65,8 @@ export default function QuizPage() {
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackCorrect, setFeedbackCorrect] = useState(false);
 
   // Determine quiz type based on URL path
   const isConsonant = location.includes('/consonants/');
@@ -118,8 +120,13 @@ export default function QuizPage() {
         setSelectedAnswers([...selectedAnswers, index]);
       }
     } else {
-      // Single select: immediately check and navigate
+      // Single select: show feedback then navigate
       const isCorrect = quiz.options[index].correct;
+      
+      // Set selected answer and show feedback
+      setSelectedAnswers([index]);
+      setShowFeedback(true);
+      setFeedbackCorrect(isCorrect);
       
       // Record attempt for smart review system
       recordAttempt({
@@ -132,20 +139,18 @@ export default function QuizPage() {
       
       if (isCorrect) {
         setScore(1);
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
       }
       
-      // Navigate to next question or results
+      // Navigate to next question or results after showing feedback
       setTimeout(() => {
         if (quiz.nextLesson.includes('/')) {
           // End of quiz - go to sections page
           setShowResults(true);
-          if (isCorrect) {
-            confetti({
-              particleCount: 100,
-              spread: 70,
-              origin: { y: 0.6 }
-            });
-          }
         } else {
           // Next question
           let basePath = '/script/lesson/vowels/quiz/';
@@ -154,7 +159,7 @@ export default function QuizPage() {
           if (isSimilar) basePath = '/script/lesson/similar/quiz/';
           setLocation(`${basePath}${quiz.nextLesson}`);
         }
-      }, 300);
+      }, 1200);
     }
   };
 
@@ -318,19 +323,41 @@ export default function QuizPage() {
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>
               {quiz.options.map((option: any, index: number) => {
                 const isSelected = selectedAnswers.includes(index);
+                const isCorrectOption = option.correct;
+                
+                // For single-select with feedback, show correct/incorrect states
+                let buttonClass = '';
+                if (showFeedback && !isMultiSelect) {
+                  if (isSelected && isCorrectOption) {
+                    buttonClass = 'bg-green-500 text-white border-2 border-green-600';
+                  } else if (isSelected && !isCorrectOption) {
+                    buttonClass = 'bg-red-500 text-white border-2 border-red-600';
+                  } else if (!isSelected && isCorrectOption) {
+                    buttonClass = 'bg-green-100 text-green-700 border-2 border-green-500';
+                  } else {
+                    buttonClass = 'bg-gray-200 text-gray-500';
+                  }
+                } else if (isMultiSelect && isSelected) {
+                  buttonClass = 'bg-[#CF7B24] text-white';
+                } else {
+                  buttonClass = 'bg-[#ff9930] text-white hover:bg-[#CF7B24]';
+                }
                 
                 return (
                   <button
                     key={index}
                     onClick={() => handleAnswer(index)}
-                    className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce whitespace-nowrap overflow-hidden text-ellipsis ${
-                      isMultiSelect && isSelected
-                        ? 'bg-[#CF7B24] text-white'
-                        : 'bg-[#ff9930] text-white hover:bg-[#CF7B24]'
+                    disabled={showFeedback && !isMultiSelect}
+                    className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce whitespace-nowrap overflow-hidden text-ellipsis ${buttonClass} ${
+                      showFeedback && !isMultiSelect ? 'cursor-default' : ''
                     }`}
                     data-testid={`button-answer-${index}`}
                   >
-                    {formatOptionLabel(quiz.type, option, 'quiz')}
+                    <div className="flex items-center justify-center gap-2">
+                      {formatOptionLabel(quiz.type, option, 'quiz')}
+                      {showFeedback && !isMultiSelect && isSelected && isCorrectOption && <CheckCircle2 className="w-5 h-5" />}
+                      {showFeedback && !isMultiSelect && isSelected && !isCorrectOption && <XCircle className="w-5 h-5" />}
+                    </div>
                   </button>
                 );
               })}

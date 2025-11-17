@@ -21,6 +21,15 @@ The app currently includes five main chapters in the script learning section:
 ## Recent Changes
 
 ### November 17, 2025 (Late Evening)
+- **Advanced Words (Level 3)**: Implemented advanced word learning with reading accuracy focus
+  - **Structure**: 3 thematic word packs: Emotions/Identity (4 words), Culture/Media (4 words), Daily but Longer (4 words)
+  - **Word Complexity**: Longer words with more matras and conjuncts (गर्व, संगीत, आत्मविश्वास, अस्पताल)
+  - **Learning Flow**: Flashcard practice followed by reading accuracy quiz
+  - **Quiz Innovation**: Shows transliteration (e.g., "garv") and asks user to identify correct Devanagari (गर्व)
+  - **Progress Tracking**: localStorage-based with sequential unlocking (must complete Beginner Words first)
+  - **Integration**: Unlocks after completing all Beginner Words packs
+  - **Visual Style**: Consistent with existing app design, larger text for Devanagari options in quiz
+  
 - **Beginner Words (Level 2)**: Implemented complete word learning feature with flashcards and quizzes
   - **Structure**: 3 thematic word packs: Family (6 words), Home & Daily (5 words), Feelings (4 words)
   - **Learning Flow**: Each pack has flashcard practice (Devanagari front, transliteration + meaning back) followed by a quiz

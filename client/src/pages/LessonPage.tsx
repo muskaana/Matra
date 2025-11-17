@@ -13,8 +13,9 @@
  * 5. Navigate to next lesson or practice exercise
  */
 
+import { useState } from "react";
 import { useParams, useLocation } from "wouter";
-import { Volume2 } from "lucide-react";
+import { Volume2, Info } from "lucide-react";
 import { MandalaPattern } from '../components/DecorativePattern';
 import { 
   VOWEL_SECTIONS, 
@@ -33,6 +34,13 @@ import { imageMap } from '../data/images';
 import { NavigationHeader } from '../components/shared/NavigationHeader';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { SampleWordCard } from '../components/lesson/SampleWordCard';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function LessonPage() {
   const params = useParams();
@@ -40,6 +48,7 @@ export default function LessonPage() {
   const location = useLocation()[0];
   const lessonId = params.id as string;
   const lesson = allLessons[lessonId];
+  const [showPhoneticInfo, setShowPhoneticInfo] = useState(false);
   
   // Determine lesson type based on URL path
   const isConsonant = location.includes('/consonants/');
@@ -231,7 +240,46 @@ export default function LessonPage() {
                 </button>
               </div>
             )}
-            <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
+            <div className="flex items-center justify-center gap-2">
+              <p className="text-gray-400 text-sm mb-0.5">{lesson.transliteration}</p>
+              {(lesson.transliteration.includes('dental') || 
+                lesson.transliteration.includes('retroflex') || 
+                lesson.transliteration.includes('palatal')) && (
+                <Dialog open={showPhoneticInfo} onOpenChange={setShowPhoneticInfo}>
+                  <DialogTrigger asChild>
+                    <button 
+                      className="text-gray-400 hover:text-[#ff9930] transition-colors"
+                      data-testid="button-phonetic-info"
+                    >
+                      <Info className="w-4 h-4" />
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-sm">
+                    <DialogHeader>
+                      <DialogTitle>Articulation Points</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-3 text-sm">
+                      <p className="text-gray-600">These terms describe where in your mouth you position your tongue to make sounds:</p>
+                      <div className="space-y-2">
+                        <div>
+                          <strong className="text-black">Dental:</strong>
+                          <p className="text-gray-600">Tongue touches the back of your upper teeth</p>
+                        </div>
+                        <div>
+                          <strong className="text-black">Retroflex:</strong>
+                          <p className="text-gray-600">Tongue curls back and touches the roof of your mouth</p>
+                        </div>
+                        <div>
+                          <strong className="text-black">Palatal:</strong>
+                          <p className="text-gray-600">Tongue touches the hard palate (roof of mouth, toward the front)</p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 italic">Hindi uses these distinctions to differentiate similar-sounding characters!</p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              )}
+            </div>
             <p className="text-gray-600 text-base">{lesson.sound}</p>
           </div>
 

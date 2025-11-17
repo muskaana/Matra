@@ -281,44 +281,18 @@ export default function QuizPage() {
             </button>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-between relative animate-slide-in-up overflow-y-auto">
-            <div>
-              <div className="mb-6">
-                <div className="text-6xl font-bold text-[#ff9930] mb-2">{percentage}%</div>
-                <p className="text-2xl font-bold text-black mb-1">{getRandomMessage()}</p>
-                <p className="text-gray-500">
-                  You got {finalScore.correct} out of {finalScore.total} correct
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-6">
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <p className="text-sm font-medium text-gray-700 mb-3">{quiz.subQuestion}</p>
-                  <div className="space-y-2">
-                    {quiz.options.map((option: any, index: number) => {
-                      const wasSelected = selectedAnswers.includes(index);
-                      const isCorrectAnswer = option.correct;
-                      const showAsCorrect = isCorrectAnswer;
-                      const showAsWrong = wasSelected && !isCorrectAnswer;
-
-                      return (
-                        <div
-                          key={index}
-                          className={`p-3 rounded-lg border-2 flex items-center justify-between ${
-                            showAsCorrect ? 'border-green-500 bg-green-50' :
-                            showAsWrong ? 'border-red-500 bg-red-50' :
-                            'border-gray-200'
-                          }`}
-                        >
-                          <span className="text-base">{formatOptionLabel(quiz.type, option, 'results')}</span>
-                          {showAsCorrect && <CheckCircle2 className="w-5 h-5 text-green-600" />}
-                          {showAsWrong && <XCircle className="w-5 h-5 text-red-600" />}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
+          <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
+            <div className="mb-8">
+              <img 
+                src={tigerWaving} 
+                alt="Waving tiger" 
+                className="w-32 h-32 mx-auto object-contain mb-6" 
+              />
+              <div className="text-6xl font-bold text-[#ff9930] mb-4">{percentage}%</div>
+              <p className="text-2xl font-bold text-black mb-2">{getRandomMessage()}</p>
+              <p className="text-gray-600 text-lg">
+                You got {finalScore.correct} out of {finalScore.total} correct
+              </p>
             </div>
 
             <button

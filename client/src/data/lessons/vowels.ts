@@ -26,7 +26,7 @@ export const vowelLessons: LessonMap = {
         "image": "different"
       }
     ],
-    "sentence": "अbhi toh party shuru hui hai",
+    "sentence": "अभी आओ (Abhi aao - Come now)",
     "nextLesson": "2",
     "pageNumber": 1
   },
@@ -95,7 +95,7 @@ export const vowelLessons: LessonMap = {
         "image": "different"
       }
     ],
-    "sentence": "ईश्वर है (Eeshwar hai - God exists)",
+    "sentence": "ईमानदार रहो (Eemaandaar raho - Be honest)",
     "nextLesson": "practice/2",
     "pageNumber": 4
   },
@@ -164,7 +164,7 @@ export const vowelLessons: LessonMap = {
         "image": "money"
       }
     ],
-    "sentence": "ऋषि महान थे (Rishi mahaan the - The sage was great)",
+    "sentence": "ऋतु बदल रही है (Ritu badal rahi hai - The season is changing)",
     "nextLesson": "8",
     "pageNumber": 7
   },

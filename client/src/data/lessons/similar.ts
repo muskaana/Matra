@@ -64,7 +64,7 @@ export const similarLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "ज्ञान शक्ति है (Gyaan shakti hai - Knowledge is power)",
+    "sentence": "मुझे इसका ज्ञान नहीं (Mujhe iska gyaan nahin - I don't know about this)",
     "nextLesson": "s2b"
   },
   "s2b": {
@@ -108,7 +108,7 @@ export const similarLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "ऋषि बुद्धिमान था (Ṛṣi buddhiman tha - The sage was wise)",
+    "sentence": "ऋतु बदल गई (Ṛtu badal gayi - The season has changed)",
     "nextLesson": "s3b"
   },
   "s3b": {
@@ -130,7 +130,7 @@ export const similarLessons: LessonMap = {
         "image": "respect"
       }
     ],
-    "sentence": "यह पुरानी रीत है (Yeh puraani reet hai - This is an old tradition)",
+    "sentence": "यह रीढ़ की हड्डी है (Yeh reedh ki haddi hai - This is the spine)",
     "nextLesson": "practice/s3"
   },
   "s4a": {
@@ -152,7 +152,7 @@ export const similarLessons: LessonMap = {
         "image": "respect"
       }
     ],
-    "sentence": "सफर लंबा था (Safar lamba tha - The journey was long)",
+    "sentence": "सच बोलो (Sach bolo - Speak the truth)",
     "nextLesson": "s4b"
   },
   "s4b": {
@@ -174,7 +174,7 @@ export const similarLessons: LessonMap = {
         "image": "respect"
       }
     ],
-    "sentence": "शांति सबसे महत्वपूर्ण है (Shaanti sabse mahatvapurn hai - Peace is most important)",
+    "sentence": "शांत रहो (Shaant raho - Stay calm)",
     "nextLesson": "s4c"
   },
   "s4c": {
@@ -196,7 +196,7 @@ export const similarLessons: LessonMap = {
         "image": "moon"
       }
     ],
-    "sentence": "यह एक षड्यंत्र था (Yeh ek ṣaḍyantra tha - This was a conspiracy)",
+    "sentence": "षोडश का मतलब सोलह (Ṣoḍash ka matalab solah - Shodash means sixteen)",
     "nextLesson": "practice/s4"
   },
   "s5a": {

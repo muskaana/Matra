@@ -181,7 +181,7 @@ export const consonantLessons: LessonMap = {
         "image": "dew"
       }
     ],
-    "sentence": "झरना सुंदर है (Jharna sundar hai - The waterfall is beautiful)",
+    "sentence": "झूला बहुत मज़ेदार है (Jhoola bahut mazedaar hai - The swing is very fun)",
     "nextLesson": "practice/c4",
     "pageNumber": 8
   },
@@ -273,7 +273,7 @@ export const consonantLessons: LessonMap = {
         "image": "glasses"
       }
     ],
-    "sentence": "ढोल की आवाज़ तेज़ है (Dhol ki aavaaz tez hai - The drum is loud)",
+    "sentence": "ढक्कन कहाँ है? (Dhakkan kahan hai? - Where is the lid?)",
     "nextLesson": "practice/c6",
     "pageNumber": 12
   },
@@ -526,7 +526,7 @@ export const consonantLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "यात्रा लंबी थी (Yaatra lambi thi - The journey was long)",
+    "sentence": "मुझे याद है (Mujhe yaad hai - I remember)",
     "nextLesson": "c24",
     "pageNumber": 23
   },
@@ -595,7 +595,7 @@ export const consonantLessons: LessonMap = {
         "image": "dew"
       }
     ],
-    "sentence": "वृक्ष हरा है (Vriksh hara hai - The tree is green)",
+    "sentence": "बारिश हो रही है (Baarish ho rahi hai - It is raining)",
     "nextLesson": "practice/c13",
     "pageNumber": 26
   },
@@ -641,7 +641,7 @@ export const consonantLessons: LessonMap = {
         "image": "glasses"
       }
     ],
-    "sentence": "षट्कोण में छह भुजाएँ हैं (Shatkona mein chhah bhujaen hain - Hexagon has six sides)",
+    "sentence": "आज कोई खास बात नहीं (Aaj koi khaas baat nahin - Nothing special today)",
     "nextLesson": "practice/c14",
     "pageNumber": 28
   },
@@ -710,7 +710,7 @@ export const consonantLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "उसमें क्षमता है (Usmein kshamata hai - He has ability)",
+    "sentence": "क्षमा करो (Kshama karo - Please forgive me)",
     "nextLesson": "c32",
     "pageNumber": 31
   },
@@ -733,7 +733,7 @@ export const consonantLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "त्रिकोण के तीन भुजाएँ हैं (Trikon ke teen bhujaen hain - Triangle has three sides)",
+    "sentence": "आज त्योहार है (Aaj tyohaar hai - Today is a festival)",
     "nextLesson": "c33",
     "pageNumber": 32
   },
@@ -756,7 +756,7 @@ export const consonantLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "ज्ञान महत्वपूर्ण है (Gyaan mahatvpoorn hai - Knowledge is important)",
+    "sentence": "मुझे ज्ञान नहीं था (Mujhe gyaan nahin tha - I didn't know)",
     "nextLesson": "practice/c16",
     "pageNumber": 33
   }

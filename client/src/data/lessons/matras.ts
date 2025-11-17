@@ -129,7 +129,7 @@ export const matraLessons: LessonMap = {
         "image": "faith"
       }
     ],
-    "sentence": "भगवान की कृपा है (Bhagwan ki kripa hai - It's God's blessing)",
+    "sentence": "कृपया बैठो (Kripya baitho - Please sit)",
     "nextLesson": "m12",
     "pageNumber": 6
   },
@@ -152,7 +152,7 @@ export const matraLessons: LessonMap = {
         "image": "helpingHands"
       }
     ],
-    "sentence": "देव मंदिर में हैं (Dev mandir mein hain - The god is in the temple)",
+    "sentence": "केला मीठा है (Kela meetha hai - The banana is sweet)",
     "nextLesson": "m8",
     "pageNumber": 7
   },
@@ -261,7 +261,7 @@ export const matraLessons: LessonMap = {
         "image": "hope"
       }
     ],
-    "sentence": "दुःख और सुख जीवन का भाग हैं (Dukh aur sukh jeevan ka bhaag hain - Joy and sorrow are part of life)",
+    "sentence": "मुझे दुःख हुआ (Mujhe dukh hua - I felt sad)",
     "nextLesson": "practice/m6",
     "pageNumber": 12
   },

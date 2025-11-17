@@ -107,12 +107,12 @@ export default function ReviewPage() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
         <div className="w-full max-w-md mx-auto flex-1 flex flex-col px-4 py-6 justify-center">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100">
-            <div className="mb-6">
+          <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gray-100">
+            <div className="mb-4">
               <img 
                 src={tigerExcited} 
                 alt="Excited tiger" 
-                className="w-32 h-32 mx-auto object-contain animate-bounce-slow" 
+                className="w-24 h-24 mx-auto object-contain" 
               />
             </div>
             
@@ -142,12 +142,12 @@ export default function ReviewPage() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
         <div className="w-full max-w-md mx-auto flex-1 flex flex-col px-4 py-6 justify-center">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100">
-            <div className="mb-6">
+          <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gray-100">
+            <div className="mb-4">
               <img 
                 src={tigerExcited} 
                 alt="Excited tiger" 
-                className="w-32 h-32 mx-auto object-contain animate-bounce-slow" 
+                className="w-24 h-24 mx-auto object-contain" 
               />
             </div>
             
@@ -198,23 +198,23 @@ export default function ReviewPage() {
         </div>
 
         {/* Flashcard */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100 flex-1 flex flex-col justify-between animate-slide-in-up">
-          <div>
-            <div className="mb-4">
+        <div className="bg-white rounded-2xl shadow-xl p-6 text-center border border-gray-100 flex-1 flex flex-col justify-between animate-slide-in-up">
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="mb-3">
               <img 
                 src={tigerThinking} 
                 alt="Thinking tiger" 
-                className="w-20 h-20 mx-auto object-contain opacity-60" 
+                className="w-16 h-16 mx-auto object-contain opacity-50" 
               />
             </div>
 
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">
               Do you remember this character?
             </h2>
 
             {/* Character display */}
-            <div className="mb-8">
-              <div className="text-8xl font-bold text-black mb-4">
+            <div className="mb-6">
+              <div className="text-7xl font-bold text-black mb-3">
                 {currentItem.contentId}
               </div>
               
@@ -229,7 +229,7 @@ export default function ReviewPage() {
             </div>
 
             {/* Metadata */}
-            <div className="text-sm text-gray-500 mb-6">
+            <div className="text-sm text-gray-500 mb-4">
               <p className="mb-1">
                 Type: <span className="font-medium text-gray-700 capitalize">{currentItem.contentType}</span>
               </p>

@@ -21,6 +21,7 @@ import SimilarSectionsPage from "@/pages/SimilarSectionsPage";
 import LessonPage from "@/pages/LessonPage";
 import QuizPage from "@/pages/QuizPage";
 import PracticePage from "@/pages/PracticePage";
+import ReviewPage from "@/pages/ReviewPage";
 
 function LessonPersistence({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
@@ -77,6 +78,7 @@ function Router() {
         <Route path="/script/lesson/similar/:id" component={LessonPage} />
         <Route path="/script/lesson/similar/practice/:id" component={PracticePage} />
         <Route path="/script/lesson/similar/quiz/:id" component={QuizPage} />
+        <Route path="/review" component={ReviewPage} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, Lock } from "lucide-react";
+import { Book, MessageSquare, FileText, Lock, Brain } from "lucide-react";
+import { getItemsDueForReview } from '../utils/smartReview';
 
 export default function ScriptPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
   const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
   const [matraCompleted, setMatraCompleted] = useState<number>(0);
   const [similarCompleted, setSimilarCompleted] = useState<number>(0);
+  const [reviewCount, setReviewCount] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
@@ -22,6 +24,10 @@ export default function ScriptPage() {
     if (consonants) setConsonantsCompleted(parseInt(consonants));
     if (matra) setMatraCompleted(parseInt(matra));
     if (similar) setSimilarCompleted(parseInt(similar));
+    
+    // Load review count
+    const dueItems = getItemsDueForReview();
+    setReviewCount(dueItems.length);
   }, []);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
@@ -37,6 +43,8 @@ export default function ScriptPage() {
     { id: 4, title: "Sentences", locked: true, lockReason: "In development" },
     { id: 5, title: "Reading", href: "/reading", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "" },
   ];
+  
+  const showReview = reviewCount > 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
@@ -82,6 +90,26 @@ export default function ScriptPage() {
           </div>
         </div>
         
+        {/* Smart Review Banner */}
+        {showReview && (
+          <Link href="/review">
+            <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-4 mb-4 shadow-lg border-2 border-white hover:from-purple-600 hover:to-purple-700 transition-all cursor-pointer" data-testid="button-review-banner">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 rounded-full p-2">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-white font-bold text-sm">Smart Review Ready!</h3>
+                  <p className="text-white/90 text-xs">{reviewCount} {reviewCount === 1 ? 'item' : 'items'} need practice</p>
+                </div>
+                <div className="bg-white text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                  {reviewCount}
+                </div>
+              </div>
+            </div>
+          </Link>
+        )}
+        
         <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-xl border-2 border-white">
           {allCharactersComplete ? (
             <Link href="/reading">
@@ -102,18 +130,32 @@ export default function ScriptPage() {
               <span className="text-sm font-bold">Script</span>
             </button>
           </Link>
-          {allCharactersComplete ? (
-            <Link href="/conversation">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-talk">
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Talk</span>
+          {showReview ? (
+            <Link href="/review">
+              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all relative" data-testid="button-review">
+                <Brain className="w-6 h-6 mb-1" />
+                <span className="text-sm font-medium">Review</span>
+                {reviewCount > 0 && (
+                  <div className="absolute -top-1 -right-1 bg-purple-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold border-2 border-white">
+                    {reviewCount}
+                  </div>
+                )}
               </button>
             </Link>
           ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-talk-locked" title="Complete all character lessons first">
-              <Lock className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Talk</span>
-            </button>
+            allCharactersComplete ? (
+              <Link href="/conversation">
+                <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-talk">
+                  <MessageSquare className="w-6 h-6 mb-1" />
+                  <span className="text-sm font-medium">Talk</span>
+                </button>
+              </Link>
+            ) : (
+              <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-talk-locked" title="Complete all character lessons first">
+                <Lock className="w-6 h-6 mb-1" />
+                <span className="text-sm font-medium">Talk</span>
+              </button>
+            )
           )}
         </div>
       </div>

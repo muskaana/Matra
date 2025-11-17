@@ -232,37 +232,49 @@ export default function QuizPage() {
   };
 
   // Handle continuing after quiz completion
-  const handleContinue = () => {
+  const handleContinue = (percentage: number) => {
     // Clear the quiz score for this section
     localStorage.removeItem(quizStorageKey);
     
     if (quiz.nextLesson.includes('/')) {
-      // This is the last quiz in the section - update completion counter
-      const sectionNumber = parseInt(quizSectionId);
+      // This is the last quiz in the section
       
-      if (isSimilar) {
-        const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-        if (sectionNumber > current) {
-          localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
+      // Only save progress if score is 60% or higher
+      if (percentage >= 60) {
+        const sectionNumber = parseInt(quizSectionId);
+        
+        if (isSimilar) {
+          const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+          if (sectionNumber > current) {
+            localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
+          }
+        } else if (isMatra) {
+          const current = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+          if (sectionNumber > current) {
+            localStorage.setItem('matraQuizzesCompleted', sectionNumber.toString());
+          }
+        } else if (isConsonant) {
+          const current = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+          if (sectionNumber > current) {
+            localStorage.setItem('consonantsQuizzesCompleted', sectionNumber.toString());
+          }
+        } else {
+          const current = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+          if (sectionNumber > current) {
+            localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+          }
         }
-      } else if (isMatra) {
-        const current = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-        if (sectionNumber > current) {
-          localStorage.setItem('matraQuizzesCompleted', sectionNumber.toString());
-        }
-      } else if (isConsonant) {
-        const current = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
-        if (sectionNumber > current) {
-          localStorage.setItem('consonantsQuizzesCompleted', sectionNumber.toString());
-        }
+        
+        setLocation(quiz.nextLesson);
       } else {
-        const current = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-        if (sectionNumber > current) {
-          localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
-        }
+        // Score below 60% - restart the quiz
+        const firstQuizId = quizSectionId + 'a';
+        let basePath = '/script/lesson/vowels/quiz/';
+        if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
+        if (isMatra) basePath = '/script/lesson/matra/quiz/';
+        if (isSimilar) basePath = '/script/lesson/similar/quiz/';
+        setLocation(`${basePath}${firstQuizId}`);
       }
-      
-      setLocation(quiz.nextLesson);
     }
   };
 
@@ -288,19 +300,39 @@ export default function QuizPage() {
                 alt="Waving tiger" 
                 className="w-32 h-32 mx-auto object-contain mb-6" 
               />
-              <div className="text-6xl font-bold text-[#ff9930] mb-4">{percentage}%</div>
-              <p className="text-2xl font-bold text-black mb-2">{getRandomMessage()}</p>
-              <p className="text-gray-600 text-lg">
-                You got {finalScore.correct} out of {finalScore.total} correct
-              </p>
+              <div className={`text-6xl font-bold mb-4 ${percentage >= 60 ? 'text-[#ff9930]' : 'text-red-500'}`}>
+                {percentage}%
+              </div>
+              {percentage >= 60 ? (
+                <>
+                  <p className="text-2xl font-bold text-black mb-2">{getRandomMessage()}</p>
+                  <p className="text-gray-600 text-lg">
+                    You got {finalScore.correct} out of {finalScore.total} correct
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-2xl font-bold text-black mb-2">Keep Practicing!</p>
+                  <p className="text-gray-600 text-lg mb-2">
+                    You got {finalScore.correct} out of {finalScore.total} correct
+                  </p>
+                  <p className="text-red-600 font-semibold">
+                    You need at least 60% to continue. Try again!
+                  </p>
+                </>
+              )}
             </div>
 
             <button
-              onClick={handleContinue}
-              className="w-full py-4 bg-[#ff9930] text-white rounded-xl hover:bg-[#CF7B24] transition-colors text-lg font-semibold shadow-lg"
+              onClick={() => handleContinue(percentage)}
+              className={`w-full py-4 text-white rounded-xl transition-colors text-lg font-semibold shadow-lg ${
+                percentage >= 60 
+                  ? 'bg-[#ff9930] hover:bg-[#CF7B24]' 
+                  : 'bg-red-500 hover:bg-red-600'
+              }`}
               data-testid="button-continue"
             >
-              Continue
+              {percentage >= 60 ? 'Continue' : 'Try Again'}
             </button>
           </div>
         </div>

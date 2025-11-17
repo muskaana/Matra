@@ -273,7 +273,8 @@ export default function QuizPage() {
         if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
         if (isMatra) basePath = '/script/lesson/matra/quiz/';
         if (isSimilar) basePath = '/script/lesson/similar/quiz/';
-        setLocation(`${basePath}${firstQuizId}`);
+        // Force full page navigation to ensure clean state reset
+        window.location.href = `${basePath}${firstQuizId}`;
       }
     }
   };

@@ -48,13 +48,21 @@ export default function Home() {
               Learn to read and write Devanagari script at your own pace.
             </p>
 
-            {/* CTA Button */}
-            <Link href="/script">
-              <button className="group inline-flex items-center gap-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-fade-up mb-6" style={{ animationDelay: "0.3s" }} data-testid="button-start-learning">
-                Start Learning Free
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
+            {/* CTA Buttons */}
+            <div className="flex flex-col gap-3 mb-6 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+              <Link href="/placement">
+                <button className="group inline-flex items-center gap-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full max-w-xs mx-auto" data-testid="button-take-placement">
+                  Take Placement Quiz
+                  <Brain className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+              <Link href="/script">
+                <button className="group inline-flex items-center gap-2 bg-white border-2 border-[#ff9930] text-[#ff9930] hover:bg-orange-50 font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full max-w-xs mx-auto" data-testid="button-start-learning">
+                  Start from Beginning
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+            </div>
 
             {/* Tiger Mascot */}
             <div className="animate-bounce-subtle" data-testid="img-hero-tiger">

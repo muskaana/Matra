@@ -99,7 +99,7 @@ export const numberLessons: LessonMap = {
         "image": "clock"
       }
     ],
-    "sentence": "पाँच मिनट रुको (Paanch minute ruko - Wait five minutes)",
+    "sentence": "बस पाँच मिनट रुको (Bas paanch minute ruko - Just wait five minutes)",
     "nextLesson": "n6",
     "pageNumber": 6
   },
@@ -116,7 +116,7 @@ export const numberLessons: LessonMap = {
         "image": "pointing"
       }
     ],
-    "sentence": "छह लोग हैं (Chhah log hain - There are six people)",
+    "sentence": "हमारे घर में छह लोग हैं (Hamare ghar mein chhah log hain - There are six people in our house)",
     "nextLesson": "n7",
     "pageNumber": 7
   },

@@ -26,6 +26,9 @@ import ReviewPage from "@/pages/ReviewPage";
 import BeginnerWordsPage from "@/pages/BeginnerWordsPage";
 import FlashcardPage from "@/pages/FlashcardPage";
 import WordQuizPage from "@/pages/WordQuizPage";
+import AdvancedWordsPage from "@/pages/AdvancedWordsPage";
+import AdvancedFlashcardPage from "@/pages/AdvancedFlashcardPage";
+import AdvancedWordQuizPage from "@/pages/AdvancedWordQuizPage";
 
 function LessonPersistence({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
@@ -90,6 +93,9 @@ function Router() {
         <Route path="/words/beginner" component={BeginnerWordsPage} />
         <Route path="/words/beginner/:packId/flashcards" component={FlashcardPage} />
         <Route path="/words/beginner/:packId/quiz" component={WordQuizPage} />
+        <Route path="/words/advanced" component={AdvancedWordsPage} />
+        <Route path="/words/advanced/:packId/flashcards" component={AdvancedFlashcardPage} />
+        <Route path="/words/advanced/:packId/quiz" component={AdvancedWordQuizPage} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

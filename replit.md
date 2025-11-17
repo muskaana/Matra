@@ -21,6 +21,16 @@ The app currently includes five main chapters in the script learning section:
 ## Recent Changes
 
 ### November 17, 2025 (Late Evening)
+- **Sentences (Level 4)**: Implemented complete sentence learning with tap-to-reveal and quizzes
+  - **Structure**: 3 thematic sections: Family talk (6 sentences), Daily life (6 sentences), Identity/pride (6 sentences)
+  - **Vocabulary**: Uses only words from Beginner Words + Advanced Words plus necessary grammar words (मेरा, है, जा रहा, etc.)
+  - **Learning Flow**: Tap-to-reveal interface - Devanagari shown first, tap to reveal transliteration + meaning
+  - **Quiz Types**: Two question formats - "match" (English → Hindi) and "fill" (fill-in-the-blank)
+  - **Progress Tracking**: localStorage-based with sequential unlocking per section
+  - **Integration**: Unlocks after completing all Advanced Words packs (3/3)
+  - **Navigation**: Previous/Next buttons during learning, automatic transition to quiz after last sentence
+  - **Visual Style**: Consistent with app design, large Devanagari text, orange gradient reveal panels
+
 - **Advanced Words (Level 3)**: Implemented advanced word learning with reading accuracy focus
   - **Structure**: 3 thematic word packs: Emotions/Identity (4 words), Culture/Media (4 words), Daily but Longer (4 words)
   - **Word Complexity**: Longer words with more matras and conjuncts (गर्व, संगीत, आत्मविश्वास, अस्पताल)

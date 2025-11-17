@@ -21,11 +21,24 @@ The app currently includes five main chapters in the script learning section:
 ## Recent Changes
 
 ### November 17, 2025 (Evening)
+- **Comprehensive Vocabulary Update**: Revised ALL lesson sentences across the entire app to use common everyday conversational Hindi words
+  - **Scope**: Updated 78+ lesson sentences across Vowels (12 lessons), Consonants (33 lessons), Matra (13 lessons), Similar Characters (11 lessons), and Numbers (10 lessons)
+  - **Goal**: Replace formal/religious/philosophical/technical vocabulary with simple words beginners encounter in daily life
+  - **Examples of changes**:
+    - Removed formal words: ऋषि (sage), ज्ञान (knowledge), षड्यंत्र (conspiracy), क्षमता (ability), कृपया (formal please), शून्य (formal zero)
+    - Replaced with everyday words: रोटी, चाय, पानी, घर, माँ, बच्चे, खाना, लोग, बारिश, मौसम, पैसे, बैठो, याद
+  - **Key improvements**:
+    - All sentences now use common conversational vocabulary appropriate for beginner Hindi learners
+    - Sentences reflect everyday situations: food, family, home, time, weather, basic activities
+    - Removed religious references (भगवान, देव, मंदिर, ईश्वर) in favor of secular everyday topics
+    - Removed technical terms (षट्कोण/hexagon, त्रिकोण/triangle, रीढ़/spine) in favor of simple concepts
+    - All sentences remain complete conversational statements with proper subjects and verbs
+
 - **Numbers Section Complete**: Added complete Numbers chapter with 10 individual lessons (one per digit ०-९)
   - Section 1: Digits ०-④ (Zero through Four) with 5 lessons
   - Section 2: Digits ⑤-⑨ (Five through Nine) with 5 lessons
   - Each lesson includes Devanagari digit, transliteration, Hindi pronunciation, and everyday sentence example
-  - Sentences use common conversational words: चाय (tea), रोटी (roti), लोग (people), बजे (o'clock), मिनट (minute), दिन (day), खाना (food), सोना (sleep), पैसे (money)
+  - Sentences use common conversational words: चाय (tea), रोटी (roti), लोग (people), बजे (o'clock), मिनट (minute), दिन (day), खाना (food), सोना (sleep), घर (house)
   - 2 practice exercises (one per section) reviewing digit-sound pairs
   - 8 quiz questions total (4 per section) testing both digit recognition and Hindi word knowledge
   - Progress tracking via localStorage key 'numbersQuizzesCompleted'

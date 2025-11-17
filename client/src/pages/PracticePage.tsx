@@ -20,6 +20,7 @@ import {
   CONSONANT_SECTIONS, 
   MATRA_SECTIONS,
   SIMILAR_SECTIONS,
+  NUMBER_SECTIONS,
   calculateProgress as calcProgress
 } from '../utils/sectionStructure';
 
@@ -39,6 +40,7 @@ export default function PracticePage() {
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
   const isSimilar = location.includes('/similar/');
+  const isNumbers = location.includes('/numbers/');
 
   if (!practice) {
     return (
@@ -49,14 +51,19 @@ export default function PracticePage() {
   }
 
   // Determine the sections page URL for back navigation
-  const backHref = isSimilar ? "/script/similar/sections" :
+  const backHref = isNumbers ? "/script/numbers/sections" :
+                   isSimilar ? "/script/similar/sections" :
                    isMatra ? "/script/matra/sections" : 
                    isConsonant ? "/script/consonants/sections" : 
                    "/script/vowels/sections";
 
   // Calculate progress through the section
   const progress = (() => {
-    if (isSimilar) {
+    if (isNumbers) {
+      const sectionNumber = parseInt(practiceId.replace('n', ''));
+      const sectionStructure = NUMBER_SECTIONS[sectionNumber - 1];
+      return calcProgress('practice', sectionStructure, 1);
+    } else if (isSimilar) {
       const sectionNumber = parseInt(practiceId.replace('s', ''));
       const sectionStructure = SIMILAR_SECTIONS[sectionNumber - 1];
       return calcProgress('practice', sectionStructure, 1);
@@ -84,6 +91,7 @@ export default function PracticePage() {
       if (isConsonant) basePath = '/script/lesson/consonants/';
       if (isMatra) basePath = '/script/lesson/matra/';
       if (isSimilar) basePath = '/script/lesson/similar/';
+      if (isNumbers) basePath = '/script/lesson/numbers/';
       
       setLocation(`${basePath}${practice.nextLesson}`);
     }, 200);

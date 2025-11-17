@@ -7,6 +7,7 @@ import { vowelQuizzes } from './vowels';
 import { consonantQuizzes } from './consonants';
 import { matraQuizzes } from './matras';
 import { similarQuizzes } from './similar';
+import { numberQuizzes } from './numbers';
 import { QuizMap } from '../types';
 
 export const allQuizzes: QuizMap = {
@@ -14,6 +15,7 @@ export const allQuizzes: QuizMap = {
   ...consonantQuizzes,
   ...matraQuizzes,
   ...similarQuizzes,
+  ...numberQuizzes,
 };
 
-export { vowelQuizzes, consonantQuizzes, matraQuizzes, similarQuizzes };
+export { vowelQuizzes, consonantQuizzes, matraQuizzes, similarQuizzes, numberQuizzes };

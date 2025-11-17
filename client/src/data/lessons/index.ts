@@ -7,6 +7,7 @@ import { vowelLessons } from './vowels';
 import { consonantLessons } from './consonants';
 import { matraLessons } from './matras';
 import { similarLessons } from './similar';
+import { numberLessons } from './numbers';
 import { LessonMap } from '../types';
 
 export const allLessons: LessonMap = {
@@ -14,6 +15,7 @@ export const allLessons: LessonMap = {
   ...consonantLessons,
   ...matraLessons,
   ...similarLessons,
+  ...numberLessons,
 };
 
-export { vowelLessons, consonantLessons, matraLessons, similarLessons };
+export { vowelLessons, consonantLessons, matraLessons, similarLessons, numberLessons };

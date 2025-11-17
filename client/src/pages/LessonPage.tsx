@@ -22,10 +22,12 @@ import {
   CONSONANT_SECTIONS, 
   MATRA_SECTIONS,
   SIMILAR_SECTIONS,
+  NUMBER_SECTIONS,
   getVowelSectionInfo,
   getConsonantSectionInfo,
   getMatraSectionInfo,
   getSimilarSectionInfo,
+  getNumberSectionInfo,
   calculateProgress as calcProgress
 } from '../utils/sectionStructure';
 
@@ -54,6 +56,7 @@ export default function LessonPage() {
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
   const isSimilar = location.includes('/similar/');
+  const isNumbers = location.includes('/numbers/');
 
   if (!lesson) {
     return (
@@ -64,7 +67,8 @@ export default function LessonPage() {
   }
 
   // Determine the sections page URL for back navigation
-  const backHref = isSimilar ? "/script/similar/sections" :
+  const backHref = isNumbers ? "/script/numbers/sections" :
+                   isSimilar ? "/script/similar/sections" :
                    isMatra ? "/script/matra/sections" : 
                    isConsonant ? "/script/consonants/sections" : 
                    "/script/vowels/sections";
@@ -76,13 +80,18 @@ export default function LessonPage() {
       if (isConsonant) basePath = '/script/lesson/consonants/';
       if (isMatra) basePath = '/script/lesson/matra/';
       if (isSimilar) basePath = '/script/lesson/similar/';
+      if (isNumbers) basePath = '/script/lesson/numbers/';
       setLocation(`${basePath}${lesson.nextLesson}`);
     }
   };
 
   // Calculate progress through the current section
   const progress = (() => {
-    if (isSimilar) {
+    if (isNumbers) {
+      const { section, lessonInSection } = getNumberSectionInfo(lesson.pageNumber || 1);
+      const sectionStructure = NUMBER_SECTIONS[section - 1];
+      return calcProgress('lesson', sectionStructure, lessonInSection);
+    } else if (isSimilar) {
       const { section, lessonInSection } = getSimilarSectionInfo(lessonId);
       const sectionStructure = SIMILAR_SECTIONS[section - 1];
       return calcProgress('lesson', sectionStructure, lessonInSection);
@@ -95,7 +104,7 @@ export default function LessonPage() {
       const sectionStructure = CONSONANT_SECTIONS[section - 1];
       return calcProgress('lesson', sectionStructure, lessonInSection);
     } else {
-      const { section, lessonInSection } = getVowelSectionInfo(lesson.pageNumber || 1);
+      const { section, lessonInSection} = getVowelSectionInfo(lesson.pageNumber || 1);
       const sectionStructure = VOWEL_SECTIONS[section - 1];
       return calcProgress('lesson', sectionStructure, lessonInSection);
     }

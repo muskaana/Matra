@@ -91,6 +91,7 @@ export default function QuizPage() {
   const isConsonant = location.includes('/consonants/');
   const isMatra = location.includes('/matra/');
   const isSimilar = location.includes('/similar/');
+  const isNumbers = location.includes('/numbers/');
 
   if (!quiz) {
     return (
@@ -117,6 +118,7 @@ export default function QuizPage() {
 
   // Determine content type based on URL
   const getContentType = (): ContentType => {
+    if (isNumbers) return 'vowel'; // Numbers use same tracking as vowels for now
     if (isSimilar) return 'similar';
     if (isMatra) return 'matra';
     if (isConsonant) return 'consonant';
@@ -224,7 +226,8 @@ export default function QuizPage() {
   };
 
   const handleConfirmExit = () => {
-    const basePath = isSimilar ? "/script/similar/sections" :
+    const basePath = isNumbers ? "/script/numbers/sections" :
+                     isSimilar ? "/script/similar/sections" :
                      isMatra ? "/script/matra/sections" : 
                      isConsonant ? "/script/consonants/sections" : 
                      "/script/vowels/sections";
@@ -243,7 +246,12 @@ export default function QuizPage() {
       if (percentage >= 60) {
         const sectionNumber = parseInt(quizSectionId);
         
-        if (isSimilar) {
+        if (isNumbers) {
+          const current = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
+          if (sectionNumber > current) {
+            localStorage.setItem('numbersQuizzesCompleted', sectionNumber.toString());
+          }
+        } else if (isSimilar) {
           const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
           if (sectionNumber > current) {
             localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
@@ -273,6 +281,7 @@ export default function QuizPage() {
         if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
         if (isMatra) basePath = '/script/lesson/matra/quiz/';
         if (isSimilar) basePath = '/script/lesson/similar/quiz/';
+        if (isNumbers) basePath = '/script/lesson/numbers/quiz/';
         // Force full page navigation to ensure clean state reset
         window.location.href = `${basePath}${firstQuizId}`;
       }

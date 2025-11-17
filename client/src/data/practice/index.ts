@@ -7,6 +7,7 @@ import { vowelPractice } from './vowels';
 import { consonantPractice } from './consonants';
 import { matraPractice } from './matras';
 import { similarPractice } from './similar';
+import { numberPractices } from './numbers';
 import { PracticeMap } from '../types';
 
 export const allPractice: PracticeMap = {
@@ -14,6 +15,7 @@ export const allPractice: PracticeMap = {
   ...consonantPractice,
   ...matraPractice,
   ...similarPractice,
+  ...numberPractices,
 };
 
-export { vowelPractice, consonantPractice, matraPractice, similarPractice };
+export { vowelPractice, consonantPractice, matraPractice, similarPractice, numberPractices };

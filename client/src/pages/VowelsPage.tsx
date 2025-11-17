@@ -32,7 +32,7 @@ export default function VowelsPage() {
   const [similarCompleted, setSimilarCompleted] = useState<number>(0);
   const [numbersCompleted, setNumbersCompleted] = useState<number>(0);
   const totalSimilar = 5;
-  const totalNumbers = 2;
+  const totalNumbers = 4;
   const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
   const numbersProgress = Math.round((numbersCompleted / totalNumbers) * 100);
   

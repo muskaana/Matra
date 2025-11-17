@@ -21,6 +21,15 @@ The app currently includes five main chapters in the script learning section:
 ## Recent Changes
 
 ### November 17, 2025 (Late Evening)
+- **Reading Practice**: Implemented reading practice mode for heritage speakers
+  - **Content Types**: 3 categories - WhatsApp messages (3 pieces), Short stories/paragraphs (3 pieces), Bollywood vibes (3 pieces)
+  - **Learning Flow**: Line-by-line tap-to-reveal - each line independently shows transliteration + meaning when tapped
+  - **UI Features**: "Show All Help" button to reveal/hide all lines at once, visual cues for each line's state
+  - **Comprehension Quizzes**: 2-3 light questions per piece, clearly marked as "practice not test"
+  - **Progress Tracking**: localStorage-based completion tracking ('readingCompleted')
+  - **Content Style**: Fun, everyday language appropriate for heritage speakers (family chats, daily life, Bollywood dialogue)
+  - **Integration**: Accessible from ScriptPage as Level 5, unlocks after completing Characters
+
 - **Sentences (Level 4)**: Implemented complete sentence learning with tap-to-reveal and quizzes
   - **Structure**: 3 thematic sections: Family talk (6 sentences), Daily life (6 sentences), Identity/pride (6 sentences)
   - **Vocabulary**: Uses only words from Beginner Words + Advanced Words plus necessary grammar words (मेरा, है, जा रहा, etc.)

@@ -17,7 +17,7 @@ export default function ReadingContentPage() {
   
   const content = readingContent.find(c => c.id === contentId);
   
-  const [showHelp, setShowHelp] = useState(false);
+  const [revealedLines, setRevealedLines] = useState<Set<number>>(new Set());
 
   if (!content) {
     return (
@@ -27,9 +27,25 @@ export default function ReadingContentPage() {
     );
   }
 
-  const handleToggleHelp = () => {
-    setShowHelp(!showHelp);
+  const handleToggleLine = (index: number) => {
+    const newRevealed = new Set(revealedLines);
+    if (newRevealed.has(index)) {
+      newRevealed.delete(index);
+    } else {
+      newRevealed.add(index);
+    }
+    setRevealedLines(newRevealed);
   };
+
+  const handleShowAll = () => {
+    if (revealedLines.size === content.lines.length) {
+      setRevealedLines(new Set());
+    } else {
+      setRevealedLines(new Set(content.lines.map((_, i) => i)));
+    }
+  };
+
+  const allRevealed = revealedLines.size === content.lines.length;
 
   const handleContinue = () => {
     setLocation(`/reading/${contentId}/quiz`);
@@ -68,41 +84,57 @@ export default function ReadingContentPage() {
             <div className="bg-white rounded-3xl shadow-2xl p-8 border-4 border-[#ff9930]">
               {/* Content in Devanagari */}
               <div className="space-y-6 mb-6">
-                {content.lines.map((line, index) => (
-                  <div key={index} className="border-b border-gray-200 pb-4 last:border-0">
-                    <div className="text-3xl font-bold text-black mb-3 leading-relaxed">
-                      {line.hindi}
-                    </div>
-                    
-                    {showHelp && (
-                      <div className="bg-gradient-to-br from-[#ff9930] to-[#ff7730] rounded-xl p-4 text-white space-y-2 animate-slide-in-up">
-                        <div className="text-lg font-semibold">
-                          {line.transliteration}
-                        </div>
-                        <div className="text-base">
-                          {line.meaning}
-                        </div>
+                {content.lines.map((line, index) => {
+                  const isRevealed = revealedLines.has(index);
+                  return (
+                    <div 
+                      key={index} 
+                      className="border-b border-gray-200 pb-4 last:border-0 cursor-pointer"
+                      onClick={() => handleToggleLine(index)}
+                      data-testid={`line-${index}`}
+                    >
+                      <div className="text-3xl font-bold text-black mb-3 leading-relaxed">
+                        {line.hindi}
                       </div>
-                    )}
-                  </div>
-                ))}
+                      
+                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        {isRevealed ? (
+                          <><EyeOff className="w-4 h-4" /> Tap to hide</>
+                        ) : (
+                          <><Eye className="w-4 h-4" /> Tap to reveal</>
+                        )}
+                      </div>
+                      
+                      {isRevealed && (
+                        <div className="bg-gradient-to-br from-[#ff9930] to-[#ff7730] rounded-xl p-4 text-white space-y-2 animate-slide-in-up">
+                          <div className="text-lg font-semibold">
+                            {line.transliteration}
+                          </div>
+                          <div className="text-base">
+                            {line.meaning}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Help Toggle Button */}
+              {/* Show/Hide All Button */}
               <button
-                onClick={handleToggleHelp}
+                onClick={handleShowAll}
                 className="w-full py-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors font-semibold text-lg flex items-center justify-center gap-2"
-                data-testid="button-toggle-help"
+                data-testid="button-toggle-all"
               >
-                {showHelp ? (
+                {allRevealed ? (
                   <>
                     <EyeOff className="w-5 h-5" />
-                    Hide Help
+                    Hide All Help
                   </>
                 ) : (
                   <>
                     <Eye className="w-5 h-5" />
-                    Show Help
+                    Show All Help
                   </>
                 )}
               </button>

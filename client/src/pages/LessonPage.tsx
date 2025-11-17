@@ -126,7 +126,9 @@ export default function LessonPage() {
 
   // Highlight character occurrences in text
   const highlightCharacter = (word: string, character: string) => {
-    const parts = word.split(character);
+    // Remove dotted circle placeholder (◌) if present
+    const cleanChar = character.replace(/◌/g, '');
+    const parts = word.split(cleanChar);
     if (parts.length === 1) return word;
     
     return (
@@ -134,7 +136,7 @@ export default function LessonPage() {
         {parts.map((part, index) => (
           <span key={index}>
             {part}
-            {index < parts.length - 1 && <strong className="font-extrabold">{character}</strong>}
+            {index < parts.length - 1 && <strong className="font-extrabold">{cleanChar}</strong>}
           </span>
         ))}
       </>

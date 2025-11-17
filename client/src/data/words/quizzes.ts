@@ -1,0 +1,107 @@
+/**
+ * Beginner Words Quizzes
+ * Simple multiple-choice quizzes for each word pack
+ */
+
+interface WordQuizQuestion {
+  word: string;  // Devanagari word to test
+  options: string[];  // Possible meanings
+  correctIndex: number;
+}
+
+interface WordQuiz {
+  id: string;
+  title: string;
+  questions: WordQuizQuestion[];
+}
+
+export const beginnerWordQuizzes: { [key: string]: WordQuiz } = {
+  "bw-family": {
+    id: "bw-family",
+    title: "Family Words Quiz",
+    questions: [
+      {
+        word: "माँ",
+        options: ["Mother", "Father", "Sister", "Brother"],
+        correctIndex: 0
+      },
+      {
+        word: "पापा",
+        options: ["Mother", "Father", "Grandmother", "Grandfather"],
+        correctIndex: 1
+      },
+      {
+        word: "दादी",
+        options: ["Brother", "Sister", "Grandmother", "Mother"],
+        correctIndex: 2
+      },
+      {
+        word: "भाई",
+        options: ["Sister", "Brother", "Friend", "Father"],
+        correctIndex: 1
+      },
+      {
+        word: "बहन",
+        options: ["Mother", "Sister", "Grandmother", "Friend"],
+        correctIndex: 1
+      }
+    ]
+  },
+  "bw-home": {
+    id: "bw-home",
+    title: "Home & Daily Words Quiz",
+    questions: [
+      {
+        word: "घर",
+        options: ["School", "Home", "Water", "Food"],
+        correctIndex: 1
+      },
+      {
+        word: "पानी",
+        options: ["Food", "Water", "Home", "Friend"],
+        correctIndex: 1
+      },
+      {
+        word: "खाना",
+        options: ["Water", "Food", "School", "Home"],
+        correctIndex: 1
+      },
+      {
+        word: "स्कूल",
+        options: ["Home", "Friend", "School", "Food"],
+        correctIndex: 2
+      },
+      {
+        word: "दोस्त",
+        options: ["Friend", "School", "Home", "Water"],
+        correctIndex: 0
+      }
+    ]
+  },
+  "bw-feelings": {
+    id: "bw-feelings",
+    title: "Feelings Words Quiz",
+    questions: [
+      {
+        word: "खुश",
+        options: ["Tired", "Happy", "Fun", "Good"],
+        correctIndex: 1
+      },
+      {
+        word: "थका",
+        options: ["Happy", "Tired", "Good", "Fun"],
+        correctIndex: 1
+      },
+      {
+        word: "मज़ा",
+        options: ["Good", "Happy", "Fun", "Tired"],
+        correctIndex: 2
+      },
+      {
+        word: "अच्छा",
+        options: ["Tired", "Fun", "Happy", "Good"],
+        correctIndex: 3
+      }
+    ]
+  }
+};

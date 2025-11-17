@@ -348,10 +348,6 @@ export default function QuizPage() {
         <ProgressBar progress={progress} />
 
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative animate-slide-in-up">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-18 h-18 opacity-70 animate-wiggle" style={{ transform: 'rotate(-12deg)' }}>
-            <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
-          </div>
-          
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
             
@@ -418,14 +414,19 @@ export default function QuizPage() {
             </div>
 
             {isMultiSelect && (
-              <button
-                onClick={handleSubmitMultiSelect}
-                disabled={selectedAnswers.length === 0}
-                className="w-full py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-lg font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                data-testid="button-submit"
-              >
-                Submit Answer{selectedAnswers.length > 0 ? ` (${selectedAnswers.length} selected)` : ''}
-              </button>
+              <div className="relative">
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-12 h-12 opacity-60 z-10">
+                  <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
+                </div>
+                <button
+                  onClick={handleSubmitMultiSelect}
+                  disabled={selectedAnswers.length === 0}
+                  className="w-full py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-lg font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  data-testid="button-submit"
+                >
+                  Submit Answer{selectedAnswers.length > 0 ? ` (${selectedAnswers.length} selected)` : ''}
+                </button>
+              </div>
             )}
           </div>
         </div>

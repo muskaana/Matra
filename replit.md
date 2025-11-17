@@ -1,109 +1,6 @@
 # Overview
 
-This is a Hindi language learning application called "Matra" that teaches users the Devanagari script, reading comprehension, and conversational skills. The application is built as a full-stack web application with a React frontend and Express backend, designed to provide an interactive, gamified learning experience for Hindi language learners.
-
-The application follows a structured learning path starting with basic script characters (vowels and consonants), progressing through word formation, and advancing to sentences and reading comprehension. Users complete lessons, practice exercises, and quizzes with progress tracking and encouraging feedback.
-
-## Curriculum Structure
-
-The app currently includes five main chapters in the script learning section:
-1. **Vowels** (5 sections/12 lessons) - Basic vowel sounds and characters
-2. **Consonants** (16 sections/33 lessons) - Consonant characters and sounds
-3. **Matra/Vowel Symbols** (7 sections/13 lessons) - Vowel modifiers that attach to consonants
-4. **Similar Characters** (5 sections/11 lessons) - Confusing character pairs commonly mistaken by learners:
-   - Section 1: न vs ण (dental vs retroflex 'na')
-   - Section 2: ज्ञ vs ग (conjunct 'gya' vs simple 'ga')
-   - Section 3: ऋ vs री (vowel vs ra+matra combination)
-   - Section 4: स, श, ष (three variants of 's' sounds)
-   - Section 5: ं vs ँ (anusvara vs chandrabindu nasalization marks)
-5. **Numbers** (2 sections/10 lessons) - Hindi numerals ०-९ (0-9) with everyday conversational usage
-
-## Recent Changes
-
-### November 17, 2025 (Late Evening)
-- **Reading Practice**: Implemented reading practice mode for heritage speakers
-  - **Content Types**: 3 categories - WhatsApp messages (3 pieces), Short stories/paragraphs (3 pieces), Bollywood vibes (3 pieces)
-  - **Learning Flow**: Line-by-line tap-to-reveal - each line independently shows transliteration + meaning when tapped
-  - **UI Features**: "Show All Help" button to reveal/hide all lines at once, visual cues for each line's state
-  - **Comprehension Quizzes**: 2-3 light questions per piece, clearly marked as "practice not test"
-  - **Progress Tracking**: localStorage-based completion tracking ('readingCompleted')
-  - **Content Style**: Fun, everyday language appropriate for heritage speakers (family chats, daily life, Bollywood dialogue)
-  - **Integration**: Accessible from ScriptPage as Level 5, unlocks after completing Characters
-
-- **Sentences (Level 4)**: Implemented complete sentence learning with tap-to-reveal and quizzes
-  - **Structure**: 3 thematic sections: Family talk (6 sentences), Daily life (6 sentences), Identity/pride (6 sentences)
-  - **Vocabulary**: Uses only words from Beginner Words + Advanced Words plus necessary grammar words (मेरा, है, जा रहा, etc.)
-  - **Learning Flow**: Tap-to-reveal interface - Devanagari shown first, tap to reveal transliteration + meaning
-  - **Quiz Types**: Two question formats - "match" (English → Hindi) and "fill" (fill-in-the-blank)
-  - **Progress Tracking**: localStorage-based with sequential unlocking per section
-  - **Integration**: Unlocks after completing all Advanced Words packs (3/3)
-  - **Navigation**: Previous/Next buttons during learning, automatic transition to quiz after last sentence
-  - **Visual Style**: Consistent with app design, large Devanagari text, orange gradient reveal panels
-
-- **Advanced Words (Level 3)**: Implemented advanced word learning with reading accuracy focus
-  - **Structure**: 3 thematic word packs: Emotions/Identity (4 words), Culture/Media (4 words), Daily but Longer (4 words)
-  - **Word Complexity**: Longer words with more matras and conjuncts (गर्व, संगीत, आत्मविश्वास, अस्पताल)
-  - **Learning Flow**: Flashcard practice followed by reading accuracy quiz
-  - **Quiz Innovation**: Shows transliteration (e.g., "garv") and asks user to identify correct Devanagari (गर्व)
-  - **Progress Tracking**: localStorage-based with sequential unlocking (must complete Beginner Words first)
-  - **Integration**: Unlocks after completing all Beginner Words packs
-  - **Visual Style**: Consistent with existing app design, larger text for Devanagari options in quiz
-  
-- **Beginner Words (Level 2)**: Implemented complete word learning feature with flashcards and quizzes
-  - **Structure**: 3 thematic word packs: Family (6 words), Home & Daily (5 words), Feelings (4 words)
-  - **Learning Flow**: Each pack has flashcard practice (Devanagari front, transliteration + meaning back) followed by a quiz
-  - **Flashcard Component**: Interactive flip animation, shows word front/back, auto-navigates to quiz after last card
-  - **Quiz System**: Multiple-choice format testing word recognition, shows results with percentage and confetti for 80%+
-  - **Progress Tracking**: localStorage-based completion tracking with sequential unlocking (must complete previous pack)
-  - **Integration**: Unlocks after completing all Characters sections, shows progress on ScriptPage
-  - **Vocabulary**: Only uses simple, high-frequency words heritage speakers already know orally
-  - **Visual Style**: Consistent with existing app design (#ff9930 brand color, tiger mascot, gradient backgrounds)
-
-### November 17, 2025 (Evening)
-- **Comprehensive Vocabulary Update**: Revised ALL lesson sentences across the entire app to use common everyday conversational Hindi words
-  - **Scope**: Updated 78+ lesson sentences across Vowels (12 lessons), Consonants (33 lessons), Matra (13 lessons), Similar Characters (11 lessons), and Numbers (10 lessons)
-  - **Goal**: Replace formal/religious/philosophical/technical vocabulary with simple words beginners encounter in daily life
-  - **Examples of changes**:
-    - Removed formal words: ऋषि (sage), ज्ञान (knowledge), षड्यंत्र (conspiracy), क्षमता (ability), कृपया (formal please), शून्य (formal zero)
-    - Replaced with everyday words: रोटी, चाय, पानी, घर, माँ, बच्चे, खाना, लोग, बारिश, मौसम, पैसे, बैठो, याद
-  - **Key improvements**:
-    - All sentences now use common conversational vocabulary appropriate for beginner Hindi learners
-    - Sentences reflect everyday situations: food, family, home, time, weather, basic activities
-    - Removed religious references (भगवान, देव, मंदिर, ईश्वर) in favor of secular everyday topics
-    - Removed technical terms (षट्कोण/hexagon, त्रिकोण/triangle, रीढ़/spine) in favor of simple concepts
-    - All sentences remain complete conversational statements with proper subjects and verbs
-
-- **Numbers Section Complete**: Added complete Numbers chapter with 10 individual lessons (one per digit ०-९)
-  - Section 1: Digits ०-④ (Zero through Four) with 5 lessons
-  - Section 2: Digits ⑤-⑨ (Five through Nine) with 5 lessons
-  - Each lesson includes Devanagari digit, transliteration, Hindi pronunciation, and everyday sentence example
-  - Sentences use common conversational words: चाय (tea), रोटी (roti), लोग (people), बजे (o'clock), मिनट (minute), दिन (day), खाना (food), सोना (sleep), घर (house)
-  - 2 practice exercises (one per section) reviewing digit-sound pairs
-  - 8 quiz questions total (4 per section) testing both digit recognition and Hindi word knowledge
-  - Progress tracking via localStorage key 'numbersQuizzesCompleted'
-  - Fully integrated with all page navigation, routing, and section structure
-  - Updated VowelsPage (/script/vowels) to display Numbers card with "१" icon and progress tracking
-
-### November 17, 2025 (Morning)
-- **Smart Review System**: Implemented adaptive spaced repetition system using SM-2-inspired algorithm
-  - Tracks quiz performance per character (vowels, consonants, matra, similar)
-  - Identifies difficult items (2+ mistakes) and schedules targeted review sessions
-  - Review intervals based on difficulty: hard (1 day), medium (2 days), easy (3 days), max 21 days
-  - ReviewPage provides flashcard-style practice with reveal/remember flow
-  - Review notification banner on ScriptPage shows count of items due for review
-  - localStorage-based with forward-compatible schema for future backend migration
-  - Bounded history (1000 events max) prevents storage bloat
-
-### November 16, 2025
-- **Quiz Instructions**: Updated matra quiz questions to include "(Select all)" text directly in the question for multi-answer quizzes, removing the generic "Multiple answers possible" message
-- **Similar Characters Bug Fix**: Fixed navigation issue where Similar Characters quizzes were using the wrong URL path (vowels instead of similar), preventing section progress tracking
-- **Progress Tracking**: Added safety check to calculateProgress function to handle undefined section structures gracefully
-
-### November 13, 2025
-- **Quiz Updates**: Changed all quiz questions to ask about sounds instead of displaying Devanagari characters (e.g., "Which word starts with a short 'a' sound?" instead of "Which word starts with अ?")
-- **Display Format**: Implemented discriminated quiz display - showing only Hindi script during active quizzes, but showing "Hindi (transliteration)" format in results
-- **New Chapter**: Added complete Similar Characters chapter with lessons, practice exercises, and quizzes to help learners distinguish between commonly confused Devanagari characters
-- **Navigation**: Replaced the locked "स,श,ष" placeholder with the new unlocked Similar Characters chapter across all hub pages
+This project is a Hindi language learning application, "Matra," designed to teach the Devanagari script, reading comprehension, and conversational skills. It's a full-stack web application with a React frontend and Express backend, offering an interactive, gamified learning experience. The application provides a structured learning path from basic script characters to advanced reading and conversation, including gamified elements, progress tracking, and encouraging feedback. The business vision is to make Hindi learning accessible and engaging, tapping into a significant market of individuals interested in learning the language.
 
 # User Preferences
 
@@ -113,98 +10,38 @@ Preferred communication style: Simple, everyday language.
 
 ## Frontend Architecture
 
-**Technology Stack:**
-- React 18 with TypeScript for the UI framework
-- Wouter for lightweight client-side routing
-- TanStack Query (React Query) for server state management
-- Tailwind CSS for styling with shadcn/ui component library
-- Vite as the build tool and development server
-
-**Design Patterns:**
-- Component-based architecture with reusable UI components from shadcn/ui
-- Page-based routing structure under `client/src/pages/`
-- Custom hooks for mobile detection and toast notifications
-- Local storage for persisting user progress (quiz completion tracking)
-
-**Key Design Decisions:**
-- Mobile-first responsive design optimized for phone screens (max-width: 540px containers)
-- Indian cultural theming with decorative patterns (Rangoli, Mandala) and orange (#ff9930) primary color
-- Gamification elements including confetti celebrations, tiger mascot characters, and encouraging Hindi/English messages
-- Asset management through a dedicated `attached_assets` directory for generated images
+The frontend uses React 18 with TypeScript, Wouter for routing, TanStack Query for state management, and Tailwind CSS with shadcn/ui for styling, built with Vite. It follows a component-based architecture, utilizing reusable shadcn/ui components and custom hooks. Key design decisions include a mobile-first responsive design, Indian cultural theming (Rangoli, Mandala, orange primary color), gamification elements like confetti and a tiger mascot, and local storage for progress persistence.
 
 ## Backend Architecture
 
-**Technology Stack:**
-- Express.js server with TypeScript
-- Drizzle ORM for database operations
-- PostgreSQL as the primary database (configured via Neon serverless driver)
-- Session management with connect-pg-simple for PostgreSQL-backed sessions
-
-**Design Patterns:**
-- Modular route registration pattern via `registerRoutes` function
-- Storage abstraction layer with `IStorage` interface
-- In-memory storage implementation (`MemStorage`) as a development/testing fallback
-- Middleware pipeline for request logging and error handling
-- Custom logging with timestamp formatting
-
-**Key Design Decisions:**
-- API routes prefixed with `/api` for clear separation from static assets
-- Development/production environment detection via `NODE_ENV`
-- Vite integration in development mode with HMR support
-- Request/response logging truncated to 80 characters for readability
-- User authentication schema ready with username/password fields
+The backend is an Express.js server with TypeScript, using Drizzle ORM for database interactions with PostgreSQL (Neon serverless driver). It employs a modular route registration pattern, a storage abstraction layer, and middleware for logging and error handling. API routes are prefixed with `/api`, and the system supports environment detection and Vite integration with HMR in development.
 
 ## Data Storage
 
-**Database:**
-- PostgreSQL database configured via `DATABASE_URL` environment variable
-- Drizzle ORM with schema-first approach defined in `shared/schema.ts`
-- Migration files stored in `./migrations` directory
-- UUID primary keys generated via PostgreSQL's `gen_random_uuid()`
+PostgreSQL is the primary database, managed by Drizzle ORM with a schema-first approach. The schema includes a `users` table with UUID primary keys and Zod validation. An `IStorage` interface provides a storage abstraction, with an in-memory implementation (`MemStorage`) for development.
 
-**Schema Design:**
-- Users table with id, username (unique), and password fields
-- Zod validation schemas derived from Drizzle schemas for type safety
-- Shared types between client and server via `shared/` directory
+## UI/UX Decisions
 
-**Storage Abstraction:**
-- `IStorage` interface defining CRUD operations
-- `MemStorage` class providing in-memory implementation for development
-- Database implementation expected to replace MemStorage in production
-- Methods for user retrieval by ID and username, plus user creation
+The application prioritizes a mobile-first responsive design, optimized for phone screens. The visual theme incorporates Indian cultural elements like Rangoli and Mandala patterns, with orange (`#ff9930`) as the primary brand color. Gamification is integrated through confetti celebrations, a tiger mascot, and encouraging messages in Hindi and English.
 
-## External Dependencies
+## Feature Specifications
 
-**UI Component Libraries:**
-- Radix UI primitives for accessible, unstyled components
-- shadcn/ui configuration with "new-york" style variant
-- Canvas-confetti for celebration animations
-- Lucide React for iconography
+The application includes a structured curriculum covering Vowels, Consonants, Matra (vowel symbols), Similar Characters, and Numbers. Key features include:
 
-**Development Tools:**
-- Replit-specific plugins: runtime error overlay, cartographer, dev banner
-- PostCSS with Tailwind CSS and Autoprefixer
-- tsx for TypeScript execution in development
-- esbuild for production server bundling
+-   **Placement Quiz**: Assesses user proficiency to determine a personalized learning starting point.
+-   **Progressive Unlocking**: Lessons and levels (Beginner Words, Advanced Words, Sentences, Reading) unlock sequentially based on completion.
+-   **Reading Practice**: Offers line-by-line tap-to-reveal reading exercises with comprehension quizzes, targeting heritage speakers.
+-   **Word Learning (Beginner & Advanced)**: Flashcard-based learning and quizzes for vocabulary acquisition, focusing on conversational Hindi.
+-   **Sentence Learning**: Thematic sentence practice with tap-to-reveal mechanics and diverse quiz types.
+-   **Smart Review System**: An adaptive spaced repetition system (SM-2 inspired) tracks performance and schedules targeted review sessions for difficult items.
+-   **Vocabulary**: All lesson content uses common, everyday conversational Hindi words, avoiding formal or technical terms.
 
-**Database & ORM:**
-- @neondatabase/serverless for PostgreSQL connections
-- Drizzle ORM and Drizzle Kit for migrations
-- drizzle-zod for schema-to-validation integration
+# External Dependencies
 
-**Form & Validation:**
-- React Hook Form with @hookform/resolvers
-- Zod for schema validation
-
-**Routing & State:**
-- wouter for client-side routing
-- @tanstack/react-query for server state with infinite stale time
-
-**Styling:**
-- Tailwind CSS with CSS variables for theming
-- Custom fonts: DM Sans, Fira Code, Geist Mono, Architects Daughter, Tiro Devanagari Hindi
-- class-variance-authority and clsx for conditional styling
-
-**Session Management:**
-- connect-pg-simple for PostgreSQL session storage
-- Express session middleware (implied by connect-pg-simple dependency)
+-   **UI Components**: Radix UI, shadcn/ui, Canvas-confetti, Lucide React.
+-   **Development Tools**: Vite, PostCSS, Tailwind CSS, Autoprefixer, tsx, esbuild.
+-   **Database & ORM**: @neondatabase/serverless, Drizzle ORM, Drizzle Kit, drizzle-zod.
+-   **Form & Validation**: React Hook Form, @hookform/resolvers, Zod.
+-   **Routing & State**: wouter, @tanstack/react-query.
+-   **Styling**: Tailwind CSS, class-variance-authority, clsx, custom fonts (DM Sans, Fira Code, Geist Mono, Architects Daughter, Tiro Devanagari Hindi).
+-   **Session Management**: connect-pg-simple, Express session middleware.

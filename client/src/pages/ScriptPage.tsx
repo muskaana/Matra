@@ -143,7 +143,7 @@ export default function ScriptPage() {
         )}
         
         <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-xl border-2 border-white">
-          {allCharactersComplete ? (
+          {isSentencesComplete ? (
             <Link href="/reading">
               <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-read">
                 <Book className="w-6 h-6 mb-1" />
@@ -151,7 +151,7 @@ export default function ScriptPage() {
               </button>
             </Link>
           ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-read-locked" title="Complete all character lessons first">
+            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-read-locked" title="Complete Sentences to unlock Reading">
               <Lock className="w-6 h-6 mb-1" />
               <span className="text-sm font-medium">Read</span>
             </button>

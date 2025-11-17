@@ -19,6 +19,16 @@ The app currently includes four main chapters in the script learning section:
 
 ## Recent Changes
 
+### November 17, 2025
+- **Smart Review System**: Implemented adaptive spaced repetition system using SM-2-inspired algorithm
+  - Tracks quiz performance per character (vowels, consonants, matra, similar)
+  - Identifies difficult items (2+ mistakes) and schedules targeted review sessions
+  - Review intervals based on difficulty: hard (1 day), medium (2 days), easy (3 days), max 21 days
+  - ReviewPage provides flashcard-style practice with reveal/remember flow
+  - Review notification banner on ScriptPage shows count of items due for review
+  - localStorage-based with forward-compatible schema for future backend migration
+  - Bounded history (1000 events max) prevents storage bloat
+
 ### November 16, 2025
 - **Quiz Instructions**: Updated matra quiz questions to include "(Select all)" text directly in the question for multi-answer quizzes, removing the generic "Multiple answers possible" message
 - **Similar Characters Bug Fix**: Fixed navigation issue where Similar Characters quizzes were using the wrong URL path (vowels instead of similar), preventing section progress tracking

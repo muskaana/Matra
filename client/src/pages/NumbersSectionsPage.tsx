@@ -31,8 +31,10 @@ export default function NumbersSectionsPage() {
   };
   
   const sections = [
-    { id: 1, name: "Section 1: Numbers ०-④", startLesson: "n0" },
-    { id: 2, name: "Section 2: Numbers ⑤-⑨", startLesson: "n5" },
+    { id: 1, name: "Section 1: Numbers ०-②", startLesson: "n0" },
+    { id: 2, name: "Section 2: Numbers ③-⑤", startLesson: "n3" },
+    { id: 3, name: "Section 3: Numbers ⑥-⑧", startLesson: "n6" },
+    { id: 4, name: "Section 4: Number ⑨", startLesson: "n9" },
   ];
 
   return (

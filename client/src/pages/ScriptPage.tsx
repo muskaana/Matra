@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, Lock } from "lucide-react";
+import { Book, MessageSquare, FileText, Lock, Home } from "lucide-react";
 
 export default function ScriptPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -39,14 +39,27 @@ export default function ScriptPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+      {/* Header with Home button */}
+      <div className="w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+        <div className="max-w-sm mx-auto px-6 py-3 flex items-center justify-between">
+          <Link href="/">
+            <button className="flex items-center gap-2 text-gray-600 hover:text-[#ff9930] transition-colors" data-testid="button-home">
+              <Home className="w-5 h-5" />
+              <span className="font-medium">Home</span>
+            </button>
+          </Link>
+          <h1 className="text-lg font-bold text-gray-900">Learning Path</h1>
+        </div>
+      </div>
+
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         <div className="flex-1 flex flex-col">
-          <div className="bg-[#ff9930] text-white px-6 py-3.5 rounded-t-xl font-semibold text-lg">
+          <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg shadow-lg">
             Hindi (Devanagari) Script
           </div>
           
-          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
             <div className="flex flex-col justify-around flex-1">
               {levels.map((level, index) => {
                 const content = (
@@ -82,7 +95,7 @@ export default function ScriptPage() {
           </div>
         </div>
         
-        <div className="flex justify-around items-center bg-[#ff9930] rounded-xl mt-6 py-3 shadow-lg">
+        <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-xl border-2 border-white">
           {allCharactersComplete ? (
             <Link href="/reading">
               <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-read">

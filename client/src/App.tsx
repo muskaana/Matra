@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
+import Home from "@/pages/Home";
 import ReadingPage from "@/pages/ReadingPage";
 import ConversationPage from "@/pages/ConversationPage";
 import ScriptPage from "@/pages/ScriptPage";
@@ -37,9 +38,9 @@ function LessonPersistence({ children }: { children: React.ReactNode }) {
   }, [location]);
 
   useEffect(() => {
-    // On mount, restore saved lesson if exists
+    // On mount, restore saved lesson if exists (but not on home page)
     const savedLesson = localStorage.getItem('currentLesson');
-    if (savedLesson && location === '/') {
+    if (savedLesson && location === '/script') {
       setLocation(savedLesson);
     }
   }, []);
@@ -52,7 +53,7 @@ function Router() {
     <LessonPersistence>
       <Switch>
         {/* Add pages below */}
-        <Route path="/" component={ScriptPage} />
+        <Route path="/" component={Home} />
         <Route path="/reading" component={ReadingPage} />
         <Route path="/conversation" component={ConversationPage} />
         <Route path="/script" component={ScriptPage} />

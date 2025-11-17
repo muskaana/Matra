@@ -220,6 +220,11 @@ export function markItemReviewed(characterId: string, correct: boolean): void {
     };
     data.history.push(event);
     
+    // Keep history bounded to prevent localStorage bloat
+    if (data.history.length > MAX_HISTORY_SIZE) {
+      data.history = data.history.slice(-MAX_HISTORY_SIZE);
+    }
+    
     if (correct) {
       item.streak++;
       

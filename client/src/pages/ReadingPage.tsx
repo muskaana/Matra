@@ -1,57 +1,113 @@
-import React from "react";
-import { Book, MessageSquare, FileText } from "lucide-react";
-import { Link } from "wouter";
+/**
+ * ReadingPage Component
+ * 
+ * Shows reading practice content organized by type
+ * WhatsApp messages, Paragraphs, and Bollywood captions
+ */
+
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
+import { ArrowLeft, MessageSquare, BookOpen, Film, CheckCircle2 } from "lucide-react";
+import { readingContent } from '../data/reading/content';
 
 export default function ReadingPage() {
-  const readings = [
-    { id: 1, title: "Title" },
-    { id: 2, title: "Title" },
-    { id: 3, title: "Title" },
-    { id: 4, title: "Title" },
-    { id: 5, title: "Title" },
-    { id: 6, title: "Title" },
-  ];
+  const [, setLocation] = useLocation();
+  const [completedItems, setCompletedItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    const completed = localStorage.getItem('readingCompleted');
+    if (completed) {
+      setCompletedItems(JSON.parse(completed));
+    }
+  }, []);
+
+  const whatsappContent = readingContent.filter(c => c.type === "whatsapp");
+  const paragraphContent = readingContent.filter(c => c.type === "paragraph");
+  const bollywoodContent = readingContent.filter(c => c.type === "bollywood");
+
+  const isCompleted = (id: string) => completedItems.includes(id);
+
+  const renderContentCard = (content: typeof readingContent[0]) => {
+    const completed = isCompleted(content.id);
+    
+    return (
+      <Link key={content.id} href={`/reading/${content.id}`}>
+        <div className={`bg-white rounded-xl shadow-lg p-4 border-2 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer ${
+          completed ? 'border-green-500' : 'border-gray-200'
+        }`} data-testid={`card-reading-${content.id}`}>
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="font-bold text-black text-lg flex-1">{content.title}</h3>
+            {completed && <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0" />}
+          </div>
+          <p className="text-sm text-gray-600">{content.description}</p>
+        </div>
+      </Link>
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
-        <div className="flex-1 flex flex-col">
-          <div className="bg-[#ff9930] text-white px-6 py-3.5 rounded-t-xl font-semibold text-lg">
-            Reading Practice
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen px-4 py-4">
+        {/* Header */}
+        <div className="flex items-center mb-4">
+          <button 
+            onClick={() => setLocation('/script')} 
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors mr-2"
+            data-testid="button-back"
+          >
+            <ArrowLeft className="w-6 h-6 text-gray-600" />
+          </button>
+          <h1 className="text-2xl font-bold text-black">Reading Practice</h1>
+        </div>
+
+        {/* Description */}
+        <p className="text-gray-600 mb-6 text-center text-sm">
+          Practice reading Hindi in different contexts. This is practice, not a test!
+        </p>
+
+        {/* WhatsApp Messages Section */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <MessageSquare className="w-6 h-6 text-[#ff9930]" />
+            <h2 className="text-xl font-bold text-black">WhatsApp Messages</h2>
           </div>
-          
-          <div className="bg-white px-6 py-6 rounded-b-xl shadow-lg flex-1 border-x border-b border-gray-200">
-            <div className="grid grid-cols-2 gap-4">
-              {readings.map((reading) => (
-                <div key={reading.id} className="flex flex-col items-center gap-2">
-                  <div className="w-28 h-28 bg-[#ff9930] rounded-xl shadow-lg"></div>
-                  <span className="text-sm font-medium text-black text-center">{reading.title}</span>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-3">
+            {whatsappContent.map(content => renderContentCard(content))}
           </div>
         </div>
-        
-        <div className="flex justify-around items-center bg-[#ff9930] rounded-xl mt-6 py-3 shadow-lg">
-          <Link href="/reading">
-            <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all">
-              <Book className="w-6 h-6 mb-1" />
-              <span className="text-sm font-bold">Read</span>
-            </button>
-          </Link>
-          <Link href="/script">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
-              <FileText className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Script</span>
-            </button>
-          </Link>
-          <Link href="/conversation">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all">
-              <MessageSquare className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Talk</span>
-            </button>
-          </Link>
+
+        {/* Paragraphs Section */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="w-6 h-6 text-[#ff9930]" />
+            <h2 className="text-xl font-bold text-black">Short Stories</h2>
+          </div>
+          <div className="space-y-3">
+            {paragraphContent.map(content => renderContentCard(content))}
+          </div>
         </div>
+
+        {/* Bollywood Section */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Film className="w-6 h-6 text-[#ff9930]" />
+            <h2 className="text-xl font-bold text-black">Bollywood Vibes</h2>
+          </div>
+          <div className="space-y-3">
+            {bollywoodContent.map(content => renderContentCard(content))}
+          </div>
+        </div>
+
+        {/* Completion Message */}
+        {completedItems.length === readingContent.length && (
+          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-center shadow-lg animate-slide-in-up">
+            <CheckCircle2 className="w-16 h-16 text-white mx-auto mb-3" />
+            <h3 className="text-white font-bold text-xl mb-2">All Reading Complete!</h3>
+            <p className="text-white/90 text-sm">
+              Great job practicing your Hindi reading! 📚
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

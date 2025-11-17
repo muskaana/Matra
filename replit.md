@@ -6,7 +6,7 @@ The application follows a structured learning path starting with basic script ch
 
 ## Curriculum Structure
 
-The app currently includes four main chapters in the script learning section:
+The app currently includes five main chapters in the script learning section:
 1. **Vowels** (5 sections/12 lessons) - Basic vowel sounds and characters
 2. **Consonants** (16 sections/33 lessons) - Consonant characters and sounds
 3. **Matra/Vowel Symbols** (7 sections/13 lessons) - Vowel modifiers that attach to consonants
@@ -16,10 +16,23 @@ The app currently includes four main chapters in the script learning section:
    - Section 3: ऋ vs री (vowel vs ra+matra combination)
    - Section 4: स, श, ष (three variants of 's' sounds)
    - Section 5: ं vs ँ (anusvara vs chandrabindu nasalization marks)
+5. **Numbers** (2 sections/10 lessons) - Hindi numerals ०-९ (0-9) with everyday conversational usage
 
 ## Recent Changes
 
-### November 17, 2025
+### November 17, 2025 (Evening)
+- **Numbers Section Complete**: Added complete Numbers chapter with 10 individual lessons (one per digit ०-९)
+  - Section 1: Digits ०-④ (Zero through Four) with 5 lessons
+  - Section 2: Digits ⑤-⑨ (Five through Nine) with 5 lessons
+  - Each lesson includes Devanagari digit, transliteration, Hindi pronunciation, and everyday sentence example
+  - Sentences use common conversational words: चाय (tea), रोटी (roti), लोग (people), बजे (o'clock), मिनट (minute), दिन (day), खाना (food), सोना (sleep), पैसे (money)
+  - 2 practice exercises (one per section) reviewing digit-sound pairs
+  - 8 quiz questions total (4 per section) testing both digit recognition and Hindi word knowledge
+  - Progress tracking via localStorage key 'numbersQuizzesCompleted'
+  - Fully integrated with all page navigation, routing, and section structure
+  - Updated VowelsPage (/script/vowels) to display Numbers card with "१" icon and progress tracking
+
+### November 17, 2025 (Morning)
 - **Smart Review System**: Implemented adaptive spaced repetition system using SM-2-inspired algorithm
   - Tracks quiz performance per character (vowels, consonants, matra, similar)
   - Identifies difficult items (2+ mistakes) and schedules targeted review sessions

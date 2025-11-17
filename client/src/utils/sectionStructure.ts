@@ -66,10 +66,11 @@ export const SIMILAR_SECTIONS: SectionStructure[] = [
   { lessons: 2, quizQuestions: 4 },  // Section 5: ं vs ँ (bindu vs chandrabindu)
 ];
 
-// Numbers sections: 1 section total
+// Numbers sections: 2 sections total
 // Hindi numerals ०-९ (0-9)
 export const NUMBER_SECTIONS: SectionStructure[] = [
-  { lessons: 5, quizQuestions: 4 },  // Section 1: All digits ०-९
+  { lessons: 5, quizQuestions: 4 },  // Section 1: ० १ २ ३ ४
+  { lessons: 5, quizQuestions: 4 }   // Section 2: ५ ६ ७ ८ ९
 ];
 
 /**
@@ -154,11 +155,15 @@ export function getSimilarSectionInfo(lessonId: string): { section: number; less
 
 /**
  * Get the section number for a numbers lesson
- * @param lessonPageNumber - The pageNumber field from lesson data (1-5)
- * @returns section number (always 1) and lesson position
+ * @param lessonPageNumber - The pageNumber field from lesson data (1-10)
+ * @returns section number (1-2) and lesson position
  */
 export function getNumberSectionInfo(lessonPageNumber: number): { section: number; lessonInSection: number } {
-  return { section: 1, lessonInSection: lessonPageNumber };
+  if (lessonPageNumber <= 5) {
+    return { section: 1, lessonInSection: lessonPageNumber };
+  } else {
+    return { section: 2, lessonInSection: lessonPageNumber - 5 };
+  }
 }
 
 /**

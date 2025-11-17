@@ -199,6 +199,24 @@ export default function LessonPage() {
                   </button>
                 </div>
               </>
+            ) : lesson.character.includes('(') ? (
+              <>
+                <div className="flex flex-col items-center justify-center mb-2">
+                  <div className="text-8xl font-bold text-black animate-slide-in-right">
+                    {lesson.character.split('(')[0].trim()}
+                  </div>
+                  <div className="text-4xl font-bold text-gray-600 mt-2">
+                    {lesson.character.match(/\(([^)]+)\)/)?.[1] || ''}
+                  </div>
+                </div>
+                <button 
+                  onClick={() => speak(lesson.character.split('(')[0].trim())}
+                  className="text-[#ff9930] hover:text-[#CF7B24] transition-colors p-2 hover:bg-orange-50 rounded-full mb-2"
+                  data-testid="button-speak-character"
+                >
+                  <Volume2 className="w-6 h-6" />
+                </button>
+              </>
             ) : (
               <div className="flex items-center justify-center gap-3 mb-2">
                 <div className="text-8xl font-bold text-black animate-slide-in-right">{lesson.character}</div>

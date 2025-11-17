@@ -63,7 +63,7 @@ export default function WordQuizPage() {
       }
 
       // Confetti for good score
-      const percentage = ((score + (selectedAnswer === currentQuestion.correctIndex ? 1 : 0)) / quiz.questions.length) * 100;
+      const percentage = (score / quiz.questions.length) * 100;
       if (percentage >= 80) {
         confetti({
           particleCount: 100,
@@ -86,7 +86,7 @@ export default function WordQuizPage() {
 
   // Results Screen
   if (showResults) {
-    const finalScore = score + (selectedAnswer === currentQuestion.correctIndex ? 1 : 0);
+    const finalScore = score;
     const percentage = Math.round((finalScore / quiz.questions.length) * 100);
 
     return (

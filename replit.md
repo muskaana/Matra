@@ -20,6 +20,17 @@ The app currently includes five main chapters in the script learning section:
 
 ## Recent Changes
 
+### November 17, 2025 (Late Evening)
+- **Beginner Words (Level 2)**: Implemented complete word learning feature with flashcards and quizzes
+  - **Structure**: 3 thematic word packs: Family (6 words), Home & Daily (5 words), Feelings (4 words)
+  - **Learning Flow**: Each pack has flashcard practice (Devanagari front, transliteration + meaning back) followed by a quiz
+  - **Flashcard Component**: Interactive flip animation, shows word front/back, auto-navigates to quiz after last card
+  - **Quiz System**: Multiple-choice format testing word recognition, shows results with percentage and confetti for 80%+
+  - **Progress Tracking**: localStorage-based completion tracking with sequential unlocking (must complete previous pack)
+  - **Integration**: Unlocks after completing all Characters sections, shows progress on ScriptPage
+  - **Vocabulary**: Only uses simple, high-frequency words heritage speakers already know orally
+  - **Visual Style**: Consistent with existing app design (#ff9930 brand color, tiger mascot, gradient backgrounds)
+
 ### November 17, 2025 (Evening)
 - **Comprehensive Vocabulary Update**: Revised ALL lesson sentences across the entire app to use common everyday conversational Hindi words
   - **Scope**: Updated 78+ lesson sentences across Vowels (12 lessons), Consonants (33 lessons), Matra (13 lessons), Similar Characters (11 lessons), and Numbers (10 lessons)

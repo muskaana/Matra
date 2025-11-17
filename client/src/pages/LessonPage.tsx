@@ -137,17 +137,21 @@ export default function LessonPage() {
   const highlightCharacter = (word: string, character: string) => {
     // Remove dotted circle placeholder (◌) if present
     const cleanChar = character.replace(/◌/g, '');
-    const parts = word.split(cleanChar);
-    if (parts.length === 1) return word;
+    
+    // Find the index of the character in the word
+    const index = word.indexOf(cleanChar);
+    if (index === -1) return word;
+    
+    // Split only at the exact position to avoid separating combining marks
+    const before = word.substring(0, index);
+    const match = cleanChar;
+    const after = word.substring(index + cleanChar.length);
     
     return (
       <>
-        {parts.map((part, index) => (
-          <span key={index}>
-            {part}
-            {index < parts.length - 1 && <strong className="font-extrabold">{cleanChar}</strong>}
-          </span>
-        ))}
+        {before}
+        <strong className="font-extrabold">{match}</strong>
+        {after}
       </>
     );
   };

@@ -9,14 +9,18 @@ export default function Home() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Check if user has visited before
+    // Check if user has completed placement quiz
+    const placementCompleted = localStorage.getItem('placementCompleted');
     const hasVisited = localStorage.getItem('hasVisitedBefore');
     
-    if (hasVisited) {
-      // Redirect to main app
-      setLocation('/script');
+    if (placementCompleted) {
+      // User has taken placement quiz, send to dashboard
+      setLocation('/dashboard');
+    } else if (hasVisited) {
+      // User has visited but no placement, send to placement quiz
+      setLocation('/placement');
     } else {
-      // Mark as visited for next time
+      // First time visitor, show landing page
       localStorage.setItem('hasVisitedBefore', 'true');
     }
   }, [setLocation]);

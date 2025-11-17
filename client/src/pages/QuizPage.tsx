@@ -306,6 +306,13 @@ export default function QuizPage() {
           <div className="flex-1 flex flex-col justify-between">
             <div className="mb-8">
               <p className="text-xl text-black mb-4" data-testid="text-question">{quiz.subQuestion}</p>
+              {isMultiSelect && (
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <div className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold border-2 border-purple-300" data-testid="badge-multi-select">
+                    Select all that apply
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>

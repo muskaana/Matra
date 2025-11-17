@@ -26,6 +26,7 @@ import confetti from "canvas-confetti";
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
+import { recordAttempt, ContentType } from '../utils/smartReview';
 
 // Encouraging messages shown on results screen
 const encouragingMessages = [
@@ -93,6 +94,20 @@ export default function QuizPage() {
     return ((questionIndex + 1) / totalQuestions) * 100;
   })();
 
+  // Determine content type based on URL
+  const getContentType = (): ContentType => {
+    if (isSimilar) return 'similar';
+    if (isMatra) return 'matra';
+    if (isConsonant) return 'consonant';
+    return 'vowel';
+  };
+
+  // Get the primary character being tested in this quiz
+  const getTestedCharacter = (): string => {
+    // The first character is typically the one being tested
+    return quiz.char1 || quiz.char2 || '';
+  };
+
   // Handle answer selection (single or multi-select)
   const handleAnswer = (index: number) => {
     if (isMultiSelect) {
@@ -105,6 +120,16 @@ export default function QuizPage() {
     } else {
       // Single select: immediately check and navigate
       const isCorrect = quiz.options[index].correct;
+      
+      // Record attempt for smart review system
+      recordAttempt({
+        contentId: getTestedCharacter(),
+        contentType: getContentType(),
+        quizId: quizId,
+        correct: isCorrect,
+        quizTitle: quiz.title,
+      });
+      
       if (isCorrect) {
         setScore(1);
       }
@@ -137,6 +162,15 @@ export default function QuizPage() {
   const handleSubmitMultiSelect = () => {
     const isCorrect = selectedAnswers.length === correctAnswers.length &&
                       selectedAnswers.every(idx => correctAnswers.includes(idx));
+    
+    // Record attempt for smart review system
+    recordAttempt({
+      contentId: getTestedCharacter(),
+      contentType: getContentType(),
+      quizId: quizId,
+      correct: isCorrect,
+      quizTitle: quiz.title,
+    });
     
     if (isCorrect) {
       setScore(1);

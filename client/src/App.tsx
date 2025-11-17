@@ -18,6 +18,7 @@ import MatraPage from "@/pages/MatraPage";
 import MatraSectionsPage from "@/pages/MatraSectionsPage";
 import SimilarPage from "@/pages/SimilarPage";
 import SimilarSectionsPage from "@/pages/SimilarSectionsPage";
+import NumbersSectionsPage from "@/pages/NumbersSectionsPage";
 import LessonPage from "@/pages/LessonPage";
 import QuizPage from "@/pages/QuizPage";
 import PracticePage from "@/pages/PracticePage";
@@ -78,6 +79,10 @@ function Router() {
         <Route path="/script/lesson/similar/:id" component={LessonPage} />
         <Route path="/script/lesson/similar/practice/:id" component={PracticePage} />
         <Route path="/script/lesson/similar/quiz/:id" component={QuizPage} />
+        <Route path="/script/numbers/sections" component={NumbersSectionsPage} />
+        <Route path="/script/lesson/numbers/:id" component={LessonPage} />
+        <Route path="/script/lesson/numbers/practice/:id" component={PracticePage} />
+        <Route path="/script/lesson/numbers/quiz/:id" component={QuizPage} />
         <Route path="/review" component={ReviewPage} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />

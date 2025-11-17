@@ -30,12 +30,17 @@ export default function VowelsPage() {
   const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete;
   
   const [similarCompleted, setSimilarCompleted] = useState<number>(0);
+  const [numbersCompleted, setNumbersCompleted] = useState<number>(0);
   const totalSimilar = 5;
+  const totalNumbers = 2;
   const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
+  const numbersProgress = Math.round((numbersCompleted / totalNumbers) * 100);
   
   useEffect(() => {
     const similar = localStorage.getItem('similarQuizzesCompleted');
+    const numbers = localStorage.getItem('numbersQuizzesCompleted');
     if (similar) setSimilarCompleted(parseInt(similar));
+    if (numbers) setNumbersCompleted(parseInt(numbers));
   }, []);
 
   const lessons = [
@@ -43,7 +48,7 @@ export default function VowelsPage() {
     { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: !isVowelsComplete, lockReason: !isVowelsComplete ? "Complete Vowels" : "" },
     { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: !isConsonantsComplete, lockReason: !isConsonantsComplete ? "Complete Consonants" : "" },
     { id: 4, title: "Similar Characters", href: `/script/similar/sections`, icon: "स", progress: similarProgress, locked: false },
-    { id: 5, title: "Numbers", icon: "१", locked: true, lockReason: "In development" },
+    { id: 5, title: "Numbers", href: `/script/numbers/sections`, icon: "१", progress: numbersProgress, locked: false },
   ];
 
   return (

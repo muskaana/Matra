@@ -28,7 +28,11 @@ The application prioritizes a mobile-first responsive design, optimized for phon
 
 The application includes a structured curriculum covering Vowels, Consonants, Matra (vowel symbols), Similar Characters, and Numbers. Key features include:
 
--   **Placement Quiz**: Assesses user proficiency to determine a personalized learning starting point.
+-   **Placement Quiz & Dashboard**: Smart onboarding system that assesses user proficiency and provides personalized navigation.
+    -   Placement quiz with 5 questions about Hindi knowledge and comfort level
+    -   Assigns placement level (Script Confident, Script Learner, or Script Beginner) based on average score
+    -   Dashboard shows "Welcome back" with current learning stage and "Continue Learning" button
+    -   Routing: First-time visitors see landing page, returning users without placement see quiz, users with placement see dashboard
 -   **Progressive Unlocking**: Lessons and levels (Beginner Words, Advanced Words, Sentences, Reading) unlock sequentially based on completion.
 -   **Reading Practice**: Offers line-by-line tap-to-reveal reading exercises with comprehension quizzes, targeting heritage speakers.
 -   **Word Learning (Beginner & Advanced)**: Flashcard-based learning and quizzes for vocabulary acquisition, focusing on conversational Hindi.

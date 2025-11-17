@@ -237,24 +237,18 @@ export default function Home() {
               <h4 className="font-semibold mb-3 text-sm" data-testid="heading-footer-links">Learn</h4>
               <ul className="space-y-1.5">
                 <li>
-                  <Link href="/script">
-                    <a className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-script">
-                      Start Learning
-                    </a>
+                  <Link href="/script" className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-script">
+                    Start Learning
                   </Link>
                 </li>
                 <li>
-                  <Link href="/script/vowels">
-                    <a className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-vowels">
-                      Vowels
-                    </a>
+                  <Link href="/script/vowels" className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-vowels">
+                    Vowels
                   </Link>
                 </li>
                 <li>
-                  <Link href="/script/consonants">
-                    <a className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-consonants">
-                      Consonants
-                    </a>
+                  <Link href="/script/consonants" className="text-sm text-gray-400 hover:text-[#ff9930] transition-colors" data-testid="link-footer-consonants">
+                    Consonants
                   </Link>
                 </li>
               </ul>

@@ -74,19 +74,23 @@ export default function DashboardPage() {
       setCurrentStage("Beginner Words");
       setContinueHref("/words/beginner");
     } else {
-      // Still working on characters - figure out which section
-      if (similar < totalSimilar) {
-        setCurrentStage("The Characters - Similar");
-        setContinueHref("/script/similar/sections");
-      } else if (matra < totalMatra) {
-        setCurrentStage("The Characters - Matra");
-        setContinueHref("/script/matra/sections");
+      // Still working on characters - figure out which section (check in order)
+      if (vowels < totalVowels) {
+        setCurrentStage("The Characters - Vowels");
+        setContinueHref("/script/vowels/sections");
       } else if (consonants < totalConsonants) {
         setCurrentStage("The Characters - Consonants");
         setContinueHref("/script/consonants/sections");
+      } else if (matra < totalMatra) {
+        setCurrentStage("The Characters - Matra");
+        setContinueHref("/script/matra/sections");
+      } else if (similar < totalSimilar) {
+        setCurrentStage("The Characters - Similar");
+        setContinueHref("/script/similar/sections");
       } else {
-        setCurrentStage("The Characters - Vowels");
-        setContinueHref("/script/vowels/sections");
+        // Fallback - should not happen but just in case
+        setCurrentStage("The Characters");
+        setContinueHref("/script/vowels");
       }
     }
   }, []);

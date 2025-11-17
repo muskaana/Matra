@@ -14,6 +14,9 @@ export default function ConversationPage() {
   const [expandedConversations, setExpandedConversations] = useState<string[]>([]);
   const [revealedLines, setRevealedLines] = useState<Set<string>>(new Set());
   const [speakingLine, setSpeakingLine] = useState<string | null>(null);
+  
+  // Check if speech synthesis is available
+  const isSpeechAvailable = 'speechSynthesis' in window;
 
   const toggleConversation = (conversationId: string) => {
     setExpandedConversations(prev => 
@@ -37,26 +40,26 @@ export default function ConversationPage() {
 
   const speakHindi = (hindi: string, lineKey: string) => {
     // Use Web Speech API for text-to-speech
-    if ('speechSynthesis' in window) {
-      // Cancel any ongoing speech
-      window.speechSynthesis.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(hindi);
-      utterance.lang = 'hi-IN'; // Hindi language
-      utterance.rate = 0.8; // Slightly slower for learning
-      
-      setSpeakingLine(lineKey);
-      
-      utterance.onend = () => {
-        setSpeakingLine(null);
-      };
-      
-      utterance.onerror = () => {
-        setSpeakingLine(null);
-      };
-      
-      window.speechSynthesis.speak(utterance);
-    }
+    if (!isSpeechAvailable) return;
+    
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(hindi);
+    utterance.lang = 'hi-IN'; // Hindi language
+    utterance.rate = 0.8; // Slightly slower for learning
+    
+    setSpeakingLine(lineKey);
+    
+    utterance.onend = () => {
+      setSpeakingLine(null);
+    };
+    
+    utterance.onerror = () => {
+      setSpeakingLine(null);
+    };
+    
+    window.speechSynthesis.speak(utterance);
   };
 
   return (
@@ -121,30 +124,36 @@ export default function ConversationPage() {
 
                               {/* Revealed Content */}
                               {isRevealed && (
-                                <div className="mt-2 space-y-1 animate-slide-in-up">
-                                  <p className="text-sm text-gray-700 italic">
+                                <div className="mt-2 space-y-1 animate-slide-in-up" data-testid={`revealed-${lineKey}`}>
+                                  <p className="text-sm text-gray-700 italic" data-testid={`transliteration-${lineKey}`}>
                                     {line.transliteration}
                                   </p>
-                                  <p className="text-sm text-gray-600">
+                                  <p className="text-sm text-gray-600" data-testid={`meaning-${lineKey}`}>
                                     {line.meaning}
                                   </p>
                                 </div>
                               )}
 
                               {/* Speak Button */}
-                              <button
-                                onClick={() => speakHindi(line.hindi, lineKey)}
-                                disabled={isSpeaking}
-                                className={`mt-2 flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                                  isSpeaking
-                                    ? 'bg-[#ff9930] text-white'
-                                    : 'bg-orange-100 text-[#ff9930] hover:bg-orange-200'
-                                }`}
-                                data-testid={`button-speak-${lineKey}`}
-                              >
-                                <Volume2 className={`w-4 h-4 ${isSpeaking ? 'animate-pulse' : ''}`} />
-                                {isSpeaking ? 'Speaking...' : 'Repeat after this'}
-                              </button>
+                              {isSpeechAvailable ? (
+                                <button
+                                  onClick={() => speakHindi(line.hindi, lineKey)}
+                                  disabled={isSpeaking}
+                                  className={`mt-2 flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                                    isSpeaking
+                                      ? 'bg-[#ff9930] text-white'
+                                      : 'bg-orange-100 text-[#ff9930] hover:bg-orange-200'
+                                  }`}
+                                  data-testid={`button-speak-${lineKey}`}
+                                >
+                                  <Volume2 className={`w-4 h-4 ${isSpeaking ? 'animate-pulse' : ''}`} />
+                                  {isSpeaking ? 'Speaking...' : 'Repeat after this'}
+                                </button>
+                              ) : (
+                                <p className="mt-2 text-xs text-gray-500 italic">
+                                  (Audio not available in this browser)
+                                </p>
+                              )}
                             </div>
                           );
                         })}

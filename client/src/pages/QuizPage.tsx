@@ -61,8 +61,8 @@ export default function QuizPage() {
   const quizId = params.id as string;
   const quiz = allQuizzes[quizId];
   
-  // Get quiz section ID (e.g., "1" from "1a", "1b", etc.)
-  const quizSectionId = quizId.replace(/[a-z]/i, '');
+  // Get quiz section ID (e.g., "1" from "1a", "1b", etc. or "2" from "s2a", "s2b")
+  const quizSectionId = quizId.replace(/[a-z]/gi, '');
   const quizStorageKey = `quiz_${location.split('/')[3]}_section_${quizSectionId}`;
   
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -237,6 +237,31 @@ export default function QuizPage() {
     localStorage.removeItem(quizStorageKey);
     
     if (quiz.nextLesson.includes('/')) {
+      // This is the last quiz in the section - update completion counter
+      const sectionNumber = parseInt(quizSectionId);
+      
+      if (isSimilar) {
+        const current = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+        if (sectionNumber > current) {
+          localStorage.setItem('similarQuizzesCompleted', sectionNumber.toString());
+        }
+      } else if (isMatra) {
+        const current = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+        if (sectionNumber > current) {
+          localStorage.setItem('matraQuizzesCompleted', sectionNumber.toString());
+        }
+      } else if (isConsonant) {
+        const current = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+        if (sectionNumber > current) {
+          localStorage.setItem('consonantsQuizzesCompleted', sectionNumber.toString());
+        }
+      } else {
+        const current = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+        if (sectionNumber > current) {
+          localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
+        }
+      }
+      
       setLocation(quiz.nextLesson);
     }
   };

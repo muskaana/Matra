@@ -1,10 +1,26 @@
-import { Link } from "wouter";
+import { useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { ArrowRight, Sparkles, BookOpen, Brain, Trophy, Instagram, Twitter, Mail } from "lucide-react";
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
 
 export default function Home() {
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    // Check if user has visited before
+    const hasVisited = localStorage.getItem('hasVisitedBefore');
+    
+    if (hasVisited) {
+      // Redirect to main app
+      setLocation('/script');
+    } else {
+      // Mark as visited for next time
+      localStorage.setItem('hasVisitedBefore', 'true');
+    }
+  }, [setLocation]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       {/* Hero Section */}

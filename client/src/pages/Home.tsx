@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowRight, Sparkles, BookOpen, Brain, Trophy, Instagram, Twitter, Mail } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Brain, Trophy, Instagram, Twitter, Mail, LogIn, User } from "lucide-react";
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Home() {
   const [, setLocation] = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     // Check if user has completed placement quiz
@@ -27,6 +29,28 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+      {/* Top Navigation Bar */}
+      <div className="relative z-10 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+        <div className="max-w-lg mx-auto px-4 py-3 flex justify-between items-center">
+          <h2 className="text-xl font-bold text-[#ff9930]" data-testid="heading-logo">Matra</h2>
+          {user ? (
+            <Link href="/dashboard">
+              <button className="inline-flex items-center gap-2 px-4 py-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-medium rounded-full transition-colors shadow-sm" data-testid="button-dashboard">
+                <User className="w-4 h-4" />
+                <span>Dashboard</span>
+              </button>
+            </Link>
+          ) : (
+            <a href="/api/login">
+              <button className="inline-flex items-center gap-2 px-4 py-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-medium rounded-full transition-colors shadow-sm" data-testid="button-login">
+                <LogIn className="w-4 h-4" />
+                <span>Log In</span>
+              </button>
+            </a>
+          )}
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,153,48,0.1),transparent_50%)]"></div>

@@ -1,6 +1,6 @@
 import { 
   type User, 
-  type InsertUser,
+  type UpsertUser,
   type UserProfile,
   type InsertUserProfile,
   type UpdateUserProfile,
@@ -34,10 +34,9 @@ import { db } from "./db";
 import { eq, and, desc, lt } from "drizzle-orm";
 
 export interface IStorage {
-  // User methods
+  // User methods - Replit Auth blueprint
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  upsertUser(user: UpsertUser): Promise<User>;
   
   // User profile methods
   getUserProfile(userId: string): Promise<UserProfile | undefined>;
@@ -76,20 +75,25 @@ export interface IStorage {
 }
 
 export class DbStorage implements IStorage {
-  // User methods
+  // User methods - Replit Auth blueprint
   async getUser(id: string): Promise<User | undefined> {
     const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
     return result[0];
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.username, username)).limit(1);
-    return result[0];
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await db.insert(users).values(insertUser).returning();
-    return result[0];
+  async upsertUser(userData: UpsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
+      .returning();
+    return user;
   }
 
   // User profile methods

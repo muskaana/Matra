@@ -52,13 +52,9 @@ export default function NumbersSectionsPage() {
         </div>
 
         <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
-          <QuarterRangoliPattern className="absolute top-0 left-0 w-20 h-20 opacity-35" color="#ff9930" corner="top-left" />
-          <HalfRangoliPattern className="absolute top-4 right-2 w-24 h-24 opacity-30" color="#FFD700" side="right" />
-          <RangoliPattern className="absolute top-40 left-6 w-14 h-14 opacity-25" color="#2E86AB" />
-          <MandalaPattern className="absolute top-64 right-4 w-18 h-18 opacity-28" color="#E91E63" />
-          <HalfRangoliPattern className="absolute bottom-48 left-0 w-20 h-20 opacity-30" color="#138808" side="left" />
-          <QuarterRangoliPattern className="absolute bottom-24 right-0 w-22 h-22 opacity-32" color="#9C27B0" corner="bottom-right" />
-          <RangoliPattern className="absolute bottom-4 left-1/3 w-16 h-16 opacity-25" color="#FF5722" />
+          {/* Decorative patterns - positioned to not overlap with content */}
+          <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#ff9930" />
+          <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#2E86AB" />
           
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;
@@ -103,8 +99,8 @@ export default function NumbersSectionsPage() {
             );
           })}
           
-          <div className="absolute bottom-16 right-12 w-32 h-32 opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }}>
-            <img src={tigerExcited} alt="Excited tiger" className="w-full h-full object-contain" />
+          <div className="mt-8 flex justify-center">
+            <img src={tigerExcited} alt="Excited tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />
           </div>
         </div>
       </div>

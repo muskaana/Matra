@@ -272,6 +272,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Placement Test Routes
+  app.post("/api/placement/complete", async (req, res) => {
+    try {
+      const { userId, masteredLessons, placementLevel, score } = req.body;
+
+      // Update user profile with placement level
+      await storage.updateUserProfile(userId, { placementLevel });
+
+      // Mark all mastered lessons as complete
+      for (const lessonId of masteredLessons) {
+        // Map lesson IDs to categories
+        let category = "vowels";
+        if (lessonId.startsWith("c")) category = "consonants";
+        else if (lessonId.startsWith("m")) category = "matra";
+        else if (lessonId.startsWith("s")) category = "similar";
+        else if (lessonId.startsWith("n")) category = "numbers";
+
+        await storage.createProgress({
+          userId,
+          category,
+          sectionId: lessonId,
+          lessonId,
+          type: "lesson",
+          completed: true,
+          score: 100
+        });
+      }
+
+      res.json({ success: true, lessonsMarked: masteredLessons.length });
+    } catch (error) {
+      console.error("Placement completion error:", error);
+      res.status(500).json({ error: "Failed to save placement results" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

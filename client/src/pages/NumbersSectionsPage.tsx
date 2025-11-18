@@ -95,6 +95,20 @@ export default function NumbersSectionsPage() {
                     </div>
                   </button>
                 )}
+                
+                {index < sections.length - 1 && (
+                  <div
+                    className="absolute border-t-2 border-gray-400"
+                    style={{
+                      width: '180px',
+                      top: '80px',
+                      left: isEven ? '110px' : 'auto',
+                      right: isEven ? 'auto' : '110px',
+                      transform: isEven ? 'rotate(25deg)' : 'rotate(-25deg)',
+                      transformOrigin: isEven ? 'left center' : 'right center',
+                    }}
+                  />
+                )}
               </div>
             );
           })}

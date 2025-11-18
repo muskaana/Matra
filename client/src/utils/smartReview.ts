@@ -50,6 +50,7 @@ const STORAGE_KEY = 'smartReview';
 const BASE_INTERVAL = 24 * 60 * 60 * 1000; // 1 day in ms
 const MIN_INTERVAL = 12 * 60 * 60 * 1000; // 12 hours in ms
 const MAX_INTERVAL = 21 * 24 * 60 * 60 * 1000; // 21 days in ms
+const MAX_HISTORY_SIZE = 1000; // Maximum number of events to keep in history
 const DIFFICULTY_MULTIPLIERS = {
   hard: 1,
   medium: 2,

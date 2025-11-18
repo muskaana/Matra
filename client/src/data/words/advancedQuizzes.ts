@@ -18,33 +18,79 @@ interface AdvancedWordQuiz {
 export const advancedWordQuizzes: { [key: string]: AdvancedWordQuiz } = {
   "aw-emotions": {
     id: "aw-emotions",
-    title: "Emotions & Identity Quiz",
+    title: "Emotions & Feelings Quiz",
     questions: [
       {
-        transliteration: "garv",
-        options: ["गर्व", "शर्म", "पर्व", "धर्म"],
-        correctIndex: 0
-      },
-      {
-        transliteration: "sharm",
-        options: ["धर्म", "शर्म", "गर्म", "कर्म"],
+        transliteration: "khushi",
+        options: ["खुशी", "ख़ुशी", "कुशी", "खुसी"],
         correctIndex: 1
       },
       {
-        transliteration: "pahchaan",
-        options: ["पहचान", "पचान", "पहलान", "परचान"],
+        transliteration: "ummeed",
+        options: ["उम्मीद", "उमीद", "उममीद", "ऊमीद"],
         correctIndex: 0
       },
       {
-        transliteration: "aatmavishvaas",
-        options: ["आत्मविश्वास", "अत्मविश्वास", "आतमविश्वास", "आत्माविश्वास"],
+        transliteration: "gamgeen",
+        options: ["गमगीन", "ग़मगीन", "गमगिन", "गमगीण"],
+        correctIndex: 1
+      },
+      {
+        transliteration: "pareshaan",
+        options: ["परेशान", "परेसान", "पेरशान", "पारेशान"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "sharminda",
+        options: ["शरमिंदा", "शरमीन्दा", "शर्मिंदा", "सरमिंदा"],
+        correctIndex: 2
+      },
+      {
+        transliteration: "hairaan",
+        options: ["हैरान", "हयरान", "हैरन", "हेरान"],
+        correctIndex: 0
+      }
+    ]
+  },
+  "aw-conversation": {
+    id: "aw-conversation",
+    title: "Everyday Chat Quiz",
+    questions: [
+      {
+        transliteration: "zaroori",
+        options: ["जरूरी", "ज़रूरी", "ज़रुरी", "जरुरी"],
+        correctIndex: 1
+      },
+      {
+        transliteration: "mushkil",
+        options: ["मुश्किल", "मुसकिल", "मुशकील", "मुसकील"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "aasaan",
+        options: ["आसन", "आसान", "आशान", "आसन"],
+        correctIndex: 1
+      },
+      {
+        transliteration: "bilkul",
+        options: ["बिलकुल", "बिलकूल", "बिल्कुल", "बीलकुल"],
+        correctIndex: 2
+      },
+      {
+        transliteration: "shaayad",
+        options: ["शायद", "शयद", "शाईद", "सायद"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "achaanak",
+        options: ["अचानक", "अचनक", "अछानक", "अचानाक"],
         correctIndex: 0
       }
     ]
   },
   "aw-culture": {
     id: "aw-culture",
-    title: "Culture & Media Quiz",
+    title: "Culture & Entertainment Quiz",
     questions: [
       {
         transliteration: "film",
@@ -57,29 +103,34 @@ export const advancedWordQuizzes: { [key: string]: AdvancedWordQuiz } = {
         correctIndex: 1
       },
       {
-        transliteration: "bhaasha",
-        options: ["भाषा", "भासा", "बाषा", "भाशा"],
+        transliteration: "kitaab",
+        options: ["किताब", "कितब", "किताव", "कीताब"],
         correctIndex: 0
       },
       {
-        transliteration: "parampara",
-        options: ["परम्परा", "परंपरा", "परमपरा", "परमपारा"],
+        transliteration: "kahaani",
+        options: ["कहनी", "कहानी", "कहाणी", "कहानि"],
         correctIndex: 1
+      },
+      {
+        transliteration: "tyohaar",
+        options: ["त्योहार", "तयोहार", "त्यौहार", "तोहार"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "saamaan",
+        options: ["सामान", "समान", "सामन", "सामाण"],
+        correctIndex: 0
       }
     ]
   },
   "aw-daily": {
     id: "aw-daily",
-    title: "Daily Life Quiz",
+    title: "Daily Activities Quiz",
     questions: [
       {
-        transliteration: "aspatal",
-        options: ["अस्पताल", "असपताल", "अस्पतल", "असपतल"],
-        correctIndex: 0
-      },
-      {
-        transliteration: "mauka",
-        options: ["मौका", "मोका", "माका", "मौकां"],
+        transliteration: "taiyaari",
+        options: ["तैयारी", "तयारी", "तैयारि", "तयरी"],
         correctIndex: 0
       },
       {
@@ -88,8 +139,23 @@ export const advancedWordQuizzes: { [key: string]: AdvancedWordQuiz } = {
         correctIndex: 1
       },
       {
-        transliteration: "taiyaari",
-        options: ["तैयारी", "तयारी", "तैयारि", "तयरी"],
+        transliteration: "samajhna",
+        options: ["समजना", "समझना", "समाझना", "समजहना"],
+        correctIndex: 1
+      },
+      {
+        transliteration: "sochna",
+        options: ["सोचना", "सोछना", "सोचन", "सौचना"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "bataana",
+        options: ["बताना", "बतना", "बताणा", "बतान"],
+        correctIndex: 0
+      },
+      {
+        transliteration: "poochna",
+        options: ["पूछना", "पुछना", "पूचना", "पुचना"],
         correctIndex: 0
       }
     ]

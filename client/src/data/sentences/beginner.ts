@@ -23,133 +23,177 @@ export const sentenceSections: SentenceSection[] = [
   {
     id: "family-talk",
     title: "Family Talk",
-    description: "Talking about family",
+    description: "Chat with family members",
     sentences: [
       {
         id: "s1",
-        hindi: "मेरा नाम राज है",
-        transliteration: "Mera naam Raj hai",
-        meaning: "My name is Raj"
+        hindi: "माँ, मुझे भूख लगी है",
+        transliteration: "Maa, mujhe bhookh lagi hai",
+        meaning: "Mom, I'm hungry"
       },
       {
         id: "s2",
-        hindi: "मैं अपने घर जा रहा हूँ",
-        transliteration: "Main apne ghar ja raha hoon",
-        meaning: "I am going to my home"
+        hindi: "पापा, आप कहाँ हो?",
+        transliteration: "Papa, aap kaha ho?",
+        meaning: "Dad, where are you?"
       },
       {
         id: "s3",
-        hindi: "मेरी माँ बहुत अच्छी है",
-        transliteration: "Meri maa bahut acchi hai",
-        meaning: "My mother is very good/nice"
+        hindi: "मेरी बहन घर पर है",
+        transliteration: "Meri bahan ghar par hai",
+        meaning: "My sister is at home"
       },
       {
         id: "s4",
-        hindi: "मेरे पापा खाना बना रहे हैं",
-        transliteration: "Mere papa khaana bana rahe hain",
-        meaning: "My father is making food"
+        hindi: "दादी, चाय पी लो",
+        transliteration: "Daadi, chaay pee lo",
+        meaning: "Grandma, have some tea"
       },
       {
         id: "s5",
-        hindi: "मेरी बहन खुश है",
-        transliteration: "Meri bahan khush hai",
-        meaning: "My sister is happy"
+        hindi: "भाई, ज़रा मदद करो",
+        transliteration: "Bhai, zara madad karo",
+        meaning: "Brother, help me a bit"
       },
       {
         id: "s6",
-        hindi: "मेरा भाई दादी के साथ है",
-        transliteration: "Mera bhai daadi ke saath hai",
-        meaning: "My brother is with grandmother"
+        hindi: "चाचा घर आ रहे हैं",
+        transliteration: "Chacha ghar aa rahe hain",
+        meaning: "Uncle is coming home"
       }
     ],
     quizId: "sq-family"
   },
   {
     id: "daily-life",
-    title: "Daily Life",
-    description: "Everyday activities",
+    title: "Daily Routine",
+    description: "Everyday conversations",
     sentences: [
       {
         id: "s7",
-        hindi: "मैं स्कूल जा रहा हूँ",
-        transliteration: "Main school ja raha hoon",
-        meaning: "I am going to school"
+        hindi: "मुझे एक कप चाय चाहिए",
+        transliteration: "Mujhe ek cup chaay chahiye",
+        meaning: "I want a cup of tea"
       },
       {
         id: "s8",
-        hindi: "मुझे पानी चाहिए",
-        transliteration: "Mujhe paani chahiye",
-        meaning: "I want water"
+        hindi: "आज बहुत गर्मी है",
+        transliteration: "Aaj bahut garmi hai",
+        meaning: "It's very hot today"
       },
       {
         id: "s9",
-        hindi: "मेरा दोस्त खाना खा रहा है",
-        transliteration: "Mera dost khaana kha raha hai",
-        meaning: "My friend is eating food"
+        hindi: "क्या तुम घर जा रहे हो?",
+        transliteration: "Kya tum ghar ja rahe ho?",
+        meaning: "Are you going home?"
       },
       {
         id: "s10",
-        hindi: "चलो बाहर चलते हैं",
-        transliteration: "Chalo baahar chalte hain",
-        meaning: "Let's go outside"
+        hindi: "मुझे ये समझ नहीं आया",
+        transliteration: "Mujhe ye samajh nahi aaya",
+        meaning: "I didn't understand this"
       },
       {
         id: "s11",
-        hindi: "मुझे मिठाई बहुत पसंद है",
-        transliteration: "Mujhe mithaai bahut pasand hai",
-        meaning: "I like sweets very much"
+        hindi: "चलो, बाहर चलते हैं",
+        transliteration: "Chalo, baahar chalte hain",
+        meaning: "Come on, let's go outside"
       },
       {
         id: "s12",
-        hindi: "मैं तैयारी कर रहा हूँ",
-        transliteration: "Main taiyaari kar raha hoon",
-        meaning: "I am preparing/getting ready"
+        hindi: "मैं तैयार हो गया",
+        transliteration: "Main taiyaar ho gaya",
+        meaning: "I'm ready"
       }
     ],
     quizId: "sq-daily"
   },
   {
-    id: "identity-pride",
-    title: "Identity & Pride",
-    description: "Expressing yourself",
+    id: "feelings-talk",
+    title: "How You Feel",
+    description: "Express your feelings",
     sentences: [
       {
         id: "s13",
-        hindi: "मुझे हिंदी सीखनी है",
-        transliteration: "Mujhe Hindi seekhni hai",
-        meaning: "I want to learn Hindi"
+        hindi: "मैं बहुत खुश हूँ",
+        transliteration: "Main bahut khush hoon",
+        meaning: "I'm very happy"
       },
       {
         id: "s14",
-        hindi: "मुझे अपनी भाषा पर गर्व है",
-        transliteration: "Mujhe apni bhaasha par garv hai",
-        meaning: "I am proud of my language"
+        hindi: "मुझे थोड़ा डर लग रहा है",
+        transliteration: "Mujhe thoda dar lag raha hai",
+        meaning: "I'm feeling a bit scared"
       },
       {
         id: "s15",
-        hindi: "मुझे संगीत पसंद है",
-        transliteration: "Mujhe sangeet pasand hai",
-        meaning: "I like music"
+        hindi: "ये बहुत मुश्किल है",
+        transliteration: "Ye bahut mushkil hai",
+        meaning: "This is very difficult"
       },
       {
         id: "s16",
-        hindi: "मैं फ़िल्म देख रहा हूँ",
-        transliteration: "Main film dekh raha hoon",
-        meaning: "I am watching a movie"
+        hindi: "मुझे उम्मीद है सब ठीक होगा",
+        transliteration: "Mujhe ummeed hai sab theek hoga",
+        meaning: "I hope everything will be okay"
       },
       {
         id: "s17",
-        hindi: "मेरी पहचान मेरी परंपरा है",
-        transliteration: "Meri pahchaan meri parampara hai",
-        meaning: "My tradition is my identity"
+        hindi: "तुम परेशान क्यों हो?",
+        transliteration: "Tum pareshaan kyon ho?",
+        meaning: "Why are you worried?"
       },
       {
         id: "s18",
-        hindi: "मुझमें आत्मविश्वास है",
-        transliteration: "Mujhme aatmavishvaas hai",
-        meaning: "I have self-confidence"
+        hindi: "मैं थोड़ा शर्मिंदा हूँ",
+        transliteration: "Main thoda sharminda hoon",
+        meaning: "I'm a bit embarrassed"
       }
     ],
-    quizId: "sq-identity"
+    quizId: "sq-feelings"
+  },
+  {
+    id: "plans-chat",
+    title: "Making Plans",
+    description: "Talk about what to do",
+    sentences: [
+      {
+        id: "s19",
+        hindi: "कल फ़िल्म देखने चलें?",
+        transliteration: "Kal film dekhne chalen?",
+        meaning: "Want to watch a movie tomorrow?"
+      },
+      {
+        id: "s20",
+        hindi: "हाँ, बिल्कुल चलते हैं",
+        transliteration: "Haa, bilkul chalte hain",
+        meaning: "Yes, absolutely let's go"
+      },
+      {
+        id: "s21",
+        hindi: "शायद मैं आ सकूँ",
+        transliteration: "Shaayad main aa sakoon",
+        meaning: "Maybe I can come"
+      },
+      {
+        id: "s22",
+        hindi: "ये ज़रूरी काम है",
+        transliteration: "Ye zaroori kaam hai",
+        meaning: "This is important work"
+      },
+      {
+        id: "s23",
+        hindi: "मुझे कुछ सामान लाना है",
+        transliteration: "Mujhe kuch saamaan laana hai",
+        meaning: "I need to bring some stuff"
+      },
+      {
+        id: "s24",
+        hindi: "अचानक मेरे मन में आया",
+        transliteration: "Achaanak mere man mein aaya",
+        meaning: "It suddenly came to my mind"
+      }
+    ],
+    quizId: "sq-plans"
   }
 ];

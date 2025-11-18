@@ -78,28 +78,105 @@ export const beginnerWordQuizzes: { [key: string]: WordQuiz } = {
       }
     ]
   },
+  "bw-nasal": {
+    id: "bw-nasal",
+    title: "Everyday Sounds Quiz",
+    questions: [
+      {
+        word: "बातों",
+        options: ["Hands", "Talks", "Eyes", "Days"],
+        correctIndex: 1
+      },
+      {
+        word: "हाथों",
+        options: ["Hands", "Eyes", "People", "Nights"],
+        correctIndex: 0
+      },
+      {
+        word: "आँखों",
+        options: ["Days", "People", "Eyes", "Hands"],
+        correctIndex: 2
+      },
+      {
+        word: "लोगों",
+        options: ["People", "Talks", "Nights", "Eyes"],
+        correctIndex: 0
+      },
+      {
+        word: "दिनों",
+        options: ["Nights", "Days", "Hands", "People"],
+        correctIndex: 1
+      },
+      {
+        word: "रातों",
+        options: ["Days", "Eyes", "Nights", "Talks"],
+        correctIndex: 2
+      }
+    ]
+  },
+  "bw-body": {
+    id: "bw-body",
+    title: "Body Parts Quiz",
+    questions: [
+      {
+        word: "हाँ",
+        options: ["No", "Yes", "Where", "Why"],
+        correctIndex: 1
+      },
+      {
+        word: "नहीं",
+        options: ["Yes", "No", "There", "Here"],
+        correctIndex: 1
+      },
+      {
+        word: "कहाँ",
+        options: ["There", "Here", "Where", "Why"],
+        correctIndex: 2
+      },
+      {
+        word: "यहाँ",
+        options: ["Here", "There", "Where", "Why"],
+        correctIndex: 0
+      },
+      {
+        word: "वहाँ",
+        options: ["Here", "There", "Where", "Yes"],
+        correctIndex: 1
+      },
+      {
+        word: "क्यों",
+        options: ["Where", "Here", "There", "Why"],
+        correctIndex: 3
+      }
+    ]
+  },
   "bw-feelings": {
     id: "bw-feelings",
     title: "Feelings Words Quiz",
     questions: [
       {
         word: "खुश",
-        options: ["Tired", "Happy", "Fun", "Good"],
+        options: ["Angry", "Happy", "Love", "Fear"],
         correctIndex: 1
       },
       {
-        word: "थका",
-        options: ["Happy", "Tired", "Good", "Fun"],
+        word: "प्यार",
+        options: ["Love", "Happy", "Angry", "Fun"],
+        correctIndex: 0
+      },
+      {
+        word: "गुस्सा",
+        options: ["Fear", "Angry", "Fun", "Good"],
         correctIndex: 1
       },
       {
         word: "मज़ा",
-        options: ["Good", "Happy", "Fun", "Tired"],
+        options: ["Good", "Happy", "Fun", "Love"],
         correctIndex: 2
       },
       {
         word: "अच्छा",
-        options: ["Tired", "Fun", "Happy", "Good"],
+        options: ["Angry", "Fun", "Happy", "Good"],
         correctIndex: 3
       }
     ]

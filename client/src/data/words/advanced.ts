@@ -21,37 +21,57 @@ export interface AdvancedWordPack {
 export const advancedWordPacks: AdvancedWordPack[] = [
   {
     id: "emotions",
-    title: "Emotions & Identity",
+    title: "Emotions & Feelings",
     description: "Express deeper feelings",
     words: [
-      { word: "गर्व", transliteration: "garv", meaning: "Pride" },
-      { word: "शर्म", transliteration: "sharm", meaning: "Shame/Shyness" },
-      { word: "पहचान", transliteration: "pahchaan", meaning: "Identity/Recognition" },
-      { word: "आत्मविश्वास", transliteration: "aatmavishvaas", meaning: "Self-confidence" },
+      { word: "ख़ुशी", transliteration: "khushi", meaning: "Happiness" },
+      { word: "उम्मीद", transliteration: "ummeed", meaning: "Hope" },
+      { word: "ग़मगीन", transliteration: "gamgeen", meaning: "Sad/Sorrowful" },
+      { word: "परेशान", transliteration: "pareshaan", meaning: "Worried/Troubled" },
+      { word: "शर्मिंदा", transliteration: "sharminda", meaning: "Embarrassed" },
+      { word: "हैरान", transliteration: "hairaan", meaning: "Surprised/Amazed" },
     ],
     quizId: "aw-emotions"
   },
   {
+    id: "conversation",
+    title: "Everyday Chat",
+    description: "Words for daily conversations",
+    words: [
+      { word: "ज़रूरी", transliteration: "zaroori", meaning: "Important/Necessary" },
+      { word: "मुश्किल", transliteration: "mushkil", meaning: "Difficult" },
+      { word: "आसान", transliteration: "aasaan", meaning: "Easy" },
+      { word: "बिल्कुल", transliteration: "bilkul", meaning: "Absolutely/Exactly" },
+      { word: "शायद", transliteration: "shaayad", meaning: "Maybe/Perhaps" },
+      { word: "अचानक", transliteration: "achaanak", meaning: "Suddenly" },
+    ],
+    quizId: "aw-conversation"
+  },
+  {
     id: "culture",
-    title: "Culture & Media",
-    description: "Words about culture and art",
+    title: "Culture & Entertainment",
+    description: "Talk about culture and media",
     words: [
       { word: "फ़िल्म", transliteration: "film", meaning: "Film/Movie" },
       { word: "संगीत", transliteration: "sangeet", meaning: "Music" },
-      { word: "भाषा", transliteration: "bhaasha", meaning: "Language" },
-      { word: "परंपरा", transliteration: "parampara", meaning: "Tradition" },
+      { word: "किताब", transliteration: "kitaab", meaning: "Book" },
+      { word: "कहानी", transliteration: "kahaani", meaning: "Story" },
+      { word: "त्योहार", transliteration: "tyohaar", meaning: "Festival" },
+      { word: "सामान", transliteration: "saamaan", meaning: "Stuff/Things" },
     ],
     quizId: "aw-culture"
   },
   {
     id: "daily-longer",
-    title: "Daily Life (Longer)",
-    description: "Common but longer words",
+    title: "Daily Activities",
+    description: "Longer everyday words",
     words: [
-      { word: "अस्पताल", transliteration: "aspatal", meaning: "Hospital" },
-      { word: "मौका", transliteration: "mauka", meaning: "Opportunity/Chance" },
-      { word: "मिठाई", transliteration: "mithaai", meaning: "Sweets/Dessert" },
       { word: "तैयारी", transliteration: "taiyaari", meaning: "Preparation" },
+      { word: "मिठाई", transliteration: "mithaai", meaning: "Sweets/Dessert" },
+      { word: "समझना", transliteration: "samajhna", meaning: "To understand" },
+      { word: "सोचना", transliteration: "sochna", meaning: "To think" },
+      { word: "बताना", transliteration: "bataana", meaning: "To tell" },
+      { word: "पूछना", transliteration: "poochna", meaning: "To ask" },
     ],
     quizId: "aw-daily"
   }

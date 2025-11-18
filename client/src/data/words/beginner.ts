@@ -27,11 +27,27 @@ export const beginnerWordPacks: WordPack[] = [
       { word: "माँ", transliteration: "maa", meaning: "Mother/Mom" },
       { word: "पापा", transliteration: "papa", meaning: "Father/Dad" },
       { word: "दादी", transliteration: "daadi", meaning: "Grandmother (paternal)" },
-      { word: "दादा", transliteration: "daada", meaning: "Grandfather (paternal)" },
+      { word: "नानी", transliteration: "naani", meaning: "Grandmother (maternal)" },
       { word: "भाई", transliteration: "bhai", meaning: "Brother" },
       { word: "बहन", transliteration: "bahan", meaning: "Sister" },
+      { word: "चाचा", transliteration: "chacha", meaning: "Uncle (father's brother)" },
+      { word: "बुआ", transliteration: "bua", meaning: "Aunt (father's sister)" },
     ],
     quizId: "bw-family"
+  },
+  {
+    id: "nasal-words",
+    title: "Everyday Sounds",
+    description: "Words with nasal sounds",
+    words: [
+      { word: "बातों", transliteration: "baaton", meaning: "Talks/Conversations" },
+      { word: "हाथों", transliteration: "haathon", meaning: "Hands" },
+      { word: "आँखों", transliteration: "aankhon", meaning: "Eyes" },
+      { word: "लोगों", transliteration: "logon", meaning: "People" },
+      { word: "दिनों", transliteration: "dinon", meaning: "Days" },
+      { word: "रातों", transliteration: "raaton", meaning: "Nights" },
+    ],
+    quizId: "bw-nasal"
   },
   {
     id: "home",
@@ -41,10 +57,25 @@ export const beginnerWordPacks: WordPack[] = [
       { word: "घर", transliteration: "ghar", meaning: "Home/House" },
       { word: "पानी", transliteration: "paani", meaning: "Water" },
       { word: "खाना", transliteration: "khaana", meaning: "Food" },
-      { word: "स्कूल", transliteration: "school", meaning: "School" },
-      { word: "दोस्त", transliteration: "dost", meaning: "Friend" },
+      { word: "कमरा", transliteration: "kamra", meaning: "Room" },
+      { word: "दरवाज़ा", transliteration: "darwaaza", meaning: "Door" },
+      { word: "चाय", transliteration: "chaay", meaning: "Tea" },
     ],
     quizId: "bw-home"
+  },
+  {
+    id: "body-nasal",
+    title: "Body Parts",
+    description: "Talk about your body",
+    words: [
+      { word: "हाँ", transliteration: "haa", meaning: "Yes" },
+      { word: "नहीं", transliteration: "nahi", meaning: "No" },
+      { word: "कहाँ", transliteration: "kaha", meaning: "Where" },
+      { word: "वहाँ", transliteration: "vaha", meaning: "There" },
+      { word: "यहाँ", transliteration: "yaha", meaning: "Here" },
+      { word: "क्यों", transliteration: "kyon", meaning: "Why" },
+    ],
+    quizId: "bw-body"
   },
   {
     id: "feelings",
@@ -52,7 +83,9 @@ export const beginnerWordPacks: WordPack[] = [
     description: "Express how you feel",
     words: [
       { word: "खुश", transliteration: "khush", meaning: "Happy" },
-      { word: "थका", transliteration: "thaka", meaning: "Tired" },
+      { word: "प्यार", transliteration: "pyaar", meaning: "Love" },
+      { word: "गुस्सा", transliteration: "gussa", meaning: "Angry" },
+      { word: "डर", transliteration: "dar", meaning: "Fear" },
       { word: "मज़ा", transliteration: "maza", meaning: "Fun" },
       { word: "अच्छा", transliteration: "accha", meaning: "Good/Nice" },
     ],

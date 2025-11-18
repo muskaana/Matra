@@ -20,7 +20,7 @@
 
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
-import { X, CheckCircle2, XCircle } from "lucide-react";
+import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
@@ -71,6 +71,7 @@ export default function QuizPage() {
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   
   // Get cumulative score from localStorage
   const getQuizScore = () => {
@@ -281,6 +282,9 @@ export default function QuizPage() {
         setLocation(quiz.nextLesson);
       } else {
         // Score below 60% - restart the quiz
+        // Show loading state before redirect
+        setIsRedirecting(true);
+        
         // Get the prefix (e.g., "n" for numbers, "s" for similar, "m" for matra)
         const prefix = quizId.match(/^[a-z]+/i)?.[0] || '';
         const firstQuizId = prefix + quizSectionId + 'a';
@@ -289,8 +293,12 @@ export default function QuizPage() {
         if (isMatra) basePath = '/script/lesson/matra/quiz/';
         if (isSimilar) basePath = '/script/lesson/similar/quiz/';
         if (isNumbers) basePath = '/script/lesson/numbers/quiz/';
-        // Force full page navigation to ensure clean state reset
-        window.location.href = `${basePath}${firstQuizId}`;
+        
+        // Small delay to show loading state, then redirect
+        setTimeout(() => {
+          // Force full page navigation to ensure clean state reset
+          window.location.href = `${basePath}${firstQuizId}`;
+        }, 100);
       }
     }
   };
@@ -353,6 +361,16 @@ export default function QuizPage() {
             </button>
           </div>
         </div>
+        
+        {/* Loading overlay when redirecting */}
+        {isRedirecting && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center gap-4 animate-slide-in-up">
+              <Loader2 className="w-12 h-12 text-[#ff9930] animate-spin" />
+              <p className="text-lg font-semibold text-black">Loading quiz...</p>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

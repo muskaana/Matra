@@ -281,7 +281,9 @@ export default function QuizPage() {
         setLocation(quiz.nextLesson);
       } else {
         // Score below 60% - restart the quiz
-        const firstQuizId = quizSectionId + 'a';
+        // Get the prefix (e.g., "n" for numbers, "s" for similar, "m" for matra)
+        const prefix = quizId.match(/^[a-z]+/i)?.[0] || '';
+        const firstQuizId = prefix + quizSectionId + 'a';
         let basePath = '/script/lesson/vowels/quiz/';
         if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
         if (isMatra) basePath = '/script/lesson/matra/quiz/';

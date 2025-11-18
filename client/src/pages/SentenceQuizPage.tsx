@@ -57,23 +57,27 @@ export default function SentenceQuizPage() {
       // Award XP for quiz completion (always, on every completion)
       awardQuizXP();
       
-      // Save completion
-      const completed = localStorage.getItem('sentencesCompleted');
-      const completedSections = completed ? JSON.parse(completed) : [];
-      const isNewCompletion = !completedSections.includes(sectionId);
+      // Calculate final score percentage
+      const percentage = Math.round((score / quiz.questions.length) * 100);
       
-      if (isNewCompletion) {
-        completedSections.push(sectionId);
-        localStorage.setItem('sentencesCompleted', JSON.stringify(completedSections));
+      // Only save completion if score is 60% or higher
+      if (percentage >= 60) {
+        const completed = localStorage.getItem('sentencesCompleted');
+        const completedSections = completed ? JSON.parse(completed) : [];
+        const isNewCompletion = !completedSections.includes(sectionId);
         
-        // Check if all sentence sections complete for unit bonus (one-time only)
-        if (completedSections.length === sentenceSections.length) {
-          awardUnitXP();
+        if (isNewCompletion) {
+          completedSections.push(sectionId);
+          localStorage.setItem('sentencesCompleted', JSON.stringify(completedSections));
+          
+          // Check if all sentence sections complete for unit bonus (one-time only)
+          if (completedSections.length === sentenceSections.length) {
+            awardUnitXP();
+          }
         }
       }
 
       // Confetti for good score
-      const percentage = (score / quiz.questions.length) * 100;
       if (percentage >= 80) {
         confetti({
           particleCount: 100,

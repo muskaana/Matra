@@ -3,7 +3,7 @@ import { QuizMap } from '../types';
 export const numberQuizzes: QuizMap = {
   // Section 1 Quizzes (०-२)
   "n1a": {
-    "title": "Quiz 1 : Numbers ०-②",
+    "title": "Numbers Quiz",
     "char1": "०-२",
     "char2": "0-2",
     "subQuestion": "Which Devanagari digit represents 'two' (दो)?",
@@ -17,7 +17,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 1a"
   },
   "n1b": {
-    "title": "Quiz 1 : Numbers ०-②",
+    "title": "Numbers Quiz",
     "char1": "०-२",
     "char2": "0-2",
     "subQuestion": "Which digit represents 'एक' (one)?",
@@ -31,7 +31,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 1b"
   },
   "n1c": {
-    "title": "Quiz 1 : Numbers ०-②",
+    "title": "Numbers Quiz",
     "char1": "०-२",
     "char2": "0-2",
     "subQuestion": "What is the Hindi word for ०?",
@@ -47,7 +47,7 @@ export const numberQuizzes: QuizMap = {
   
   // Section 2 Quizzes (३-५)
   "n2a": {
-    "title": "Quiz 2 : Numbers ③-⑤",
+    "title": "Numbers Quiz",
     "char1": "३-५",
     "char2": "3-5",
     "subQuestion": "Which Devanagari digit represents 'four' (चार)?",
@@ -61,7 +61,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 2a"
   },
   "n2b": {
-    "title": "Quiz 2 : Numbers ③-⑤",
+    "title": "Numbers Quiz",
     "char1": "३-५",
     "char2": "3-5",
     "subQuestion": "What is the Hindi word for ५?",
@@ -75,7 +75,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 2b"
   },
   "n2c": {
-    "title": "Quiz 2 : Numbers ③-⑤",
+    "title": "Numbers Quiz",
     "char1": "३-५",
     "char2": "3-5",
     "subQuestion": "Which digit represents 'तीन' (three)?",
@@ -91,7 +91,7 @@ export const numberQuizzes: QuizMap = {
 
   // Section 3 Quizzes (६-८)
   "n3a": {
-    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "title": "Numbers Quiz",
     "char1": "६-८",
     "char2": "6-8",
     "subQuestion": "Which Devanagari digit represents 'seven' (सात)?",
@@ -105,7 +105,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 3a"
   },
   "n3b": {
-    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "title": "Numbers Quiz",
     "char1": "६-८",
     "char2": "6-8",
     "subQuestion": "What is the Hindi word for ६?",
@@ -119,7 +119,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 3b"
   },
   "n3c": {
-    "title": "Quiz 3 : Numbers ⑥-⑧",
+    "title": "Numbers Quiz",
     "char1": "६-८",
     "char2": "6-8",
     "subQuestion": "Which digit represents 'आठ' (eight)?",
@@ -135,7 +135,7 @@ export const numberQuizzes: QuizMap = {
 
   // Section 4 Quizzes (९)
   "n4a": {
-    "title": "Quiz 4 : Number ⑨",
+    "title": "Numbers Quiz",
     "char1": "९",
     "char2": "9",
     "subQuestion": "Which Devanagari digit represents 'nine' (नौ)?",
@@ -150,7 +150,7 @@ export const numberQuizzes: QuizMap = {
     "pageNumber": "Quiz 4a"
   },
   "n4b": {
-    "title": "Quiz 4 : Number ⑨",
+    "title": "Numbers Quiz",
     "char1": "९",
     "char2": "9",
     "subQuestion": "What is the Hindi word for ९?",

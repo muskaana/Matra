@@ -9,7 +9,7 @@ export default function SmartReviewSlot({ reviewCount }: SmartReviewSlotProps) {
   const showReview = reviewCount > 0;
 
   if (!showReview) {
-    return <div className="h-[88px] mb-4" />;
+    return null;
   }
 
   return (

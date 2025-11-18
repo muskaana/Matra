@@ -118,13 +118,6 @@ export default function MatraPage() {
                 );
               })}
             </div>
-            
-            {/* Learning Tip Card */}
-            <div className="mt-6 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#ff9930] rounded-xl p-4" data-testid="text-learning-tip">
-              <p className="text-sm text-gray-700 leading-relaxed">
-                <span className="font-bold text-[#ff9930]">💡 Tip:</span> Matra symbols change how consonants sound. Learn these to read complete Hindi words correctly!
-              </p>
-            </div>
           </div>
         </div>
         

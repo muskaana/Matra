@@ -118,13 +118,6 @@ export default function ConsonantsPage() {
                 );
               })}
             </div>
-            
-            {/* Learning Tip Card */}
-            <div className="mt-6 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#ff9930] rounded-xl p-4" data-testid="text-learning-tip">
-              <p className="text-sm text-gray-700 leading-relaxed">
-                <span className="font-bold text-[#ff9930]">💡 Tip:</span> Consonants form the building blocks of Hindi words. Master these sounds to unlock reading fluency!
-              </p>
-            </div>
           </div>
         </div>
         

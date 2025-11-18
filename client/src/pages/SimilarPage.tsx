@@ -114,13 +114,6 @@ export default function SimilarPage() {
                 );
               })}
             </div>
-            
-            {/* Learning Tip Card */}
-            <div className="mt-6 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#ff9930] rounded-xl p-4" data-testid="text-learning-tip">
-              <p className="text-sm text-gray-700 leading-relaxed">
-                <span className="font-bold text-[#ff9930]">💡 Tip:</span> These characters look similar but sound different. Pay close attention to the small details!
-              </p>
-            </div>
           </div>
         </div>
         

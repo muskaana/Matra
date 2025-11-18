@@ -172,13 +172,23 @@ export const readingContent: ReadingContent[] = [
   {
     id: "bolly-1",
     type: "bollywood",
-    title: "Filmi Dialogue",
-    description: "Classic Bollywood line",
+    title: "Never Give Up",
+    description: "Inspirational movie dialogue",
     lines: [
       {
-        hindi: "ज़िंदगी में कभी हार नहीं माननी चाहिए, कोशिश करते रहना चाहिए!",
-        transliteration: "Zindagi mein kabhi haar nahi maanni chahiye, koshish karte rehna chahiye!",
-        meaning: "You should never give up in life, you should keep trying!"
+        hindi: "ज़िंदगी में कभी हार नहीं माननी चाहिए।",
+        transliteration: "Zindagi mein kabhi haar nahi maanni chahiye.",
+        meaning: "You should never give up in life."
+      },
+      {
+        hindi: "कोशिश करते रहना चाहिए!",
+        transliteration: "Koshish karte rehna chahiye!",
+        meaning: "You should keep trying!"
+      },
+      {
+        hindi: "क्योंकि जब तक जीत नहीं होती, हार नहीं मानी जाती।",
+        transliteration: "Kyonki jab tak jeet nahi hoti, haar nahi maani jaati.",
+        meaning: "Because until you win, you haven't accepted defeat."
       }
     ],
     quizId: "rq-bolly-1"
@@ -186,13 +196,23 @@ export const readingContent: ReadingContent[] = [
   {
     id: "bolly-2",
     type: "bollywood",
-    title: "Love Song Line",
-    description: "Romantic Bollywood style",
+    title: "Kuch Kuch Hota Hai",
+    description: "Romantic Bollywood classic",
     lines: [
       {
-        hindi: "तुम मेरे दिल की धड़कन हो, मेरी ज़िंदगी हो!",
-        transliteration: "Tum mere dil ki dhadkan ho, meri zindagi ho!",
-        meaning: "You are my heartbeat, you are my life!"
+        hindi: "कुछ कुछ होता है",
+        transliteration: "Kuch kuch hota hai",
+        meaning: "Something happens"
+      },
+      {
+        hindi: "तुम नहीं समझोगे",
+        transliteration: "Tum nahin samjhoge",
+        meaning: "You won't understand"
+      },
+      {
+        hindi: "प्यार दोस्ती है",
+        transliteration: "Pyaar dosti hai",
+        meaning: "Love is friendship"
       }
     ],
     quizId: "rq-bolly-2"
@@ -200,15 +220,150 @@ export const readingContent: ReadingContent[] = [
   {
     id: "bolly-3",
     type: "bollywood",
-    title: "Party Vibes",
-    description: "Upbeat dance song style",
+    title: "Kal Ho Naa Ho",
+    description: "About living in the present",
     lines: [
       {
-        hindi: "नाचो, गाओ, खुश रहो - ये ज़िंदगी है एक बार!",
-        transliteration: "Nacho, gaao, khush raho - ye zindagi hai ek baar!",
-        meaning: "Dance, sing, be happy - this life comes once!"
+        hindi: "हर घड़ी बदल रही है रूप ज़िंदगी",
+        transliteration: "Har ghadi badal rahi hai roop zindagi",
+        meaning: "Every moment life is changing its form"
+      },
+      {
+        hindi: "छाँव है कभी कभी है धूप ज़िंदगी",
+        transliteration: "Chaanv hai kabhi kabhi hai dhoop zindagi",
+        meaning: "Sometimes it's shade, sometimes it's sunshine, life is"
+      },
+      {
+        hindi: "हर पल यहाँ जी भर जियो",
+        transliteration: "Har pal yahaan jee bhar jiyo",
+        meaning: "Live every moment here to the fullest"
       }
     ],
     quizId: "rq-bolly-3"
+  },
+  {
+    id: "bolly-4",
+    type: "bollywood",
+    title: "Kabhi Khushi Kabhie Gham",
+    description: "About family bonds",
+    lines: [
+      {
+        hindi: "कभी खुशी कभी ग़म",
+        transliteration: "Kabhi khushi kabhie gham",
+        meaning: "Sometimes happiness, sometimes sorrow"
+      },
+      {
+        hindi: "ऐसा है ये घर परिवार",
+        transliteration: "Aisa hai ye ghar parivar",
+        meaning: "Such is this home and family"
+      },
+      {
+        hindi: "साथ हैं हम यहाँ हर खुशी में हर ग़म में",
+        transliteration: "Saath hain hum yahaan har khushi mein har gham mein",
+        meaning: "We're together here in every happiness and every sorrow"
+      }
+    ],
+    quizId: "rq-bolly-4"
+  },
+  {
+    id: "bolly-5",
+    type: "bollywood",
+    title: "Senorita",
+    description: "Zindagi Na Milegi Dobara song",
+    lines: [
+      {
+        hindi: "ये दुनिया पितल दी",
+        transliteration: "Ye duniya pital di",
+        meaning: "This world is made of brass"
+      },
+      {
+        hindi: "हाँ हथेली पे सितारे",
+        transliteration: "Haan hatheli pe sitaare",
+        meaning: "Yes, stars on the palm"
+      },
+      {
+        hindi: "दिल खोल के जी लो ओ लम्हों की बारिश में",
+        transliteration: "Dil khol ke jee lo o lamhon ki baarish mein",
+        meaning: "Live with an open heart in the rain of moments"
+      }
+    ],
+    quizId: "rq-bolly-5"
+  },
+  {
+    id: "bolly-6",
+    type: "bollywood",
+    title: "Mere Paas Maa Hai",
+    description: "Famous dialogue about family",
+    lines: [
+      {
+        hindi: "मेरे पास बंगला है, गाड़ी है, पैसा है।",
+        transliteration: "Mere paas bangla hai, gaadi hai, paisa hai.",
+        meaning: "I have a bungalow, a car, money."
+      },
+      {
+        hindi: "तुम्हारे पास क्या है?",
+        transliteration: "Tumhare paas kya hai?",
+        meaning: "What do you have?"
+      },
+      {
+        hindi: "मेरे पास माँ है!",
+        transliteration: "Mere paas maan hai!",
+        meaning: "I have my mother!"
+      }
+    ],
+    quizId: "rq-bolly-6"
+  },
+  {
+    id: "bolly-7",
+    type: "bollywood",
+    title: "Tum Hi Ho",
+    description: "Romantic song lyrics",
+    lines: [
+      {
+        hindi: "तुम ही हो, तुम ही हो",
+        transliteration: "Tum hi ho, tum hi ho",
+        meaning: "You are the one, you are the one"
+      },
+      {
+        hindi: "ज़िंदगी अब तुम ही हो",
+        transliteration: "Zindagi ab tum hi ho",
+        meaning: "Life, now you are the one"
+      },
+      {
+        hindi: "चैन भी, मेरा दर्द भी",
+        transliteration: "Chain bhi, mera dard bhi",
+        meaning: "My peace, my pain too"
+      },
+      {
+        hindi: "मेरी आशिकी अब तुम ही हो",
+        transliteration: "Meri aashiqui ab tum hi ho",
+        meaning: "My love, now you are the one"
+      }
+    ],
+    quizId: "rq-bolly-7"
+  },
+  {
+    id: "bolly-8",
+    type: "bollywood",
+    title: "Chaiyya Chaiyya",
+    description: "Energetic dance song",
+    lines: [
+      {
+        hindi: "जिनके सर हो इश्क़ की छाँव",
+        transliteration: "Jinke sar ho ishq ki chaanv",
+        meaning: "Those who have the shade of love over their heads"
+      },
+      {
+        hindi: "पाँव के नीचे जन्नत होगी",
+        transliteration: "Paanv ke neeche jannat hogi",
+        meaning: "Will have heaven beneath their feet"
+      },
+      {
+        hindi: "चैय्या चैय्या!",
+        transliteration: "Chaiyya chaiyya!",
+        meaning: "Chaiyya chaiyya! (shade/shelter)"
+      }
+    ],
+    quizId: "rq-bolly-8"
   }
 ];

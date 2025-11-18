@@ -65,15 +65,15 @@ export const beginnerWordPacks: WordPack[] = [
   },
   {
     id: "body-nasal",
-    title: "Body Parts",
-    description: "Talk about your body",
+    title: "Question Words",
+    description: "Essential question words",
     words: [
-      { word: "हाँ", transliteration: "haa", meaning: "Yes" },
-      { word: "नहीं", transliteration: "nahi", meaning: "No" },
-      { word: "कहाँ", transliteration: "kaha", meaning: "Where" },
-      { word: "वहाँ", transliteration: "vaha", meaning: "There" },
-      { word: "यहाँ", transliteration: "yaha", meaning: "Here" },
-      { word: "क्यों", transliteration: "kyon", meaning: "Why" },
+      { word: "हाँ", transliteration: "haan", meaning: "Yes" },
+      { word: "नहीं", transliteration: "nahin", meaning: "No" },
+      { word: "कहाँ", transliteration: "kahaan", meaning: "Where" },
+      { word: "वहाँ", transliteration: "vahaan", meaning: "There" },
+      { word: "यहाँ", transliteration: "yahaan", meaning: "Here" },
+      { word: "क्यों", transliteration: "kyun", meaning: "Why" },
     ],
     quizId: "bw-body"
   },

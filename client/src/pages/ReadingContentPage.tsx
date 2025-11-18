@@ -10,6 +10,8 @@ import { useParams, useLocation } from "wouter";
 import { ArrowLeft, Eye, EyeOff, MessageSquare, BookOpen, Film } from "lucide-react";
 import { readingContent } from '../data/reading/content';
 
+type RevealState = "hidden" | "transliteration" | "full";
+
 export default function ReadingContentPage() {
   const params = useParams();
   const [, setLocation] = useLocation();
@@ -17,7 +19,7 @@ export default function ReadingContentPage() {
   
   const content = readingContent.find(c => c.id === contentId);
   
-  const [revealedLines, setRevealedLines] = useState<Set<number>>(new Set());
+  const [lineStates, setLineStates] = useState<Map<number, RevealState>>(new Map());
 
   if (!content) {
     return (
@@ -28,24 +30,33 @@ export default function ReadingContentPage() {
   }
 
   const handleToggleLine = (index: number) => {
-    const newRevealed = new Set(revealedLines);
-    if (newRevealed.has(index)) {
-      newRevealed.delete(index);
+    const currentState = lineStates.get(index) || "hidden";
+    const newStates = new Map(lineStates);
+    
+    if (currentState === "hidden") {
+      newStates.set(index, "transliteration");
+    } else if (currentState === "transliteration") {
+      newStates.set(index, "full");
     } else {
-      newRevealed.add(index);
+      newStates.delete(index);
     }
-    setRevealedLines(newRevealed);
+    
+    setLineStates(newStates);
   };
 
   const handleShowAll = () => {
-    if (revealedLines.size === content.lines.length) {
-      setRevealedLines(new Set());
+    const allFullyRevealed = content.lines.every((_, i) => lineStates.get(i) === "full");
+    
+    if (allFullyRevealed) {
+      setLineStates(new Map());
     } else {
-      setRevealedLines(new Set(content.lines.map((_, i) => i)));
+      const newStates = new Map();
+      content.lines.forEach((_, i) => newStates.set(i, "full"));
+      setLineStates(newStates);
     }
   };
 
-  const allRevealed = revealedLines.size === content.lines.length;
+  const allRevealed = content.lines.every((_, i) => lineStates.get(i) === "full");
 
   const handleContinue = () => {
     setLocation(`/reading/${contentId}/quiz`);
@@ -85,7 +96,7 @@ export default function ReadingContentPage() {
               {/* Content in Devanagari */}
               <div className="space-y-6 mb-6">
                 {content.lines.map((line, index) => {
-                  const isRevealed = revealedLines.has(index);
+                  const state = lineStates.get(index) || "hidden";
                   return (
                     <div 
                       key={index} 
@@ -98,19 +109,31 @@ export default function ReadingContentPage() {
                       </div>
                       
                       <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        {isRevealed ? (
+                        {state === "hidden" && (
+                          <><Eye className="w-4 h-4" /> Tap to read aloud</>
+                        )}
+                        {state === "transliteration" && (
+                          <><Eye className="w-4 h-4" /> Tap for translation</>
+                        )}
+                        {state === "full" && (
                           <><EyeOff className="w-4 h-4" /> Tap to hide</>
-                        ) : (
-                          <><Eye className="w-4 h-4" /> Tap to reveal</>
                         )}
                       </div>
                       
-                      {isRevealed && (
-                        <div className="bg-gradient-to-br from-[#ff9930] to-[#ff7730] rounded-xl p-4 text-white space-y-2 animate-slide-in-up">
-                          <div className="text-lg font-semibold">
+                      {state === "transliteration" && (
+                        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white animate-slide-in-up">
+                          <div className="text-lg font-semibold italic">
                             {line.transliteration}
                           </div>
-                          <div className="text-base">
+                        </div>
+                      )}
+                      
+                      {state === "full" && (
+                        <div className="bg-gradient-to-br from-[#ff9930] to-[#ff7730] rounded-xl p-4 text-white space-y-3 animate-slide-in-up">
+                          <div className="text-lg font-semibold italic border-b border-white/30 pb-2">
+                            {line.transliteration}
+                          </div>
+                          <div className="text-base font-medium">
                             {line.meaning}
                           </div>
                         </div>

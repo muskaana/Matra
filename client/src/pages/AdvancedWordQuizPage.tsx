@@ -58,23 +58,27 @@ export default function AdvancedWordQuizPage() {
       // Award XP for quiz completion (always, on every completion)
       awardQuizXP();
       
-      // Save completion
-      const completed = localStorage.getItem('advancedWordsCompleted');
-      const completedPacks = completed ? JSON.parse(completed) : [];
-      const isNewCompletion = !completedPacks.includes(packId);
+      // Calculate final score percentage
+      const percentage = Math.round((score / quiz.questions.length) * 100);
       
-      if (isNewCompletion) {
-        completedPacks.push(packId);
-        localStorage.setItem('advancedWordsCompleted', JSON.stringify(completedPacks));
+      // Only save completion if score is 60% or higher
+      if (percentage >= 60) {
+        const completed = localStorage.getItem('advancedWordsCompleted');
+        const completedPacks = completed ? JSON.parse(completed) : [];
+        const isNewCompletion = !completedPacks.includes(packId);
         
-        // Check if all advanced packs complete for unit bonus (one-time only)
-        if (completedPacks.length === advancedWordPacks.length) {
-          awardUnitXP();
+        if (isNewCompletion) {
+          completedPacks.push(packId);
+          localStorage.setItem('advancedWordsCompleted', JSON.stringify(completedPacks));
+          
+          // Check if all advanced packs complete for unit bonus (one-time only)
+          if (completedPacks.length === advancedWordPacks.length) {
+            awardUnitXP();
+          }
         }
       }
 
       // Confetti for good score
-      const percentage = (score / quiz.questions.length) * 100;
       if (percentage >= 80) {
         confetti({
           particleCount: 100,

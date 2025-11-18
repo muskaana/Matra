@@ -184,6 +184,7 @@ export default function QuizPage() {
           if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
           if (isMatra) basePath = '/script/lesson/matra/quiz/';
           if (isSimilar) basePath = '/script/lesson/similar/quiz/';
+          if (isNumbers) basePath = '/script/lesson/numbers/quiz/';
           setLocation(`${basePath}${quiz.nextLesson}`);
         }
       }, 1200);

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Lock, Brain, CheckCircle2, Flame, Star } from "lucide-react";
+import { Lock, CheckCircle2 } from "lucide-react";
 import { getItemsDueForReview } from '../utils/smartReview';
-import { getProgress } from '../lib/progress';
 import BottomNav from '../components/BottomNav';
+import ProgressSummary from '../components/ProgressSummary';
+import SmartReviewSlot from '../components/SmartReviewSlot';
 
 export default function ScriptPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -15,8 +16,6 @@ export default function ScriptPage() {
   const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
   const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
-  const [totalXP, setTotalXP] = useState<number>(0);
-  const [currentStreak, setCurrentStreak] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
@@ -63,11 +62,6 @@ export default function ScriptPage() {
     // Load review count
     const dueItems = getItemsDueForReview();
     setReviewCount(dueItems.length);
-    
-    // Load XP and streak
-    const progress = getProgress();
-    setTotalXP(progress.totalXP);
-    setCurrentStreak(progress.currentStreak);
   }, []);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
@@ -86,23 +80,12 @@ export default function ScriptPage() {
     { id: 4, title: "Sentences", href: "/sentences", locked: !isAdvancedWordsComplete, lockReason: !isAdvancedWordsComplete ? "Complete Advanced Words" : "", progress: `${sentencesCompleted}/${totalSentenceSections}`, completed: isSentencesComplete },
     { id: 5, title: "Reading", href: "/reading", locked: !isSentencesComplete, lockReason: !isSentencesComplete ? "Complete Sentences" : "" },
   ];
-  
-  const showReview = reviewCount > 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
-        {/* XP and Streak Bar */}
-        <div className="flex gap-3 mb-4">
-          <div className="flex-1 bg-white rounded-xl px-3 py-2 shadow-md border border-gray-200 flex items-center justify-center gap-2">
-            <Star className="w-5 h-5 text-[#ff9930]" />
-            <p className="text-base font-bold text-black">{totalXP}XP</p>
-          </div>
-          <div className="flex-1 bg-white rounded-xl px-3 py-2 shadow-md border border-gray-200 flex items-center justify-center gap-2">
-            <Flame className="w-5 h-5 text-orange-500" />
-            <p className="text-base font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
-          </div>
-        </div>
+        <ProgressSummary />
+        <SmartReviewSlot reviewCount={reviewCount} />
         
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg shadow-lg">
@@ -150,28 +133,15 @@ export default function ScriptPage() {
                 );
               })}
             </div>
+            
+            {/* Learning Tip Card */}
+            <div className="mt-6 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#ff9930] rounded-xl p-4" data-testid="text-learning-tip">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <span className="font-bold text-[#ff9930]">💡 Tip:</span> Start with The Characters to learn the Devanagari script, then progress through words and sentences!
+              </p>
+            </div>
           </div>
         </div>
-        
-        {/* Smart Review Banner */}
-        {showReview && (
-          <Link href="/review">
-            <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-4 mb-4 shadow-lg border-2 border-white hover:from-purple-600 hover:to-purple-700 transition-all cursor-pointer" data-testid="button-review-banner">
-              <div className="flex items-center gap-3">
-                <div className="bg-white/20 rounded-full p-2">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-white font-bold text-sm">Smart Review Ready!</h3>
-                  <p className="text-white/90 text-xs">{reviewCount} {reviewCount === 1 ? 'item' : 'items'} need practice</p>
-                </div>
-                <div className="bg-white text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
-                  {reviewCount}
-                </div>
-              </div>
-            </div>
-          </Link>
-        )}
         
         {/* Bottom Navigation - Fixed */}
         <BottomNav 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { XCircle, Lock } from "lucide-react";
+import ProgressSummary from '../components/ProgressSummary';
+import SmartReviewSlot from '../components/SmartReviewSlot';
 
 export default function VowelsPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -54,6 +56,9 @@ export default function VowelsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
+        <ProgressSummary />
+        <SmartReviewSlot reviewCount={0} />
+        
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
             <span>Level 1: The Characters</span>
@@ -116,6 +121,13 @@ export default function VowelsPage() {
                   <Link key={lesson.id} href={lesson.href || "#"}>{content}</Link>
                 );
               })}
+            </div>
+            
+            {/* Learning Tip Card */}
+            <div className="mt-6 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-[#ff9930] rounded-xl p-4" data-testid="text-learning-tip">
+              <p className="text-sm text-gray-700 leading-relaxed">
+                <span className="font-bold text-[#ff9930]">💡 Tip:</span> Practice makes perfect! Complete each section in order to build a strong foundation in reading Hindi.
+              </p>
             </div>
           </div>
         </div>

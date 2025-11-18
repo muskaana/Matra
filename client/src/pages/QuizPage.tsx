@@ -18,7 +18,7 @@
  * 4. Results screen shows score, breakdown, and next action
  */
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, useLocation } from "wouter";
 import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -103,6 +103,19 @@ export default function QuizPage() {
     );
   }
 
+  // Shuffle options to prevent predictable ordering
+  const shuffledOptions = useMemo(() => {
+    // Create array of [option, originalIndex] pairs
+    const optionsWithIndices = quiz.options.map((opt: any, idx: number) => ({ option: opt, originalIndex: idx }));
+    // Shuffle using Fisher-Yates algorithm
+    const shuffled = [...optionsWithIndices];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }, [quizId]); // Reshuffle when quiz changes
+
   // Determine if this is a multi-select question (multiple correct answers)
   const correctAnswers = quiz.options
     .map((opt: any, idx: number) => opt.correct ? idx : -1)
@@ -134,20 +147,23 @@ export default function QuizPage() {
   };
 
   // Handle answer selection (single or multi-select)
-  const handleAnswer = (index: number) => {
+  const handleAnswer = (shuffledIndex: number) => {
+    // Map shuffled index back to original index
+    const originalIndex = shuffledOptions[shuffledIndex].originalIndex;
+    
     if (isMultiSelect) {
-      // Multi-select: toggle answer
-      if (selectedAnswers.includes(index)) {
-        setSelectedAnswers(selectedAnswers.filter(i => i !== index));
+      // Multi-select: toggle answer (store original indices)
+      if (selectedAnswers.includes(originalIndex)) {
+        setSelectedAnswers(selectedAnswers.filter(i => i !== originalIndex));
       } else {
-        setSelectedAnswers([...selectedAnswers, index]);
+        setSelectedAnswers([...selectedAnswers, originalIndex]);
       }
     } else {
       // Single select: show feedback then navigate
-      const isCorrect = quiz.options[index].correct;
+      const isCorrect = quiz.options[originalIndex].correct;
       
-      // Set selected answer and show feedback
-      setSelectedAnswers([index]);
+      // Set selected answer and show feedback (store original index)
+      setSelectedAnswers([originalIndex]);
       setShowFeedback(true);
       setFeedbackCorrect(isCorrect);
       
@@ -406,8 +422,10 @@ export default function QuizPage() {
             </div>
 
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>
-              {quiz.options.map((option: any, index: number) => {
-                const isSelected = selectedAnswers.includes(index);
+              {shuffledOptions.map((item: any, shuffledIndex: number) => {
+                const option = item.option;
+                const originalIndex = item.originalIndex;
+                const isSelected = selectedAnswers.includes(originalIndex);
                 const isCorrectOption = option.correct;
                 
                 // For single-select with feedback, show correct/incorrect states
@@ -430,13 +448,13 @@ export default function QuizPage() {
                 
                 return (
                   <button
-                    key={index}
-                    onClick={() => handleAnswer(index)}
+                    key={shuffledIndex}
+                    onClick={() => handleAnswer(shuffledIndex)}
                     disabled={showFeedback && !isMultiSelect}
                     className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce ${buttonClass} ${
                       showFeedback && !isMultiSelect ? 'cursor-default' : ''
                     }`}
-                    data-testid={`button-answer-${index}`}
+                    data-testid={`button-answer-${shuffledIndex}`}
                   >
                     <div className="flex flex-col items-center justify-center gap-1">
                       <div className="flex items-center gap-2">

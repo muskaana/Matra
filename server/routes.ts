@@ -2,12 +2,18 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
-  insertUserProfileSchema, 
-  insertProgressSchema, 
+  insertUserProfileSchema,
+  updateUserProfileSchema,
+  insertProgressSchema,
+  updateProgressSchema,
   insertReviewItemSchema,
+  updateReviewItemSchema,
   insertWordProgressSchema,
+  updateWordProgressSchema,
   insertSentenceProgressSchema,
+  updateSentenceProgressSchema,
   insertReadingProgressSchema,
+  updateReadingProgressSchema,
   insertAchievementSchema
 } from "@shared/schema";
 
@@ -37,13 +43,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/profile/:userId", async (req, res) => {
     try {
-      const profile = await storage.updateUserProfile(req.params.userId, req.body);
+      const validatedData = updateUserProfileSchema.parse(req.body);
+      const profile = await storage.updateUserProfile(req.params.userId, validatedData);
       if (!profile) {
         return res.status(404).json({ error: "Profile not found" });
       }
       res.json(profile);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update profile" });
+      res.status(400).json({ error: "Invalid profile update data" });
     }
   });
 
@@ -70,14 +77,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/progress/:id", async (req, res) => {
     try {
-      const { completed, score } = req.body;
-      const progress = await storage.updateProgress(req.params.id, completed, score);
+      const validatedData = updateProgressSchema.parse(req.body);
+      const progress = await storage.updateProgress(req.params.id, validatedData);
       if (!progress) {
         return res.status(404).json({ error: "Progress not found" });
       }
       res.json(progress);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update progress" });
+      res.status(400).json({ error: "Invalid progress update data" });
     }
   });
 
@@ -116,13 +123,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/review/:id", async (req, res) => {
     try {
-      const item = await storage.updateReviewItem(req.params.id, req.body);
+      const validatedData = updateReviewItemSchema.parse(req.body);
+      const item = await storage.updateReviewItem(req.params.id, validatedData);
       if (!item) {
         return res.status(404).json({ error: "Review item not found" });
       }
       res.json(item);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update review item" });
+      res.status(400).json({ error: "Invalid review item update data" });
     }
   });
 
@@ -149,13 +157,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/words/:id", async (req, res) => {
     try {
-      const word = await storage.updateWordProgress(req.params.id, req.body);
+      const validatedData = updateWordProgressSchema.parse(req.body);
+      const word = await storage.updateWordProgress(req.params.id, validatedData);
       if (!word) {
         return res.status(404).json({ error: "Word progress not found" });
       }
       res.json(word);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update word progress" });
+      res.status(400).json({ error: "Invalid word progress update data" });
     }
   });
 
@@ -182,13 +191,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/sentences/:id", async (req, res) => {
     try {
-      const sentence = await storage.updateSentenceProgress(req.params.id, req.body);
+      const validatedData = updateSentenceProgressSchema.parse(req.body);
+      const sentence = await storage.updateSentenceProgress(req.params.id, validatedData);
       if (!sentence) {
         return res.status(404).json({ error: "Sentence progress not found" });
       }
       res.json(sentence);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update sentence progress" });
+      res.status(400).json({ error: "Invalid sentence progress update data" });
     }
   });
 
@@ -215,13 +225,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.patch("/api/reading/:id", async (req, res) => {
     try {
-      const reading = await storage.updateReadingProgress(req.params.id, req.body);
+      const validatedData = updateReadingProgressSchema.parse(req.body);
+      const reading = await storage.updateReadingProgress(req.params.id, validatedData);
       if (!reading) {
         return res.status(404).json({ error: "Reading progress not found" });
       }
       res.json(reading);
     } catch (error) {
-      res.status(400).json({ error: "Failed to update reading progress" });
+      res.status(400).json({ error: "Invalid reading progress update data" });
     }
   });
 

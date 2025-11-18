@@ -3,16 +3,22 @@ import {
   type InsertUser,
   type UserProfile,
   type InsertUserProfile,
+  type UpdateUserProfile,
   type Progress,
   type InsertProgress,
+  type UpdateProgress,
   type ReviewItem,
   type InsertReviewItem,
+  type UpdateReviewItem,
   type WordProgress,
   type InsertWordProgress,
+  type UpdateWordProgress,
   type SentenceProgress,
   type InsertSentenceProgress,
+  type UpdateSentenceProgress,
   type ReadingProgress,
   type InsertReadingProgress,
+  type UpdateReadingProgress,
   type Achievement,
   type InsertAchievement,
   users,
@@ -36,33 +42,33 @@ export interface IStorage {
   // User profile methods
   getUserProfile(userId: string): Promise<UserProfile | undefined>;
   createUserProfile(userId: string, profile: InsertUserProfile): Promise<UserProfile>;
-  updateUserProfile(userId: string, updates: Partial<InsertUserProfile>): Promise<UserProfile | undefined>;
+  updateUserProfile(userId: string, updates: UpdateUserProfile): Promise<UserProfile | undefined>;
   
   // Progress methods
   getProgress(userId: string, category?: string): Promise<Progress[]>;
   createProgress(progressData: InsertProgress): Promise<Progress>;
-  updateProgress(id: string, completed: boolean, score?: number): Promise<Progress | undefined>;
+  updateProgress(id: string, updates: UpdateProgress): Promise<Progress | undefined>;
   
   // Review methods
   getReviewItems(userId: string, dueOnly?: boolean): Promise<ReviewItem[]>;
   getReviewItem(userId: string, character: string): Promise<ReviewItem | undefined>;
   createReviewItem(item: InsertReviewItem): Promise<ReviewItem>;
-  updateReviewItem(id: string, updates: Partial<InsertReviewItem>): Promise<ReviewItem | undefined>;
+  updateReviewItem(id: string, updates: UpdateReviewItem): Promise<ReviewItem | undefined>;
   
   // Word progress methods
   getWordProgress(userId: string, level?: string): Promise<WordProgress[]>;
   createWordProgress(wordData: InsertWordProgress): Promise<WordProgress>;
-  updateWordProgress(id: string, updates: Partial<InsertWordProgress>): Promise<WordProgress | undefined>;
+  updateWordProgress(id: string, updates: UpdateWordProgress): Promise<WordProgress | undefined>;
   
   // Sentence progress methods
   getSentenceProgress(userId: string, theme?: string): Promise<SentenceProgress[]>;
   createSentenceProgress(sentenceData: InsertSentenceProgress): Promise<SentenceProgress>;
-  updateSentenceProgress(id: string, updates: Partial<InsertSentenceProgress>): Promise<SentenceProgress | undefined>;
+  updateSentenceProgress(id: string, updates: UpdateSentenceProgress): Promise<SentenceProgress | undefined>;
   
   // Reading progress methods
   getReadingProgress(userId: string, level?: string): Promise<ReadingProgress[]>;
   createReadingProgress(readingData: InsertReadingProgress): Promise<ReadingProgress>;
-  updateReadingProgress(id: string, updates: Partial<InsertReadingProgress>): Promise<ReadingProgress | undefined>;
+  updateReadingProgress(id: string, updates: UpdateReadingProgress): Promise<ReadingProgress | undefined>;
   
   // Achievement methods
   getAchievements(userId: string): Promise<Achievement[]>;
@@ -97,7 +103,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateUserProfile(userId: string, updates: Partial<InsertUserProfile>): Promise<UserProfile | undefined> {
+  async updateUserProfile(userId: string, updates: UpdateUserProfile): Promise<UserProfile | undefined> {
     const result = await db.update(userProfiles)
       .set(updates)
       .where(eq(userProfiles.userId, userId))
@@ -122,10 +128,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateProgress(id: string, completed: boolean, score?: number): Promise<Progress | undefined> {
-    const updates: any = { completed };
-    if (score !== undefined) updates.score = score;
-    
+  async updateProgress(id: string, updates: UpdateProgress): Promise<Progress | undefined> {
     const result = await db.update(progress)
       .set(updates)
       .where(eq(progress.id, id))
@@ -164,7 +167,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateReviewItem(id: string, updates: Partial<InsertReviewItem>): Promise<ReviewItem | undefined> {
+  async updateReviewItem(id: string, updates: UpdateReviewItem): Promise<ReviewItem | undefined> {
     const result = await db.update(reviewItems)
       .set(updates)
       .where(eq(reviewItems.id, id))
@@ -189,7 +192,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateWordProgress(id: string, updates: Partial<InsertWordProgress>): Promise<WordProgress | undefined> {
+  async updateWordProgress(id: string, updates: UpdateWordProgress): Promise<WordProgress | undefined> {
     const result = await db.update(wordProgress)
       .set(updates)
       .where(eq(wordProgress.id, id))
@@ -214,7 +217,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateSentenceProgress(id: string, updates: Partial<InsertSentenceProgress>): Promise<SentenceProgress | undefined> {
+  async updateSentenceProgress(id: string, updates: UpdateSentenceProgress): Promise<SentenceProgress | undefined> {
     const result = await db.update(sentenceProgress)
       .set(updates)
       .where(eq(sentenceProgress.id, id))
@@ -239,7 +242,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async updateReadingProgress(id: string, updates: Partial<InsertReadingProgress>): Promise<ReadingProgress | undefined> {
+  async updateReadingProgress(id: string, updates: UpdateReadingProgress): Promise<ReadingProgress | undefined> {
     const result = await db.update(readingProgress)
       .set(updates)
       .where(eq(readingProgress.id, id))

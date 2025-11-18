@@ -19,6 +19,7 @@ import confetti from "canvas-confetti";
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import { getItemsDueForReview, markItemReviewed, ReviewItem } from '../utils/smartReview';
+import { getCharacterInfo } from '../utils/characterLookup';
 
 export default function ReviewPage() {
   const [, setLocation] = useLocation();
@@ -260,8 +261,10 @@ export default function ReviewPage() {
               <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-4 mb-4 border-2 border-orange-200">
                 <p className="text-sm text-gray-600 mb-1">Sound:</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {/* This would need to be looked up from lesson data - for now show type */}
-                  {currentItem.contentType}
+                  {getCharacterInfo(currentItem.contentId).sound}
+                </p>
+                <p className="text-lg text-gray-700 mt-2">
+                  ({getCharacterInfo(currentItem.contentId).transliteration})
                 </p>
               </div>
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, User, Star, Flame, Trophy, TrendingUp, Calendar, Award } from "lucide-react";
+import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User } from "lucide-react";
 import { getProgress } from '../lib/progress';
 import { getItemsDueForReview } from '../utils/smartReview';
+import BottomNav from '../components/BottomNav';
 
 export default function ProfilePage() {
   const [totalXP, setTotalXP] = useState<number>(0);
@@ -251,50 +252,10 @@ export default function ProfilePage() {
       </div>
 
       {/* Bottom Navigation - Fixed */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
-        <div className="w-full max-w-sm mx-auto px-6 py-3">
-          <div className="flex justify-around items-center">
-            <Link href="/script">
-              <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-script">
-                <FileText className="w-6 h-6 mb-1" />
-                <span className="text-xs font-medium">Script</span>
-              </button>
-            </Link>
-            {allCharactersComplete ? (
-              <Link href="/conversation">
-                <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-talk">
-                  <MessageSquare className="w-6 h-6 mb-1" />
-                  <span className="text-xs font-medium">Talk</span>
-                </button>
-              </Link>
-            ) : (
-              <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-talk-locked" title="Complete all characters first">
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <span className="text-xs font-medium">Talk</span>
-              </button>
-            )}
-            {isSentencesComplete ? (
-              <Link href="/reading">
-                <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-read">
-                  <Book className="w-6 h-6 mb-1" />
-                  <span className="text-xs font-medium">Read</span>
-                </button>
-              </Link>
-            ) : (
-              <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-read-locked" title="Complete Sentences to unlock Reading">
-                <Book className="w-6 h-6 mb-1" />
-                <span className="text-xs font-medium">Read</span>
-              </button>
-            )}
-            <Link href="/profile">
-              <button className="flex flex-col items-center text-[#ff9930] p-2 transition-all" data-testid="button-nav-profile">
-                <User className="w-6 h-6 mb-1" />
-                <span className="text-xs font-bold">Profile</span>
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <BottomNav 
+        allCharactersComplete={allCharactersComplete}
+        isSentencesComplete={isSentencesComplete}
+      />
     </div>
   );
 }

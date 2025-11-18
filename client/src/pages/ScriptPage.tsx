@@ -94,19 +94,13 @@ export default function ScriptPage() {
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         {/* XP and Streak Bar */}
         <div className="flex gap-3 mb-4">
-          <div className="flex-1 bg-white rounded-xl px-4 py-3 shadow-md border border-gray-200 flex items-center gap-2">
+          <div className="flex-1 bg-white rounded-xl px-3 py-2 shadow-md border border-gray-200 flex items-center justify-center gap-2">
             <Star className="w-5 h-5 text-[#ff9930]" />
-            <div className="flex-1">
-              <p className="text-xs text-gray-500">Total XP</p>
-              <p className="text-lg font-bold text-black">{totalXP}</p>
-            </div>
+            <p className="text-base font-bold text-black">{totalXP}XP</p>
           </div>
-          <div className="flex-1 bg-white rounded-xl px-4 py-3 shadow-md border border-gray-200 flex items-center gap-2">
+          <div className="flex-1 bg-white rounded-xl px-3 py-2 shadow-md border border-gray-200 flex items-center justify-center gap-2">
             <Flame className="w-5 h-5 text-orange-500" />
-            <div className="flex-1">
-              <p className="text-xs text-gray-500">Streak</p>
-              <p className="text-lg font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
-            </div>
+            <p className="text-base font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
           </div>
         </div>
         

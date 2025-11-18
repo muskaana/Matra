@@ -37,6 +37,7 @@ import ReadingQuizPage from "@/pages/ReadingQuizPage";
 import PlacementQuizPage from "@/pages/PlacementQuizPage";
 import DashboardPage from "@/pages/DashboardPage";
 import ReadingInstructionsPage from "@/pages/ReadingInstructionsPage";
+import ProfilePage from "@/pages/ProfilePage";
 
 function LessonPersistence({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
@@ -112,6 +113,7 @@ function Router() {
         <Route path="/reading/:contentId/quiz" component={ReadingQuizPage} />
         <Route path="/placement" component={PlacementQuizPage} />
         <Route path="/dashboard" component={DashboardPage} />
+        <Route path="/profile" component={ProfilePage} />
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

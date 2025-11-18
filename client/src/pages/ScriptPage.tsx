@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, Lock, Brain, CheckCircle2, Flame, Star } from "lucide-react";
+import { Book, MessageSquare, FileText, Lock, Brain, CheckCircle2, Flame, Star, User } from "lucide-react";
 import { getItemsDueForReview } from '../utils/smartReview';
 import { getProgress } from '../lib/progress';
 
@@ -79,7 +79,7 @@ export default function ScriptPage() {
   const showReview = reviewCount > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col pb-24">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         {/* XP and Streak Bar */}
         <div className="flex gap-3 mb-4">
@@ -168,53 +168,50 @@ export default function ScriptPage() {
           </Link>
         )}
         
-        <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-xl border-2 border-white">
-          {isSentencesComplete ? (
-            <Link href="/reading">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-read">
-                <Book className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Read</span>
-              </button>
-            </Link>
-          ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-read-locked" title="Complete Sentences to unlock Reading">
-              <Lock className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Read</span>
-            </button>
-          )}
-          <Link href="/script">
-            <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-script">
-              <FileText className="w-6 h-6 mb-1" />
-              <span className="text-sm font-bold">Script</span>
-            </button>
-          </Link>
-          {showReview ? (
-            <Link href="/review">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all relative" data-testid="button-review">
-                <Brain className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Review</span>
-                {reviewCount > 0 && (
-                  <div className="absolute -top-1 -right-1 bg-purple-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold border-2 border-white">
-                    {reviewCount}
-                  </div>
-                )}
-              </button>
-            </Link>
-          ) : (
-            allCharactersComplete ? (
-              <Link href="/conversation">
-                <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-talk">
-                  <MessageSquare className="w-6 h-6 mb-1" />
-                  <span className="text-sm font-medium">Talk</span>
+        {/* Bottom Navigation - Fixed */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+          <div className="w-full max-w-sm mx-auto px-6 py-3">
+            <div className="flex justify-around items-center">
+              <Link href="/script">
+                <button className="flex flex-col items-center text-[#ff9930] p-2 transition-all" data-testid="button-nav-script">
+                  <FileText className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-bold">Script</span>
                 </button>
               </Link>
-            ) : (
-              <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-talk-locked" title="Complete all character lessons first">
-                <Lock className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Talk</span>
-              </button>
-            )
-          )}
+              {allCharactersComplete ? (
+                <Link href="/conversation">
+                  <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-talk">
+                    <MessageSquare className="w-6 h-6 mb-1" />
+                    <span className="text-xs font-medium">Talk</span>
+                  </button>
+                </Link>
+              ) : (
+                <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-talk-locked" title="Complete all characters first">
+                  <MessageSquare className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-medium">Talk</span>
+                </button>
+              )}
+              {isSentencesComplete ? (
+                <Link href="/reading">
+                  <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-read">
+                    <Book className="w-6 h-6 mb-1" />
+                    <span className="text-xs font-medium">Read</span>
+                  </button>
+                </Link>
+              ) : (
+                <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-read-locked" title="Complete Sentences to unlock Reading">
+                  <Book className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-medium">Read</span>
+                </button>
+              )}
+              <Link href="/profile">
+                <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-profile">
+                  <User className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-medium">Profile</span>
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

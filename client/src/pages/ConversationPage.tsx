@@ -5,8 +5,8 @@
  * Features tap-to-reveal transliteration/meaning and optional speech synthesis
  */
 
-import { useState } from "react";
-import { Book, MessageSquare, FileText, Volume2, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Book, MessageSquare, FileText, Volume2, ChevronDown, ChevronUp, User } from "lucide-react";
 import { Link } from "wouter";
 import { conversations } from '../data/conversations';
 
@@ -14,9 +14,45 @@ export default function ConversationPage() {
   const [expandedConversations, setExpandedConversations] = useState<string[]>([]);
   const [revealedLines, setRevealedLines] = useState<Set<string>>(new Set());
   const [speakingLine, setSpeakingLine] = useState<string | null>(null);
+  const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
+  const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
+  const [matraCompleted, setMatraCompleted] = useState<number>(0);
+  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
+  const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
+
+  const totalVowels = 5;
+  const totalConsonants = 16;
+  const totalMatra = 7;
+  const totalSimilar = 5;
+  const totalSentenceSections = 3;
   
   // Check if speech synthesis is available
   const isSpeechAvailable = 'speechSynthesis' in window;
+
+  useEffect(() => {
+    // Load completion data to determine unlock states
+    const vowels = localStorage.getItem('vowelsQuizzesCompleted');
+    const consonants = localStorage.getItem('consonantsQuizzesCompleted');
+    const matra = localStorage.getItem('matraQuizzesCompleted');
+    const similar = localStorage.getItem('similarQuizzesCompleted');
+    const sentences = localStorage.getItem('sentencesCompleted');
+
+    if (vowels) setVowelsCompleted(parseInt(vowels));
+    if (consonants) setConsonantsCompleted(parseInt(consonants));
+    if (matra) setMatraCompleted(parseInt(matra));
+    if (similar) setSimilarCompleted(parseInt(similar));
+    if (sentences) {
+      const sectionsCompleted = JSON.parse(sentences);
+      setSentencesCompleted(sectionsCompleted.length);
+    }
+  }, []);
+
+  const allCharactersComplete = vowelsCompleted >= totalVowels && 
+    consonantsCompleted >= totalConsonants && 
+    matraCompleted >= totalMatra && 
+    similarCompleted >= totalSimilar;
+
+  const isSentencesComplete = sentencesCompleted >= totalSentenceSections;
 
   const toggleConversation = (conversationId: string) => {
     setExpandedConversations(prev => 
@@ -63,7 +99,7 @@ export default function ConversationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col pb-24">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg shadow-lg">
@@ -166,26 +202,51 @@ export default function ConversationPage() {
           </div>
         </div>
         
-        {/* Footer Navigation */}
-        <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-lg">
-          <Link href="/reading">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-nav-read">
-              <Book className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Read</span>
-            </button>
-          </Link>
-          <Link href="/script">
-            <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-nav-script">
-              <FileText className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Script</span>
-            </button>
-          </Link>
-          <Link href="/conversation">
-            <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-nav-talk">
-              <MessageSquare className="w-6 h-6 mb-1" />
-              <span className="text-sm font-bold">Talk</span>
-            </button>
-          </Link>
+      </div>
+
+      {/* Bottom Navigation - Fixed */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+        <div className="w-full max-w-sm mx-auto px-6 py-3">
+          <div className="flex justify-around items-center">
+            <Link href="/script">
+              <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-script">
+                <FileText className="w-6 h-6 mb-1" />
+                <span className="text-xs font-medium">Script</span>
+              </button>
+            </Link>
+            {allCharactersComplete ? (
+              <Link href="/conversation">
+                <button className="flex flex-col items-center text-[#ff9930] p-2 transition-all" data-testid="button-nav-talk">
+                  <MessageSquare className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-bold">Talk</span>
+                </button>
+              </Link>
+            ) : (
+              <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-talk-locked" title="Complete all characters first">
+                <MessageSquare className="w-6 h-6 mb-1" />
+                <span className="text-xs font-medium">Talk</span>
+              </button>
+            )}
+            {isSentencesComplete ? (
+              <Link href="/reading">
+                <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-read">
+                  <Book className="w-6 h-6 mb-1" />
+                  <span className="text-xs font-medium">Read</span>
+                </button>
+              </Link>
+            ) : (
+              <button className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed" data-testid="button-nav-read-locked" title="Complete Sentences to unlock Reading">
+                <Book className="w-6 h-6 mb-1" />
+                <span className="text-xs font-medium">Read</span>
+              </button>
+            )}
+            <Link href="/profile">
+              <button className="flex flex-col items-center text-gray-600 p-2 hover:text-[#ff9930] transition-all" data-testid="button-nav-profile">
+                <User className="w-6 h-6 mb-1" />
+                <span className="text-xs font-medium">Profile</span>
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -13,21 +13,26 @@ import { beginnerWordPacks } from '../data/words/beginner';
 export default function BeginnerWordsPage() {
   const [, setLocation] = useLocation();
   const [packsCompleted, setPacksCompleted] = useState<string[]>([]);
+  const [readingIntroComplete, setReadingIntroComplete] = useState(false);
 
   useEffect(() => {
     const completed = localStorage.getItem('beginnerWordsCompleted');
+    const introViewed = localStorage.getItem('readingInstructionsViewed');
     if (completed) {
       setPacksCompleted(JSON.parse(completed));
+    }
+    if (introViewed === 'true') {
+      setReadingIntroComplete(true);
     }
   }, []);
 
   const isPackCompleted = (packId: string) => packsCompleted.includes(packId);
   const isPackUnlocked = (index: number) => {
-    if (index === 0) return true;  // First pack always unlocked
+    if (index === 0) return readingIntroComplete;  // First pack requires reading intro
     return isPackCompleted(beginnerWordPacks[index - 1].id);
   };
 
-  const allPacksComplete = beginnerWordPacks.every(pack => isPackCompleted(pack.id));
+  const allPacksComplete = beginnerWordPacks.every(pack => isPackCompleted(pack.id)) && readingIntroComplete;
 
   // Define icons for each pack
   const packIcons = ['👨‍👩‍👧', '🏠', '❤️'];
@@ -35,21 +40,6 @@ export default function BeginnerWordsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
-        {/* Reading Instructions Link */}
-        <Link href="/words/beginner/intro/1">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 mb-6 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all" data-testid="card-reading-intro">
-            <div className="flex items-center gap-3">
-              <div className="bg-white/20 rounded-full p-3">
-                <BookOpen className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-white font-bold text-lg">How to Read Hindi Words</h3>
-                <p className="text-white/90 text-sm">Quick lesson on reading words</p>
-              </div>
-            </div>
-          </div>
-        </Link>
-
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
             <span>Level 2: Beginner Words</span>
@@ -60,6 +50,29 @@ export default function BeginnerWordsPage() {
           
           <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
             <div className="flex flex-col justify-around flex-1">
+              {/* Reading Instructions - First Item */}
+              <Link href="/words/beginner/intro/1">
+                <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors cursor-pointer hover:bg-gray-50`} data-testid="card-reading-intro">
+                  <div className="relative flex-shrink-0">
+                    <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${readingIntroComplete ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'}`}>
+                      📖
+                    </div>
+                    {readingIntroComplete && (
+                      <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <span className="leading-10 font-medium text-black text-[24px]">
+                      How to Read Words
+                    </span>
+                    <p className="text-sm text-gray-500 mt-1">Required • 4-page lesson</p>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Word Packs */}
               {beginnerWordPacks.map((pack, index) => {
                 const completed = isPackCompleted(pack.id);
                 const unlocked = isPackUnlocked(index);
@@ -85,6 +98,9 @@ export default function BeginnerWordsPage() {
                       <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[28px]`}>
                         {pack.title}
                       </span>
+                      {!unlocked && index === 0 && !readingIntroComplete && (
+                        <p className="text-sm text-gray-400 mt-1">Complete How to Read Words first</p>
+                      )}
                       {!unlocked && index > 0 && (
                         <p className="text-sm text-gray-400 mt-1">Complete {beginnerWordPacks[index - 1].title} first</p>
                       )}

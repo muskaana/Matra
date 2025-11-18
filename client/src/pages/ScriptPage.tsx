@@ -14,13 +14,14 @@ export default function ScriptPage() {
   const [beginnerWordsCompleted, setBeginnerWordsCompleted] = useState<number>(0);
   const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
   const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
+  const [readingIntroComplete, setReadingIntroComplete] = useState(false);
   const [totalXP, setTotalXP] = useState<number>(0);
   const [currentStreak, setCurrentStreak] = useState<number>(0);
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 3;
+  const totalBeginnerPacks = 4; // 1 intro + 3 packs
   const totalAdvancedPacks = 3;
   const totalSentenceSections = 3;
   
@@ -32,15 +33,24 @@ export default function ScriptPage() {
     const beginnerWords = localStorage.getItem('beginnerWordsCompleted');
     const advancedWords = localStorage.getItem('advancedWordsCompleted');
     const sentences = localStorage.getItem('sentencesCompleted');
+    const readingIntro = localStorage.getItem('readingInstructionsViewed');
     
     if (vowels) setVowelsCompleted(parseInt(vowels));
     if (consonants) setConsonantsCompleted(parseInt(consonants));
     if (matra) setMatraCompleted(parseInt(matra));
     if (similar) setSimilarCompleted(parseInt(similar));
+    
+    let beginnerCount = 0;
+    if (readingIntro === 'true') {
+      setReadingIntroComplete(true);
+      beginnerCount = 1; // Count the intro lesson
+    }
     if (beginnerWords) {
       const packsCompleted = JSON.parse(beginnerWords);
-      setBeginnerWordsCompleted(packsCompleted.length);
+      beginnerCount += packsCompleted.length;
     }
+    setBeginnerWordsCompleted(beginnerCount);
+    
     if (advancedWords) {
       const packsCompleted = JSON.parse(advancedWords);
       setAdvancedWordsCompleted(packsCompleted.length);

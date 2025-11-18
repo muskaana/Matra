@@ -7,7 +7,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowLeft, Lock, CheckCircle2, BookOpen } from "lucide-react";
+import { XCircle, Lock, CheckCircle2, BookOpen } from "lucide-react";
 import { beginnerWordPacks } from '../data/words/beginner';
 
 export default function BeginnerWordsPage() {
@@ -29,26 +29,12 @@ export default function BeginnerWordsPage() {
 
   const allPacksComplete = beginnerWordPacks.every(pack => isPackCompleted(pack.id));
 
+  // Define icons for each pack
+  const packIcons = ['👨‍👩‍👧', '🏠', '❤️'];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
-        {/* Header */}
-        <div className="flex items-center mb-4">
-          <button 
-            onClick={() => setLocation('/script')} 
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors mr-2"
-            data-testid="button-back"
-          >
-            <ArrowLeft className="w-6 h-6 text-gray-600" />
-          </button>
-          <h1 className="text-2xl font-bold text-black">Beginner Words</h1>
-        </div>
-
-        {/* Description */}
-        <p className="text-gray-600 mb-4 text-center">
-          Learn simple, everyday words using flashcards
-        </p>
-
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         {/* Reading Instructions Link */}
         <Link href="/words/beginner/intro">
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 mb-6 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all" data-testid="card-reading-intro">
@@ -64,70 +50,67 @@ export default function BeginnerWordsPage() {
           </div>
         </Link>
 
-        {/* Word Packs */}
-        <div className="flex-1 space-y-4">
-          {beginnerWordPacks.map((pack, index) => {
-            const completed = isPackCompleted(pack.id);
-            const unlocked = isPackUnlocked(index);
+        <div className="flex-1 flex flex-col">
+          <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
+            <span>Level 2: Beginner Words</span>
+            <button onClick={() => setLocation('/script')} data-testid="button-close">
+              <XCircle className="w-5 h-5 hover:bg-white/20 rounded-full transition-colors" />
+            </button>
+          </div>
+          
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
+            <div className="flex flex-col justify-around flex-1">
+              {beginnerWordPacks.map((pack, index) => {
+                const completed = isPackCompleted(pack.id);
+                const unlocked = isPackUnlocked(index);
 
-            const content = (
-              <div 
-                className={`bg-white rounded-2xl shadow-lg p-6 border-2 transition-all ${
-                  !unlocked 
-                    ? 'border-gray-200 opacity-50 cursor-not-allowed' 
-                    : completed
-                    ? 'border-green-500 cursor-pointer hover:shadow-xl hover:scale-[1.02]'
-                    : 'border-[#ff9930] cursor-pointer hover:shadow-xl hover:scale-[1.02]'
-                }`}
-                data-testid={`card-pack-${pack.id}`}
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1">
-                    <h2 className={`text-2xl font-bold mb-1 ${!unlocked ? 'text-gray-400' : 'text-black'}`}>
-                      {pack.title}
-                    </h2>
-                    <p className={`text-sm ${!unlocked ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {pack.description}
-                    </p>
-                  </div>
-                  {completed && (
-                    <CheckCircle2 className="w-8 h-8 text-green-500 flex-shrink-0" />
-                  )}
-                  {!unlocked && (
-                    <Lock className="w-8 h-8 text-gray-400 flex-shrink-0" />
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between mt-4">
-                  <div className={`text-sm font-medium ${!unlocked ? 'text-gray-400' : 'text-gray-600'}`}>
-                    {pack.words.length} words
-                  </div>
-                  {!unlocked && index > 0 && (
-                    <div className="text-xs text-gray-400">
-                      Complete {beginnerWordPacks[index - 1].title} first
+                const content = (
+                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-pack-${pack.id}`}>
+                    <div className="relative flex-shrink-0">
+                      <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${!unlocked ? 'bg-gray-400' : completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
+                        {packIcons[index]}
+                      </div>
+                      {!unlocked && (
+                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
+                          <Lock className="w-3.5 h-3.5 text-white" />
+                        </div>
+                      )}
+                      {completed && (
+                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
-            );
+                    <div className="flex-1">
+                      <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[28px]`}>
+                        {pack.title}
+                      </span>
+                      {!unlocked && index > 0 && (
+                        <p className="text-sm text-gray-400 mt-1">Complete {beginnerWordPacks[index - 1].title} first</p>
+                      )}
+                    </div>
+                  </div>
+                );
 
-            return unlocked ? (
-              <Link key={pack.id} href={`/words/beginner/${pack.id}/flashcards`}>
-                {content}
-              </Link>
-            ) : (
-              <div key={pack.id}>{content}</div>
-            );
-          })}
+                return unlocked ? (
+                  <Link key={pack.id} href={`/words/beginner/${pack.id}/flashcards`}>
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={pack.id}>{content}</div>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Completion Message */}
         {allPacksComplete && (
           <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 mt-6 text-center shadow-lg animate-slide-in-up">
             <CheckCircle2 className="w-16 h-16 text-white mx-auto mb-3" />
-            <h3 className="text-white font-bold text-xl mb-2">Beginner Words Complete!</h3>
+            <h3 className="text-white font-bold text-xl mb-2">Level Complete!</h3>
             <p className="text-white/90 text-sm">
-              You've learned all the basic words. Keep practicing!
+              You've learned basic Hindi words. Advanced Words unlocked!
             </p>
           </div>
         )}

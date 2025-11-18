@@ -8,12 +8,12 @@ export default function ConsonantSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
   const [showCompletedModal, setShowCompletedModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<any>(null);
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   
   useEffect(() => {
     const completed = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
     setCompletedSections(completed);
-  }, []);
+  }, [location]);
   
   const handleRedoSection = () => {
     if (selectedSection) {

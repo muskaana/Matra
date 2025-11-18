@@ -99,7 +99,7 @@ export default function ConversationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg shadow-lg">

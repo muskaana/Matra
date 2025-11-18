@@ -90,7 +90,7 @@ export default function ScriptPage() {
   const showReview = reviewCount > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col pb-24">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         {/* XP and Streak Bar */}
         <div className="flex gap-3 mb-4">

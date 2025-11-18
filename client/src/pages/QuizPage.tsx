@@ -391,12 +391,6 @@ export default function QuizPage() {
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col relative animate-slide-in-up">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-black mb-8">{quiz.title}</h2>
-            
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <span className="text-7xl font-bold text-black">{quiz.char1}</span>
-              <span className="text-2xl font-semibold text-gray-500">vs</span>
-              <span className="text-7xl font-bold text-black">{quiz.char2}</span>
-            </div>
           </div>
 
           <div className="flex-1 flex flex-col justify-between">

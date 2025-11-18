@@ -36,7 +36,7 @@ export default function BeginnerWordsPage() {
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
         {/* Reading Instructions Link */}
-        <Link href="/words/beginner/intro">
+        <Link href="/words/beginner/intro/1">
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 mb-6 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all" data-testid="card-reading-intro">
             <div className="flex items-center gap-3">
               <div className="bg-white/20 rounded-full p-3">

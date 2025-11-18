@@ -100,6 +100,7 @@ function Router() {
         <Route path="/script/lesson/numbers/quiz/:id" component={QuizPage} />
         <Route path="/review" component={ReviewPage} />
         <Route path="/words/beginner/intro" component={ReadingInstructionsPage} />
+        <Route path="/words/beginner/intro/:id" component={ReadingInstructionsPage} />
         <Route path="/words/beginner" component={BeginnerWordsPage} />
         <Route path="/words/beginner/:packId/flashcards" component={FlashcardPage} />
         <Route path="/words/beginner/:packId/quiz" component={WordQuizPage} />

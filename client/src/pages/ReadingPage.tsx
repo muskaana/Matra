@@ -82,7 +82,7 @@ export default function ReadingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen px-4 py-4">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen px-4 py-4 pb-24">
         {/* Header */}
         <div className="flex items-center mb-4">
           <button 

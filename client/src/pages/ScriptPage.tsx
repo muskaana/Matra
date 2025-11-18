@@ -91,7 +91,7 @@ export default function ScriptPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
         {/* XP and Streak Bar */}
         <div className="flex gap-3 mb-4">
           <div className="flex-1 bg-white rounded-xl px-3 py-2 shadow-md border border-gray-200 flex items-center justify-center gap-2">

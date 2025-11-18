@@ -316,6 +316,15 @@ export default function QuizPage() {
           window.location.href = `${basePath}${firstQuizId}`;
         }, 100);
       }
+    } else {
+      // This is not the last quiz - navigate to next quiz
+      let basePath = '/script/lesson/vowels/quiz/';
+      if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
+      if (isMatra) basePath = '/script/lesson/matra/quiz/';
+      if (isSimilar) basePath = '/script/lesson/similar/quiz/';
+      if (isNumbers) basePath = '/script/lesson/numbers/quiz/';
+      
+      setLocation(`${basePath}${quiz.nextLesson}`);
     }
   };
 

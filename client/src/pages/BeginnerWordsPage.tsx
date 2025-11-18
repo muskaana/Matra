@@ -9,6 +9,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { XCircle, Lock, CheckCircle2, BookOpen } from "lucide-react";
 import { beginnerWordPacks } from '../data/words/beginner';
+import ProgressSummary from '../components/ProgressSummary';
+import SmartReviewSlot from '../components/SmartReviewSlot';
+import BottomNav from '../components/BottomNav';
 
 export default function BeginnerWordsPage() {
   const [, setLocation] = useLocation();
@@ -40,6 +43,9 @@ export default function BeginnerWordsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
+        <ProgressSummary />
+        <SmartReviewSlot reviewCount={0} />
+        
         <div className="flex-1 flex flex-col">
           <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
             <span>Level 2: Beginner Words</span>
@@ -130,6 +136,12 @@ export default function BeginnerWordsPage() {
             </p>
           </div>
         )}
+        
+        {/* Bottom Navigation - Fixed */}
+        <BottomNav 
+          allCharactersComplete={true}
+          isSentencesComplete={false}
+        />
       </div>
     </div>
   );

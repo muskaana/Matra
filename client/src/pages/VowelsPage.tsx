@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { XCircle, Lock } from "lucide-react";
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
+import BottomNav from '../components/BottomNav';
 
 export default function VowelsPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -131,6 +132,12 @@ export default function VowelsPage() {
             </div>
           </div>
         </div>
+        
+        {/* Bottom Navigation - Fixed */}
+        <BottomNav 
+          allCharactersComplete={vowelsCompleted >= 13 && consonantsCompleted >= 36 && matraCompleted >= 11 && similarCompleted >= 10}
+          isSentencesComplete={false}
+        />
       </div>
     </div>
   );

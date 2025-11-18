@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
-import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
+import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
 
 export default function MatraSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
@@ -55,9 +55,13 @@ export default function MatraSectionsPage() {
         </div>
 
         <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
-          <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-30" color="#ff9930" />
-          <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-30" color="#2E86AB" />
-          <RangoliPattern className="absolute bottom-32 left-4 w-12 h-12 opacity-25" color="#138808" />
+          <HalfRangoliPattern className="absolute top-0 left-0 w-24 h-24 opacity-30" color="#FF1744" side="top" />
+          <QuarterRangoliPattern className="absolute top-0 right-0 w-22 h-22 opacity-32" color="#00BCD4" corner="top-right" />
+          <RangoliPattern className="absolute top-44 left-6 w-15 h-15 opacity-28" color="#CDDC39" />
+          <MandalaPattern className="absolute top-72 right-4 w-17 h-17 opacity-26" color="#FF6F00" />
+          <HalfRangoliPattern className="absolute bottom-52 left-2 w-20 h-20 opacity-29" color="#00E676" side="left" />
+          <QuarterRangoliPattern className="absolute bottom-28 right-0 w-20 h-20 opacity-31" color="#D500F9" corner="bottom-right" />
+          <RangoliPattern className="absolute bottom-6 left-1/4 w-16 h-16 opacity-25" color="#2962FF" />
           
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;

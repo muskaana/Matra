@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
-import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
+import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
 
 export default function VowelSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
@@ -58,9 +58,13 @@ export default function VowelSectionsPage() {
         </div>
 
         <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
-          <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-30" color="#ff9930" />
-          <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-30" color="#2E86AB" />
-          <RangoliPattern className="absolute bottom-32 left-4 w-12 h-12 opacity-25" color="#138808" />
+          <HalfRangoliPattern className="absolute top-0 left-0 w-24 h-24 opacity-32" color="#FF6B6B" side="top" />
+          <QuarterRangoliPattern className="absolute top-2 right-0 w-20 h-20 opacity-30" color="#4ECDC4" corner="top-right" />
+          <MandalaPattern className="absolute top-48 left-8 w-16 h-16 opacity-28" color="#FFD93D" />
+          <RangoliPattern className="absolute top-80 right-6 w-14 h-14 opacity-26" color="#95E1D3" />
+          <HalfRangoliPattern className="absolute bottom-40 left-4 w-18 h-18 opacity-30" color="#F38181" side="left" />
+          <QuarterRangoliPattern className="absolute bottom-16 right-2 w-20 h-20 opacity-32" color="#AA96DA" corner="bottom-right" />
+          <RangoliPattern className="absolute bottom-6 left-1/2 w-14 h-14 opacity-24" color="#FCBAD3" />
           
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;

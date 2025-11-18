@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
-import { RangoliPattern, MandalaPattern } from '../components/DecorativePattern';
+import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
 
 export default function ConsonantSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
@@ -64,9 +64,17 @@ export default function ConsonantSectionsPage() {
         </div>
 
         <div className="flex-1 flex flex-col gap-8 py-8 px-6 overflow-y-auto relative">
-          <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-30" color="#ff9930" />
-          <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-30" color="#2E86AB" />
-          <RangoliPattern className="absolute bottom-32 left-4 w-12 h-12 opacity-25" color="#138808" />
+          <QuarterRangoliPattern className="absolute top-0 left-0 w-22 h-22 opacity-33" color="#3498DB" corner="top-left" />
+          <HalfRangoliPattern className="absolute top-6 right-0 w-26 h-26 opacity-28" color="#E74C3C" side="right" />
+          <MandalaPattern className="absolute top-36 left-4 w-16 h-16 opacity-30" color="#F39C12" />
+          <RangoliPattern className="absolute top-60 right-8 w-14 h-14 opacity-26" color="#1ABC9C" />
+          <HalfRangoliPattern className="absolute top-96 left-2 w-20 h-20 opacity-28" color="#9B59B6" side="bottom" />
+          <QuarterRangoliPattern className="absolute top-[500px] right-4 w-18 h-18 opacity-30" color="#E67E22" corner="bottom-right" />
+          <RangoliPattern className="absolute top-[600px] left-6 w-16 h-16 opacity-25" color="#16A085" />
+          <MandalaPattern className="absolute top-[700px] right-2 w-15 h-15 opacity-27" color="#C0392B" />
+          <HalfRangoliPattern className="absolute bottom-48 left-0 w-22 h-22 opacity-32" color="#2980B9" side="left" />
+          <QuarterRangoliPattern className="absolute bottom-20 right-0 w-20 h-20 opacity-29" color="#8E44AD" corner="bottom-right" />
+          <RangoliPattern className="absolute bottom-8 left-1/3 w-14 h-14 opacity-24" color="#27AE60" />
           
           {sections.map((section, index) => {
             const isEven = index % 2 === 0;

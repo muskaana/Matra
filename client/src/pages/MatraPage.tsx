@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, MessageSquare, FileText, XCircle, Lock } from "lucide-react";
+import { XCircle, Lock } from "lucide-react";
 
 export default function MatraPage() {
   const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
@@ -113,41 +113,6 @@ export default function MatraPage() {
               })}
             </div>
           </div>
-        </div>
-
-        <div className="flex justify-around items-center bg-gradient-to-r from-[#ff9930] to-[#ff7730] rounded-xl mt-6 py-3 shadow-xl border-2 border-white">
-          {allCharactersComplete ? (
-            <Link href="/reading">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-read">
-                <Book className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Read</span>
-              </button>
-            </Link>
-          ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-read-locked" title="Complete all character lessons first">
-              <Lock className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Read</span>
-            </button>
-          )}
-          <Link href="/script">
-            <button className="flex flex-col items-center text-white p-2 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-script">
-              <FileText className="w-6 h-6 mb-1" />
-              <span className="text-sm font-bold">Script</span>
-            </button>
-          </Link>
-          {allCharactersComplete ? (
-            <Link href="/conversation">
-              <button className="flex flex-col items-center text-white p-2 opacity-70 hover:opacity-100 hover:bg-[#CF7B24] rounded-lg transition-all" data-testid="button-talk">
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <span className="text-sm font-medium">Talk</span>
-              </button>
-            </Link>
-          ) : (
-            <button className="flex flex-col items-center text-white p-2 opacity-30 cursor-not-allowed rounded-lg" data-testid="button-talk-locked" title="Complete all character lessons first">
-              <Lock className="w-6 h-6 mb-1" />
-              <span className="text-sm font-medium">Talk</span>
-            </button>
-          )}
         </div>
       </div>
     </div>

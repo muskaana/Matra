@@ -18,7 +18,25 @@ The backend is an Express.js server with TypeScript, using Drizzle ORM for datab
 
 ## Data Storage
 
-PostgreSQL is the primary database, managed by Drizzle ORM with a schema-first approach. The schema includes a `users` table with UUID primary keys and Zod validation. An `IStorage` interface provides a storage abstraction, with an in-memory implementation (`MemStorage`) for development.
+PostgreSQL is the primary database, managed by Drizzle ORM with a schema-first approach. The database schema includes comprehensive tables for user data and learning progress:
+
+-   **Core Tables**:
+    -   `users` - User authentication (UUID primary keys)
+    -   `user_profiles` - XP, streak, placement level, last active date
+    -   `progress` - Section/lesson completion tracking with scores
+    -   `review_items` - Smart review system with spaced repetition data
+    -   `achievements` - Unlocked achievements with timestamps
+
+-   **Learning Progress Tables**:
+    -   `word_progress` - Beginner/Advanced word mastery tracking (Talk section)
+    -   `sentence_progress` - Sentence learning progress by theme (Talk section)
+    -   `reading_progress` - Story completion and page bookmarks (Read section)
+
+-   **Storage Architecture**:
+    -   `IStorage` interface provides storage abstraction layer
+    -   `DbStorage` class implements full database operations using Drizzle ORM
+    -   All schemas validated with Zod through `drizzle-zod`
+    -   API routes in `server/routes.ts` provide RESTful endpoints for all data operations
 
 ## UI/UX Decisions
 

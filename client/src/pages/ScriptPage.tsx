@@ -21,7 +21,7 @@ export default function ScriptPage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 7; // 1 intro + 6 packs
+  const totalBeginnerPacks = 6; // 6 word packs (intro is just instructional)
   const totalAdvancedPacks = 5;
   const totalSentenceSections = 30;
   const totalReadingPieces = 14; // 3 whatsapp + 3 paragraphs + 8 bollywood
@@ -41,16 +41,13 @@ export default function ScriptPage() {
     if (matra) setMatraCompleted(parseInt(matra));
     if (similar) setSimilarCompleted(parseInt(similar));
     
-    let beginnerCount = 0;
     if (readingIntro === 'true') {
       setReadingIntroComplete(true);
-      beginnerCount = 1; // Count the intro lesson
     }
     if (beginnerWords) {
       const packsCompleted = JSON.parse(beginnerWords);
-      beginnerCount += packsCompleted.length;
+      setBeginnerWordsCompleted(packsCompleted.length);
     }
-    setBeginnerWordsCompleted(beginnerCount);
     
     if (advancedWords) {
       const packsCompleted = JSON.parse(advancedWords);

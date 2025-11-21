@@ -234,6 +234,10 @@ export default function QuizPage() {
     const isCorrect = selectedAnswers.length === correctAnswers.length &&
                       selectedAnswers.every(idx => correctAnswers.includes(idx));
     
+    // Show feedback
+    setShowFeedback(true);
+    setFeedbackCorrect(isCorrect);
+    
     // Record attempt for smart review system
     recordAttempt({
       contentId: getTestedCharacter(),
@@ -254,7 +258,7 @@ export default function QuizPage() {
       });
     }
 
-    // Navigate to next question or show results
+    // Navigate to next question or show results after showing feedback
     setTimeout(() => {
       if (quiz.nextLesson.includes('/')) {
         // End of quiz section - award XP and show results
@@ -262,6 +266,7 @@ export default function QuizPage() {
         setShowResults(true);
       } else {
         // Next question - reset state
+        setShowFeedback(false);
         setSelectedAnswers([]);
         let basePath = '/script/lesson/vowels/quiz/';
         if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
@@ -481,9 +486,9 @@ export default function QuizPage() {
                 const isSelected = selectedAnswers.includes(originalIndex);
                 const isCorrectOption = option.correct;
                 
-                // For single-select with feedback, show correct/incorrect states
+                // Show correct/incorrect states when feedback is active
                 let buttonClass = '';
-                if (showFeedback && !isMultiSelect) {
+                if (showFeedback) {
                   if (isSelected && isCorrectOption) {
                     buttonClass = 'bg-green-500 text-white border-2 border-green-600';
                   } else if (isSelected && !isCorrectOption) {
@@ -503,17 +508,17 @@ export default function QuizPage() {
                   <button
                     key={shuffledIndex}
                     onClick={() => handleAnswer(shuffledIndex)}
-                    disabled={showFeedback && !isMultiSelect}
+                    disabled={showFeedback}
                     className={`px-4 py-4 rounded-xl transition-colors font-medium text-base shadow-lg btn-bounce ${buttonClass} ${
-                      showFeedback && !isMultiSelect ? 'cursor-default' : ''
+                      showFeedback ? 'cursor-default' : ''
                     }`}
                     data-testid={`button-answer-${shuffledIndex}`}
                   >
                     <div className="flex flex-col items-center justify-center gap-1">
                       <div className="flex items-center gap-2">
-                        {formatOptionLabel(quiz.type, option, showFeedback && !isMultiSelect ? 'results' : 'quiz')}
-                        {showFeedback && !isMultiSelect && isSelected && isCorrectOption && <CheckCircle2 className="w-5 h-5 flex-shrink-0" />}
-                        {showFeedback && !isMultiSelect && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 flex-shrink-0" />}
+                        {formatOptionLabel(quiz.type, option, showFeedback ? 'results' : 'quiz')}
+                        {showFeedback && isSelected && isCorrectOption && <CheckCircle2 className="w-5 h-5 flex-shrink-0" />}
+                        {showFeedback && isSelected && !isCorrectOption && <XCircle className="w-5 h-5 flex-shrink-0" />}
                       </div>
                     </div>
                   </button>
@@ -521,7 +526,7 @@ export default function QuizPage() {
               })}
             </div>
 
-            {isMultiSelect && (
+            {isMultiSelect && !showFeedback && (
               <button
                 onClick={handleSubmitMultiSelect}
                 disabled={selectedAnswers.length === 0}

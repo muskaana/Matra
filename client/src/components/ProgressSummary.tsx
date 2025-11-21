@@ -1,16 +1,27 @@
 import { useState, useEffect } from 'react';
 import { Star, Flame } from 'lucide-react';
 import { getProgress } from '../lib/progress';
+import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile } from '@/hooks/useUserProgress';
 
 export default function ProgressSummary() {
+  const { user } = useAuth();
+  const { profile } = useUserProfile();
   const [totalXP, setTotalXP] = useState<number>(0);
   const [currentStreak, setCurrentStreak] = useState<number>(0);
 
   useEffect(() => {
-    const progress = getProgress();
-    setTotalXP(progress.totalXP);
-    setCurrentStreak(progress.currentStreak);
-  }, []);
+    // For authenticated users, use database profile
+    if (user && profile) {
+      setTotalXP(profile.xp || 0);
+      setCurrentStreak(profile.currentStreak || 0);
+    } else if (!user) {
+      // For unauthenticated users, use localStorage
+      const progress = getProgress();
+      setTotalXP(progress.totalXP);
+      setCurrentStreak(progress.currentStreak);
+    }
+  }, [user, profile]);
 
   return (
     <div className="flex gap-3 mb-4" data-testid="progress-summary">

@@ -1,50 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { Link } from "wouter";
 import { XCircle, Lock } from "lucide-react";
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '@/hooks/useAuth';
+import { useProgress } from '@/hooks/useUserProgress';
 
 export default function VowelsPage() {
-  const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
-  const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
-  const [matraCompleted, setMatraCompleted] = useState<number>(0);
+  const { user } = useAuth();
+  const { progress } = useProgress();
+  
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
+  const totalSimilar = 5;
+  const totalNumbers = 4;
   
-  useEffect(() => {
-    const vowels = localStorage.getItem('vowelsQuizzesCompleted');
-    const consonants = localStorage.getItem('consonantsQuizzesCompleted');
-    const matra = localStorage.getItem('matraQuizzesCompleted');
-    
-    if (vowels) setVowelsCompleted(parseInt(vowels));
-    if (consonants) setConsonantsCompleted(parseInt(consonants));
-    if (matra) setMatraCompleted(parseInt(matra));
-  }, []);
+  // For authenticated users, use database progress; for guests, use localStorage
+  const vowelsCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const consonantsCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const matraCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const similarCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const numbersCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
+  }, [user, progress]);
   
   const vowelsProgress = Math.round((vowelsCompleted / totalVowels) * 100);
   const consonantsProgress = Math.round((consonantsCompleted / totalConsonants) * 100);
   const matraProgress = Math.round((matraCompleted / totalMatra) * 100);
-  
-  const isVowelsComplete = vowelsCompleted >= totalVowels;
-  const isConsonantsComplete = consonantsCompleted >= totalConsonants;
-  const isMatraComplete = matraCompleted >= totalMatra;
-  const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete;
-  
-  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
-  const [numbersCompleted, setNumbersCompleted] = useState<number>(0);
-  const totalSimilar = 5;
-  const totalNumbers = 4;
   const similarProgress = Math.round((similarCompleted / totalSimilar) * 100);
   const numbersProgress = Math.round((numbersCompleted / totalNumbers) * 100);
   
-  useEffect(() => {
-    const similar = localStorage.getItem('similarQuizzesCompleted');
-    const numbers = localStorage.getItem('numbersQuizzesCompleted');
-    if (similar) setSimilarCompleted(parseInt(similar));
-    if (numbers) setNumbersCompleted(parseInt(numbers));
-  }, []);
+  const isVowelsComplete = vowelsCompleted >= totalVowels;
+  const isConsonantsComplete = consonantsCompleted >= totalConsonants;
 
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: vowelsProgress, locked: false },

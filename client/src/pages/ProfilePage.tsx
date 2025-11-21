@@ -32,9 +32,9 @@ export default function ProfilePage() {
   const [localSentences, setLocalSentences] = useState<number>(0);
   const [localPlacementLevel, setLocalPlacementLevel] = useState<string>('');
   
-  // Get user's name/email from auth  
-  // For now, display email until firstName/lastName are populated from OIDC
-  const userName = (user as any)?.email || 'Your Profile';
+  // Get user's name from email (extract part before @)
+  const userEmail = (user as any)?.email || '';
+  const userName = userEmail ? userEmail.split('@')[0] : 'Your Profile';
 
   const totalVowels = 5;
   const totalConsonants = 16;

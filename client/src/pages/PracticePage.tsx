@@ -14,7 +14,7 @@
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerCalm from '@assets/sitting-calm-tiger.jpg';
+import tigerCalm from '@assets/sitting-calm-tiger.png';
 import { 
   VOWEL_SECTIONS, 
   CONSONANT_SECTIONS, 

@@ -11,7 +11,7 @@ import { X, CheckCircle2, XCircle, BookOpen } from "lucide-react";
 import confetti from "canvas-confetti";
 import { readingContent } from '../data/reading/content';
 import { readingQuizzes } from '../data/reading/quizzes';
-import tigerExcited from '@assets/excited-jumping-tiger.jpg';
+import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { awardQuizXP } from '../lib/progress';
 
 export default function ReadingQuizPage() {

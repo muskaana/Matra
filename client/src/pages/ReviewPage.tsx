@@ -16,8 +16,8 @@ import { useLocation } from "wouter";
 import { Volume2, CheckCircle2, XCircle, Home } from "lucide-react";
 import confetti from "canvas-confetti";
 
-import tigerSleeping from '@assets/sleeping-tiger.jpg';
-import tigerExcited from '@assets/excited-jumping-tiger.jpg';
+import tigerSleeping from '@assets/sleeping-tiger.png';
+import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { getItemsDueForReview, markItemReviewed, ReviewItem } from '../utils/smartReview';
 import { getCharacterInfo } from '../utils/characterLookup';
 

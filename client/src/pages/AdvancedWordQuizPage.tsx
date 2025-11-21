@@ -11,7 +11,7 @@ import { X, CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import { advancedWordPacks } from '../data/words/advanced';
 import { advancedWordQuizzes } from '../data/words/advancedQuizzes';
-import tigerExcited from '@assets/excited-jumping-tiger.jpg';
+import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function AdvancedWordQuizPage() {

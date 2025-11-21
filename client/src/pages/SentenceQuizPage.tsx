@@ -10,7 +10,7 @@ import { X, CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import { sentenceSections } from '../data/sentences/beginner';
 import { sentenceQuizzes } from '../data/sentences/quizzes';
-import tigerExcited from '@assets/excited-jumping-tiger.jpg';
+import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function SentenceQuizPage() {

@@ -23,7 +23,7 @@ import { useParams, useLocation } from "wouter";
 import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
-import tigerExcited from '@assets/excited-jumping-tiger.jpg';
+import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';

@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
-import tigerCalm from '@assets/sitting-calm-tiger.jpg';
+import tigerCalm from '@assets/sitting-calm-tiger.png';
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/useAuth";

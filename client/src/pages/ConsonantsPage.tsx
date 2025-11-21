@@ -122,10 +122,7 @@ export default function ConsonantsPage() {
         </div>
         
         {/* Bottom Navigation - Fixed */}
-        <BottomNav 
-          allCharactersComplete={vowelsCompleted >= 13 && consonantsCompleted >= 36 && matraCompleted >= 11 && similarCompleted >= 10}
-          isSentencesComplete={false}
-        />
+        <BottomNav />
       </div>
     </div>
   );

@@ -138,10 +138,7 @@ export default function BeginnerWordsPage() {
         )}
         
         {/* Bottom Navigation - Fixed */}
-        <BottomNav 
-          allCharactersComplete={true}
-          isSentencesComplete={false}
-        />
+        <BottomNav />
       </div>
     </div>
   );

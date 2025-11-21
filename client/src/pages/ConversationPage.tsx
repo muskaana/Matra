@@ -205,10 +205,7 @@ export default function ConversationPage() {
       </div>
 
       {/* Bottom Navigation - Fixed */}
-      <BottomNav 
-        allCharactersComplete={allCharactersComplete}
-        isSentencesComplete={isSentencesComplete}
-      />
+      <BottomNav />
     </div>
   );
 }

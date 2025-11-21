@@ -137,10 +137,7 @@ export default function ScriptPage() {
         </div>
         
         {/* Bottom Navigation - Fixed */}
-        <BottomNav 
-          allCharactersComplete={allCharactersComplete}
-          isSentencesComplete={isSentencesComplete}
-        />
+        <BottomNav />
       </div>
     </div>
   );

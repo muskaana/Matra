@@ -107,10 +107,7 @@ export default function AdvancedWordsPage() {
         )}
         
         {/* Bottom Navigation - Fixed */}
-        <BottomNav 
-          allCharactersComplete={true}
-          isSentencesComplete={false}
-        />
+        <BottomNav />
       </div>
     </div>
   );

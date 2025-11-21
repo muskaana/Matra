@@ -146,10 +146,7 @@ export default function ReadingPage() {
       </div>
 
       {/* Bottom Navigation - Fixed */}
-      <BottomNav 
-        allCharactersComplete={allCharactersComplete}
-        isSentencesComplete={isSentencesComplete}
-      />
+      <BottomNav />
     </div>
   );
 }

@@ -252,10 +252,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Bottom Navigation - Fixed */}
-      <BottomNav 
-        allCharactersComplete={allCharactersComplete}
-        isSentencesComplete={isSentencesComplete}
-      />
+      <BottomNav />
     </div>
   );
 }

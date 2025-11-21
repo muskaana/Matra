@@ -44,12 +44,12 @@ export default function ReadingPage() {
     '🎬', '❤️', '🌟', '👩‍👩‍👦', '🎵', '🎤', '🌙', '💃'  // Bollywood (6-13)
   ];
 
-  // Subtitles to show content type
-  const getSubtitle = (type: string) => {
-    if (type === 'whatsapp') return 'WhatsApp Message';
-    if (type === 'paragraph') return 'Short Story';
-    if (type === 'bollywood') return 'Bollywood';
-    return '';
+  // Section headers appear at these indices
+  const getSectionHeader = (index: number) => {
+    if (index === 0) return '💬 WhatsApp Messages';
+    if (index === 3) return '📖 Short Stories';
+    if (index === 6) return '🎬 Bollywood Vibes';
+    return null;
   };
 
   return (
@@ -71,6 +71,7 @@ export default function ReadingPage() {
               {readingContent.map((item, index) => {
                 const completed = isItemCompleted(item.id);
                 const unlocked = isItemUnlocked(index);
+                const sectionHeader = getSectionHeader(index);
 
                 const content = (
                   <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-reading-${item.id}`}>
@@ -93,7 +94,6 @@ export default function ReadingPage() {
                       <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[24px]`}>
                         {item.title}
                       </span>
-                      <p className="text-sm text-gray-500 mt-1">{getSubtitle(item.type)}</p>
                       {!unlocked && index > 0 && (
                         <p className="text-sm text-gray-400 mt-1">Complete {readingContent[index - 1].title} first</p>
                       )}
@@ -101,12 +101,21 @@ export default function ReadingPage() {
                   </div>
                 );
 
-                return unlocked ? (
-                  <Link key={item.id} href={`/reading/${item.id}`}>
-                    {content}
-                  </Link>
-                ) : (
-                  <div key={item.id}>{content}</div>
+                return (
+                  <div key={item.id}>
+                    {sectionHeader && (
+                      <div className="text-sm font-semibold text-[#ff9930] mb-2 mt-2">
+                        {sectionHeader}
+                      </div>
+                    )}
+                    {unlocked ? (
+                      <Link href={`/reading/${item.id}`}>
+                        {content}
+                      </Link>
+                    ) : (
+                      <div>{content}</div>
+                    )}
+                  </div>
                 );
               })}
             </div>

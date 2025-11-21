@@ -46,13 +46,11 @@ const getRandomMessage = () => {
   return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
 };
 
-// Tiger image for quiz screens - varies by category for visual variety
-const getQuizTiger = (location?: string) => {
-  if (!location) return tigerExcited;
-  if (location.includes('/consonants/')) return tigerCalm;
-  if (location.includes('/similar/')) return tigerCalm;
-  if (location.includes('/numbers/')) return tigerSleeping;
-  return tigerExcited; // Default for vowels and matra
+// Tiger image for quiz screens - varies by question index for visual variety
+const getQuizTiger = (questionIndex: number) => {
+  // Rotate through different tiger images based on question number
+  const tigerImages = [tigerExcited, tigerCalm, tigerSleeping];
+  return tigerImages[questionIndex % tigerImages.length];
 };
 
 // Format quiz option labels based on type and display mode
@@ -150,14 +148,11 @@ export default function QuizPage() {
     .filter((idx: number) => idx !== -1);
   const isMultiSelect = correctAnswers.length > 1;
 
-  // Calculate progress through the quiz section
-  const progress = (() => {
-    const quizNumber = parseInt(quiz.pageNumber.split(' ')[1]?.replace(/[a-z]/i, '') || '1');
-    const questionLetter = quiz.pageNumber.match(/[a-z]$/i)?.[0] || 'a';
-    const questionIndex = questionLetter.charCodeAt(0) - 'a'.charCodeAt(0);
-    const totalQuestions = 4;
-    return ((questionIndex + 1) / totalQuestions) * 100;
-  })();
+  // Calculate question index and progress through the quiz section
+  const questionLetter = quiz.pageNumber.match(/[a-z]$/i)?.[0] || 'a';
+  const questionIndex = questionLetter.charCodeAt(0) - 'a'.charCodeAt(0);
+  const totalQuestions = 4;
+  const progress = ((questionIndex + 1) / totalQuestions) * 100;
 
   // Determine content type based on URL
   const getContentType = (): ContentType => {
@@ -478,7 +473,7 @@ export default function QuizPage() {
           <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
             <div className="mb-8">
               <img 
-                src={getQuizTiger(location)} 
+                src={getQuizTiger(questionIndex)} 
                 alt="Waving tiger" 
                 className="w-40 h-40 mx-auto object-contain mb-6" 
               />
@@ -565,7 +560,7 @@ export default function QuizPage() {
             {/* Tiger mascot in center white space */}
             <div className="flex justify-center items-center mb-4">
               <img 
-                src={getQuizTiger(location)} 
+                src={getQuizTiger(questionIndex)} 
                 alt="Tiger mascot" 
                 className="w-24 h-24 object-contain opacity-90 animate-bounce-subtle"
               />

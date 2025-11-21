@@ -41,6 +41,7 @@ import PlacementQuizPage from "@/pages/PlacementQuizPage";
 import DashboardPage from "@/pages/DashboardPage";
 import ReadingInstructionsPage from "@/pages/ReadingInstructionsPage";
 import ProfilePage from "@/pages/ProfilePage";
+import FlowCheckerPage from "@/pages/FlowCheckerPage";
 
 function LessonPersistence({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useLocation();
@@ -120,6 +121,8 @@ function Router() {
         <Route path="/placement" component={PlacementQuizPage} />
         <Route path="/dashboard" component={DashboardPage} />
         <Route path="/profile" component={ProfilePage} />
+        {/* Dev-only routes */}
+        {import.meta.env.DEV && <Route path="/dev/flows" component={FlowCheckerPage} />}
         {/* Fallback to 404 */}
         <Route component={NotFound} />
       </Switch>

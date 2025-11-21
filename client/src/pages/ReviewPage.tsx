@@ -16,8 +16,8 @@ import { useLocation } from "wouter";
 import { Volume2, CheckCircle2, XCircle, Home } from "lucide-react";
 import confetti from "canvas-confetti";
 
-import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
-import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
+import tigerSleeping from '@assets/sleeping-tiger.jpg';
+import tigerExcited from '@assets/excited-jumping-tiger.jpg';
 import { getItemsDueForReview, markItemReviewed, ReviewItem } from '../utils/smartReview';
 import { getCharacterInfo } from '../utils/characterLookup';
 
@@ -206,8 +206,8 @@ export default function ReviewPage() {
           <div className="flex-1 flex flex-col justify-center">
             <div className="mb-3">
               <img 
-                src={tigerThinking} 
-                alt="Thinking tiger" 
+                src={tigerSleeping} 
+                alt="Sleeping tiger" 
                 className="w-16 h-16 mx-auto object-contain opacity-50" 
               />
             </div>

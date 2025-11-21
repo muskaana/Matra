@@ -11,7 +11,7 @@ import { X, CheckCircle2, XCircle, BookOpen } from "lucide-react";
 import confetti from "canvas-confetti";
 import { readingContent } from '../data/reading/content';
 import { readingQuizzes } from '../data/reading/quizzes';
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import tigerExcited from '@assets/excited-jumping-tiger.jpg';
 import { awardQuizXP } from '../lib/progress';
 
 export default function ReadingQuizPage() {
@@ -107,8 +107,8 @@ export default function ReadingQuizPage() {
               <BookOpen className="w-16 h-16 text-[#ff9930] mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-black mb-4">Reading Practice Complete!</h2>
               <img 
-                src={tigerWaving} 
-                alt="Waving tiger" 
+                src={tigerExcited} 
+                alt="Excited tiger" 
                 className="w-32 h-32 mx-auto object-contain mb-6" 
               />
               <div className={`text-6xl font-bold mb-4 ${percentage >= 80 ? 'text-[#ff9930]' : percentage >= 60 ? 'text-yellow-500' : 'text-gray-500'}`}>

@@ -14,7 +14,7 @@
 import { useState } from "react";
 import { useParams, useLocation } from "wouter";
 import { X, ChevronLeft } from "lucide-react";
-import tigerHappy from '@assets/generated_images/Bright_orange_tiger_mascot_transparent_d56bba83.png';
+import tigerCalm from '@assets/sitting-calm-tiger.jpg';
 import { 
   VOWEL_SECTIONS, 
   CONSONANT_SECTIONS, 
@@ -108,7 +108,7 @@ export default function PracticePage() {
           <div>
             <div className="mb-6 flex justify-center">
               <img 
-                src={tigerHappy} 
+                src={tigerCalm} 
                 alt="Happy tiger" 
                 className="w-24 h-24 object-contain animate-bounce-slow" 
               />

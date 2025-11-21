@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Sparkles, BookOpen, Brain, Trophy, Instagram, Twitter, Mail, LogIn, User } from "lucide-react";
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
-import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
-import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
+import tigerHappy from '@assets/sitting-happy-tiger.jpg';
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Home() {
@@ -95,7 +93,7 @@ export default function Home() {
             {/* Tiger Mascot */}
             <div className="animate-bounce-subtle" data-testid="img-hero-tiger">
               <img 
-                src={tigerWaving} 
+                src={tigerHappy} 
                 alt="Matra tiger mascot" 
                 className="w-32 h-32 md:w-48 md:h-48 mx-auto drop-shadow-2xl"
               />

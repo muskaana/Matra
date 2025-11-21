@@ -7,7 +7,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight, CheckCircle2, Trophy } from "lucide-react";
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import tigerWaving from '@assets/sitting-happy-tiger.jpg';
 
 export default function DashboardPage() {
   const [, setLocation] = useLocation();

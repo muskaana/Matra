@@ -23,9 +23,7 @@ import { useParams, useLocation } from "wouter";
 import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
-import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
-import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
+import tigerExcited from '@assets/excited-jumping-tiger.jpg';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
@@ -44,13 +42,9 @@ const getRandomMessage = () => {
   return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
 };
 
-// Tiger images for variety in quiz screens - all same style, different poses
-const quizTigers = [tigerWaving, tigerExcited, tigerThinking];
-
-const getQuizTiger = (quizId: string) => {
-  // Use quiz ID to deterministically select a tiger (same quiz = same tiger)
-  const index = quizId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % quizTigers.length;
-  return quizTigers[index];
+// Tiger image for quiz screens
+const getQuizTiger = () => {
+  return tigerExcited;
 };
 
 // Format quiz option labels based on type and display mode
@@ -386,7 +380,7 @@ export default function QuizPage() {
           <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
             <div className="mb-8">
               <img 
-                src={tigerWaving} 
+                src={tigerExcited} 
                 alt="Waving tiger" 
                 className="w-32 h-32 mx-auto object-contain mb-6" 
               />
@@ -473,7 +467,7 @@ export default function QuizPage() {
             {/* Tiger mascot in center white space */}
             <div className="flex justify-center items-center mb-4">
               <img 
-                src={getQuizTiger(quizId)} 
+                src={getQuizTiger()} 
                 alt="Tiger mascot" 
                 className="w-24 h-24 object-contain opacity-90 animate-bounce-subtle"
               />

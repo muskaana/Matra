@@ -10,7 +10,7 @@ import { X, CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import { sentenceSections } from '../data/sentences/beginner';
 import { sentenceQuizzes } from '../data/sentences/quizzes';
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import tigerExcited from '@assets/excited-jumping-tiger.jpg';
 import { awardQuizXP, awardUnitXP } from '../lib/progress';
 
 export default function SentenceQuizPage() {
@@ -116,8 +116,8 @@ export default function SentenceQuizPage() {
           <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
             <div className="mb-8">
               <img 
-                src={tigerWaving} 
-                alt="Waving tiger" 
+                src={tigerExcited} 
+                alt="Excited tiger" 
                 className="w-32 h-32 mx-auto object-contain mb-6" 
               />
               <div className={`text-6xl font-bold mb-4 ${percentage >= 80 ? 'text-[#ff9930]' : percentage >= 60 ? 'text-yellow-500' : 'text-gray-500'}`}>

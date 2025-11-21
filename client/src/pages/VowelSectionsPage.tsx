@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
-import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
+import tigerPlayful from '@assets/crouching-playful-tiger.jpg';
 import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
 
 export default function VowelSectionsPage() {
@@ -118,7 +118,7 @@ export default function VowelSectionsPage() {
           })}
           
           <div className="mt-8 flex justify-center">
-            <img src={tigerExcited} alt="Excited tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />
+            <img src={tigerPlayful} alt="Playful tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />
           </div>
         </div>
       </div>

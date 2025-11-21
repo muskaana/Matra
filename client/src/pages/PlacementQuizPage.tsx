@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
-import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import tigerCalm from '@assets/sitting-calm-tiger.jpg';
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/useAuth";
@@ -137,7 +137,7 @@ export default function PlacementQuizPage() {
     localStorage.setItem('masteredLessons', JSON.stringify(masteredLessons));
 
     // If user is authenticated, save to database
-    if (user && 'id' in user) {
+    if (user && (user as User).id) {
       saveResultsMutation.mutate({
         userId: (user as User).id,
         masteredLessons,
@@ -175,7 +175,7 @@ export default function PlacementQuizPage() {
               <CheckCircle2 className="w-16 h-16 text-[#ff9930] mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-black mb-4">Assessment Complete!</h2>
               <img 
-                src={tigerWaving} 
+                src={tigerCalm} 
                 alt="Waving tiger" 
                 className="w-32 h-32 mx-auto object-contain mb-6" 
               />

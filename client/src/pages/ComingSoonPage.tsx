@@ -1,6 +1,6 @@
 import { useLocation } from "wouter";
 import { ArrowLeft, Sparkles } from "lucide-react";
-import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
+import tigerPouncing from '@assets/pouncing-tiger.jpg';
 
 export default function ComingSoonPage() {
   const [, setLocation] = useLocation();
@@ -11,8 +11,8 @@ export default function ComingSoonPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100">
           <div className="mb-6">
             <img 
-              src={tigerExcited} 
-              alt="Excited tiger" 
+              src={tigerPouncing} 
+              alt="Pouncing tiger" 
               className="w-32 h-32 mx-auto object-contain animate-bounce-subtle" 
             />
           </div>

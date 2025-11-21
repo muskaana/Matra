@@ -38,7 +38,7 @@ export default function BeginnerWordsPage() {
   const allPacksComplete = beginnerWordPacks.every(pack => isPackCompleted(pack.id)) && readingIntroComplete;
 
   // Define icons for each pack
-  const packIcons = ['👨‍👩‍👧', '🏠', '❤️'];
+  const packIcons = ['👨‍👩‍👧', '🗣️', '🏠', '❓', '❤️'];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

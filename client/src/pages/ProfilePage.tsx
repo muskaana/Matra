@@ -22,7 +22,7 @@ export default function ProfilePage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 6;
+  const totalBeginnerPacks = 5;
   const totalAdvancedPacks = 5;
   const totalSentenceSections = 30;
 

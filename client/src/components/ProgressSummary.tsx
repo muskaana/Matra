@@ -1,27 +1,37 @@
-import { useState, useEffect } from 'react';
 import { Star, Flame } from 'lucide-react';
 import { getProgress } from '../lib/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile } from '@/hooks/useUserProgress';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ProgressSummary() {
   const { user } = useAuth();
-  const { profile } = useUserProfile();
-  const [totalXP, setTotalXP] = useState<number>(0);
-  const [currentStreak, setCurrentStreak] = useState<number>(0);
+  const { profile, isLoading } = useUserProfile();
 
-  useEffect(() => {
-    // For authenticated users, use database profile
-    if (user && profile) {
-      setTotalXP(profile.xp || 0);
-      setCurrentStreak(profile.currentStreak || 0);
-    } else if (!user) {
-      // For unauthenticated users, use localStorage
-      const progress = getProgress();
-      setTotalXP(progress.totalXP);
-      setCurrentStreak(progress.currentStreak);
-    }
-  }, [user, profile]);
+  // For authenticated users, use database profile directly
+  let totalXP = 0;
+  let currentStreak = 0;
+
+  if (user) {
+    // Use database values
+    totalXP = profile?.xp || 0;
+    currentStreak = profile?.currentStreak || 0;
+  } else {
+    // For unauthenticated users, use localStorage
+    const progress = getProgress();
+    totalXP = progress.totalXP;
+    currentStreak = progress.currentStreak;
+  }
+
+  // Show loading state for authenticated users
+  if (user && isLoading) {
+    return (
+      <div className="flex gap-3 mb-4" data-testid="progress-summary">
+        <Skeleton className="flex-1 h-[52px] rounded-xl" />
+        <Skeleton className="flex-1 h-[52px] rounded-xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-3 mb-4" data-testid="progress-summary">

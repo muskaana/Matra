@@ -70,95 +70,74 @@ export default function ReadingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
-        <ProgressSummary />
-        <SmartReviewSlot reviewCount={reviewCount} />
+    <div className="min-h-screen bg-white flex flex-col pb-20">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
+        {/* Header */}
+        <div className="bg-[#ff9930] text-white px-6 py-4 font-bold text-xl">
+          Reading Practice
+        </div>
         
-        <div className="flex-1 flex flex-col">
-          <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
-            <span>Level 5: Reading</span>
-            <button onClick={() => setLocation('/script')} data-testid="button-close">
-              <XCircle className="w-5 h-5 hover:bg-white/20 rounded-full transition-colors" />
-            </button>
-          </div>
-          
-          <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col">
-            {/* Loading state for authenticated users */}
-            {user && isLoading ? (
-              <div className="flex flex-col gap-4 overflow-y-auto" data-testid="loading-state">
-                {readingContent.map((item) => (
-                  <div key={item.id} className="flex items-center gap-5 rounded-lg p-2 -m-2">
-                    <div className="w-[80px] h-[80px] rounded-full bg-gray-200 animate-pulse" />
-                    <div className="flex-1">
-                      <div className="h-6 bg-gray-200 rounded animate-pulse w-3/4" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col gap-4 overflow-y-auto">
-                {readingContent.map((item, index) => {
+        {/* Content Area */}
+        <div className="flex-1 px-6 py-6 overflow-y-auto">
+          {/* Loading state for authenticated users */}
+          {user && isLoading ? (
+            <div className="grid grid-cols-2 gap-4" data-testid="loading-state">
+              {readingContent.map((item) => (
+                <div key={item.id} className="flex flex-col items-center">
+                  <div className="w-full aspect-square rounded-2xl bg-gray-200 animate-pulse" />
+                  <div className="h-5 bg-gray-200 rounded animate-pulse w-20 mt-3" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-4">
+              {readingContent.map((item, index) => {
                 const completed = isItemCompleted(item.id);
                 const unlocked = isItemUnlocked(index);
-                const sectionHeader = getSectionHeader(index);
 
-                const content = (
-                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-reading-${item.id}`}>
-                    <div className="relative flex-shrink-0">
-                      <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${!unlocked ? 'bg-gray-400' : completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
+                const cardContent = (
+                  <div className="flex flex-col items-center" data-testid={`card-reading-${item.id}`}>
+                    <div className="relative w-full">
+                      <div className={`w-full aspect-square rounded-2xl flex items-center justify-center text-white font-bold text-[40px] shadow-md transition-all ${!unlocked ? 'bg-gray-400 cursor-not-allowed opacity-50' : completed ? 'bg-green-500 hover:bg-green-600 cursor-pointer' : 'bg-[#ff9930] hover:bg-[#CF7B24] cursor-pointer'}`}>
                         {itemIcons[index]}
                       </div>
                       {!unlocked && (
-                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
-                          <Lock className="w-3.5 h-3.5 text-white" />
+                        <div className="absolute bottom-2 right-2 w-7 h-7 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
+                          <Lock className="w-4 h-4 text-white" />
                         </div>
                       )}
                       {completed && (
-                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                        <div className="absolute bottom-2 right-2 w-7 h-7 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                          <CheckCircle2 className="w-4 h-4 text-white" />
                         </div>
                       )}
                     </div>
-                    <div className="flex-1">
-                      <span className={`leading-tight font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[20px]`}>
-                        {item.title}
-                      </span>
-                      {!unlocked && index > 0 && (
-                        <p className="text-sm text-gray-400 mt-1">Complete {readingContent[index - 1].title} first</p>
-                      )}
-                    </div>
+                    <span className={`text-center mt-3 font-medium text-sm ${!unlocked ? 'text-gray-400' : 'text-black'}`}>
+                      {item.title}
+                    </span>
                   </div>
                 );
 
-                return (
+                return unlocked ? (
+                  <Link key={item.id} href={`/reading/${item.id}`}>
+                    {cardContent}
+                  </Link>
+                ) : (
                   <div key={item.id}>
-                    {sectionHeader && (
-                      <div className="text-xs font-semibold text-[#ff9930] mb-2 mt-2">
-                        {sectionHeader}
-                      </div>
-                    )}
-                    {unlocked ? (
-                      <Link href={`/reading/${item.id}`}>
-                        {content}
-                      </Link>
-                    ) : (
-                      <div>{content}</div>
-                    )}
+                    {cardContent}
                   </div>
                 );
               })}
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Completion Message */}
         {allItemsComplete && (
-          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-4 mt-6 shadow-lg animate-slide-in-up">
+          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-4 mx-6 mb-4 shadow-lg">
             <div className="flex items-center gap-3 mb-2">
               <CheckCircle2 className="w-8 h-8 text-white flex-shrink-0" />
-              <h3 className="text-white font-bold text-lg">Level Complete!</h3>
+              <h3 className="text-white font-bold text-lg">All Complete!</h3>
             </div>
             <p className="text-white/90 text-sm">
               Amazing work! You've completed all reading practice! 📚

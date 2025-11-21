@@ -97,9 +97,11 @@ export default function AdvancedWordsPage() {
 
         {/* Completion Message */}
         {allPacksComplete && (
-          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 mt-6 text-center shadow-lg animate-slide-in-up">
-            <CheckCircle2 className="w-16 h-16 text-white mx-auto mb-3" />
-            <h3 className="text-white font-bold text-xl mb-2">Level Complete!</h3>
+          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-4 mt-6 shadow-lg animate-slide-in-up">
+            <div className="flex items-center gap-3 mb-2">
+              <CheckCircle2 className="w-8 h-8 text-white flex-shrink-0" />
+              <h3 className="text-white font-bold text-lg">Level Complete!</h3>
+            </div>
             <p className="text-white/90 text-sm">
               You've mastered reading longer words. Sentences unlocked!
             </p>

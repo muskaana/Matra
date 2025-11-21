@@ -74,6 +74,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/reading" component={ComingSoonPage} />
         <Route path="/conversation" component={ComingSoonPage} />
+        <Route path="/script/reading" component={ReadingPage} />
         <Route path="/script" component={ScriptPage} />
         <Route path="/script/vowels" component={VowelsPage} />
         <Route path="/script/vowels/sections" component={VowelSectionsPage} />

@@ -78,7 +78,7 @@ export default function ScriptPage() {
     { id: 2, title: "Beginner Words", href: "/words/beginner", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "", progress: `${beginnerWordsCompleted}/${totalBeginnerPacks}`, completed: isBeginnerWordsComplete },
     { id: 3, title: "Advanced Words", href: "/words/advanced", locked: !isBeginnerWordsComplete, lockReason: !isBeginnerWordsComplete ? "Complete Beginner Words" : "", progress: `${advancedWordsCompleted}/${totalAdvancedPacks}`, completed: isAdvancedWordsComplete },
     { id: 4, title: "Sentences", href: "/sentences", locked: !isAdvancedWordsComplete, lockReason: !isAdvancedWordsComplete ? "Complete Advanced Words" : "", progress: `${sentencesCompleted}/${totalSentenceSections}`, completed: isSentencesComplete },
-    { id: 5, title: "Reading", href: "/reading", locked: !isSentencesComplete, lockReason: !isSentencesComplete ? "Complete Sentences" : "" },
+    { id: 5, title: "Reading", href: "/script/reading", locked: !isSentencesComplete, lockReason: !isSentencesComplete ? "Complete Sentences" : "" },
   ];
 
   return (

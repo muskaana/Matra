@@ -22,8 +22,8 @@ export default function ProfilePage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 3;
-  const totalAdvancedPacks = 3;
+  const totalBeginnerPacks = 6;
+  const totalAdvancedPacks = 5;
   const totalSentenceSections = 3;
 
   useEffect(() => {

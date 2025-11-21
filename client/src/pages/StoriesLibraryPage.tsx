@@ -61,10 +61,10 @@ export default function StoriesLibraryPage() {
                   <li>• Numbers</li>
                 </ul>
               </div>
-              <Link href="/script">
-                <a className="inline-block mt-6 px-6 py-3 bg-[#ff9930] hover:bg-[#ff8800] text-white rounded-lg font-semibold" data-testid="link-go-to-script">
+              <Link href="/script" data-testid="link-go-to-script">
+                <div className="inline-block mt-6 px-6 py-3 bg-[#ff9930] hover:bg-[#ff8800] text-white rounded-lg font-semibold">
                   Go to Script
-                </a>
+                </div>
               </Link>
             </div>
           </div>

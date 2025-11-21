@@ -15,6 +15,7 @@ export default function ScriptPage() {
   const [beginnerWordsCompleted, setBeginnerWordsCompleted] = useState<number>(0);
   const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
   const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
+  const [readingCompleted, setReadingCompleted] = useState<number>(0);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
   const totalVowels = 5;
   const totalConsonants = 16;
@@ -23,6 +24,7 @@ export default function ScriptPage() {
   const totalBeginnerPacks = 4; // 1 intro + 3 packs
   const totalAdvancedPacks = 3;
   const totalSentenceSections = 3;
+  const totalReadingPieces = 9;
   
   useEffect(() => {
     const vowels = localStorage.getItem('vowelsQuizzesCompleted');
@@ -59,6 +61,12 @@ export default function ScriptPage() {
       setSentencesCompleted(sectionsCompleted.length);
     }
     
+    const reading = localStorage.getItem('readingCompleted');
+    if (reading) {
+      const piecesCompleted = JSON.parse(reading);
+      setReadingCompleted(piecesCompleted.length);
+    }
+    
     // Load review count
     const dueItems = getItemsDueForReview();
     setReviewCount(dueItems.length);
@@ -72,13 +80,14 @@ export default function ScriptPage() {
   const isBeginnerWordsComplete = beginnerWordsCompleted >= totalBeginnerPacks;
   const isAdvancedWordsComplete = advancedWordsCompleted >= totalAdvancedPacks;
   const isSentencesComplete = sentencesCompleted >= totalSentenceSections;
+  const isReadingComplete = readingCompleted >= totalReadingPieces;
   
   const levels = [
     { id: 1, title: "The Characters", href: "/script/vowels", locked: false, progress: `${vowelsCompleted + consonantsCompleted + matraCompleted + similarCompleted}/${totalVowels + totalConsonants + totalMatra + totalSimilar}`, completed: allCharactersComplete },
     { id: 2, title: "Beginner Words", href: "/words/beginner", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "", progress: `${beginnerWordsCompleted}/${totalBeginnerPacks}`, completed: isBeginnerWordsComplete },
     { id: 3, title: "Advanced Words", href: "/words/advanced", locked: !isBeginnerWordsComplete, lockReason: !isBeginnerWordsComplete ? "Complete Beginner Words" : "", progress: `${advancedWordsCompleted}/${totalAdvancedPacks}`, completed: isAdvancedWordsComplete },
     { id: 4, title: "Sentences", href: "/sentences", locked: !isAdvancedWordsComplete, lockReason: !isAdvancedWordsComplete ? "Complete Advanced Words" : "", progress: `${sentencesCompleted}/${totalSentenceSections}`, completed: isSentencesComplete },
-    { id: 5, title: "Reading", href: "/script/reading", locked: !isSentencesComplete, lockReason: !isSentencesComplete ? "Complete Sentences" : "" },
+    { id: 5, title: "Reading", href: "/script/reading", locked: !isSentencesComplete, lockReason: !isSentencesComplete ? "Complete Sentences" : "", progress: `${readingCompleted}/${totalReadingPieces}`, completed: isReadingComplete },
   ];
 
   return (

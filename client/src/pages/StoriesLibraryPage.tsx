@@ -1,19 +1,78 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Book, ChevronRight, CheckCircle } from "lucide-react";
+import { Book, ChevronRight, CheckCircle, Lock } from "lucide-react";
 import { storiesLibrary } from "@/data/stories/library";
 import BottomNav from "@/components/BottomNav";
 
 export default function StoriesLibraryPage() {
   const [completedStories, setCompletedStories] = useState<string[]>([]);
+  const [isScriptComplete, setIsScriptComplete] = useState(false);
 
   useEffect(() => {
     // Load completed stories from localStorage
     const completed = JSON.parse(localStorage.getItem('completedStories') || '[]');
     setCompletedStories(completed);
+
+    // Check if all script sections are completed
+    const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+    const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+    const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+    const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+    const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
+
+    const totalVowels = 5;
+    const totalConsonants = 16;
+    const totalMatra = 7;
+    const totalSimilar = 5;
+    const totalNumbers = 4;
+
+    const allScriptComplete = vowels >= totalVowels && 
+                              consonants >= totalConsonants && 
+                              matra >= totalMatra && 
+                              similar >= totalSimilar &&
+                              numbers >= totalNumbers;
+    
+    setIsScriptComplete(allScriptComplete);
   }, []);
 
   const isCompleted = (storyId: string) => completedStories.includes(storyId);
+
+  // Show locked state if script is not complete
+  if (!isScriptComplete) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pb-24">
+        <div className="w-full max-w-md mx-auto px-6 py-6">
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="bg-white rounded-2xl shadow-lg p-8 w-full text-center">
+              <Lock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                Story Library Locked
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Complete all Script sections first to unlock the Story Library!
+              </p>
+              <div className="bg-orange-50 rounded-lg p-4 text-left">
+                <p className="text-sm font-semibold text-gray-900 mb-2">Complete these sections:</p>
+                <ul className="space-y-1 text-sm text-gray-700">
+                  <li>• Vowels</li>
+                  <li>• Consonants</li>
+                  <li>• Matra (Vowel Symbols)</li>
+                  <li>• Similar Characters</li>
+                  <li>• Numbers</li>
+                </ul>
+              </div>
+              <Link href="/script">
+                <a className="inline-block mt-6 px-6 py-3 bg-[#ff9930] hover:bg-[#ff8800] text-white rounded-lg font-semibold" data-testid="link-go-to-script">
+                  Go to Script
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <BottomNav />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pb-24">

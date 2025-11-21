@@ -42,10 +42,10 @@ export default function DashboardPage() {
     const totalConsonants = 16;
     const totalMatra = 7;
     const totalSimilar = 5;
-    const totalBeginnerPacks = 3;
-    const totalAdvancedPacks = 3;
-    const totalSentenceSections = 3;
-    const totalReadingPieces = 9;
+    const totalBeginnerPacks = 5;
+    const totalAdvancedPacks = 4;
+    const totalSentenceSections = 30;
+    const totalReadingPieces = 14;
 
     const allCharactersComplete = vowels >= totalVowels && 
                                    consonants >= totalConsonants && 

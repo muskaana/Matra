@@ -23,7 +23,7 @@ export default function ProfilePage() {
   const totalMatra = 7;
   const totalSimilar = 5;
   const totalBeginnerPacks = 5;
-  const totalAdvancedPacks = 5;
+  const totalAdvancedPacks = 4;
   const totalSentenceSections = 30;
 
   useEffect(() => {

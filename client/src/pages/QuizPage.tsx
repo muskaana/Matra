@@ -24,6 +24,9 @@ import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
+import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
+import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
+import tigerCute from '@assets/generated_images/Cute_tiger_mascot_character_95699dd7.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
@@ -40,6 +43,15 @@ const encouragingMessages = [
 
 const getRandomMessage = () => {
   return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+};
+
+// Tiger images for variety in quiz screens
+const quizTigers = [tigerWaving, tigerExcited, tigerThinking, tigerCute];
+
+const getQuizTiger = (quizId: string) => {
+  // Use quiz ID to deterministically select a tiger (same quiz = same tiger)
+  const index = quizId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % quizTigers.length;
+  return quizTigers[index];
 };
 
 // Format quiz option labels based on type and display mode
@@ -438,6 +450,15 @@ export default function QuizPage() {
                   </div>
                 </div>
               )}
+            </div>
+
+            {/* Tiger mascot in center white space */}
+            <div className="flex justify-center items-center mb-4">
+              <img 
+                src={getQuizTiger(quizId)} 
+                alt="Tiger mascot" 
+                className="w-24 h-24 object-contain opacity-90 animate-bounce-subtle"
+              />
             </div>
 
             <div className={`gap-4 mb-4 ${quiz.type === 'sound' ? 'flex justify-center' : 'grid grid-cols-2'}`}>

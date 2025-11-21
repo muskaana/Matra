@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 import { useAuth } from "./useAuth";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import type {
@@ -28,6 +29,7 @@ import type {
 export function useUserProfile() {
   const { user } = useAuth();
   const userId = (user as any)?.id;
+  const profileCreatedRef = useRef(false);
 
   const query = useQuery({
     queryKey: ["/api/profile", userId],
@@ -52,12 +54,52 @@ export function useUserProfile() {
     },
   });
 
+  // Auto-create profile if 404 detected
+  useEffect(() => {
+    if (userId && query.error && !profileCreatedRef.current) {
+      const error = query.error as any;
+      // Check if error is 404 (profile not found)
+      if (error?.message?.includes('404') || error?.message?.includes('not found')) {
+        profileCreatedRef.current = true;
+        const today = new Date().toISOString().split('T')[0];
+        createMutation.mutate({
+          userId,
+          xp: 0,
+          currentStreak: 0,
+          lastActiveDate: today,
+          placementLevel: null,
+        });
+      }
+    }
+  }, [userId, query.error, createMutation]);
+
+  // Helper function to ensure profile exists before update (upsert pattern)
+  const ensureProfileAndUpdate = async (data: UpdateUserProfile) => {
+    try {
+      await updateMutation.mutateAsync(data);
+    } catch (error: any) {
+      // If update fails with 404, create profile first then update
+      if (error?.message?.includes('404') || error?.message?.includes('not found')) {
+        const today = new Date().toISOString().split('T')[0];
+        await createMutation.mutateAsync({
+          userId,
+          xp: data.xp || 0,
+          currentStreak: data.currentStreak || 0,
+          lastActiveDate: data.lastActiveDate || today,
+          placementLevel: data.placementLevel || null,
+        });
+      } else {
+        throw error;
+      }
+    }
+  };
+
   return {
     profile: query.data as UserProfile | undefined,
     isLoading: query.isLoading,
     error: query.error,
     createProfile: createMutation.mutateAsync,
-    updateProfile: updateMutation.mutateAsync,
+    updateProfile: ensureProfileAndUpdate,
     isCreating: createMutation.isPending,
     isUpdating: updateMutation.isPending,
   };

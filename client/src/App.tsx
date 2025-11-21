@@ -9,6 +9,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import ReadingPage from "@/pages/ReadingPage";
 import ConversationPage from "@/pages/ConversationPage";
+import ComingSoonPage from "@/pages/ComingSoonPage";
 import ScriptPage from "@/pages/ScriptPage";
 import VowelsPage from "@/pages/VowelsPage";
 import VowelSectionsPage from "@/pages/VowelSectionsPage";
@@ -71,8 +72,8 @@ function Router() {
       <Switch>
         {/* Add pages below */}
         <Route path="/" component={Home} />
-        <Route path="/reading" component={ReadingPage} />
-        <Route path="/conversation" component={ConversationPage} />
+        <Route path="/reading" component={ComingSoonPage} />
+        <Route path="/conversation" component={ComingSoonPage} />
         <Route path="/script" component={ScriptPage} />
         <Route path="/script/vowels" component={VowelsPage} />
         <Route path="/script/vowels/sections" component={VowelSectionsPage} />

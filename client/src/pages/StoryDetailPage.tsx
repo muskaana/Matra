@@ -342,14 +342,15 @@ export default function StoryDetailPage() {
               <h1 className="text-2xl font-bold text-gray-900">{story.title}</h1>
             </div>
             <span 
-              className={`px-2 py-1 rounded-full text-xs font-semibold ${
+              className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold ${
                 story.level === 'Beginner' 
                   ? 'bg-green-100 text-green-700' 
                   : 'bg-yellow-100 text-yellow-700'
               }`}
+              title={story.level}
               data-testid={`badge-${story.level.toLowerCase()}`}
             >
-              {story.level}
+              {story.level === 'Beginner' ? 'B' : 'I'}
             </span>
           </div>
         </div>

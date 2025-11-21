@@ -52,13 +52,15 @@ export default function StoriesLibraryPage() {
                           {story.title}
                         </h3>
                         <span 
-                          className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                          className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold ${
                             story.level === 'Beginner' 
                               ? 'bg-green-100 text-green-700' 
                               : 'bg-yellow-100 text-yellow-700'
                           }`}
+                          title={story.level}
+                          data-testid={`badge-level-${story.id}`}
                         >
-                          {story.level}
+                          {story.level === 'Beginner' ? 'B' : 'I'}
                         </span>
                       </div>
                       <p className="text-gray-600 text-sm">

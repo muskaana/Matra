@@ -21,9 +21,9 @@ export default function ScriptPage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 4; // 1 intro + 3 packs
-  const totalAdvancedPacks = 3;
-  const totalSentenceSections = 3;
+  const totalBeginnerPacks = 7; // 1 intro + 6 packs
+  const totalAdvancedPacks = 5;
+  const totalSentenceSections = 30;
   const totalReadingPieces = 14; // 3 whatsapp + 3 paragraphs + 8 bollywood
   
   useEffect(() => {

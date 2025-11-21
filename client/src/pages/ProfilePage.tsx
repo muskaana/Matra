@@ -24,7 +24,7 @@ export default function ProfilePage() {
   const totalSimilar = 5;
   const totalBeginnerPacks = 6;
   const totalAdvancedPacks = 5;
-  const totalSentenceSections = 3;
+  const totalSentenceSections = 30;
 
   useEffect(() => {
     // Load progress data

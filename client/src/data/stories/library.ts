@@ -4,12 +4,19 @@ export interface StorySentence {
   en: string;
 }
 
+export interface ComprehensionQuestion {
+  question: string;
+  options: string[];
+  correctIndex: number;
+}
+
 export interface Story {
   id: string;
   title: string;
   level: 'Beginner' | 'Intermediate';
   summaryEn: string;
   sentences: StorySentence[];
+  comprehensionQuestions: ComprehensionQuestion[];
 }
 
 export const storiesLibrary: Story[] = [
@@ -33,6 +40,18 @@ export const storiesLibrary: Story[] = [
         hi: "शनिवार को चलते हैं।",
         translit: "Shanivaar ko chalte hain.",
         en: "Let's go on Saturday."
+      }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "Where are they planning to go?",
+        options: ["To the market", "To grandma's house", "To a restaurant", "To the park"],
+        correctIndex: 1
+      },
+      {
+        question: "When will they go?",
+        options: ["Today", "Tomorrow", "Saturday", "Next week"],
+        correctIndex: 2
       }
     ]
   },
@@ -62,6 +81,23 @@ export const storiesLibrary: Story[] = [
         translit: "Shaam ko ghar aakar sab kuch bataunga.",
         en: "I'll come home in the evening and tell you everything."
       }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "How is the person feeling?",
+        options: ["Only nervous", "Only excited", "Both nervous and excited", "Neither nervous nor excited"],
+        correctIndex: 2
+      },
+      {
+        question: "What are they looking forward to?",
+        options: ["Going home", "Making new friends", "Finishing college", "Eating lunch"],
+        correctIndex: 1
+      },
+      {
+        question: "When will they share about their day?",
+        options: ["Right now", "During lunch", "In the evening", "Tomorrow"],
+        correctIndex: 2
+      }
     ]
   },
   {
@@ -90,6 +126,18 @@ export const storiesLibrary: Story[] = [
         translit: "Waah! Main samay par aaunga.",
         en: "Wow! I'll come on time."
       }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "What is mom making for dinner?",
+        options: ["Rice", "Paneer", "Roti", "Dal"],
+        correctIndex: 1
+      },
+      {
+        question: "How does the person react to the dinner plan?",
+        options: ["They're disappointed", "They're excited", "They're not interested", "They're confused"],
+        correctIndex: 1
+      }
     ]
   },
   {
@@ -117,6 +165,18 @@ export const storiesLibrary: Story[] = [
         hi: "मिठाई भी लेनी होगी।",
         translit: "Mithai bhi leni hogi.",
         en: "We'll also need to get sweets."
+      }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "What festival is coming?",
+        options: ["Holi", "Diwali", "Eid", "Christmas"],
+        correctIndex: 1
+      },
+      {
+        question: "What are they NOT planning to do?",
+        options: ["Clean the house", "Buy new clothes", "Get sweets", "Cook dinner"],
+        correctIndex: 3
       }
     ]
   },
@@ -151,6 +211,23 @@ export const storiesLibrary: Story[] = [
         translit: "Theek hai, main taiyaar rahunga.",
         en: "Okay, I'll be ready."
       }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "Who is arriving?",
+        options: ["A friend", "Uncle", "Grandmother", "Sister"],
+        correctIndex: 1
+      },
+      {
+        question: "What time does the flight land?",
+        options: ["5 AM", "6 AM", "7 AM", "8 AM"],
+        correctIndex: 1
+      },
+      {
+        question: "What time will they leave home?",
+        options: ["4 AM", "5 AM", "6 AM", "7 AM"],
+        correctIndex: 1
+      }
     ]
   },
   {
@@ -173,6 +250,18 @@ export const storiesLibrary: Story[] = [
         hi: "कुछ मसाले भी लेने हैं।",
         translit: "Kuch masaale bhi lene hain.",
         en: "We also need to get some spices."
+      }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "What store are they going to?",
+        options: ["American store", "Chinese store", "Indian store", "Mexican store"],
+        correctIndex: 2
+      },
+      {
+        question: "What are they out of?",
+        options: ["Rice and flour", "Milk and bread", "Fruits and vegetables", "Meat and fish"],
+        correctIndex: 0
       }
     ]
   },
@@ -202,6 +291,23 @@ export const storiesLibrary: Story[] = [
         translit: "Sab theek ho jaayega, tum accha karoge.",
         en: "Everything will be fine, you'll do well."
       }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "When is the interview?",
+        options: ["Today", "Tomorrow", "Next week", "Yesterday"],
+        correctIndex: 1
+      },
+      {
+        question: "What does the person need to prepare?",
+        options: ["Lunch", "Documents", "Clothes", "Presentation"],
+        correctIndex: 1
+      },
+      {
+        question: "What is the tone of the encouragement?",
+        options: ["Worried", "Supportive", "Angry", "Indifferent"],
+        correctIndex: 1
+      }
     ]
   },
   {
@@ -229,6 +335,23 @@ export const storiesLibrary: Story[] = [
         hi: "शनिवार शाम को सात बजे।",
         translit: "Shanivaar shaam ko saat baje.",
         en: "Saturday evening at 7 PM."
+      }
+    ],
+    comprehensionQuestions: [
+      {
+        question: "Whose birthday is coming up?",
+        options: ["The speaker's", "Raj's", "Mom's", "Sister's"],
+        correctIndex: 1
+      },
+      {
+        question: "What kind of party are they planning?",
+        options: ["Regular party", "Surprise party", "Dinner party", "Dance party"],
+        correctIndex: 1
+      },
+      {
+        question: "When is the party?",
+        options: ["Friday evening", "Saturday morning", "Saturday evening", "Sunday evening"],
+        correctIndex: 2
       }
     ]
   }

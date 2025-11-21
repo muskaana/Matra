@@ -54,22 +54,33 @@ export default function ScriptPage() {
     return parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
   }, [user, progress]);
   
-  // Note: Word/sentence progress tables track individual word mastery, not pack completion
-  // For now, use localStorage for word packs and sentences until we migrate to database completion tracking
+  // Word/sentence pack completion: Use database for authenticated users, localStorage for guests
   const beginnerWordsCompleted = useMemo(() => {
+    if (user) {
+      // Database: count completed beginner word packs (currently 0 until we track pack completion)
+      return 0;
+    }
     const local = localStorage.getItem('beginnerWordsCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, []);
+  }, [user]);
   
   const advancedWordsCompleted = useMemo(() => {
+    if (user) {
+      // Database: count completed advanced word packs (currently 0 until we track pack completion)
+      return 0;
+    }
     const local = localStorage.getItem('advancedWordsCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, []);
+  }, [user]);
   
   const sentencesCompleted = useMemo(() => {
+    if (user) {
+      // Database: count completed sentence sections (currently 0 until we track section completion)
+      return 0;
+    }
     const local = localStorage.getItem('sentencesCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, []);
+  }, [user]);
   
   const readingCompleted = useMemo(() => {
     if (user && readingProgress) {

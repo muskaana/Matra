@@ -1,24 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User } from "lucide-react";
 import { getProgress } from '../lib/progress';
 import { getItemsDueForReview } from '../utils/smartReview';
 import BottomNav from '../components/BottomNav';
 import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile, useProgress, useWordProgress, useSentenceProgress, useReviewItems } from '@/hooks/useUserProgress';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ProfilePage() {
   const { user } = useAuth();
-  const [totalXP, setTotalXP] = useState<number>(0);
-  const [currentStreak, setCurrentStreak] = useState<number>(0);
-  const [reviewCount, setReviewCount] = useState<number>(0);
-  const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
-  const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
-  const [matraCompleted, setMatraCompleted] = useState<number>(0);
-  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
-  const [beginnerWordsCompleted, setBeginnerWordsCompleted] = useState<number>(0);
-  const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
-  const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
-  const [placementLevel, setPlacementLevel] = useState<string>('');
+  const isAuthenticated = !!user;
+  
+  // Fetch data from database when authenticated
+  const { profile, isLoading: isLoadingProfile } = useUserProfile();
+  const { progress, isLoading: isLoadingProgress } = useProgress();
+  const { wordProgress, isLoading: isLoadingWords } = useWordProgress();
+  const { sentenceProgress, isLoading: isLoadingSentences } = useSentenceProgress();
+  const { reviewItems, isLoading: isLoadingReview } = useReviewItems();
+  
+  // State for localStorage fallback (when not authenticated)
+  const [localXP, setLocalXP] = useState<number>(0);
+  const [localStreak, setLocalStreak] = useState<number>(0);
+  const [localReviewCount, setLocalReviewCount] = useState<number>(0);
+  const [localVowels, setLocalVowels] = useState<number>(0);
+  const [localConsonants, setLocalConsonants] = useState<number>(0);
+  const [localMatra, setLocalMatra] = useState<number>(0);
+  const [localSimilar, setLocalSimilar] = useState<number>(0);
+  const [localBeginnerWords, setLocalBeginnerWords] = useState<number>(0);
+  const [localAdvancedWords, setLocalAdvancedWords] = useState<number>(0);
+  const [localSentences, setLocalSentences] = useState<number>(0);
+  const [localPlacementLevel, setLocalPlacementLevel] = useState<string>('');
   
   // Get user's name/email from auth  
   // For now, display email until firstName/lastName are populated from OIDC
@@ -32,44 +44,108 @@ export default function ProfilePage() {
   const totalAdvancedPacks = 4;
   const totalSentenceSections = 4;
 
+  // Load localStorage data when not authenticated
   useEffect(() => {
-    // Load progress data
-    const progress = getProgress();
-    setTotalXP(progress.totalXP);
-    setCurrentStreak(progress.currentStreak);
+    if (!isAuthenticated) {
+      // Load progress data
+      const progressData = getProgress();
+      setLocalXP(progressData.totalXP);
+      setLocalStreak(progressData.currentStreak);
 
-    // Load review count
-    const dueItems = getItemsDueForReview();
-    setReviewCount(dueItems.length);
+      // Load review count
+      const dueItems = getItemsDueForReview();
+      setLocalReviewCount(dueItems.length);
 
-    // Load completion data
-    const vowels = localStorage.getItem('vowelsQuizzesCompleted');
-    const consonants = localStorage.getItem('consonantsQuizzesCompleted');
-    const matra = localStorage.getItem('matraQuizzesCompleted');
-    const similar = localStorage.getItem('similarQuizzesCompleted');
-    const beginnerWords = localStorage.getItem('beginnerWordsCompleted');
-    const advancedWords = localStorage.getItem('advancedWordsCompleted');
-    const sentences = localStorage.getItem('sentencesCompleted');
-    const placement = localStorage.getItem('placementLevel');
+      // Load completion data
+      const vowels = localStorage.getItem('vowelsQuizzesCompleted');
+      const consonants = localStorage.getItem('consonantsQuizzesCompleted');
+      const matra = localStorage.getItem('matraQuizzesCompleted');
+      const similar = localStorage.getItem('similarQuizzesCompleted');
+      const beginnerWords = localStorage.getItem('beginnerWordsCompleted');
+      const advancedWords = localStorage.getItem('advancedWordsCompleted');
+      const sentences = localStorage.getItem('sentencesCompleted');
+      const placement = localStorage.getItem('placementLevel');
 
-    if (vowels) setVowelsCompleted(parseInt(vowels));
-    if (consonants) setConsonantsCompleted(parseInt(consonants));
-    if (matra) setMatraCompleted(parseInt(matra));
-    if (similar) setSimilarCompleted(parseInt(similar));
-    if (beginnerWords) {
-      const packsCompleted = JSON.parse(beginnerWords);
-      setBeginnerWordsCompleted(packsCompleted.length);
+      if (vowels) setLocalVowels(parseInt(vowels));
+      if (consonants) setLocalConsonants(parseInt(consonants));
+      if (matra) setLocalMatra(parseInt(matra));
+      if (similar) setLocalSimilar(parseInt(similar));
+      if (beginnerWords) {
+        const packsCompleted = JSON.parse(beginnerWords);
+        setLocalBeginnerWords(packsCompleted.length);
+      }
+      if (advancedWords) {
+        const packsCompleted = JSON.parse(advancedWords);
+        setLocalAdvancedWords(packsCompleted.length);
+      }
+      if (sentences) {
+        const sectionsCompleted = JSON.parse(sentences);
+        setLocalSentences(sectionsCompleted.length);
+      }
+      if (placement) setLocalPlacementLevel(placement);
     }
-    if (advancedWords) {
-      const packsCompleted = JSON.parse(advancedWords);
-      setAdvancedWordsCompleted(packsCompleted.length);
-    }
-    if (sentences) {
-      const sectionsCompleted = JSON.parse(sentences);
-      setSentencesCompleted(sectionsCompleted.length);
-    }
-    if (placement) setPlacementLevel(placement);
-  }, []);
+  }, [isAuthenticated]);
+
+  // Calculate counts from database data
+  const vowelsCompleted = useMemo(() => {
+    if (!isAuthenticated) return localVowels;
+    if (!progress) return 0;
+    return progress.filter(p => p.category === 'vowels' && p.completed && p.type === 'lesson').length;
+  }, [isAuthenticated, progress, localVowels]);
+
+  const consonantsCompleted = useMemo(() => {
+    if (!isAuthenticated) return localConsonants;
+    if (!progress) return 0;
+    return progress.filter(p => p.category === 'consonants' && p.completed && p.type === 'lesson').length;
+  }, [isAuthenticated, progress, localConsonants]);
+
+  const matraCompleted = useMemo(() => {
+    if (!isAuthenticated) return localMatra;
+    if (!progress) return 0;
+    return progress.filter(p => p.category === 'matra' && p.completed && p.type === 'lesson').length;
+  }, [isAuthenticated, progress, localMatra]);
+
+  const similarCompleted = useMemo(() => {
+    if (!isAuthenticated) return localSimilar;
+    if (!progress) return 0;
+    return progress.filter(p => p.category === 'similar' && p.completed && p.type === 'lesson').length;
+  }, [isAuthenticated, progress, localSimilar]);
+
+  const beginnerWordsCompleted = useMemo(() => {
+    if (!isAuthenticated) return localBeginnerWords;
+    if (!wordProgress) return 0;
+    // Count unique completed beginner word packs
+    const uniquePacks = new Set(wordProgress.filter(w => w.level === 'beginner' && w.mastered).map(w => w.wordId.split('-')[0]));
+    return uniquePacks.size;
+  }, [isAuthenticated, wordProgress, localBeginnerWords]);
+
+  const advancedWordsCompleted = useMemo(() => {
+    if (!isAuthenticated) return localAdvancedWords;
+    if (!wordProgress) return 0;
+    // Count unique completed advanced word packs
+    const uniquePacks = new Set(wordProgress.filter(w => w.level === 'advanced' && w.mastered).map(w => w.wordId.split('-')[0]));
+    return uniquePacks.size;
+  }, [isAuthenticated, wordProgress, localAdvancedWords]);
+
+  const sentencesCompleted = useMemo(() => {
+    if (!isAuthenticated) return localSentences;
+    if (!sentenceProgress) return 0;
+    // Count unique completed sentence sections
+    const uniqueSections = new Set(sentenceProgress.filter(s => s.mastered).map(s => s.theme || s.sentenceId.split('-')[0]));
+    return uniqueSections.size;
+  }, [isAuthenticated, sentenceProgress, localSentences]);
+
+  // Get values from database or localStorage
+  const totalXP = isAuthenticated ? (profile?.xp || 0) : localXP;
+  const currentStreak = isAuthenticated ? (profile?.currentStreak || 0) : localStreak;
+  const placementLevel = isAuthenticated ? (profile?.placementLevel || '') : localPlacementLevel;
+  const reviewCount = isAuthenticated ? (reviewItems?.filter(item => {
+    if (!item.nextReviewDate) return false;
+    return new Date(item.nextReviewDate) <= new Date();
+  }).length || 0) : localReviewCount;
+
+  // Loading state
+  const isLoading = isAuthenticated && (isLoadingProfile || isLoadingProgress || isLoadingWords || isLoadingSentences || isLoadingReview);
 
   const totalCharacters = vowelsCompleted + consonantsCompleted + matraCompleted + similarCompleted;
   const maxCharacters = totalVowels + totalConsonants + totalMatra + totalSimilar;
@@ -115,7 +191,11 @@ export default function ProfilePage() {
               <Star className="w-5 h-5 text-[#ff9930]" />
               <p className="text-xs text-gray-500 font-medium">Total XP</p>
             </div>
-            <p className="text-2xl font-bold text-black">{totalXP}</p>
+            {isLoading ? (
+              <Skeleton className="h-8 w-16" />
+            ) : (
+              <p className="text-2xl font-bold text-black">{totalXP}</p>
+            )}
           </div>
 
           <div className="bg-white rounded-xl px-4 py-4 shadow-md border border-gray-200">
@@ -123,7 +203,11 @@ export default function ProfilePage() {
               <Flame className="w-5 h-5 text-orange-500" />
               <p className="text-xs text-gray-500 font-medium">Current Streak</p>
             </div>
-            <p className="text-2xl font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
+            {isLoading ? (
+              <Skeleton className="h-8 w-20" />
+            ) : (
+              <p className="text-2xl font-bold text-black">{currentStreak} {currentStreak === 1 ? 'day' : 'days'}</p>
+            )}
           </div>
 
           <div className="bg-white rounded-xl px-4 py-4 shadow-md border border-gray-200">
@@ -131,7 +215,11 @@ export default function ProfilePage() {
               <Trophy className="w-5 h-5 text-yellow-500" />
               <p className="text-xs text-gray-500 font-medium">Characters</p>
             </div>
-            <p className="text-2xl font-bold text-black">{totalCharacters}/{maxCharacters}</p>
+            {isLoading ? (
+              <Skeleton className="h-8 w-16" />
+            ) : (
+              <p className="text-2xl font-bold text-black">{totalCharacters}/{maxCharacters}</p>
+            )}
           </div>
 
           <div className="bg-white rounded-xl px-4 py-4 shadow-md border border-gray-200">
@@ -139,7 +227,11 @@ export default function ProfilePage() {
               <Award className="w-5 h-5 text-purple-500" />
               <p className="text-xs text-gray-500 font-medium">Review Items</p>
             </div>
-            <p className="text-2xl font-bold text-black">{reviewCount}</p>
+            {isLoading ? (
+              <Skeleton className="h-8 w-12" />
+            ) : (
+              <p className="text-2xl font-bold text-black">{reviewCount}</p>
+            )}
           </div>
         </div>
 
@@ -150,47 +242,66 @@ export default function ProfilePage() {
             Learning Progress
           </h2>
 
-          {/* Characters Progress */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">Characters</span>
-              <span className="text-sm font-bold text-[#ff9930]">{totalCharacters}/{maxCharacters}</span>
+          {isLoading ? (
+            <div className="space-y-4">
+              <div>
+                <Skeleton className="h-4 w-32 mb-2" />
+                <Skeleton className="h-3 w-full rounded-full" />
+              </div>
+              <div>
+                <Skeleton className="h-4 w-32 mb-2" />
+                <Skeleton className="h-3 w-full rounded-full" />
+              </div>
+              <div>
+                <Skeleton className="h-4 w-32 mb-2" />
+                <Skeleton className="h-3 w-full rounded-full" />
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div 
-                className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
-                style={{ width: `${charactersProgress}%` }}
-              />
-            </div>
-          </div>
+          ) : (
+            <>
+              {/* Characters Progress */}
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-gray-700">Characters</span>
+                  <span className="text-sm font-bold text-[#ff9930]">{totalCharacters}/{maxCharacters}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
+                    style={{ width: `${charactersProgress}%` }}
+                  />
+                </div>
+              </div>
 
-          {/* Words Progress */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">Words</span>
-              <span className="text-sm font-bold text-[#ff9930]">{totalWords}/{maxWords}</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div 
-                className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
-                style={{ width: `${wordsProgress}%` }}
-              />
-            </div>
-          </div>
+              {/* Words Progress */}
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-gray-700">Words</span>
+                  <span className="text-sm font-bold text-[#ff9930]">{totalWords}/{maxWords}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
+                    style={{ width: `${wordsProgress}%` }}
+                  />
+                </div>
+              </div>
 
-          {/* Sentences Progress */}
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">Sentences</span>
-              <span className="text-sm font-bold text-[#ff9930]">{sentencesCompleted}/{totalSentenceSections}</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div 
-                className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
-                style={{ width: `${sentencesProgress}%` }}
-              />
-            </div>
-          </div>
+              {/* Sentences Progress */}
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-medium text-gray-700">Sentences</span>
+                  <span className="text-sm font-bold text-[#ff9930]">{sentencesCompleted}/{totalSentenceSections}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div 
+                    className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] h-3 rounded-full transition-all"
+                    style={{ width: `${sentencesProgress}%` }}
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Achievements */}

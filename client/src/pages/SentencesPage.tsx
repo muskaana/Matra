@@ -5,24 +5,54 @@
  * Tracks progress and unlocks sections sequentially
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { XCircle, Lock, CheckCircle2 } from "lucide-react";
 import { sentenceSections } from '../data/sentences/beginner';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '@/hooks/useAuth';
+import { useSentenceProgress } from '@/hooks/useUserProgress';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function SentencesPage() {
   const [, setLocation] = useLocation();
-  const [sectionsCompleted, setSectionsCompleted] = useState<string[]>([]);
+  const { user } = useAuth();
+  const { sentenceProgress, isLoading } = useSentenceProgress();
+  const [localStorageCompleted, setLocalStorageCompleted] = useState<string[]>([]);
 
+  // Load localStorage data for unauthenticated users
   useEffect(() => {
-    const completed = localStorage.getItem('sentencesCompleted');
-    if (completed) {
-      setSectionsCompleted(JSON.parse(completed));
+    if (!user) {
+      const completed = localStorage.getItem('sentencesCompleted');
+      if (completed) {
+        setLocalStorageCompleted(JSON.parse(completed));
+      }
     }
-  }, []);
+  }, [user]);
+
+  // Extract completed sections from database for authenticated users
+  const sectionsCompleted = useMemo(() => {
+    if (user && sentenceProgress) {
+      // Filter for mastered sentences
+      const masteredProgress = sentenceProgress.filter(p => p.mastered);
+      
+      // Extract unique section IDs from theme field (or sentenceId if theme is not available)
+      const uniqueSections = new Set<string>();
+      masteredProgress.forEach(p => {
+        const sectionId = p.theme || p.sentenceId;
+        if (sectionId) {
+          uniqueSections.add(sectionId);
+        }
+      });
+      
+      return Array.from(uniqueSections);
+    }
+    
+    // Fall back to localStorage for unauthenticated users
+    return localStorageCompleted;
+  }, [user, sentenceProgress, localStorageCompleted]);
 
   const isSectionCompleted = (sectionId: string) => sectionsCompleted.includes(sectionId);
   const isSectionUnlocked = (index: number) => {
@@ -33,7 +63,7 @@ export default function SentencesPage() {
   const allSectionsComplete = sentenceSections.every(section => isSectionCompleted(section.id));
 
   // Define icons for each section
-  const sectionIcons = ['👨‍👩‍👧', '🌞', '🌟'];
+  const sectionIcons = ['👨‍👩‍👧', '🌞', '🌟', '📅'];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
@@ -50,48 +80,62 @@ export default function SentencesPage() {
           </div>
           
           <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
-            <div className="flex flex-col justify-around flex-1">
-              {sentenceSections.map((section, index) => {
-                const completed = isSectionCompleted(section.id);
-                const unlocked = isSectionUnlocked(index);
-
-                const content = (
-                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-section-${section.id}`}>
-                    <div className="relative flex-shrink-0">
-                      <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${!unlocked ? 'bg-gray-400' : completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
-                        {sectionIcons[index]}
-                      </div>
-                      {!unlocked && (
-                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
-                          <Lock className="w-3.5 h-3.5 text-white" />
-                        </div>
-                      )}
-                      {completed && (
-                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <span className={`leading-8 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[22px]`}>
-                        {section.title}
-                      </span>
-                      {!unlocked && index > 0 && (
-                        <p className="text-sm text-gray-400 mt-1">Complete {sentenceSections[index - 1].title} first</p>
-                      )}
+            {user && isLoading ? (
+              <div className="flex flex-col justify-around flex-1 gap-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex items-center gap-5" data-testid={`skeleton-section-${i}`}>
+                    <Skeleton className="w-[80px] h-[80px] rounded-full flex-shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-7 w-3/4" />
+                      <Skeleton className="h-4 w-1/2" />
                     </div>
                   </div>
-                );
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col justify-around flex-1">
+                {sentenceSections.map((section, index) => {
+                  const completed = isSectionCompleted(section.id);
+                  const unlocked = isSectionUnlocked(index);
 
-                return unlocked ? (
-                  <Link key={section.id} href={`/sentences/${section.id}/learn`}>
-                    {content}
-                  </Link>
-                ) : (
-                  <div key={section.id}>{content}</div>
-                );
-              })}
-            </div>
+                  const content = (
+                    <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-section-${section.id}`}>
+                      <div className="relative flex-shrink-0">
+                        <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${!unlocked ? 'bg-gray-400' : completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
+                          {sectionIcons[index]}
+                        </div>
+                        {!unlocked && (
+                          <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
+                            <Lock className="w-3.5 h-3.5 text-white" />
+                          </div>
+                        )}
+                        {completed && (
+                          <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <span className={`leading-8 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[22px]`}>
+                          {section.title}
+                        </span>
+                        {!unlocked && index > 0 && (
+                          <p className="text-sm text-gray-400 mt-1">Complete {sentenceSections[index - 1].title} first</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+
+                  return unlocked ? (
+                    <Link key={section.id} href={`/sentences/${section.id}/learn`}>
+                      {content}
+                    </Link>
+                  ) : (
+                    <div key={section.id}>{content}</div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
 

@@ -1,19 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerPlayful from '@assets/crouching-playful-tiger.jpg';
 import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
+import { useAuth } from '@/hooks/useAuth';
+import { useProgress } from '@/hooks/useUserProgress';
 
 export default function VowelSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
   const [showCompletedModal, setShowCompletedModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState<any>(null);
   const [location, setLocation] = useLocation();
+  const { user } = useAuth();
+  const { progress, isLoading } = useProgress();
+  
+  const sections = [
+    { id: 1, name: "Section 1", startLesson: "1" },
+    { id: 2, name: "Section 2", startLesson: "3" },
+    { id: 3, name: "Section 3", startLesson: "5" },
+    { id: 4, name: "Section 4", startLesson: "7" },
+    { id: 5, name: "Section 5", startLesson: "10" },
+  ];
+
+  // Calculate completed sections from database or localStorage
+  const calculatedCompletedSections = useMemo(() => {
+    if (user && progress) {
+      // For authenticated users, use database data
+      const vowelLessons = progress.filter(
+        (p) => p.category === 'vowels' && p.type === 'lesson' && p.completed
+      );
+      
+      // Get all completed lesson IDs
+      const completedLessonIds = vowelLessons.map((p) => p.lessonId);
+      
+      // Count how many sections are completed
+      let completed = 0;
+      for (const section of sections) {
+        if (completedLessonIds.includes(section.startLesson)) {
+          completed = section.id;
+        }
+      }
+      
+      return completed;
+    } else if (!user) {
+      // For unauthenticated users, fall back to localStorage
+      return parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+    }
+    
+    return 0;
+  }, [user, progress]);
   
   useEffect(() => {
-    const completed = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-    setCompletedSections(completed);
-  }, [location]);
+    setCompletedSections(calculatedCompletedSections);
+  }, [calculatedCompletedSections, location]);
   
   const handleReset = () => {
     localStorage.setItem('vowelsQuizzesCompleted', '0');
@@ -34,14 +73,32 @@ export default function VowelSectionsPage() {
       setShowCompletedModal(true);
     }
   };
-  
-  const sections = [
-    { id: 1, name: "Section 1", startLesson: "1" },
-    { id: 2, name: "Section 2", startLesson: "3" },
-    { id: 3, name: "Section 3", startLesson: "5" },
-    { id: 4, name: "Section 4", startLesson: "7" },
-    { id: 5, name: "Section 5", startLesson: "10" },
-  ];
+
+  // Show loading state for authenticated users while fetching data
+  if (user && isLoading) {
+    return (
+      <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+        <div className="w-full max-w-md mx-auto flex-1 flex flex-col bg-white shadow-lg">
+          <div className="sticky top-0 z-10 bg-white px-6 pt-6 pb-4 flex-shrink-0">
+            <div className="bg-gradient-to-r from-[#ff9930] to-[#FFD700] text-white px-6 py-4 rounded-xl font-semibold text-2xl flex items-center justify-between">
+              <span>Vowels</span>
+              <Link href="/script/vowels">
+                <button className="p-2 hover:bg-[#CF7B24] rounded-full transition-colors">
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff9930] mb-4"></div>
+              <p className="text-gray-600">Loading your progress...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

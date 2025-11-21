@@ -5,24 +5,55 @@
  * Tracks progress and unlocks packs sequentially
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { XCircle, Lock, CheckCircle2 } from "lucide-react";
 import { advancedWordPacks } from '../data/words/advanced';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '@/hooks/useAuth';
+import { useWordProgress } from '@/hooks/useUserProgress';
 
 export default function AdvancedWordsPage() {
   const [, setLocation] = useLocation();
-  const [packsCompleted, setPacksCompleted] = useState<string[]>([]);
+  const { user } = useAuth();
+  const { wordProgress, isLoading } = useWordProgress();
+  const [localStorageCompleted, setLocalStorageCompleted] = useState<string[]>([]);
 
+  // Load from localStorage for unauthenticated users
   useEffect(() => {
-    const completed = localStorage.getItem('advancedWordsCompleted');
-    if (completed) {
-      setPacksCompleted(JSON.parse(completed));
+    if (!user) {
+      const completed = localStorage.getItem('advancedWordsCompleted');
+      if (completed) {
+        setLocalStorageCompleted(JSON.parse(completed));
+      }
     }
-  }, []);
+  }, [user]);
+
+  // Extract completed pack IDs from database for authenticated users
+  const packsCompleted = useMemo(() => {
+    if (user && wordProgress) {
+      // Filter for advanced level and mastered words
+      const masteredAdvancedWords = wordProgress.filter(
+        wp => wp.level === 'advanced' && wp.mastered
+      );
+      
+      // Extract unique pack IDs from wordId format "${packId}-${word}"
+      const packIds = new Set<string>();
+      masteredAdvancedWords.forEach(wp => {
+        const packId = wp.wordId.split('-')[0];
+        if (packId) {
+          packIds.add(packId);
+        }
+      });
+      
+      return Array.from(packIds);
+    }
+    
+    // Fall back to localStorage for unauthenticated users
+    return localStorageCompleted;
+  }, [user, wordProgress, localStorageCompleted]);
 
   const isPackCompleted = (packId: string) => packsCompleted.includes(packId);
   const isPackUnlocked = (index: number) => {
@@ -50,8 +81,21 @@ export default function AdvancedWordsPage() {
           </div>
           
           <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col justify-around">
-            <div className="flex flex-col justify-around flex-1">
-              {advancedWordPacks.map((pack, index) => {
+            {/* Loading state for authenticated users */}
+            {user && isLoading ? (
+              <div className="flex flex-col justify-around flex-1">
+                {[0, 1, 2].map((index) => (
+                  <div key={index} className="flex items-center gap-5 animate-pulse">
+                    <div className="w-[80px] h-[80px] rounded-full bg-gray-200"></div>
+                    <div className="flex-1">
+                      <div className="h-8 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col justify-around flex-1">
+                {advancedWordPacks.map((pack, index) => {
                 const completed = isPackCompleted(pack.id);
                 const unlocked = isPackUnlocked(index);
 
@@ -92,6 +136,7 @@ export default function AdvancedWordsPage() {
                 );
               })}
             </div>
+            )}
           </div>
         </div>
 

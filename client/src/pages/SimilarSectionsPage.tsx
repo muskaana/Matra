@@ -3,6 +3,8 @@ import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerPlayful from '@assets/crouching-playful-tiger.jpg';
 import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
+import { useAuth } from '@/hooks/useAuth';
+import { useProgress } from '@/hooks/useUserProgress';
 
 export default function SimilarSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
@@ -10,10 +12,22 @@ export default function SimilarSectionsPage() {
   const [selectedSection, setSelectedSection] = useState<any>(null);
   const [location, setLocation] = useLocation();
   
+  const { user, isAuthenticated } = useAuth();
+  const { progress, isLoading } = useProgress();
+  
   useEffect(() => {
-    const completed = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-    setCompletedSections(completed);
-  }, [location]);
+    if (isAuthenticated && progress) {
+      // For authenticated users, count completed lessons from database
+      const completedLessons = progress.filter(
+        p => p.category === 'similar' && p.type === 'lesson' && p.completed
+      );
+      setCompletedSections(completedLessons.length);
+    } else if (!isAuthenticated) {
+      // For unauthenticated users, fall back to localStorage
+      const completed = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+      setCompletedSections(completed);
+    }
+  }, [isAuthenticated, progress, location]);
   
   const handleRedoSection = () => {
     if (selectedSection) {
@@ -57,7 +71,14 @@ export default function SimilarSectionsPage() {
           <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#ff9930" />
           <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#2E86AB" />
           
-          {sections.map((section, index) => {
+          {/* Loading state for authenticated users */}
+          {isAuthenticated && isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff9930]"></div>
+            </div>
+          ) : null}
+          
+          {(!isAuthenticated || !isLoading) && sections.map((section, index) => {
             const isEven = index % 2 === 0;
             const isCompleted = section.id <= completedSections;
             const isUnlocked = section.id <= completedSections + 1;
@@ -114,9 +135,11 @@ export default function SimilarSectionsPage() {
             );
           })}
           
-          <div className="mt-8 flex justify-center">
-            <img src={tigerPlayful} alt="Playful tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />
-          </div>
+          {(!isAuthenticated || !isLoading) && (
+            <div className="mt-8 flex justify-center">
+              <img src={tigerPlayful} alt="Playful tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />
+            </div>
+          )}
         </div>
       </div>
       

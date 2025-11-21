@@ -12,12 +12,18 @@ import confetti from "canvas-confetti";
 import { readingContent } from '../data/reading/content';
 import { readingQuizzes } from '../data/reading/quizzes';
 import tigerExcited from '@assets/excited-jumping-tiger.png';
-import { awardQuizXP } from '../lib/progress';
+import { awardQuizXP, awardXP } from '../lib/progress';
+import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile, useReadingProgress } from '@/hooks/useUserProgress';
 
 export default function ReadingQuizPage() {
   const params = useParams();
   const [, setLocation] = useLocation();
   const contentId = params.contentId as string;
+  
+  const { user, isAuthenticated } = useAuth();
+  const { profile, updateProfile } = useUserProfile();
+  const { readingProgress, createReadingProgress, updateReadingProgress } = useReadingProgress();
   
   const content = readingContent.find(c => c.id === contentId);
   const quiz = content ? readingQuizzes[content.quizId] : null;
@@ -51,18 +57,75 @@ export default function ReadingQuizPage() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isLastQuestion) {
       setShowResults(true);
       
-      // Award XP for quiz completion (always, on every completion)
-      awardQuizXP();
-      
-      // Save completion
+      // Check if this is a new completion (for localStorage)
       const completed = localStorage.getItem('readingCompleted');
       const completedItems = completed ? JSON.parse(completed) : [];
       const isNewCompletion = !completedItems.includes(contentId);
       
+      if (isAuthenticated && user) {
+        try {
+          const userId = (user as any).id;
+          
+          // Map content type to level for database
+          const level = content.type === 'whatsapp' ? 'picture_book' : 'chapter_book';
+          
+          // Check if reading progress already exists for this storyId
+          const existingProgress = readingProgress?.find(rp => rp.storyId === contentId);
+          
+          if (existingProgress) {
+            // Update existing record: mark as completed
+            await updateReadingProgress({
+              progressId: existingProgress.id as any,
+              data: {
+                completed: true,
+              },
+            });
+            
+            // Award only quiz XP (10) for replaying - story bonus already awarded
+            if (profile) {
+              await updateProfile({
+                xp: (profile.xp || 0) + 10,
+              });
+            }
+          } else {
+            // Create new record only if it doesn't exist
+            await createReadingProgress({
+              userId,
+              storyId: contentId,
+              level,
+              completed: true
+            });
+            
+            // Award full XP for new completion (10 for quiz + 50 for story completion = 60 total)
+            if (profile) {
+              await updateProfile({
+                xp: (profile.xp || 0) + 60,
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Failed to save reading progress to database:', error);
+          // Fallback to localStorage on error
+          // Award 10 XP for quiz completion + 50 for story (if new)
+          awardQuizXP();
+          if (isNewCompletion) {
+            awardXP(50);
+          }
+        }
+      } else {
+        // Not authenticated - use localStorage
+        // Award 10 XP for quiz completion + 50 for story (if new)
+        awardQuizXP();
+        if (isNewCompletion) {
+          awardXP(50);
+        }
+      }
+      
+      // Maintain backward compatibility - always update localStorage
       if (isNewCompletion) {
         completedItems.push(contentId);
         localStorage.setItem('readingCompleted', JSON.stringify(completedItems));

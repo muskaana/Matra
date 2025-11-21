@@ -27,7 +27,7 @@ import type {
 // User Profile Hooks
 export function useUserProfile() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/profile", userId],
@@ -66,7 +66,7 @@ export function useUserProfile() {
 // Progress Hooks (lesson/quiz completion)
 export function useProgress() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/progress", userId],
@@ -105,7 +105,7 @@ export function useProgress() {
 // Word Progress Hooks
 export function useWordProgress() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/words/progress", userId],
@@ -144,7 +144,7 @@ export function useWordProgress() {
 // Sentence Progress Hooks
 export function useSentenceProgress() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/sentences/progress", userId],
@@ -183,7 +183,7 @@ export function useSentenceProgress() {
 // Reading Progress Hooks
 export function useReadingProgress() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/reading/progress", userId],
@@ -222,7 +222,7 @@ export function useReadingProgress() {
 // Review Items Hooks
 export function useReviewItems() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/review", userId],
@@ -261,7 +261,7 @@ export function useReviewItems() {
 // Achievements Hooks
 export function useAchievements() {
   const { user } = useAuth();
-  const userId = (user as any)?.claims?.sub;
+  const userId = (user as any)?.id;
 
   const query = useQuery({
     queryKey: ["/api/achievements", userId],

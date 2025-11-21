@@ -12,22 +12,50 @@ import { beginnerWordPacks } from '../data/words/beginner';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '@/hooks/useAuth';
+import { useWordProgress } from '@/hooks/useUserProgress';
 
 export default function BeginnerWordsPage() {
   const [, setLocation] = useLocation();
   const [packsCompleted, setPacksCompleted] = useState<string[]>([]);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
+  
+  const { user } = useAuth();
+  const { wordProgress, isLoading } = useWordProgress();
 
   useEffect(() => {
-    const completed = localStorage.getItem('beginnerWordsCompleted');
-    const introViewed = localStorage.getItem('readingInstructionsViewed');
-    if (completed) {
-      setPacksCompleted(JSON.parse(completed));
+    if (user && wordProgress) {
+      // For authenticated users, use database data
+      // Filter for beginner level and mastered words
+      const masteredBeginnerWords = wordProgress.filter(
+        wp => wp.level === 'beginner' && wp.mastered
+      );
+      
+      // Extract unique packIds from wordId (format is "${packId}-${word}")
+      const completedPackIds = Array.from(
+        new Set(
+          masteredBeginnerWords.map(wp => {
+            const packId = wp.wordId.split('-')[0];
+            return packId;
+          })
+        )
+      );
+      
+      setPacksCompleted(completedPackIds);
+    } else if (!user) {
+      // For unauthenticated users, fall back to localStorage
+      const completed = localStorage.getItem('beginnerWordsCompleted');
+      if (completed) {
+        setPacksCompleted(JSON.parse(completed));
+      }
     }
+    
+    // Reading intro check (still uses localStorage for both authenticated and unauthenticated)
+    const introViewed = localStorage.getItem('readingInstructionsViewed');
     if (introViewed === 'true') {
       setReadingIntroComplete(true);
     }
-  }, []);
+  }, [user, wordProgress]);
 
   const isPackCompleted = (packId: string) => packsCompleted.includes(packId);
   const isPackUnlocked = (index: number) => {
@@ -39,6 +67,34 @@ export default function BeginnerWordsPage() {
 
   // Define icons for each pack
   const packIcons = ['👨‍👩‍👧', '🗣️', '🏠', '❓', '❤️'];
+
+  // Show loading state for authenticated users while fetching data
+  if (user && isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+        <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
+          <ProgressSummary />
+          <SmartReviewSlot reviewCount={0} />
+          
+          <div className="flex-1 flex flex-col">
+            <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
+              <span>Level 2: Beginner Words</span>
+              <button onClick={() => setLocation('/script')} data-testid="button-close">
+                <XCircle className="w-5 h-5 hover:bg-white/20 rounded-full transition-colors" />
+              </button>
+            </div>
+            
+            <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ff9930]"></div>
+              <p className="mt-4 text-gray-500">Loading your progress...</p>
+            </div>
+          </div>
+          
+          <BottomNav />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

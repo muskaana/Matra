@@ -13,11 +13,17 @@ import { beginnerWordPacks } from '../data/words/beginner';
 import { beginnerWordQuizzes } from '../data/words/quizzes';
 import tigerExcited from '@assets/excited-jumping-tiger.png';
 import { awardQuizXP, awardUnitXP } from '../lib/progress';
+import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile, useWordProgress } from '@/hooks/useUserProgress';
 
 export default function WordQuizPage() {
   const params = useParams();
   const [, setLocation] = useLocation();
   const packId = params.packId as string;
+  
+  const { user } = useAuth();
+  const { profile, updateProfile } = useUserProfile();
+  const { wordProgress, createWordProgress, updateWordProgress } = useWordProgress();
   
   const pack = beginnerWordPacks.find(p => p.id === packId);
   const quiz = pack ? beginnerWordQuizzes[pack.quizId] : null;
@@ -51,18 +57,16 @@ export default function WordQuizPage() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isLastQuestion) {
       setShowResults(true);
-      
-      // Award XP for quiz completion (always, on every completion)
-      awardQuizXP();
       
       // Calculate final score percentage
       const percentage = Math.round((score / quiz.questions.length) * 100);
       
       // Only save completion if score is 60% or higher
       if (percentage >= 60) {
+        // Always update localStorage for backward compatibility
         const completed = localStorage.getItem('beginnerWordsCompleted');
         const completedPacks = completed ? JSON.parse(completed) : [];
         const isNewCompletion = !completedPacks.includes(packId);
@@ -70,9 +74,65 @@ export default function WordQuizPage() {
         if (isNewCompletion) {
           completedPacks.push(packId);
           localStorage.setItem('beginnerWordsCompleted', JSON.stringify(completedPacks));
-          
-          // Check if all beginner packs complete for unit bonus (one-time only)
-          if (completedPacks.length === beginnerWordPacks.length) {
+        }
+
+        // For authenticated users, save to database
+        if (user && pack) {
+          try {
+            // Save word progress for each word in the pack
+            // Check existing progress to prevent duplicates
+            for (const word of pack.words) {
+              const wordId = `${packId}-${word.word}`;
+              
+              // Check if this word already has progress
+              const existingProgress = wordProgress?.find(wp => wp.wordId === wordId);
+              
+              if (existingProgress) {
+                // Update existing record: increment attempts, mark as mastered
+                await updateWordProgress({
+                  progressId: existingProgress.id as any,
+                  data: {
+                    mastered: true,
+                    attempts: (existingProgress.attempts || 0) + 1,
+                  },
+                });
+              } else {
+                // Create new record only if it doesn't exist
+                await createWordProgress({
+                  userId: (user as any).id,
+                  wordId,
+                  level: 'beginner',
+                  mastered: true,
+                  attempts: 1,
+                });
+              }
+            }
+
+            // Award XP to database (10 for quiz completion)
+            let xpToAward = 10;
+            
+            // Check if all beginner packs are complete for unit bonus
+            if (isNewCompletion && completedPacks.length === beginnerWordPacks.length) {
+              xpToAward += 50; // Add unit completion bonus
+            }
+
+            if (profile) {
+              await updateProfile({
+                xp: (profile.xp || 0) + xpToAward,
+              });
+            }
+          } catch (error) {
+            console.error('Error saving word progress to database:', error);
+            // Fall back to localStorage if database save fails
+            awardQuizXP();
+            if (isNewCompletion && completedPacks.length === beginnerWordPacks.length) {
+              awardUnitXP();
+            }
+          }
+        } else {
+          // For unauthenticated users, use localStorage
+          awardQuizXP();
+          if (isNewCompletion && completedPacks.length === beginnerWordPacks.length) {
             awardUnitXP();
           }
         }

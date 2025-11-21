@@ -28,6 +28,8 @@ import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
 import { awardQuizXP } from '../lib/progress';
+import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile, useProgress } from '@/hooks/useUserProgress';
 
 // Encouraging messages shown on results screen
 const encouragingMessages = [
@@ -66,6 +68,11 @@ export default function QuizPage() {
   const location = useLocation()[0];
   const quizId = params.id as string;
   const quiz = allQuizzes[quizId];
+  
+  // Auth and database hooks
+  const { user, isAuthenticated } = useAuth();
+  const { profile, updateProfile } = useUserProfile();
+  const { progress: progressRecords, createProgress, updateProgress } = useProgress();
   
   // Get quiz section ID (e.g., "1" from "1a", "1b", etc. or "2" from "s2a", "s2b")
   const quizSectionId = quizId.replace(/[a-z]/gi, '');
@@ -291,7 +298,7 @@ export default function QuizPage() {
   };
 
   // Handle continuing after quiz completion
-  const handleContinue = (percentage: number) => {
+  const handleContinue = async (percentage: number) => {
     // Clear the quiz score for this section
     localStorage.removeItem(quizStorageKey);
     
@@ -302,6 +309,88 @@ export default function QuizPage() {
       if (percentage >= 60) {
         const sectionNumber = parseInt(quizSectionId);
         
+        // Determine category
+        const category = isNumbers ? 'numbers' : 
+                        isSimilar ? 'similar' :
+                        isMatra ? 'matra' :
+                        isConsonant ? 'consonants' : 'vowels';
+        
+        // Save to database for authenticated users
+        if (isAuthenticated && user) {
+          try {
+            // Check for existing QUIZ progress record
+            const existingQuizProgress = progressRecords?.find(
+              p => p.userId === (user as any).id &&
+                   p.category === category &&
+                   p.lessonId === quizId &&
+                   p.type === 'quiz'
+            );
+            
+            if (existingQuizProgress) {
+              // Update existing QUIZ progress record
+              await updateProgress({
+                progressId: existingQuizProgress.id,
+                data: {
+                  score: percentage,
+                  completed: true,
+                }
+              });
+            } else {
+              // Create new QUIZ progress record
+              await createProgress({
+                userId: (user as any).id,
+                category,
+                sectionId: quizSectionId,
+                lessonId: quizId,
+                type: 'quiz',
+                completed: true,
+                score: percentage,
+              });
+            }
+            
+            // Check for existing LESSON progress record
+            const existingLessonProgress = progressRecords?.find(
+              p => p.userId === (user as any).id &&
+                   p.category === category &&
+                   p.lessonId === quizId &&
+                   p.type === 'lesson'
+            );
+            
+            if (existingLessonProgress) {
+              // Update existing LESSON progress record
+              await updateProgress({
+                progressId: existingLessonProgress.id,
+                data: {
+                  score: percentage,
+                  completed: true,
+                }
+              });
+            } else {
+              // Create new LESSON progress record
+              await createProgress({
+                userId: (user as any).id,
+                category,
+                sectionId: quizSectionId,
+                lessonId: quizId,
+                type: 'lesson',
+                completed: true,
+                score: percentage,
+              });
+            }
+            
+            // Update profile XP (quiz awards 10 XP)
+            const currentXP = profile?.xp || 0;
+            await updateProfile({
+              xp: currentXP + 10,
+            });
+          } catch (error) {
+            console.error('Failed to save progress to database:', error);
+            // Award unit bonus XP in catch branch too
+            awardQuizXP();
+          }
+        }
+        
+        // Keep localStorage as fallback for unauthenticated users or if database fails
         if (isNumbers) {
           const current = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
           if (sectionNumber > current) {
@@ -328,6 +417,9 @@ export default function QuizPage() {
             localStorage.setItem('vowelsQuizzesCompleted', sectionNumber.toString());
           }
         }
+        
+        // Award unit bonus XP for all users
+        awardQuizXP();
         
         setLocation(quiz.nextLesson);
       } else {

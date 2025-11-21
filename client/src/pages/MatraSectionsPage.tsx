@@ -3,6 +3,9 @@ import { Link, useLocation } from "wouter";
 import { ChevronLeft, Check } from "lucide-react";
 import tigerPlayful from '@assets/crouching-playful-tiger.jpg';
 import { RangoliPattern, MandalaPattern, HalfRangoliPattern, QuarterRangoliPattern } from '../components/DecorativePattern';
+import { useAuth } from '@/hooks/useAuth';
+import { useProgress } from '@/hooks/useUserProgress';
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function MatraSectionsPage() {
   const [completedSections, setCompletedSections] = useState(0);
@@ -10,10 +13,22 @@ export default function MatraSectionsPage() {
   const [selectedSection, setSelectedSection] = useState<any>(null);
   const [location, setLocation] = useLocation();
   
+  const { isAuthenticated } = useAuth();
+  const { progress, isLoading } = useProgress();
+  
   useEffect(() => {
-    const completed = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-    setCompletedSections(completed);
-  }, [location]);
+    if (isAuthenticated && progress) {
+      const matraLessons = progress.filter(p => 
+        p.category === 'matra' && 
+        p.type === 'lesson' && 
+        p.completed
+      );
+      setCompletedSections(matraLessons.length);
+    } else if (!isAuthenticated) {
+      const completed = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+      setCompletedSections(completed);
+    }
+  }, [isAuthenticated, progress, location]);
   
   const handleRedoSection = () => {
     if (selectedSection) {
@@ -59,7 +74,34 @@ export default function MatraSectionsPage() {
           <RangoliPattern className="absolute top-4 left-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#ff9930" />
           <MandalaPattern className="absolute top-4 right-4 w-16 h-16 opacity-20 -z-10 pointer-events-none" color="#2E86AB" />
           
-          {sections.map((section, index) => {
+          {isAuthenticated && isLoading ? (
+            // Loading state for authenticated users
+            Array.from({ length: 7 }).map((_, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={index} className="relative w-full min-h-[100px]">
+                  <Skeleton 
+                    className={`w-24 h-24 rounded-full ${isEven ? 'ml-8' : 'ml-auto mr-8'}`}
+                    data-testid={`skeleton-section-${index + 1}`}
+                  />
+                  {index < 6 && (
+                    <div
+                      className="absolute border-t-2 border-gray-300"
+                      style={{
+                        width: '180px',
+                        top: '80px',
+                        left: isEven ? '110px' : 'auto',
+                        right: isEven ? 'auto' : '110px',
+                        transform: isEven ? 'rotate(25deg)' : 'rotate(-25deg)',
+                        transformOrigin: isEven ? 'left center' : 'right center',
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            sections.map((section, index) => {
             const isEven = index % 2 === 0;
             const isCompleted = section.id <= completedSections;
             const isUnlocked = section.id <= completedSections + 1;
@@ -112,7 +154,8 @@ export default function MatraSectionsPage() {
                 )}
               </div>
             );
-          })}
+          }))
+          }
           
           <div className="mt-8 flex justify-center">
             <img src={tigerPlayful} alt="Playful tiger" className="w-32 h-32 object-contain opacity-85 animate-bounce-subtle" style={{ transform: 'rotate(-5deg)' }} />

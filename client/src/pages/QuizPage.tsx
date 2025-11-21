@@ -484,17 +484,17 @@ export default function QuizPage() {
                 <>
                   <p className="text-2xl font-bold text-black mb-2">{getRandomMessage()}</p>
                   <p className="text-gray-600 text-lg">
-                    You got {finalScore.correct} out of {finalScore.total} correct
+                    You got {finalScore.correct} out of {finalScore.total} questions correct across all quizzes in this section
                   </p>
                 </>
               ) : (
                 <>
                   <p className="text-2xl font-bold text-black mb-2">Keep Practicing!</p>
                   <p className="text-gray-600 text-lg mb-2">
-                    You got {finalScore.correct} out of {finalScore.total} correct
+                    You got {finalScore.correct} out of {finalScore.total} questions correct across all quizzes
                   </p>
                   <p className="text-red-600 font-semibold">
-                    You need at least 60% to continue. Try again!
+                    You need at least 60% ({Math.ceil(finalScore.total * 0.6)} out of {finalScore.total}) to continue. Try again!
                   </p>
                 </>
               )}

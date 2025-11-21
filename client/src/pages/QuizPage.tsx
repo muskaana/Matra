@@ -47,7 +47,8 @@ const getRandomMessage = () => {
 };
 
 // Tiger image for quiz screens - varies by category for visual variety
-const getQuizTiger = (location: string) => {
+const getQuizTiger = (location?: string) => {
+  if (!location) return tigerExcited;
   if (location.includes('/consonants/')) return tigerCalm;
   if (location.includes('/similar/')) return tigerCalm;
   if (location.includes('/numbers/')) return tigerSleeping;
@@ -564,7 +565,7 @@ export default function QuizPage() {
             {/* Tiger mascot in center white space */}
             <div className="flex justify-center items-center mb-4">
               <img 
-                src={getQuizTiger()} 
+                src={getQuizTiger(location)} 
                 alt="Tiger mascot" 
                 className="w-24 h-24 object-contain opacity-90 animate-bounce-subtle"
               />

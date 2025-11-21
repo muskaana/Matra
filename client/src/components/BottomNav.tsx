@@ -1,53 +1,8 @@
-import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { FileText, MessageSquare, Book, User, Lock } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
-import { useProgress } from "@/hooks/useUserProgress";
+import { FileText, MessageSquare, Book, User } from "lucide-react";
 
 export default function BottomNav() {
   const [location] = useLocation();
-  const { user } = useAuth();
-  const { progress, isLoading } = useProgress();
-  const [talkUnlocked, setTalkUnlocked] = useState(false);
-  
-  useEffect(() => {
-    if (user && progress && !isLoading) {
-      // For authenticated users: Check database for completed lessons (not quizzes)
-      // QuizPage saves type='lesson' records for unlock logic
-      const completedLessons = progress.filter(p => p.type === 'lesson' && p.completed);
-      
-      // Count completed lessons by category
-      const vowelsCompleted = completedLessons.filter(p => p.category === 'vowels').length;
-      const consonantsCompleted = completedLessons.filter(p => p.category === 'consonants').length;
-      const matraCompleted = completedLessons.filter(p => p.category === 'matra').length;
-      const similarCompleted = completedLessons.filter(p => p.category === 'similar').length;
-      const numbersCompleted = completedLessons.filter(p => p.category === 'numbers').length;
-      
-      // Talk tab unlocks when all script lessons are completed
-      const allLessonsComplete = vowelsCompleted >= 10 && 
-                                 consonantsCompleted >= 28 && 
-                                 matraCompleted >= 10 && 
-                                 similarCompleted >= 4 &&
-                                 numbersCompleted >= 1;
-      
-      setTalkUnlocked(allLessonsComplete);
-    } else if (!user) {
-      // For unauthenticated users: Fall back to localStorage
-      const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-      const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
-      const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-      const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-      const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
-
-      const allComplete = vowels >= 10 && 
-                          consonants >= 28 && 
-                          matra >= 10 && 
-                          similar >= 4 &&
-                          numbers >= 1;
-      
-      setTalkUnlocked(allComplete);
-    }
-  }, [user, progress, isLoading, location])
   
   const isActive = (path: string) => location === path || location.startsWith(path);
   
@@ -69,34 +24,20 @@ export default function BottomNav() {
             </button>
           </Link>
           
-          {/* Talk tab - Unlocks when all script quizzes are completed */}
-          {talkUnlocked ? (
-            <Link href="/conversation">
-              <button 
-                className={`flex flex-col items-center p-2 transition-all ${
-                  isActive('/conversation') 
-                    ? 'text-[#ff9930]' 
-                    : 'text-gray-600 hover:text-[#ff9930]'
-                }`} 
-                data-testid="button-nav-talk"
-              >
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <span className={`text-xs ${isActive('/conversation') ? 'font-bold' : 'font-medium'}`}>Talk</span>
-              </button>
-            </Link>
-          ) : (
+          {/* Talk tab - Always clickable, shows coming soon */}
+          <Link href="/conversation">
             <button 
-              className="flex flex-col items-center text-gray-300 p-2 cursor-not-allowed relative" 
-              data-testid="button-nav-talk-locked" 
-              title="Complete all Script quizzes to unlock"
+              className={`flex flex-col items-center p-2 transition-all ${
+                isActive('/conversation') 
+                  ? 'text-[#ff9930]' 
+                  : 'text-gray-600 hover:text-[#ff9930]'
+              }`} 
+              data-testid="button-nav-talk"
             >
-              <div className="relative">
-                <MessageSquare className="w-6 h-6 mb-1" />
-                <Lock className="w-3 h-3 absolute -top-1 -right-1" />
-              </div>
-              <span className="text-xs font-medium">Talk</span>
+              <MessageSquare className="w-6 h-6 mb-1" />
+              <span className={`text-xs ${isActive('/conversation') ? 'font-bold' : 'font-medium'}`}>Talk</span>
             </button>
-          )}
+          </Link>
           
           {/* Read tab - Always unlocked */}
           <Link href="/reading">

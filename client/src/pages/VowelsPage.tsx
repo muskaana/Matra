@@ -61,13 +61,15 @@ export default function VowelsPage() {
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
   const isConsonantsComplete = consonantsCompleted >= totalConsonants;
+  const isMatraComplete = matraCompleted >= totalMatra;
+  const isSimilarComplete = similarCompleted >= totalSimilar;
 
   const lessons = [
     { id: 1, title: "Vowels", href: `/script/vowels/sections`, icon: "अ", progress: vowelsProgress, locked: false },
     { id: 2, title: "Consonants", href: `/script/consonants/sections`, icon: "क", progress: consonantsProgress, locked: !isVowelsComplete, lockReason: !isVowelsComplete ? "Complete Vowels" : "" },
     { id: 3, title: "Matra (Vowel Symbols)", href: `/script/matra/sections`, icon: "ा", progress: matraProgress, locked: !isConsonantsComplete, lockReason: !isConsonantsComplete ? "Complete Consonants" : "" },
-    { id: 4, title: "Similar Characters", href: `/script/similar/sections`, icon: "स", progress: similarProgress, locked: false },
-    { id: 5, title: "Numbers", href: `/script/numbers/sections`, icon: "१", progress: numbersProgress, locked: false },
+    { id: 4, title: "Similar Characters", href: `/script/similar/sections`, icon: "स", progress: similarProgress, locked: !isMatraComplete, lockReason: !isMatraComplete ? "Complete Matra" : "" },
+    { id: 5, title: "Numbers", href: `/script/numbers/sections`, icon: "१", progress: numbersProgress, locked: !isSimilarComplete, lockReason: !isSimilarComplete ? "Complete Similar Characters" : "" },
   ];
 
   return (

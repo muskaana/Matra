@@ -20,6 +20,7 @@ export default function ScriptPage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
+  const totalNumbers = 4;
   const totalBeginnerPacks = 5;
   const totalAdvancedPacks = 4;
   const totalSentenceSections = 4;
@@ -52,6 +53,13 @@ export default function ScriptPage() {
       return progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length;
     }
     return parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const numbersCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
   }, [user, progress]);
   
   // Word/sentence pack completion: Use database for authenticated users, localStorage for guests
@@ -105,14 +113,15 @@ export default function ScriptPage() {
   const isConsonantsComplete = consonantsCompleted >= totalConsonants;
   const isMatraComplete = matraCompleted >= totalMatra;
   const isSimilarComplete = similarCompleted >= totalSimilar;
-  const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete && isSimilarComplete;
+  const isNumbersComplete = numbersCompleted >= totalNumbers;
+  const allCharactersComplete = isVowelsComplete && isConsonantsComplete && isMatraComplete && isSimilarComplete && isNumbersComplete;
   const isBeginnerWordsComplete = beginnerWordsCompleted >= totalBeginnerPacks;
   const isAdvancedWordsComplete = advancedWordsCompleted >= totalAdvancedPacks;
   const isSentencesComplete = sentencesCompleted >= totalSentenceSections;
   const isReadingComplete = readingCompleted >= totalReadingPieces;
   
   const levels = [
-    { id: 1, title: "The Characters", href: "/script/vowels", locked: false, progress: `${vowelsCompleted + consonantsCompleted + matraCompleted + similarCompleted}/${totalVowels + totalConsonants + totalMatra + totalSimilar}`, completed: allCharactersComplete },
+    { id: 1, title: "The Characters", href: "/script/vowels", locked: false, progress: `${vowelsCompleted + consonantsCompleted + matraCompleted + similarCompleted + numbersCompleted}/${totalVowels + totalConsonants + totalMatra + totalSimilar + totalNumbers}`, completed: allCharactersComplete },
     { id: 2, title: "Beginner Words", href: "/words/beginner", locked: !allCharactersComplete, lockReason: !allCharactersComplete ? "Complete The Characters" : "", progress: `${beginnerWordsCompleted}/${totalBeginnerPacks}`, completed: isBeginnerWordsComplete },
     { id: 3, title: "Advanced Words", href: "/words/advanced", locked: !isBeginnerWordsComplete, lockReason: !isBeginnerWordsComplete ? "Complete Beginner Words" : "", progress: `${advancedWordsCompleted}/${totalAdvancedPacks}`, completed: isAdvancedWordsComplete },
     { id: 4, title: "Sentences", href: "/sentences", locked: !isAdvancedWordsComplete, lockReason: !isAdvancedWordsComplete ? "Complete Advanced Words" : "", progress: `${sentencesCompleted}/${totalSentenceSections}`, completed: isSentencesComplete },

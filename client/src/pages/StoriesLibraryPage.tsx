@@ -84,6 +84,22 @@ export default function StoriesLibraryPage() {
         
         {/* Content Area */}
         <div className="flex-1 px-6 py-6 overflow-y-auto">
+          {/* Legend */}
+          <div className="flex items-center justify-center gap-4 mb-4 text-xs">
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 flex items-center justify-center rounded-full bg-green-100 text-green-700 font-bold border border-green-200">
+                B
+              </div>
+              <span className="text-gray-600">Beginner</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-700 font-bold border border-yellow-200">
+                I
+              </div>
+              <span className="text-gray-600">Intermediate</span>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-2 gap-4">
             {storiesLibrary.map((story, index) => {
               const completed = isCompleted(story.id);

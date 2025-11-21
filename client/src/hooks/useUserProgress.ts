@@ -63,7 +63,6 @@ export function useUserProfile() {
         profileCreatedRef.current = true;
         const today = new Date().toISOString().split('T')[0];
         createMutation.mutate({
-          userId,
           xp: 0,
           currentStreak: 0,
           lastActiveDate: today,
@@ -82,7 +81,6 @@ export function useUserProfile() {
       if (error?.message?.includes('404') || error?.message?.includes('not found')) {
         const today = new Date().toISOString().split('T')[0];
         await createMutation.mutateAsync({
-          userId,
           xp: data.xp || 0,
           currentStreak: data.currentStreak || 0,
           lastActiveDate: data.lastActiveDate || today,
@@ -125,7 +123,7 @@ export function useProgress() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (params: { progressId: number; data: UpdateProgress }) => {
+    mutationFn: async (params: { progressId: string; data: UpdateProgress }) => {
       return apiRequest("PATCH", `/api/progress/${params.progressId}`, params.data);
     },
     onSuccess: () => {
@@ -164,7 +162,7 @@ export function useWordProgress() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (params: { progressId: number; data: UpdateWordProgress }) => {
+    mutationFn: async (params: { progressId: string; data: UpdateWordProgress }) => {
       return apiRequest("PATCH", `/api/words/progress/${params.progressId}`, params.data);
     },
     onSuccess: () => {
@@ -203,7 +201,7 @@ export function useSentenceProgress() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (params: { progressId: number; data: UpdateSentenceProgress }) => {
+    mutationFn: async (params: { progressId: string; data: UpdateSentenceProgress }) => {
       return apiRequest("PATCH", `/api/sentences/progress/${params.progressId}`, params.data);
     },
     onSuccess: () => {
@@ -242,7 +240,7 @@ export function useReadingProgress() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (params: { progressId: number; data: UpdateReadingProgress }) => {
+    mutationFn: async (params: { progressId: string; data: UpdateReadingProgress }) => {
       return apiRequest("PATCH", `/api/reading/progress/${params.progressId}`, params.data);
     },
     onSuccess: () => {
@@ -281,7 +279,7 @@ export function useReviewItems() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (params: { reviewId: number; data: UpdateReviewItem }) => {
+    mutationFn: async (params: { reviewId: string; data: UpdateReviewItem }) => {
       return apiRequest("PATCH", `/api/review/${params.reviewId}`, params.data);
     },
     onSuccess: () => {

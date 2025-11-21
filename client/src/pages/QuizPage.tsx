@@ -24,6 +24,8 @@ import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
 
 import tigerExcited from '@assets/excited-jumping-tiger.png';
+import tigerCalm from '@assets/sitting-calm-tiger.png';
+import tigerSleeping from '@assets/sleeping-tiger.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
@@ -44,9 +46,12 @@ const getRandomMessage = () => {
   return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
 };
 
-// Tiger image for quiz screens
-const getQuizTiger = () => {
-  return tigerExcited;
+// Tiger image for quiz screens - varies by category for visual variety
+const getQuizTiger = (location: string) => {
+  if (location.includes('/consonants/')) return tigerCalm;
+  if (location.includes('/similar/')) return tigerCalm;
+  if (location.includes('/numbers/')) return tigerSleeping;
+  return tigerExcited; // Default for vowels and matra
 };
 
 // Format quiz option labels based on type and display mode
@@ -472,9 +477,9 @@ export default function QuizPage() {
           <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
             <div className="mb-8">
               <img 
-                src={tigerExcited} 
+                src={getQuizTiger(location)} 
                 alt="Waving tiger" 
-                className="w-32 h-32 mx-auto object-contain mb-6" 
+                className="w-40 h-40 mx-auto object-contain mb-6" 
               />
               <div className={`text-6xl font-bold mb-4 ${percentage >= 60 ? 'text-[#ff9930]' : 'text-red-500'}`}>
                 {percentage}%

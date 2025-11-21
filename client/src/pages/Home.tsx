@@ -6,10 +6,18 @@ import { useAuth } from "@/hooks/useAuth";
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
-    // Check if user has completed placement quiz
+    // Don't redirect while checking auth status
+    if (isLoading) return;
+    
+    // If not authenticated, show landing page with login button
+    if (!user) {
+      return;
+    }
+    
+    // User is authenticated, check placement status
     const placementCompleted = localStorage.getItem('placementCompleted');
     const hasVisited = localStorage.getItem('hasVisitedBefore');
     
@@ -20,10 +28,10 @@ export default function Home() {
       // User has visited but no placement, send to placement quiz
       setLocation('/placement');
     } else {
-      // First time visitor, show landing page
+      // First authenticated visit, mark as visited then show landing page
       localStorage.setItem('hasVisitedBefore', 'true');
     }
-  }, [setLocation]);
+  }, [setLocation, user, isLoading]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">

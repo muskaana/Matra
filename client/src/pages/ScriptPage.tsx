@@ -1,70 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import { Lock, CheckCircle2 } from "lucide-react";
 import { getItemsDueForReview } from '../utils/smartReview';
 import BottomNav from '../components/BottomNav';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
+import { useAuth } from '@/hooks/useAuth';
+import { useProgress, useReadingProgress } from '@/hooks/useUserProgress';
 
 export default function ScriptPage() {
-  const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
-  const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
-  const [matraCompleted, setMatraCompleted] = useState<number>(0);
-  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
+  const { user } = useAuth();
+  const { progress } = useProgress();
+  const { readingProgress } = useReadingProgress();
+  
   const [reviewCount, setReviewCount] = useState<number>(0);
-  const [beginnerWordsCompleted, setBeginnerWordsCompleted] = useState<number>(0);
-  const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
-  const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
-  const [readingCompleted, setReadingCompleted] = useState<number>(0);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
+  
   const totalVowels = 5;
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 5; // 5 word packs (intro is just instructional)
+  const totalBeginnerPacks = 5;
   const totalAdvancedPacks = 4;
   const totalSentenceSections = 4;
-  const totalReadingPieces = 14; // 3 whatsapp + 3 paragraphs + 8 bollywood
+  const totalReadingPieces = 14;
+  
+  // Calculate completion counts from database or localStorage
+  const vowelsCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const consonantsCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const matraCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  const similarCompleted = useMemo(() => {
+    if (user && progress) {
+      return progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length;
+    }
+    return parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+  }, [user, progress]);
+  
+  // Note: Word/sentence progress tables track individual word mastery, not pack completion
+  // For now, use localStorage for word packs and sentences until we migrate to database completion tracking
+  const beginnerWordsCompleted = useMemo(() => {
+    const local = localStorage.getItem('beginnerWordsCompleted');
+    return local ? JSON.parse(local).length : 0;
+  }, []);
+  
+  const advancedWordsCompleted = useMemo(() => {
+    const local = localStorage.getItem('advancedWordsCompleted');
+    return local ? JSON.parse(local).length : 0;
+  }, []);
+  
+  const sentencesCompleted = useMemo(() => {
+    const local = localStorage.getItem('sentencesCompleted');
+    return local ? JSON.parse(local).length : 0;
+  }, []);
+  
+  const readingCompleted = useMemo(() => {
+    if (user && readingProgress) {
+      const uniqueStories = new Set(readingProgress.filter(r => r.completed).map(r => r.storyId));
+      return uniqueStories.size;
+    }
+    const local = localStorage.getItem('readingCompleted');
+    return local ? JSON.parse(local).length : 0;
+  }, [user, readingProgress]);
   
   useEffect(() => {
-    const vowels = localStorage.getItem('vowelsQuizzesCompleted');
-    const consonants = localStorage.getItem('consonantsQuizzesCompleted');
-    const matra = localStorage.getItem('matraQuizzesCompleted');
-    const similar = localStorage.getItem('similarQuizzesCompleted');
-    const beginnerWords = localStorage.getItem('beginnerWordsCompleted');
-    const advancedWords = localStorage.getItem('advancedWordsCompleted');
-    const sentences = localStorage.getItem('sentencesCompleted');
     const readingIntro = localStorage.getItem('readingInstructionsViewed');
-    
-    if (vowels) setVowelsCompleted(parseInt(vowels));
-    if (consonants) setConsonantsCompleted(parseInt(consonants));
-    if (matra) setMatraCompleted(parseInt(matra));
-    if (similar) setSimilarCompleted(parseInt(similar));
-    
     if (readingIntro === 'true') {
       setReadingIntroComplete(true);
     }
-    if (beginnerWords) {
-      const packsCompleted = JSON.parse(beginnerWords);
-      setBeginnerWordsCompleted(packsCompleted.length);
-    }
     
-    if (advancedWords) {
-      const packsCompleted = JSON.parse(advancedWords);
-      setAdvancedWordsCompleted(packsCompleted.length);
-    }
-    if (sentences) {
-      const sectionsCompleted = JSON.parse(sentences);
-      setSentencesCompleted(sectionsCompleted.length);
-    }
-    
-    const reading = localStorage.getItem('readingCompleted');
-    if (reading) {
-      const piecesCompleted = JSON.parse(reading);
-      setReadingCompleted(piecesCompleted.length);
-    }
-    
-    // Load review count
     const dueItems = getItemsDueForReview();
     setReviewCount(dueItems.length);
   }, []);

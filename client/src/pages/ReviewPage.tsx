@@ -261,10 +261,10 @@ export default function ReviewPage() {
               <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-4 mb-4 border-2 border-orange-200">
                 <p className="text-sm text-gray-600 mb-1">Sound:</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {getCharacterInfo(currentItem.contentId).sound}
+                  {getCharacterInfo(currentItem.contentId)?.sound || currentItem.contentId}
                 </p>
                 <p className="text-lg text-gray-700 mt-2">
-                  ({getCharacterInfo(currentItem.contentId).transliteration})
+                  ({getCharacterInfo(currentItem.contentId)?.transliteration || currentItem.contentId})
                 </p>
               </div>
 

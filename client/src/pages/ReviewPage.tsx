@@ -41,6 +41,9 @@ export default function ReviewPage() {
   const currentItem = reviewItems[currentIndex];
   const totalItems = reviewItems.length;
   const progress = totalItems > 0 ? ((currentIndex + 1) / totalItems) * 100 : 0;
+  
+  // Check if current item is a number (Devanagari numerals)
+  const isNumber = currentItem && /[०-९]/.test(currentItem.contentId);
 
   // Text-to-speech for character pronunciation
   const speak = (text: string) => {
@@ -254,18 +257,22 @@ export default function ReviewPage() {
               className="w-full py-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors text-lg font-semibold"
               data-testid="button-reveal-answer"
             >
-              Reveal Sound
+              {isNumber ? 'Reveal Translation' : 'Reveal Sound'}
             </button>
           ) : (
             <div className="space-y-3">
               <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-4 mb-4 border-2 border-orange-200">
-                <p className="text-sm text-gray-600 mb-1">Sound:</p>
+                <p className="text-sm text-gray-600 mb-1">{isNumber ? 'Translation:' : 'Sound:'}</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {getCharacterInfo(currentItem.contentId)?.sound || currentItem.contentId}
+                  {isNumber 
+                    ? getCharacterInfo(currentItem.contentId)?.transliteration || currentItem.contentId
+                    : getCharacterInfo(currentItem.contentId)?.sound || currentItem.contentId}
                 </p>
-                <p className="text-lg text-gray-700 mt-2">
-                  ({getCharacterInfo(currentItem.contentId)?.transliteration || currentItem.contentId})
-                </p>
+                {!isNumber && (
+                  <p className="text-lg text-gray-700 mt-2">
+                    ({getCharacterInfo(currentItem.contentId)?.transliteration || currentItem.contentId})
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-3">

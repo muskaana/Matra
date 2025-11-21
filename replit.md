@@ -52,6 +52,11 @@ The application includes a structured curriculum covering Vowels, Consonants, Ma
     -   Dashboard shows "Welcome back" with current learning stage and "Continue Learning" button
     -   Routing: First-time visitors see landing page, returning users without placement see quiz, users with placement see dashboard
 -   **Progressive Unlocking**: Lessons and levels (Beginner Words, Advanced Words, Sentences, Reading) unlock sequentially based on completion.
+-   **Story Library (Read Tab)**: Optional reading practice area separate from the Script track, featuring 8 diaspora-focused mini-stories.
+    -   Stories include: visiting grandma, college life, WhatsApp messages, Diwali, airport pickup, grocery shopping, job interview, birthday party
+    -   Each story has Hindi title, difficulty level (Beginner/Intermediate), English summary, and structured sentences
+    -   Sentences display Hindi text, transliteration, and English translation for line-by-line comprehension
+    -   Designed for heritage speakers to practice reading in culturally relevant contexts
 -   **Reading Practice**: Offers line-by-line tap-to-reveal reading exercises with comprehension quizzes, targeting heritage speakers.
 -   **Word Learning (Beginner & Advanced)**: Flashcard-based learning and quizzes for vocabulary acquisition, focusing on conversational Hindi.
 -   **Sentence Learning**: Thematic sentence practice with tap-to-reveal mechanics and diverse quiz types.

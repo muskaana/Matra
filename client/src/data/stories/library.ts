@@ -1,115 +1,235 @@
+export interface StorySentence {
+  hi: string;
+  translit: string;
+  en: string;
+}
+
 export interface Story {
   id: string;
   title: string;
-  description: string;
-  difficulty: 'Beginner' | 'Intermediate';
-  content: string[];
-  comprehensionQuestions?: {
-    question: string;
-    options: string[];
-    correctAnswer: number;
-  }[];
+  level: 'Beginner' | 'Intermediate';
+  summaryEn: string;
+  sentences: StorySentence[];
 }
 
 export const storiesLibrary: Story[] = [
   {
-    id: "chai-time",
-    title: "चाय का समय (Chai Time)",
-    description: "A quick chat over morning tea",
-    difficulty: "Beginner",
-    content: [
-      "मुझे चाय चाहिए।",
-      "दूध और चीनी के साथ।",
-      "बहुत गर्म।"
+    id: "nani-ke-ghar",
+    title: "नानी के घर",
+    level: "Beginner",
+    summaryEn: "A WhatsApp message about visiting grandma's house this weekend",
+    sentences: [
+      {
+        hi: "इस हफ्ते नानी के घर चलें?",
+        translit: "Is hafte nani ke ghar chalen?",
+        en: "Should we go to grandma's house this weekend?"
+      },
+      {
+        hi: "हां! मुझे नानी से मिलना है।",
+        translit: "Haan! Mujhe nani se milna hai.",
+        en: "Yes! I want to meet grandma."
+      },
+      {
+        hi: "शनिवार को चलते हैं।",
+        translit: "Shanivaar ko chalte hain.",
+        en: "Let's go on Saturday."
+      }
     ]
   },
   {
-    id: "market-trip",
-    title: "बाजार जाना (Going to Market)",
-    description: "Shopping for vegetables at the local market",
-    difficulty: "Beginner",
-    content: [
-      "मैं बाजार जा रहा हूं।",
-      "मुझे सब्जियां चाहिए।",
-      "आलू, प्याज और टमाटर।",
-      "कितने पैसे हैं?"
+    id: "pehla-din-college",
+    title: "पहला दिन कॉलेज में",
+    level: "Intermediate",
+    summaryEn: "Nervous excitement on the first day of college",
+    sentences: [
+      {
+        hi: "आज मेरा पहला दिन कॉलेज में है।",
+        translit: "Aaj mera pehla din college mein hai.",
+        en: "Today is my first day at college."
+      },
+      {
+        hi: "मुझे थोड़ा घबराहट हो रही है।",
+        translit: "Mujhe thoda ghabrahat ho rahi hai.",
+        en: "I'm feeling a little nervous."
+      },
+      {
+        hi: "लेकिन मैं नए दोस्त बनाने के लिए उत्सुक हूं।",
+        translit: "Lekin main naye dost banane ke liye utsuk hoon.",
+        en: "But I'm excited to make new friends."
+      },
+      {
+        hi: "शाम को घर आकर सब कुछ बताऊंगा।",
+        translit: "Shaam ko ghar aakar sab kuch bataunga.",
+        en: "I'll come home in the evening and tell you everything."
+      }
     ]
   },
   {
-    id: "phone-call",
-    title: "फ़ोन पर बात (Phone Chat)",
-    description: "A short conversation on the phone",
-    difficulty: "Beginner",
-    content: [
-      "हैलो, कैसे हो?",
-      "मैं ठीक हूं, धन्यवाद।",
-      "क्या तुम घर पर हो?",
-      "हां, मैं घर पर हूं।"
+    id: "whatsapp-group",
+    title: "फैमिली ग्रुप चैट",
+    level: "Beginner",
+    summaryEn: "Quick messages in the family WhatsApp group",
+    sentences: [
+      {
+        hi: "हैलो सब लोग!",
+        translit: "Hello sab log!",
+        en: "Hello everyone!"
+      },
+      {
+        hi: "आज रात डिनर पर क्या बनेगा?",
+        translit: "Aaj raat dinner par kya banega?",
+        en: "What's for dinner tonight?"
+      },
+      {
+        hi: "मम्मी पनीर बना रही हैं।",
+        translit: "Mummy paneer bana rahi hain.",
+        en: "Mom is making paneer."
+      },
+      {
+        hi: "वाह! मैं समय पर आऊंगा।",
+        translit: "Waah! Main samay par aaunga.",
+        en: "Wow! I'll come on time."
+      }
     ]
   },
   {
-    id: "movie-plan",
-    title: "फ़िल्म देखने चलें (Let's Watch a Movie)",
-    description: "Making plans to see a Bollywood film",
-    difficulty: "Intermediate",
-    content: [
-      "आज शाम को फ़िल्म देखने चलें?",
-      "कौन सी फ़िल्म देखनी है?",
-      "नई शाहरुख़ खान की फ़िल्म आई है।",
-      "बढ़िया! शो किस टाइम है?",
-      "सात बजे का शो है।"
+    id: "diwali-plans",
+    title: "दिवाली की तैयारी",
+    level: "Beginner",
+    summaryEn: "Getting ready for Diwali celebrations with family",
+    sentences: [
+      {
+        hi: "दिवाली आ रही है!",
+        translit: "Diwali aa rahi hai!",
+        en: "Diwali is coming!"
+      },
+      {
+        hi: "हमें घर की सफाई करनी है।",
+        translit: "Hamein ghar ki safaai karni hai.",
+        en: "We need to clean the house."
+      },
+      {
+        hi: "और नए कपड़े खरीदने हैं।",
+        translit: "Aur naye kapde kharidne hain.",
+        en: "And we need to buy new clothes."
+      },
+      {
+        hi: "मिठाई भी लेनी होगी।",
+        translit: "Mithai bhi leni hogi.",
+        en: "We'll also need to get sweets."
+      }
     ]
   },
   {
-    id: "weather-talk",
-    title: "मौसम की बात (Weather Talk)",
-    description: "Discussing the weather and plans",
-    difficulty: "Beginner",
-    content: [
-      "आज बहुत गर्मी है।",
-      "हां, बहुत गर्म दिन है।",
-      "मैं घर पर ही रहूंगा।",
-      "ठंडा पानी पीओ।"
+    id: "airport-pickup",
+    title: "एयरपोर्ट पिकअप",
+    level: "Intermediate",
+    summaryEn: "Coordinating to pick up relatives arriving from India",
+    sentences: [
+      {
+        hi: "मामा जी की फ्लाइट कल सुबह आ रही है।",
+        translit: "Mama ji ki flight kal subah aa rahi hai.",
+        en: "Uncle's flight is arriving tomorrow morning."
+      },
+      {
+        hi: "हमें एयरपोर्ट पर जाना होगा।",
+        translit: "Hamein airport par jaana hoga.",
+        en: "We'll have to go to the airport."
+      },
+      {
+        hi: "फ्लाइट सुबह छह बजे लैंड करेगी।",
+        translit: "Flight subah chhe baje land karegi.",
+        en: "The flight will land at 6 AM."
+      },
+      {
+        hi: "तो हमें पांच बजे घर से निकलना होगा।",
+        translit: "To hamein paanch baje ghar se nikalna hoga.",
+        en: "So we'll have to leave home at 5 AM."
+      },
+      {
+        hi: "ठीक है, मैं तैयार रहूंगा।",
+        translit: "Theek hai, main taiyaar rahunga.",
+        en: "Okay, I'll be ready."
+      }
     ]
   },
   {
-    id: "family-dinner",
-    title: "परिवार का खाना (Family Dinner)",
-    description: "Dinner time with the family",
-    difficulty: "Intermediate",
-    content: [
-      "खाना तैयार है?",
-      "हां, अभी आ रहा है।",
-      "आज क्या बना है?",
-      "रोटी, दाल और सब्जी बनी है।",
-      "वाह! मुझे बहुत भूख लगी है।",
-      "सब लोग बैठ जाओ, खाना परोसती हूं।"
+    id: "grocery-shopping",
+    title: "किराना खरीदना",
+    level: "Beginner",
+    summaryEn: "Shopping for groceries at the Indian store",
+    sentences: [
+      {
+        hi: "हमें इंडियन स्टोर जाना है।",
+        translit: "Hamein Indian store jaana hai.",
+        en: "We need to go to the Indian store."
+      },
+      {
+        hi: "चावल और आटा खत्म हो गया है।",
+        translit: "Chawal aur aata khatam ho gaya hai.",
+        en: "We're out of rice and flour."
+      },
+      {
+        hi: "कुछ मसाले भी लेने हैं।",
+        translit: "Kuch masaale bhi lene hain.",
+        en: "We also need to get some spices."
+      }
     ]
   },
   {
-    id: "cricket-match",
-    title: "क्रिकेट मैच (Cricket Match)",
-    description: "Excitement about a cricket game",
-    difficulty: "Intermediate",
-    content: [
-      "आज भारत का मैच है!",
-      "किसके साथ खेल रहे हैं?",
-      "पाकिस्तान के साथ।",
-      "मैच कितने बजे है?",
-      "शाम को सात बजे।",
-      "चलो साथ में देखते हैं!"
+    id: "job-interview",
+    title: "नौकरी का इंटरव्यू",
+    level: "Intermediate",
+    summaryEn: "Getting ready for an important job interview",
+    sentences: [
+      {
+        hi: "कल मेरा इंटरव्यू है।",
+        translit: "Kal mera interview hai.",
+        en: "My interview is tomorrow."
+      },
+      {
+        hi: "मैं बहुत excited और nervous हूं।",
+        translit: "Main bahut excited aur nervous hoon.",
+        en: "I'm very excited and nervous."
+      },
+      {
+        hi: "मुझे अपने सारे documents तैयार रखने हैं।",
+        translit: "Mujhe apne saare documents taiyaar rakhne hain.",
+        en: "I need to keep all my documents ready."
+      },
+      {
+        hi: "सब ठीक हो जाएगा, तुम अच्छा करोगे।",
+        translit: "Sab theek ho jaayega, tum accha karoge.",
+        en: "Everything will be fine, you'll do well."
+      }
     ]
   },
   {
-    id: "birthday-wish",
-    title: "जन्मदिन की बधाई (Birthday Wishes)",
-    description: "Wishing someone happy birthday",
-    difficulty: "Beginner",
-    content: [
-      "जन्मदिन मुबारक हो!",
-      "थैंक यू सो मच!",
-      "पार्टी कहां है?",
-      "घर पर ही है, शाम को आना।"
+    id: "birthday-party",
+    title: "जन्मदिन की पार्टी",
+    level: "Beginner",
+    summaryEn: "Planning a friend's surprise birthday party",
+    sentences: [
+      {
+        hi: "अगले हफ्ते राज का जन्मदिन है।",
+        translit: "Agle hafte Raj ka janmdin hai.",
+        en: "Raj's birthday is next week."
+      },
+      {
+        hi: "हम सरप्राइज पार्टी करेंगे।",
+        translit: "Hum surprise party karenge.",
+        en: "We'll throw a surprise party."
+      },
+      {
+        hi: "किसी को बताना मत।",
+        translit: "Kisi ko batana mat.",
+        en: "Don't tell anyone."
+      },
+      {
+        hi: "शनिवार शाम को सात बजे।",
+        translit: "Shanivaar shaam ko saat baje.",
+        en: "Saturday evening at 7 PM."
+      }
     ]
   }
 ];

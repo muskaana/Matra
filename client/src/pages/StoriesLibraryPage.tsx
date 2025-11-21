@@ -21,7 +21,7 @@ export default function StoriesLibraryPage() {
         {/* Stories List */}
         <div className="space-y-4">
           {storiesLibrary.map((story) => (
-            <Link key={story.id} href={`/stories/${story.id}`}>
+            <Link key={story.id} href={`/stories/${story.id}`} data-testid={`link-story-${story.id}`}>
               <div 
                 className="bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer"
                 data-testid={`story-${story.id}`}
@@ -34,16 +34,16 @@ export default function StoriesLibraryPage() {
                       </h3>
                       <span 
                         className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                          story.difficulty === 'Beginner' 
+                          story.level === 'Beginner' 
                             ? 'bg-green-100 text-green-700' 
                             : 'bg-yellow-100 text-yellow-700'
                         }`}
                       >
-                        {story.difficulty}
+                        {story.level}
                       </span>
                     </div>
                     <p className="text-gray-600 text-sm">
-                      {story.description}
+                      {story.summaryEn}
                     </p>
                   </div>
                   <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />

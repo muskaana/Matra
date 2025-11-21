@@ -18,7 +18,7 @@
  * 4. Results screen shows score, breakdown, and next action
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, useLocation } from "wouter";
 import { X, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -72,6 +72,16 @@ export default function QuizPage() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  
+  // Reset state when quiz changes (when navigating from one quiz to another)
+  useEffect(() => {
+    setSelectedAnswers([]);
+    setShowResults(false);
+    setShowExitConfirmation(false);
+    setShowFeedback(false);
+    setFeedbackCorrect(false);
+    setIsRedirecting(false);
+  }, [quizId]);
   
   // Get cumulative score from localStorage
   const getQuizScore = () => {

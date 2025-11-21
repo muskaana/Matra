@@ -73,7 +73,7 @@ export default function AdvancedWordsPage() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[28px]`}>
+                      <span className={`leading-8 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[22px]`}>
                         {pack.title}
                       </span>
                       {!unlocked && index > 0 && (

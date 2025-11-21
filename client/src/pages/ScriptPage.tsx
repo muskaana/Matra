@@ -119,7 +119,7 @@ export default function ScriptPage() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <span className={`leading-10 font-medium ${level.locked ? 'text-gray-500' : 'text-black'} ${level.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>
+                      <span className={`leading-8 font-medium ${level.locked ? 'text-gray-500' : 'text-black'} ${level.title.split(' ').length >= 2 ? 'text-[22px]' : 'text-[28px]'}`}>
                         {level.title}
                       </span>
                       {level.locked && level.lockReason && (

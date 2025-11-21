@@ -101,7 +101,7 @@ export default function ConsonantsPage() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <span className={`leading-10 font-medium ${lesson.locked ? 'text-gray-500' : 'text-black'} ${lesson.title.split(' ').length >= 2 ? 'text-[28px]' : 'text-[36px]'}`}>
+                      <span className={`leading-8 font-medium ${lesson.locked ? 'text-gray-500' : 'text-black'} ${lesson.title.split(' ').length >= 2 ? 'text-[22px]' : 'text-[28px]'}`}>
                         {lesson.title}
                       </span>
                       {lesson.locked && lesson.lockReason && (

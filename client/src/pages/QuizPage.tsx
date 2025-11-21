@@ -254,9 +254,23 @@ export default function QuizPage() {
       });
     }
 
-    // Award XP for quiz completion (always, on every completion)
-    awardQuizXP();
-    setShowResults(true);
+    // Navigate to next question or show results
+    setTimeout(() => {
+      if (quiz.nextLesson.includes('/')) {
+        // End of quiz section - award XP and show results
+        awardQuizXP();
+        setShowResults(true);
+      } else {
+        // Next question - reset state
+        setSelectedAnswers([]);
+        let basePath = '/script/lesson/vowels/quiz/';
+        if (isConsonant) basePath = '/script/lesson/consonants/quiz/';
+        if (isMatra) basePath = '/script/lesson/matra/quiz/';
+        if (isSimilar) basePath = '/script/lesson/similar/quiz/';
+        if (isNumbers) basePath = '/script/lesson/numbers/quiz/';
+        setLocation(`${basePath}${quiz.nextLesson}`);
+      }
+    }, 1200);
   };
 
   // Handle exit confirmation dialog

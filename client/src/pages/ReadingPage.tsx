@@ -1,30 +1,23 @@
 /**
  * ReadingPage Component
  * 
- * Shows reading practice content organized by type
- * WhatsApp messages, Paragraphs, and Bollywood captions
+ * Shows reading practice content in the same design as other levels
+ * 14 items total: 3 WhatsApp, 3 Short Stories, 8 Bollywood
  */
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowLeft, MessageSquare as MessageSquareIcon, BookOpen, Film, CheckCircle2 } from "lucide-react";
+import { XCircle, Lock, CheckCircle2 } from "lucide-react";
 import { readingContent } from '../data/reading/content';
+import ProgressSummary from '../components/ProgressSummary';
+import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
+import { getItemsDueForReview } from '../utils/smartReview';
 
 export default function ReadingPage() {
   const [, setLocation] = useLocation();
   const [completedItems, setCompletedItems] = useState<string[]>([]);
-  const [vowelsCompleted, setVowelsCompleted] = useState<number>(0);
-  const [consonantsCompleted, setConsonantsCompleted] = useState<number>(0);
-  const [matraCompleted, setMatraCompleted] = useState<number>(0);
-  const [similarCompleted, setSimilarCompleted] = useState<number>(0);
-  const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
-
-  const totalVowels = 5;
-  const totalConsonants = 16;
-  const totalMatra = 7;
-  const totalSimilar = 5;
-  const totalSentenceSections = 3;
+  const [reviewCount, setReviewCount] = useState<number>(0);
 
   useEffect(() => {
     const completed = localStorage.getItem('readingCompleted');
@@ -32,121 +25,108 @@ export default function ReadingPage() {
       setCompletedItems(JSON.parse(completed));
     }
 
-    // Load completion data to determine unlock states
-    const vowels = localStorage.getItem('vowelsQuizzesCompleted');
-    const consonants = localStorage.getItem('consonantsQuizzesCompleted');
-    const matra = localStorage.getItem('matraQuizzesCompleted');
-    const similar = localStorage.getItem('similarQuizzesCompleted');
-    const sentences = localStorage.getItem('sentencesCompleted');
-
-    if (vowels) setVowelsCompleted(parseInt(vowels));
-    if (consonants) setConsonantsCompleted(parseInt(consonants));
-    if (matra) setMatraCompleted(parseInt(matra));
-    if (similar) setSimilarCompleted(parseInt(similar));
-    if (sentences) {
-      const sectionsCompleted = JSON.parse(sentences);
-      setSentencesCompleted(sectionsCompleted.length);
-    }
+    const dueItems = getItemsDueForReview();
+    setReviewCount(dueItems.length);
   }, []);
 
-  const allCharactersComplete = vowelsCompleted >= totalVowels && 
-    consonantsCompleted >= totalConsonants && 
-    matraCompleted >= totalMatra && 
-    similarCompleted >= totalSimilar;
+  const isItemCompleted = (itemId: string) => completedItems.includes(itemId);
+  const isItemUnlocked = (index: number) => {
+    if (index === 0) return true;  // First item always unlocked
+    return isItemCompleted(readingContent[index - 1].id);
+  };
 
-  const isSentencesComplete = sentencesCompleted >= totalSentenceSections;
+  const allItemsComplete = readingContent.every(item => isItemCompleted(item.id));
 
-  const whatsappContent = readingContent.filter(c => c.type === "whatsapp");
-  const paragraphContent = readingContent.filter(c => c.type === "paragraph");
-  const bollywoodContent = readingContent.filter(c => c.type === "bollywood");
+  // Icons for each of the 14 reading items
+  const itemIcons = [
+    '📱', '💬', '👪',  // WhatsApp (0-2)
+    '📖', '☀️', '🎉',  // Short Stories (3-5)
+    '🎬', '❤️', '🌟', '👩‍👩‍👦', '🎵', '🎤', '🌙', '💃'  // Bollywood (6-13)
+  ];
 
-  const isCompleted = (id: string) => completedItems.includes(id);
-
-  const renderContentCard = (content: typeof readingContent[0]) => {
-    const completed = isCompleted(content.id);
-    
-    return (
-      <Link key={content.id} href={`/reading/${content.id}`}>
-        <div className={`bg-white rounded-xl shadow-lg p-4 border-2 transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer ${
-          completed ? 'border-green-500' : 'border-gray-200'
-        }`} data-testid={`card-reading-${content.id}`}>
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="font-bold text-black text-lg flex-1">{content.title}</h3>
-            {completed && <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0" />}
-          </div>
-          <p className="text-sm text-gray-600">{content.description}</p>
-        </div>
-      </Link>
-    );
+  // Subtitles to show content type
+  const getSubtitle = (type: string) => {
+    if (type === 'whatsapp') return 'WhatsApp Message';
+    if (type === 'paragraph') return 'Short Story';
+    if (type === 'bollywood') return 'Bollywood';
+    return '';
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen px-4 py-4 pb-24">
-        {/* Header */}
-        <div className="flex items-center mb-4">
-          <button 
-            onClick={() => setLocation('/script')} 
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors mr-2"
-            data-testid="button-back"
-          >
-            <ArrowLeft className="w-6 h-6 text-gray-600" />
-          </button>
-          <h1 className="text-2xl font-bold text-black">Reading Practice</h1>
-        </div>
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
+        <ProgressSummary />
+        <SmartReviewSlot reviewCount={reviewCount} />
+        
+        <div className="flex-1 flex flex-col">
+          <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-t-xl font-bold text-lg flex items-center justify-between shadow-lg">
+            <span>Level 5: Reading</span>
+            <button onClick={() => setLocation('/script')} data-testid="button-close">
+              <XCircle className="w-5 h-5 hover:bg-white/20 rounded-full transition-colors" />
+            </button>
+          </div>
+          
+          <div className="bg-white px-6 py-6 rounded-b-xl shadow-xl flex-1 border-x border-b border-gray-200 flex flex-col">
+            <div className="flex flex-col gap-4 overflow-y-auto">
+              {readingContent.map((item, index) => {
+                const completed = isItemCompleted(item.id);
+                const unlocked = isItemUnlocked(index);
 
-        {/* Description */}
-        <p className="text-gray-600 mb-6 text-center text-sm">
-          Practice reading Hindi in different contexts. This is practice, not a test!
-        </p>
+                const content = (
+                  <div className={`flex items-center gap-5 rounded-lg p-2 -m-2 transition-colors ${!unlocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'}`} data-testid={`card-reading-${item.id}`}>
+                    <div className="relative flex-shrink-0">
+                      <div className={`w-[80px] h-[80px] rounded-full flex items-center justify-center text-white font-bold text-[40px] border-[3px] border-white shadow-md transition-colors ${!unlocked ? 'bg-gray-400' : completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'}`}>
+                        {itemIcons[index]}
+                      </div>
+                      {!unlocked && (
+                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center border-2 border-white">
+                          <Lock className="w-3.5 h-3.5 text-white" />
+                        </div>
+                      )}
+                      {completed && (
+                        <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[24px]`}>
+                        {item.title}
+                      </span>
+                      <p className="text-sm text-gray-500 mt-1">{getSubtitle(item.type)}</p>
+                      {!unlocked && index > 0 && (
+                        <p className="text-sm text-gray-400 mt-1">Complete {readingContent[index - 1].title} first</p>
+                      )}
+                    </div>
+                  </div>
+                );
 
-        {/* WhatsApp Messages Section */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <MessageSquareIcon className="w-6 h-6 text-[#ff9930]" />
-            <h2 className="text-xl font-bold text-black">WhatsApp Messages</h2>
-          </div>
-          <div className="space-y-3">
-            {whatsappContent.map(content => renderContentCard(content))}
-          </div>
-        </div>
-
-        {/* Paragraphs Section */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <BookOpen className="w-6 h-6 text-[#ff9930]" />
-            <h2 className="text-xl font-bold text-black">Short Stories</h2>
-          </div>
-          <div className="space-y-3">
-            {paragraphContent.map(content => renderContentCard(content))}
-          </div>
-        </div>
-
-        {/* Bollywood Section */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <Film className="w-6 h-6 text-[#ff9930]" />
-            <h2 className="text-xl font-bold text-black">Bollywood Vibes</h2>
-          </div>
-          <div className="space-y-3">
-            {bollywoodContent.map(content => renderContentCard(content))}
+                return unlocked ? (
+                  <Link key={item.id} href={`/reading/${item.id}`}>
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={item.id}>{content}</div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
         {/* Completion Message */}
-        {completedItems.length === readingContent.length && (
-          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-center shadow-lg animate-slide-in-up mb-6">
+        {allItemsComplete && (
+          <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 mt-6 text-center shadow-lg animate-slide-in-up">
             <CheckCircle2 className="w-16 h-16 text-white mx-auto mb-3" />
-            <h3 className="text-white font-bold text-xl mb-2">All Reading Complete!</h3>
+            <h3 className="text-white font-bold text-xl mb-2">Level Complete!</h3>
             <p className="text-white/90 text-sm">
-              Great job practicing your Hindi reading! 📚
+              Amazing work! You've completed all reading practice! 📚
             </p>
           </div>
         )}
+        
+        {/* Bottom Navigation - Fixed */}
+        <BottomNav />
       </div>
-
-      {/* Bottom Navigation - Fixed */}
-      <BottomNav />
     </div>
   );
 }

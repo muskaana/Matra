@@ -24,7 +24,7 @@ export default function ScriptPage() {
   const totalBeginnerPacks = 4; // 1 intro + 3 packs
   const totalAdvancedPacks = 3;
   const totalSentenceSections = 3;
-  const totalReadingPieces = 9;
+  const totalReadingPieces = 14; // 3 whatsapp + 3 paragraphs + 8 bollywood
   
   useEffect(() => {
     const vowels = localStorage.getItem('vowelsQuizzesCompleted');

@@ -104,7 +104,7 @@ export default function ReadingPage() {
                 return (
                   <div key={item.id}>
                     {sectionHeader && (
-                      <div className="text-sm font-semibold text-[#ff9930] mb-2 mt-2">
+                      <div className="text-xs font-semibold text-[#ff9930] mb-2 mt-2">
                         {sectionHeader}
                       </div>
                     )}

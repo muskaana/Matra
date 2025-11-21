@@ -91,7 +91,7 @@ export default function ReadingPage() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <span className={`leading-10 font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[24px]`}>
+                      <span className={`leading-tight font-medium ${!unlocked ? 'text-gray-500' : 'text-black'} text-[20px]`}>
                         {item.title}
                       </span>
                       {!unlocked && index > 0 && (

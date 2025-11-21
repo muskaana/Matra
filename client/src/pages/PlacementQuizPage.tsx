@@ -10,10 +10,8 @@ import { useLocation } from "wouter";
 import { CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import tigerCalm from '@assets/sitting-calm-tiger.png';
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/useAuth";
-import type { User } from "@shared/schema";
+import { useUserProfile } from "@/hooks/useUserProgress";
 
 interface ReadingQuestion {
   id: string;
@@ -51,7 +49,8 @@ const readingQuestions: ReadingQuestion[] = [
 
 export default function PlacementQuizPage() {
   const [, setLocation] = useLocation();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const { profile, createProfile, updateProfile, isLoading: isLoadingProfile } = useUserProfile();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: boolean }>({});
   const [showFeedback, setShowFeedback] = useState(false);
@@ -61,14 +60,6 @@ export default function PlacementQuizPage() {
   const currentQuestion = readingQuestions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === readingQuestions.length - 1;
   const progress = ((currentQuestionIndex + 1) / readingQuestions.length) * 100;
-
-  // Mutation to save placement results
-  const saveResultsMutation = useMutation({
-    mutationFn: async (data: { userId: string; masteredLessons: string[]; placementLevel: string; score: number }) => {
-      // Mark placement as complete
-      await apiRequest("/api/placement/complete", "POST", data);
-    }
-  });
 
   const handleAnswerSelect = (selectedOption: string) => {
     setSelectedAnswer(selectedOption);
@@ -130,29 +121,44 @@ export default function PlacementQuizPage() {
       startPath = "/script/vowels";
     }
 
-    // Save results to localStorage
+    // Save results to localStorage (fallback for unauthenticated users)
     localStorage.setItem('placementLevel', placementLevel);
     localStorage.setItem('placementScore', percentageScore.toString());
     localStorage.setItem('placementCompleted', 'true');
     localStorage.setItem('masteredLessons', JSON.stringify(masteredLessons));
 
-    // If user is authenticated, save to database
-    if (user && (user as User).id) {
-      saveResultsMutation.mutate({
-        userId: (user as User).id,
-        masteredLessons,
-        placementLevel,
-        score: percentageScore
-      });
-    }
-
-    // Show results
+    // Show results first
     setShowResults(true);
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 }
     });
+
+    // If user is authenticated, save to database
+    if (isAuthenticated) {
+      (async () => {
+        try {
+          // Create or update profile with placement data
+          if (!profile) {
+            await createProfile({
+              xp: 0,
+              currentStreak: 0,
+              placementLevel,
+              completedPlacement: true,
+              lastActiveDate: new Date().toISOString()
+            });
+          } else {
+            await updateProfile({
+              placementLevel,
+              completedPlacement: true
+            });
+          }
+        } catch (error) {
+          console.error("Failed to save placement results:", error);
+        }
+      })();
+    }
 
     // Navigate after showing results
     setTimeout(() => {

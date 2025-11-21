@@ -4,8 +4,10 @@ import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User } from "lucide-r
 import { getProgress } from '../lib/progress';
 import { getItemsDueForReview } from '../utils/smartReview';
 import BottomNav from '../components/BottomNav';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function ProfilePage() {
+  const { user } = useAuth();
   const [totalXP, setTotalXP] = useState<number>(0);
   const [currentStreak, setCurrentStreak] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
@@ -17,6 +19,10 @@ export default function ProfilePage() {
   const [advancedWordsCompleted, setAdvancedWordsCompleted] = useState<number>(0);
   const [sentencesCompleted, setSentencesCompleted] = useState<number>(0);
   const [placementLevel, setPlacementLevel] = useState<string>('');
+  
+  // Get user's name/email from auth  
+  // For now, display email until firstName/lastName are populated from OIDC
+  const userName = (user as any)?.email || 'Your Profile';
 
   const totalVowels = 5;
   const totalConsonants = 16;
@@ -92,9 +98,11 @@ export default function ProfilePage() {
               <User className="w-8 h-8 text-[#ff9930]" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Your Profile</h1>
+              <h1 className="text-2xl font-bold" data-testid="text-username">
+                {userName || 'Your Profile'}
+              </h1>
               {placementLevel && (
-                <p className="text-sm opacity-90">{placementLevel}</p>
+                <p className="text-sm opacity-90" data-testid="text-placement-level">{placementLevel}</p>
               )}
             </div>
           </div>

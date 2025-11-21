@@ -26,7 +26,6 @@ import confetti from "canvas-confetti";
 import tigerWaving from '@assets/generated_images/Waving_tiger_transparent_9a08bf58.png';
 import tigerExcited from '@assets/generated_images/Excited_jumping_tiger_transparent_3fe7af96.png';
 import tigerThinking from '@assets/generated_images/Thinking_tiger_transparent_d7773890.png';
-import tigerCute from '@assets/generated_images/Cute_tiger_mascot_character_95699dd7.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
@@ -45,8 +44,8 @@ const getRandomMessage = () => {
   return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
 };
 
-// Tiger images for variety in quiz screens
-const quizTigers = [tigerWaving, tigerExcited, tigerThinking, tigerCute];
+// Tiger images for variety in quiz screens - all same style, different poses
+const quizTigers = [tigerWaving, tigerExcited, tigerThinking];
 
 const getQuizTiger = (quizId: string) => {
   // Use quiz ID to deterministically select a tiger (same quiz = same tiger)
@@ -509,19 +508,14 @@ export default function QuizPage() {
             </div>
 
             {isMultiSelect && (
-              <div className="relative">
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-12 h-12 opacity-60 z-10">
-                  <img src={tigerWaving} alt="Waving tiger" className="w-full h-full object-contain" />
-                </div>
-                <button
-                  onClick={handleSubmitMultiSelect}
-                  disabled={selectedAnswers.length === 0}
-                  className="w-full py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-lg font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                  data-testid="button-submit"
-                >
-                  Submit Answer{selectedAnswers.length > 0 ? ` (${selectedAnswers.length} selected)` : ''}
-                </button>
-              </div>
+              <button
+                onClick={handleSubmitMultiSelect}
+                disabled={selectedAnswers.length === 0}
+                className="w-full py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-lg font-semibold shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                data-testid="button-submit"
+              >
+                Submit Answer{selectedAnswers.length > 0 ? ` (${selectedAnswers.length} selected)` : ''}
+              </button>
             )}
           </div>
         </div>

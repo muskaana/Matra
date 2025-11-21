@@ -44,7 +44,7 @@ export default function DashboardPage() {
     const totalSimilar = 5;
     const totalBeginnerPacks = 5;
     const totalAdvancedPacks = 4;
-    const totalSentenceSections = 30;
+    const totalSentenceSections = 4;
     const totalReadingPieces = 14;
 
     const allCharactersComplete = vowels >= totalVowels && 

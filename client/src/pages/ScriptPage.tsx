@@ -23,7 +23,7 @@ export default function ScriptPage() {
   const totalSimilar = 5;
   const totalBeginnerPacks = 5; // 5 word packs (intro is just instructional)
   const totalAdvancedPacks = 4;
-  const totalSentenceSections = 30;
+  const totalSentenceSections = 4;
   const totalReadingPieces = 14; // 3 whatsapp + 3 paragraphs + 8 bollywood
   
   useEffect(() => {

@@ -34,7 +34,9 @@ export default function ProfilePage() {
   
   // Get user's name from email (extract part before @)
   const userEmail = (user as any)?.email || '';
-  const userName = userEmail ? userEmail.split('@')[0] : 'Your Profile';
+  const userName = userEmail 
+    ? userEmail.split('@')[0].charAt(0).toUpperCase() + userEmail.split('@')[0].slice(1)
+    : 'Your Profile';
 
   const totalVowels = 5;
   const totalConsonants = 16;

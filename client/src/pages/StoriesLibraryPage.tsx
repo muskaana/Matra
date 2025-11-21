@@ -75,67 +75,59 @@ export default function StoriesLibraryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pb-24">
-      <div className="w-full max-w-md mx-auto px-6 py-6">
+    <div className="min-h-screen bg-white flex flex-col pb-20">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         {/* Header */}
-        <div className="mb-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Book className="w-8 h-8 text-[#ff9930]" />
-            <h1 className="text-3xl font-bold text-gray-900">Story Library</h1>
-          </div>
-          <p className="text-gray-600">
-            Practice reading with these mini-stories in Hindi
-          </p>
+        <div className="bg-[#ff9930] text-white px-6 py-4 font-bold text-xl">
+          Reading Practice
         </div>
+        
+        {/* Content Area */}
+        <div className="flex-1 px-6 py-6 overflow-y-auto">
+          <div className="grid grid-cols-2 gap-4">
+            {storiesLibrary.map((story, index) => {
+              const completed = isCompleted(story.id);
+              
+              // Story emojis for visual representation
+              const storyEmojis = ['👪', '🎓', '📱', '🪔', '✈️', '🛒', '💼', '🎂'];
 
-        {/* Stories List */}
-        <div className="space-y-4">
-          {storiesLibrary.map((story) => {
-            const completed = isCompleted(story.id);
-            
-            return (
-              <Link key={story.id} href={`/stories/${story.id}`} data-testid={`link-story-${story.id}`}>
-                <div 
-                  className={`bg-white rounded-xl shadow-md p-5 border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer ${
-                    completed ? 'border-green-200' : ''
-                  }`}
-                  data-testid={`story-${story.id}`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        {completed && (
-                          <CheckCircle className="w-5 h-5 text-green-600" data-testid={`checkmark-${story.id}`} />
-                        )}
-                        <h3 className="text-xl font-bold text-gray-900">
-                          {story.title}
-                        </h3>
-                        <span 
-                          className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold ${
-                            story.level === 'Beginner' 
-                              ? 'bg-green-100 text-green-700' 
-                              : 'bg-yellow-100 text-yellow-700'
-                          }`}
-                          title={story.level}
-                          data-testid={`badge-level-${story.id}`}
-                        >
-                          {story.level === 'Beginner' ? 'B' : 'I'}
-                        </span>
+              return (
+                <Link key={story.id} href={`/stories/${story.id}`} data-testid={`link-story-${story.id}`}>
+                  <div className="flex flex-col items-center" data-testid={`story-${story.id}`}>
+                    <div className="relative w-full">
+                      <div className={`w-full aspect-square rounded-2xl flex items-center justify-center text-white font-bold text-[40px] shadow-md transition-all ${
+                        completed ? 'bg-green-500 hover:bg-green-600' : 'bg-[#ff9930] hover:bg-[#CF7B24]'
+                      } cursor-pointer`}>
+                        {storyEmojis[index] || '📖'}
                       </div>
-                      <p className="text-gray-600 text-sm">
-                        {story.summaryEn}
-                      </p>
+                      {completed && (
+                        <div className="absolute bottom-2 right-2 w-7 h-7 bg-green-700 rounded-full flex items-center justify-center border-2 border-white">
+                          <CheckCircle className="w-4 h-4 text-white" data-testid={`checkmark-${story.id}`} />
+                        </div>
+                      )}
+                      {story.level && (
+                        <div className={`absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold border-2 border-white ${
+                          story.level === 'Beginner' 
+                            ? 'bg-green-100 text-green-700' 
+                            : 'bg-yellow-100 text-yellow-700'
+                        }`}
+                        data-testid={`badge-level-${story.id}`}>
+                          {story.level === 'Beginner' ? 'B' : 'I'}
+                        </div>
+                      )}
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
+                    <span className="text-center mt-3 font-medium text-sm text-black leading-tight">
+                      {story.title}
+                    </span>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
+          </div>
         </div>
+        
+        <BottomNav />
       </div>
-
-      <BottomNav />
     </div>
   );
 }

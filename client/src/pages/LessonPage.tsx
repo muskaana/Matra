@@ -183,13 +183,13 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+    <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto pb-6">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-4 py-4">
         <NavigationHeader backHref={backHref} />
         
         <ProgressBar progress={progress} />
 
-        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between overflow-hidden animate-slide-in-up relative">
+        <div className="bg-white rounded-2xl shadow-xl p-5 text-center border border-gray-100 flex-1 flex flex-col justify-between animate-slide-in-up relative">
           <MandalaPattern className="absolute top-2 right-2 w-12 h-12 opacity-20" color="#2E86AB" />
           
           {/* Character Display */}

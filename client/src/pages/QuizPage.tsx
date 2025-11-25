@@ -461,8 +461,8 @@ export default function QuizPage() {
     const percentage = finalScore.total > 0 ? Math.round((finalScore.correct / finalScore.total) * 100) : 0;
 
     return (
-      <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
-        <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+      <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto pb-6">
+        <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-4 py-4">
           <div className="flex items-center justify-between mb-2 flex-shrink-0">
             <div className="w-10"></div>
             <button onClick={handleConfirmExit} className="p-2 hover:bg-gray-100 rounded-full transition-colors" data-testid="button-close">
@@ -529,8 +529,8 @@ export default function QuizPage() {
 
   // Quiz question screen
   return (
-    <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+    <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto pb-6">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-4 py-4">
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="w-10"></div>
           <button onClick={handleExitClick} className="p-2 hover:bg-gray-100 rounded-full transition-colors" data-testid="button-exit">

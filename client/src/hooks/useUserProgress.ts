@@ -115,7 +115,7 @@ export function useProgress() {
 
   const createMutation = useMutation({
     mutationFn: async (data: InsertProgress) => {
-      return apiRequest("POST", `/api/progress/${userId}`, data);
+      return apiRequest("POST", `/api/progress`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/progress", userId] });

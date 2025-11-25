@@ -11,7 +11,8 @@ import { CheckCircle2, XCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import tigerCalm from '@assets/sitting-calm-tiger.png';
 import { useAuth } from "@/hooks/useAuth";
-import { useUserProfile } from "@/hooks/useUserProgress";
+import { useUserProfile, useProgress } from "@/hooks/useUserProgress";
+import { queryClient } from "@/lib/queryClient";
 
 interface ReadingQuestion {
   id: string;
@@ -51,6 +52,7 @@ export default function PlacementQuizPage() {
   const [, setLocation] = useLocation();
   const { user, isAuthenticated } = useAuth();
   const { profile, createProfile, updateProfile, isLoading: isLoadingProfile } = useUserProfile();
+  const { createProgress } = useProgress();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: boolean }>({});
   const [showFeedback, setShowFeedback] = useState(false);
@@ -59,7 +61,7 @@ export default function PlacementQuizPage() {
 
   const currentQuestion = readingQuestions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === readingQuestions.length - 1;
-  const progress = ((currentQuestionIndex + 1) / readingQuestions.length) * 100;
+  const quizProgress = ((currentQuestionIndex + 1) / readingQuestions.length) * 100;
 
   const handleAnswerSelect = (selectedOption: string) => {
     setSelectedAnswer(selectedOption);
@@ -126,6 +128,25 @@ export default function PlacementQuizPage() {
     localStorage.setItem('placementScore', percentageScore.toString());
     localStorage.setItem('placementCompleted', 'true');
     localStorage.setItem('masteredLessons', JSON.stringify(masteredLessons));
+    
+    // Mark character sections as complete based on placement level
+    // This ensures the Script page reflects the user's actual proficiency
+    if (placementLevel === "Script Confident") {
+      // User can skip all characters - mark everything complete
+      localStorage.setItem('vowelsQuizzesCompleted', '5');
+      localStorage.setItem('consonantsQuizzesCompleted', '16');
+      localStorage.setItem('matraQuizzesCompleted', '7');
+      localStorage.setItem('similarQuizzesCompleted', '5');
+      localStorage.setItem('numbersQuizzesCompleted', '4');
+    } else if (placementLevel === "Script Learner") {
+      // User knows basics - mark Vowels and Consonants complete
+      localStorage.setItem('vowelsQuizzesCompleted', '5');
+      localStorage.setItem('consonantsQuizzesCompleted', '16');
+    } else if (placementLevel === "Script Beginner") {
+      // User knows some letters - mark Vowels complete
+      localStorage.setItem('vowelsQuizzesCompleted', '5');
+    }
+    // Absolute Beginner: don't mark anything complete
 
     // Show results first
     setShowResults(true);
@@ -135,35 +156,90 @@ export default function PlacementQuizPage() {
       origin: { y: 0.6 }
     });
 
-    // If user is authenticated, save to database
-    if (isAuthenticated) {
-      (async () => {
-        try {
-          // Create or update profile with placement data
-          if (!profile) {
-            await createProfile({
-              xp: 0,
-              currentStreak: 0,
-              placementLevel,
-              completedPlacement: true,
-              lastActiveDate: new Date().toISOString()
-            });
-          } else {
-            await updateProfile({
-              placementLevel,
-              completedPlacement: true
-            });
-          }
-        } catch (error) {
-          console.error("Failed to save placement results:", error);
+    // Helper function to save progress to database
+    const saveToDatabase = async (): Promise<void> => {
+      if (!isAuthenticated || !user) return;
+      
+      try {
+        // Create or update profile with placement data
+        if (!profile) {
+          await createProfile({
+            xp: 0,
+            currentStreak: 0,
+            placementLevel,
+            completedPlacement: true,
+            lastActiveDate: new Date().toISOString()
+          });
+        } else {
+          await updateProfile({
+            placementLevel,
+            completedPlacement: true
+          });
         }
-      })();
-    }
+        
+        // Create progress records based on placement level
+        // This ensures ScriptPage shows character sections as complete for authenticated users
+        const userId = (user as any).id;
+        const progressRecordsToCreate: Array<{category: string; sectionId: string}> = [];
+        
+        if (placementLevel === "Script Confident") {
+          // Mark all character sections complete
+          for (let i = 1; i <= 5; i++) progressRecordsToCreate.push({ category: 'vowels', sectionId: i.toString() });
+          for (let i = 1; i <= 16; i++) progressRecordsToCreate.push({ category: 'consonants', sectionId: i.toString() });
+          for (let i = 1; i <= 7; i++) progressRecordsToCreate.push({ category: 'matra', sectionId: i.toString() });
+          for (let i = 1; i <= 5; i++) progressRecordsToCreate.push({ category: 'similar', sectionId: i.toString() });
+          for (let i = 1; i <= 4; i++) progressRecordsToCreate.push({ category: 'numbers', sectionId: i.toString() });
+        } else if (placementLevel === "Script Learner") {
+          // Mark Vowels and Consonants complete
+          for (let i = 1; i <= 5; i++) progressRecordsToCreate.push({ category: 'vowels', sectionId: i.toString() });
+          for (let i = 1; i <= 16; i++) progressRecordsToCreate.push({ category: 'consonants', sectionId: i.toString() });
+        } else if (placementLevel === "Script Beginner") {
+          // Mark Vowels complete
+          for (let i = 1; i <= 5; i++) progressRecordsToCreate.push({ category: 'vowels', sectionId: i.toString() });
+        }
+        
+        // Create all progress records in parallel
+        const createPromises = progressRecordsToCreate.map(record =>
+          createProgress({
+            userId,
+            category: record.category,
+            sectionId: record.sectionId,
+            type: 'lesson',
+            completed: true,
+            score: 100
+          }).catch(err => {
+            // Ignore errors for individual records (e.g., duplicates)
+            console.log(`Progress record might already exist for ${record.category}/${record.sectionId}`);
+          })
+        );
+        
+        // Wait for all progress records to be created
+        await Promise.all(createPromises);
+        
+        // Invalidate the progress query to refresh ScriptPage
+        queryClient.invalidateQueries({ queryKey: ["/api/progress", userId] });
+      } catch (error) {
+        console.error("Failed to save placement results:", error);
+      }
+    };
 
-    // Navigate after showing results
+    // Save to database and then navigate
+    const performNavigation = async () => {
+      // Wait for database save to complete for authenticated users
+      if (isAuthenticated && user) {
+        await saveToDatabase();
+      }
+      
+      // Navigate after showing results
+      setTimeout(() => {
+        setLocation(startPath);
+      }, 3000); // Reduced from 3500 since we're now waiting for DB save
+    };
+
+    // Start the navigation flow after showing confetti
     setTimeout(() => {
-      setLocation(startPath);
-    }, 3500);
+      performNavigation();
+    }, 500); // Small delay for confetti to appear
   };
 
   // Results Screen
@@ -230,7 +306,7 @@ export default function PlacementQuizPage() {
         <div className="w-full bg-gray-200 rounded-full h-2 mb-6 flex-shrink-0">
           <div 
             className="bg-[#ff9930] h-2 rounded-full transition-all duration-300"
-            style={{ width: `${progress}%` }}
+            style={{ width: `${quizProgress}%` }}
           />
         </div>
 

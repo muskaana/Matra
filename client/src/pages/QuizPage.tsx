@@ -260,6 +260,9 @@ export default function QuizPage() {
         if (quiz.nextLesson.includes('/')) {
           // End of quiz section - award XP and show results
           awardQuizXP();
+          // Capture the final score BEFORE showing results to prevent localStorage issues
+          const capturedScore = getQuizScore();
+          setFinalQuizScore(capturedScore);
           setShowResults(true);
         } else {
           // Next question - reset feedback state

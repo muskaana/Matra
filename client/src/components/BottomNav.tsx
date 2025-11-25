@@ -3,10 +3,11 @@ import { FileText, MessageSquare, Book, User, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useWordProgress } from "@/hooks/useUserProgress";
+import { advancedWordPacks } from "@/data/words/advanced";
 
 export default function BottomNav() {
   const [location, setLocation] = useLocation();
-  const [isScriptComplete, setIsScriptComplete] = useState(false);
+  const [isAdvancedComplete, setIsAdvancedComplete] = useState(false);
   const { user, isAuthenticated } = useAuth();
   const { wordProgress } = useWordProgress();
   
@@ -15,26 +16,24 @@ export default function BottomNav() {
   useEffect(() => {
     if (isAuthenticated && wordProgress) {
       // For authenticated users, check if advanced words are complete
-      // Import advanced packs to check completion properly
-      const { advancedWordPacks } = require('../data/words/advanced');
       const masteredWords = wordProgress.filter((w: any) => w.level === 'advanced' && w.mastered);
       const advancedComplete = advancedWordPacks.filter((pack: any) => 
         masteredWords.some((w: any) => w.wordId.startsWith(pack.id + '-'))
       ).length >= advancedWordPacks.length;
       
-      setIsScriptComplete(advancedComplete);
+      setIsAdvancedComplete(advancedComplete);
     } else {
       // For unauthenticated users, check localStorage
       const advancedCompleted = localStorage.getItem('advancedWordsCompleted');
       const advancedPacks = advancedCompleted ? JSON.parse(advancedCompleted) : [];
       const totalAdvancedPacks = 3; // emotions, conversation, culture
       
-      setIsScriptComplete(advancedPacks.length >= totalAdvancedPacks);
+      setIsAdvancedComplete(advancedPacks.length >= totalAdvancedPacks);
     }
   }, [isAuthenticated, wordProgress]);
 
   const handleReadClick = (e: React.MouseEvent) => {
-    if (!isScriptComplete) {
+    if (!isAdvancedComplete) {
       e.preventDefault();
       // Navigate to reading page which will show the locked message
       setLocation('/reading');
@@ -74,12 +73,12 @@ export default function BottomNav() {
             </button>
           </Link>
           
-          {/* Read tab - Locked until script is complete */}
+          {/* Read tab - Locked until advanced words complete */}
           <Link href="/reading">
             <button 
               onClick={handleReadClick}
               className={`flex flex-col items-center p-2 transition-all relative ${
-                isScriptComplete
+                isAdvancedComplete
                   ? (isActive('/reading') || isActive('/stories')
                       ? 'text-[#ff9930]' 
                       : 'text-gray-600 hover:text-[#ff9930]')
@@ -89,7 +88,7 @@ export default function BottomNav() {
             >
               <div className="relative">
                 <Book className="w-6 h-6 mb-1" />
-                {!isScriptComplete && (
+                {!isAdvancedComplete && (
                   <Lock className="w-3 h-3 absolute -top-1 -right-1 text-gray-400" />
                 )}
               </div>

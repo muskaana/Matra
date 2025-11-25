@@ -7,6 +7,8 @@ import BottomNav from '../components/BottomNav';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useProgress, useWordProgress, useSentenceProgress, useReviewItems } from '@/hooks/useUserProgress';
 import { Skeleton } from '@/components/ui/skeleton';
+import { beginnerWordPacks } from '@/data/words/beginner';
+import { advancedWordPacks } from '@/data/words/advanced';
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -116,8 +118,6 @@ export default function ProfilePage() {
   const beginnerWordsCompleted = useMemo(() => {
     if (!isAuthenticated) return localBeginnerWords;
     if (!wordProgress) return 0;
-    // Import beginner packs to check completion properly
-    const { beginnerWordPacks } = require('../data/words/beginner');
     const masteredWords = wordProgress.filter(w => w.level === 'beginner' && w.mastered);
     // Count packs with at least one mastered word (handles hyphenated IDs)
     return beginnerWordPacks.filter((pack: any) => 
@@ -128,8 +128,6 @@ export default function ProfilePage() {
   const advancedWordsCompleted = useMemo(() => {
     if (!isAuthenticated) return localAdvancedWords;
     if (!wordProgress) return 0;
-    // Import advanced packs to check completion properly
-    const { advancedWordPacks } = require('../data/words/advanced');
     const masteredWords = wordProgress.filter(w => w.level === 'advanced' && w.mastered);
     // Count packs with at least one mastered word (handles hyphenated IDs)
     return advancedWordPacks.filter((pack: any) => 

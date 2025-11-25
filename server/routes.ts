@@ -150,7 +150,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Word Progress Routes
+  // Word Progress Routes (with /progress/ path to match frontend)
+  app.get("/api/words/progress/:userId", async (req, res) => {
+    try {
+      const level = req.query.level as string | undefined;
+      const words = await storage.getWordProgress(req.params.userId, level);
+      res.json(words);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch word progress" });
+    }
+  });
+
+  app.post("/api/words/progress/:userId", async (req, res) => {
+    try {
+      const validatedData = insertWordProgressSchema.parse(req.body);
+      const word = await storage.createWordProgress(validatedData);
+      res.json(word);
+    } catch (error) {
+      console.error("Error creating word progress:", error);
+      res.status(400).json({ error: "Invalid word progress data" });
+    }
+  });
+
+  app.patch("/api/words/progress/:id", async (req, res) => {
+    try {
+      const validatedData = updateWordProgressSchema.parse(req.body);
+      const word = await storage.updateWordProgress(req.params.id, validatedData);
+      if (!word) {
+        return res.status(404).json({ error: "Word progress not found" });
+      }
+      res.json(word);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid word progress update data" });
+    }
+  });
+
+  // Legacy routes (keep for backward compatibility)
   app.get("/api/words/:userId", async (req, res) => {
     try {
       const level = req.query.level as string | undefined;
@@ -184,7 +219,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Sentence Progress Routes
+  // Sentence Progress Routes (with /progress/ path to match frontend)
+  app.get("/api/sentences/progress/:userId", async (req, res) => {
+    try {
+      const theme = req.query.theme as string | undefined;
+      const sentences = await storage.getSentenceProgress(req.params.userId, theme);
+      res.json(sentences);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch sentence progress" });
+    }
+  });
+
+  app.post("/api/sentences/progress/:userId", async (req, res) => {
+    try {
+      const validatedData = insertSentenceProgressSchema.parse(req.body);
+      const sentence = await storage.createSentenceProgress(validatedData);
+      res.json(sentence);
+    } catch (error) {
+      console.error("Error creating sentence progress:", error);
+      res.status(400).json({ error: "Invalid sentence progress data" });
+    }
+  });
+
+  app.patch("/api/sentences/progress/:id", async (req, res) => {
+    try {
+      const validatedData = updateSentenceProgressSchema.parse(req.body);
+      const sentence = await storage.updateSentenceProgress(req.params.id, validatedData);
+      if (!sentence) {
+        return res.status(404).json({ error: "Sentence progress not found" });
+      }
+      res.json(sentence);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid sentence progress update data" });
+    }
+  });
+
+  // Legacy Sentence Progress Routes
   app.get("/api/sentences/:userId", async (req, res) => {
     try {
       const theme = req.query.theme as string | undefined;
@@ -218,7 +288,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Reading Progress Routes
+  // Reading Progress Routes (with /progress/ path to match frontend)
+  app.get("/api/reading/progress/:userId", async (req, res) => {
+    try {
+      const level = req.query.level as string | undefined;
+      const reading = await storage.getReadingProgress(req.params.userId, level);
+      res.json(reading);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch reading progress" });
+    }
+  });
+
+  app.post("/api/reading/progress/:userId", async (req, res) => {
+    try {
+      const validatedData = insertReadingProgressSchema.parse(req.body);
+      const reading = await storage.createReadingProgress(validatedData);
+      res.json(reading);
+    } catch (error) {
+      console.error("Error creating reading progress:", error);
+      res.status(400).json({ error: "Invalid reading progress data" });
+    }
+  });
+
+  app.patch("/api/reading/progress/:id", async (req, res) => {
+    try {
+      const validatedData = updateReadingProgressSchema.parse(req.body);
+      const reading = await storage.updateReadingProgress(req.params.id, validatedData);
+      if (!reading) {
+        return res.status(404).json({ error: "Reading progress not found" });
+      }
+      res.json(reading);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid reading progress update data" });
+    }
+  });
+
+  // Legacy Reading Progress Routes
   app.get("/api/reading/:userId", async (req, res) => {
     try {
       const level = req.query.level as string | undefined;

@@ -17,6 +17,8 @@ import {
   useReadingProgress 
 } from "@/hooks/useUserProgress";
 import { Skeleton } from "@/components/ui/skeleton";
+import { beginnerWordPacks } from "@/data/words/beginner";
+import { advancedWordPacks } from "@/data/words/advanced";
 
 export default function DashboardPage() {
   const [, setLocation] = useLocation();
@@ -63,16 +65,18 @@ export default function DashboardPage() {
       }
 
       if (wordProgress) {
-        // Count unique mastered words by level
+        // Count completed PACKS (not individual words)
         const masteredWords = wordProgress.filter(wp => wp.mastered);
-        const uniqueBeginner = new Set(
-          masteredWords.filter(wp => wp.level === 'beginner').map(wp => wp.wordId)
-        );
-        const uniqueAdvanced = new Set(
-          masteredWords.filter(wp => wp.level === 'advanced').map(wp => wp.wordId)
-        );
-        beginnerWordsCount = uniqueBeginner.size;
-        advancedWordsCount = uniqueAdvanced.size;
+        const masteredBeginner = masteredWords.filter(wp => wp.level === 'beginner');
+        const masteredAdvanced = masteredWords.filter(wp => wp.level === 'advanced');
+        
+        // Count packs that have at least one mastered word
+        beginnerWordsCount = beginnerWordPacks.filter(pack => 
+          masteredBeginner.some(wp => wp.wordId.startsWith(pack.id + '-'))
+        ).length;
+        advancedWordsCount = advancedWordPacks.filter(pack => 
+          masteredAdvanced.some(wp => wp.wordId.startsWith(pack.id + '-'))
+        ).length;
       }
 
       if (sentenceProgress) {
@@ -113,8 +117,8 @@ export default function DashboardPage() {
     const totalConsonants = 16;
     const totalMatra = 7;
     const totalSimilar = 5;
-    const totalBeginnerPacks = 5;
-    const totalAdvancedPacks = 4;
+    const totalBeginnerPacks = beginnerWordPacks.length;
+    const totalAdvancedPacks = advancedWordPacks.length;
     const totalSentenceSections = 4;
     const totalReadingPieces = 14;
 

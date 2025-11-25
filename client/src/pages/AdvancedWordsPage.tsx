@@ -9,6 +9,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { XCircle, Lock, CheckCircle2 } from "lucide-react";
 import { advancedWordPacks } from '../data/words/advanced';
+import { beginnerWordPacks } from '../data/words/beginner';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import BottomNav from '../components/BottomNav';
@@ -20,6 +21,7 @@ export default function AdvancedWordsPage() {
   const { user } = useAuth();
   const { wordProgress, isLoading } = useWordProgress();
   const [localStorageCompleted, setLocalStorageCompleted] = useState<string[]>([]);
+  const [isBeginnerComplete, setIsBeginnerComplete] = useState(false);
 
   // Load from localStorage for unauthenticated users
   useEffect(() => {
@@ -30,6 +32,25 @@ export default function AdvancedWordsPage() {
       }
     }
   }, [user]);
+
+  // Check if beginner words are complete
+  useEffect(() => {
+    if (user && wordProgress) {
+      // For authenticated users, check if beginner words packs are complete
+      const masteredBeginner = wordProgress.filter((wp: any) => wp.level === 'beginner' && wp.mastered);
+      const beginnerComplete = beginnerWordPacks.filter((pack: any) => 
+        masteredBeginner.some((wp: any) => wp.wordId.startsWith(pack.id + '-'))
+      ).length >= beginnerWordPacks.length;
+      
+      setIsBeginnerComplete(beginnerComplete);
+    } else if (!user) {
+      // For unauthenticated users, check localStorage
+      const beginnerCompleted = localStorage.getItem('beginnerWordsCompleted');
+      const beginnerPacks = beginnerCompleted ? JSON.parse(beginnerCompleted) : [];
+      
+      setIsBeginnerComplete(beginnerPacks.length >= beginnerWordPacks.length);
+    }
+  }, [user, wordProgress]);
 
   // Extract completed pack IDs from database for authenticated users
   const packsCompleted = useMemo(() => {
@@ -64,6 +85,41 @@ export default function AdvancedWordsPage() {
 
   // Define icons for each pack
   const packIcons = ['😊', '🎬', '☀️'];
+
+  // Show locked state if beginner words not complete
+  if (!isBeginnerComplete && !isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pb-nav">
+        <div className="w-full max-w-md mx-auto px-6 py-6">
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="bg-white rounded-2xl shadow-lg p-8 w-full text-center">
+              <Lock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                Advanced Words Locked
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Complete all Beginner Words to unlock Advanced Words!
+              </p>
+              <div className="bg-orange-50 rounded-lg p-4 text-left">
+                <p className="text-sm font-semibold text-gray-900 mb-2">Complete these word packs:</p>
+                <ul className="space-y-1 text-sm text-gray-700">
+                  {beginnerWordPacks.map(pack => (
+                    <li key={pack.id}>• {pack.title}</li>
+                  ))}
+                </ul>
+              </div>
+              <Link href="/words/beginner" data-testid="link-go-to-beginner">
+                <div className="inline-block mt-6 px-6 py-3 bg-[#ff9930] hover:bg-[#ff8800] text-white rounded-lg font-semibold">
+                  Go to Beginner Words
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <BottomNav />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

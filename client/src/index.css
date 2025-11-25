@@ -279,3 +279,30 @@
     line-height: 1.6;
   }
 }
+
+/* Mobile-safe viewport height utilities */
+.h-screen-safe {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-screen-safe {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Bottom nav safe area - accounts for fixed bottom navigation */
+.pb-nav {
+  padding-bottom: 80px;
+}
+
+/* For pages with bottom nav, use this to prevent content cutoff */
+.h-screen-nav {
+  height: calc(100vh - 80px);
+  height: calc(100dvh - 80px);
+}
+
+.min-h-screen-nav {
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
+}

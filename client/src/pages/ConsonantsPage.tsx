@@ -50,8 +50,8 @@ export default function ConsonantsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-24">
+    <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-nav">
         <ProgressSummary />
         <SmartReviewSlot reviewCount={0} />
         

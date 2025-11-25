@@ -183,7 +183,7 @@ export default function LessonPage() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
+    <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
         <NavigationHeader backHref={backHref} />
         

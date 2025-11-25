@@ -176,8 +176,8 @@ export default function DashboardPage() {
     : (localStorage.getItem('placementLevel') || "");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen px-4 py-8 justify-center">
+    <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-screen-safe px-4 py-8 justify-center">
         <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 animate-fade-in">
           {/* Tiger Mascot */}
           <img 

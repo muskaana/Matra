@@ -40,7 +40,7 @@ export default function StoriesLibraryPage() {
   // Show locked state if script is not complete
   if (!isScriptComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white pb-24">
+      <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white pb-nav">
         <div className="w-full max-w-md mx-auto px-6 py-6">
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <div className="bg-white rounded-2xl shadow-lg p-8 w-full text-center">
@@ -75,7 +75,7 @@ export default function StoriesLibraryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col pb-20">
+    <div className="min-h-screen-safe bg-white flex flex-col pb-nav">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         {/* Header */}
         <div className="bg-[#ff9930] text-white px-6 py-4 font-bold text-xl">

@@ -97,13 +97,17 @@ export default function QuizPage() {
     setShowFeedback(false);
     setFeedbackCorrect(false);
     setIsRedirecting(false);
-    
-    // Clear localStorage score when starting the first quiz of a section (ends with 'a')
-    // This ensures fresh scores when beginning a new attempt
+  }, [quizId]);
+  
+  // Clear localStorage score when starting the first quiz of a section (ends with 'a')
+  // This ensures fresh scores when beginning a new attempt
+  // Use a separate effect that runs once per quiz section start
+  useEffect(() => {
     if (quizId.endsWith('a')) {
+      console.log('Starting new quiz section, clearing score for:', quizStorageKey);
       localStorage.removeItem(quizStorageKey);
     }
-  }, [quizId, quizStorageKey]);
+  }, [quizId]); // Only depend on quizId, not quizStorageKey to avoid re-running
   
   // Get cumulative score from localStorage
   const getQuizScore = () => {

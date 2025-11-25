@@ -88,6 +88,7 @@ export default function QuizPage() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackCorrect, setFeedbackCorrect] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [finalQuizScore, setFinalQuizScore] = useState<{correct: number, total: number} | null>(null);
   
   // Reset state when quiz changes (when navigating from one quiz to another)
   useEffect(() => {
@@ -275,6 +276,9 @@ export default function QuizPage() {
       if (quiz.nextLesson.includes('/')) {
         // End of quiz section - award XP and show results
         awardQuizXP();
+        // Capture the final score BEFORE showing results to prevent localStorage issues
+        const capturedScore = getQuizScore();
+        setFinalQuizScore(capturedScore);
         setShowResults(true);
       } else {
         // Next question - reset state
@@ -466,9 +470,8 @@ export default function QuizPage() {
   };
 
   // Results screen
-  if (showResults) {
-    const finalScore = getQuizScore();
-    const percentage = finalScore.total > 0 ? Math.round((finalScore.correct / finalScore.total) * 100) : 0;
+  if (showResults && finalQuizScore) {
+    const percentage = finalQuizScore.total > 0 ? Math.round((finalQuizScore.correct / finalQuizScore.total) * 100) : 0;
 
     return (
       <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto pb-6">
@@ -494,17 +497,17 @@ export default function QuizPage() {
                 <>
                   <p className="text-2xl font-bold text-black mb-2">{getRandomMessage()}</p>
                   <p className="text-gray-600 text-lg">
-                    You got {finalScore.correct} out of {finalScore.total} questions correct across all quizzes in this section
+                    You got {finalQuizScore.correct} out of {finalQuizScore.total} questions correct across all quizzes in this section
                   </p>
                 </>
               ) : (
                 <>
                   <p className="text-2xl font-bold text-black mb-2">Keep Practicing!</p>
                   <p className="text-gray-600 text-lg mb-2">
-                    You got {finalScore.correct} out of {finalScore.total} questions correct across all quizzes
+                    You got {finalQuizScore.correct} out of {finalQuizScore.total} questions correct across all quizzes
                   </p>
                   <p className="text-red-600 font-semibold">
-                    You need at least 60% ({Math.ceil(finalScore.total * 0.6)} out of {finalScore.total}) to continue. Try again!
+                    You need at least 60% ({Math.ceil(finalQuizScore.total * 0.6)} out of {finalQuizScore.total}) to continue. Try again!
                   </p>
                 </>
               )}

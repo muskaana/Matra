@@ -97,7 +97,13 @@ export default function QuizPage() {
     setShowFeedback(false);
     setFeedbackCorrect(false);
     setIsRedirecting(false);
-  }, [quizId]);
+    
+    // Clear localStorage score when starting the first quiz of a section (ends with 'a')
+    // This ensures fresh scores when beginning a new attempt
+    if (quizId.endsWith('a')) {
+      localStorage.removeItem(quizStorageKey);
+    }
+  }, [quizId, quizStorageKey]);
   
   // Get cumulative score from localStorage
   const getQuizScore = () => {

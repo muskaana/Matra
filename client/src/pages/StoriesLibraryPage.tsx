@@ -3,37 +3,52 @@ import { Link } from "wouter";
 import { Book, ChevronRight, CheckCircle, Lock } from "lucide-react";
 import { storiesLibrary } from "@/data/stories/library";
 import BottomNav from "@/components/BottomNav";
+import { useAuth } from "@/hooks/useAuth";
+import { useProgress } from "@/hooks/useUserProgress";
 
 export default function StoriesLibraryPage() {
   const [completedStories, setCompletedStories] = useState<string[]>([]);
   const [isScriptComplete, setIsScriptComplete] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const { progress } = useProgress();
 
   useEffect(() => {
     // Load completed stories from localStorage
     const completed = JSON.parse(localStorage.getItem('completedStories') || '[]');
     setCompletedStories(completed);
 
-    // Check if all script sections are completed
-    const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-    const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
-    const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-    const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-    const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
+    if (isAuthenticated && progress) {
+      // For authenticated users, check database progress
+      const vowelsComplete = progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length >= 5;
+      const consonantsComplete = progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length >= 16;
+      const matraComplete = progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length >= 7;
+      const similarComplete = progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length >= 5;
+      const numbersComplete = progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length >= 4;
+      
+      setIsScriptComplete(vowelsComplete && consonantsComplete && matraComplete && similarComplete && numbersComplete);
+    } else {
+      // For unauthenticated users, check localStorage
+      const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
+      const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
+      const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
+      const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
+      const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
 
-    const totalVowels = 5;
-    const totalConsonants = 16;
-    const totalMatra = 7;
-    const totalSimilar = 5;
-    const totalNumbers = 4;
+      const totalVowels = 5;
+      const totalConsonants = 16;
+      const totalMatra = 7;
+      const totalSimilar = 5;
+      const totalNumbers = 4;
 
-    const allScriptComplete = vowels >= totalVowels && 
-                              consonants >= totalConsonants && 
-                              matra >= totalMatra && 
-                              similar >= totalSimilar &&
-                              numbers >= totalNumbers;
-    
-    setIsScriptComplete(allScriptComplete);
-  }, []);
+      const allScriptComplete = vowels >= totalVowels && 
+                                consonants >= totalConsonants && 
+                                matra >= totalMatra && 
+                                similar >= totalSimilar &&
+                                numbers >= totalNumbers;
+      
+      setIsScriptComplete(allScriptComplete);
+    }
+  }, [isAuthenticated, progress]);
 
   const isCompleted = (storyId: string) => completedStories.includes(storyId);
 

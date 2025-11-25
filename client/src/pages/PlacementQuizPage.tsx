@@ -250,8 +250,8 @@ export default function PlacementQuizPage() {
     const placementLevel = localStorage.getItem('placementLevel') || "Absolute Beginner";
 
     return (
-      <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
-        <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+      <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto">
+        <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-4 py-4">
           <div className="bg-white rounded-2xl shadow-xl px-6 py-8 text-center border border-gray-100 flex-1 flex flex-col justify-center relative animate-slide-in-up">
             <div className="mb-8">
               <CheckCircle2 className="w-16 h-16 text-[#ff9930] mx-auto mb-4" />
@@ -295,8 +295,8 @@ export default function PlacementQuizPage() {
   const isAnswerCorrect = selectedAnswer === currentQuestion.correctAnswer;
 
   return (
-    <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
-      <div className="w-full max-w-md mx-auto flex flex-col h-full px-4 py-4">
+    <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col overflow-y-auto">
+      <div className="w-full max-w-md mx-auto flex flex-col min-h-full px-4 py-4">
         <div className="text-center mb-4 flex-shrink-0">
           <h1 className="text-2xl font-bold text-black mb-2">Reading Assessment</h1>
           <p className="text-sm text-gray-600">Question {currentQuestionIndex + 1} of {readingQuestions.length}</p>

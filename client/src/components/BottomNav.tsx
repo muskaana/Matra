@@ -2,49 +2,36 @@ import { Link, useLocation } from "wouter";
 import { FileText, MessageSquare, Book, User, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useProgress } from "@/hooks/useUserProgress";
+import { useWordProgress } from "@/hooks/useUserProgress";
 
 export default function BottomNav() {
   const [location, setLocation] = useLocation();
   const [isScriptComplete, setIsScriptComplete] = useState(false);
   const { user, isAuthenticated } = useAuth();
-  const { progress } = useProgress();
+  const { wordProgress } = useWordProgress();
   
   const isActive = (path: string) => location === path || location.startsWith(path);
   
   useEffect(() => {
-    if (isAuthenticated && progress) {
-      // For authenticated users, check database progress
-      const vowelsComplete = progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length >= 5;
-      const consonantsComplete = progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length >= 16;
-      const matraComplete = progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length >= 7;
-      const similarComplete = progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length >= 5;
-      const numbersComplete = progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length >= 4;
+    if (isAuthenticated && wordProgress) {
+      // For authenticated users, check if advanced words are complete
+      // Import advanced packs to check completion properly
+      const { advancedWordPacks } = require('../data/words/advanced');
+      const masteredWords = wordProgress.filter((w: any) => w.level === 'advanced' && w.mastered);
+      const advancedComplete = advancedWordPacks.filter((pack: any) => 
+        masteredWords.some((w: any) => w.wordId.startsWith(pack.id + '-'))
+      ).length >= advancedWordPacks.length;
       
-      setIsScriptComplete(vowelsComplete && consonantsComplete && matraComplete && similarComplete && numbersComplete);
+      setIsScriptComplete(advancedComplete);
     } else {
       // For unauthenticated users, check localStorage
-      const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-      const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
-      const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-      const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-      const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
-
-      const totalVowels = 5;
-      const totalConsonants = 16;
-      const totalMatra = 7;
-      const totalSimilar = 5;
-      const totalNumbers = 4;
-
-      const allScriptComplete = vowels >= totalVowels && 
-                                consonants >= totalConsonants && 
-                                matra >= totalMatra && 
-                                similar >= totalSimilar &&
-                                numbers >= totalNumbers;
+      const advancedCompleted = localStorage.getItem('advancedWordsCompleted');
+      const advancedPacks = advancedCompleted ? JSON.parse(advancedCompleted) : [];
+      const totalAdvancedPacks = 3; // emotions, conversation, culture
       
-      setIsScriptComplete(allScriptComplete);
+      setIsScriptComplete(advancedPacks.length >= totalAdvancedPacks);
     }
-  }, [isAuthenticated, progress]);
+  }, [isAuthenticated, wordProgress]);
 
   const handleReadClick = (e: React.MouseEvent) => {
     if (!isScriptComplete) {

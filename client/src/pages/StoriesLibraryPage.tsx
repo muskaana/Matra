@@ -4,56 +4,42 @@ import { Book, ChevronRight, CheckCircle, Lock } from "lucide-react";
 import { storiesLibrary } from "@/data/stories/library";
 import BottomNav from "@/components/BottomNav";
 import { useAuth } from "@/hooks/useAuth";
-import { useProgress } from "@/hooks/useUserProgress";
+import { useWordProgress } from "@/hooks/useUserProgress";
+import { advancedWordPacks } from "@/data/words/advanced";
 
 export default function StoriesLibraryPage() {
   const [completedStories, setCompletedStories] = useState<string[]>([]);
-  const [isScriptComplete, setIsScriptComplete] = useState(false);
+  const [isAdvancedComplete, setIsAdvancedComplete] = useState(false);
   const { isAuthenticated } = useAuth();
-  const { progress } = useProgress();
+  const { wordProgress } = useWordProgress();
 
   useEffect(() => {
     // Load completed stories from localStorage
     const completed = JSON.parse(localStorage.getItem('completedStories') || '[]');
     setCompletedStories(completed);
 
-    if (isAuthenticated && progress) {
-      // For authenticated users, check database progress
-      const vowelsComplete = progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length >= 5;
-      const consonantsComplete = progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length >= 16;
-      const matraComplete = progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length >= 7;
-      const similarComplete = progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length >= 5;
-      const numbersComplete = progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length >= 4;
+    if (isAuthenticated && wordProgress) {
+      // For authenticated users, check if advanced words are complete
+      const masteredWords = wordProgress.filter((w: any) => w.level === 'advanced' && w.mastered);
+      const advancedComplete = advancedWordPacks.filter((pack: any) => 
+        masteredWords.some((w: any) => w.wordId.startsWith(pack.id + '-'))
+      ).length >= advancedWordPacks.length;
       
-      setIsScriptComplete(vowelsComplete && consonantsComplete && matraComplete && similarComplete && numbersComplete);
+      setIsAdvancedComplete(advancedComplete);
     } else {
       // For unauthenticated users, check localStorage
-      const vowels = parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
-      const consonants = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
-      const matra = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
-      const similar = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
-      const numbers = parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
-
-      const totalVowels = 5;
-      const totalConsonants = 16;
-      const totalMatra = 7;
-      const totalSimilar = 5;
-      const totalNumbers = 4;
-
-      const allScriptComplete = vowels >= totalVowels && 
-                                consonants >= totalConsonants && 
-                                matra >= totalMatra && 
-                                similar >= totalSimilar &&
-                                numbers >= totalNumbers;
+      const advancedCompleted = localStorage.getItem('advancedWordsCompleted');
+      const advancedPacks = advancedCompleted ? JSON.parse(advancedCompleted) : [];
+      const totalAdvancedPacks = 3; // emotions, conversation, culture
       
-      setIsScriptComplete(allScriptComplete);
+      setIsAdvancedComplete(advancedPacks.length >= totalAdvancedPacks);
     }
-  }, [isAuthenticated, progress]);
+  }, [isAuthenticated, wordProgress]);
 
   const isCompleted = (storyId: string) => completedStories.includes(storyId);
 
-  // Show locked state if script is not complete
-  if (!isScriptComplete) {
+  // Show locked state if advanced words not complete
+  if (!isAdvancedComplete) {
     return (
       <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white pb-nav">
         <div className="w-full max-w-md mx-auto px-6 py-6">
@@ -64,21 +50,19 @@ export default function StoriesLibraryPage() {
                 Story Library Locked
               </h2>
               <p className="text-gray-600 mb-6">
-                Complete all Script sections first to unlock the Story Library!
+                Complete all Advanced Words to unlock the Story Library!
               </p>
               <div className="bg-orange-50 rounded-lg p-4 text-left">
-                <p className="text-sm font-semibold text-gray-900 mb-2">Complete these sections:</p>
+                <p className="text-sm font-semibold text-gray-900 mb-2">Complete these word packs:</p>
                 <ul className="space-y-1 text-sm text-gray-700">
-                  <li>• Vowels</li>
-                  <li>• Consonants</li>
-                  <li>• Matra (Vowel Symbols)</li>
-                  <li>• Similar Characters</li>
-                  <li>• Numbers</li>
+                  <li>• Emotions & Feelings</li>
+                  <li>• Everyday Chat</li>
+                  <li>• Culture & Entertainment</li>
                 </ul>
               </div>
-              <Link href="/script" data-testid="link-go-to-script">
+              <Link href="/words/advanced" data-testid="link-go-to-words">
                 <div className="inline-block mt-6 px-6 py-3 bg-[#ff9930] hover:bg-[#ff8800] text-white rounded-lg font-semibold">
-                  Go to Script
+                  Go to Advanced Words
                 </div>
               </Link>
             </div>

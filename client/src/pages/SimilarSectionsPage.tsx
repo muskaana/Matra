@@ -15,13 +15,32 @@ export default function SimilarSectionsPage() {
   const { user, isAuthenticated } = useAuth();
   const { progress, isLoading } = useProgress();
   
+  const sections = [
+    { id: 1, name: "Section 1: न vs ण", startLesson: "s1a" },
+    { id: 2, name: "Section 2: ज्ञ vs ग", startLesson: "s2a" },
+    { id: 3, name: "Section 3: ऋ vs री", startLesson: "s3a" },
+    { id: 4, name: "Section 4: स, श, ष", startLesson: "s4a" },
+    { id: 5, name: "Section 5: ं vs ँ", startLesson: "s5a" },
+  ];
+  
   useEffect(() => {
     if (isAuthenticated && progress) {
-      // For authenticated users, count completed lessons from database
+      // For authenticated users, count completed sections from database using sectionId
       const completedLessons = progress.filter(
         p => p.category === 'similar' && p.type === 'lesson' && p.completed
       );
-      setCompletedSections(completedLessons.length);
+      // Get unique section IDs and find consecutive completed sections
+      const completedSectionIds = completedLessons.map(p => p.sectionId).filter(Boolean);
+      let maxCompleted = 0;
+      for (const section of sections) {
+        if (completedSectionIds.includes(section.id.toString())) {
+          maxCompleted = section.id;
+        } else {
+          // Stop at first incomplete section to enforce linear progression
+          break;
+        }
+      }
+      setCompletedSections(maxCompleted);
     } else if (!isAuthenticated) {
       // For unauthenticated users, fall back to localStorage
       const completed = parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
@@ -43,14 +62,6 @@ export default function SimilarSectionsPage() {
       setShowCompletedModal(true);
     }
   };
-  
-  const sections = [
-    { id: 1, name: "Section 1: न vs ण", startLesson: "s1a" },
-    { id: 2, name: "Section 2: ज्ञ vs ग", startLesson: "s2a" },
-    { id: 3, name: "Section 3: ऋ vs री", startLesson: "s3a" },
-    { id: 4, name: "Section 4: स, श, ष", startLesson: "s4a" },
-    { id: 5, name: "Section 5: ं vs ँ", startLesson: "s5a" },
-  ];
 
   return (
     <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

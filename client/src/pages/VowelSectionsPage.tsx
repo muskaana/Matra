@@ -30,14 +30,18 @@ export default function VowelSectionsPage() {
         (p) => p.category === 'vowels' && p.type === 'lesson' && p.completed
       );
       
-      // Get all completed lesson IDs
-      const completedLessonIds = vowelLessons.map((p) => p.lessonId);
+      // Get all completed section IDs (sectionId stores the section number like "1", "2", etc.)
+      const completedSectionIds = vowelLessons.map((p) => p.sectionId).filter(Boolean);
       
-      // Count how many sections are completed
+      // Count consecutive completed sections (must be in order)
       let completed = 0;
       for (const section of sections) {
-        if (completedLessonIds.includes(section.startLesson)) {
+        // Check if this section's ID (as string) is in the completed sections
+        if (completedSectionIds.includes(section.id.toString())) {
           completed = section.id;
+        } else {
+          // Stop at first incomplete section to enforce linear progression
+          break;
         }
       }
       

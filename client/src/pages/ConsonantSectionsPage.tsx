@@ -15,13 +15,43 @@ export default function ConsonantSectionsPage() {
   const { user, isAuthenticated } = useAuth();
   const { progress, isLoading } = useProgress();
   
+  const sections = [
+    { id: 1, name: "क vs ख", startLesson: "c1" },
+    { id: 2, name: "ग vs घ", startLesson: "c3" },
+    { id: 3, name: "च vs छ", startLesson: "c5" },
+    { id: 4, name: "ज vs झ", startLesson: "c7" },
+    { id: 5, name: "ट vs ठ", startLesson: "c9" },
+    { id: 6, name: "ड vs ढ", startLesson: "c11" },
+    { id: 7, name: "त vs थ", startLesson: "c13" },
+    { id: 8, name: "द vs ध", startLesson: "c15" },
+    { id: 9, name: "प vs फ", startLesson: "c17" },
+    { id: 10, name: "ब vs भ", startLesson: "c19" },
+    { id: 11, name: "न vs म", startLesson: "c21" },
+    { id: 12, name: "य vs र", startLesson: "c23" },
+    { id: 13, name: "ल vs व", startLesson: "c25" },
+    { id: 14, name: "श vs ष", startLesson: "c27" },
+    { id: 15, name: "स vs ह", startLesson: "c29" },
+    { id: 16, name: "क्ष त्र ज्ञ", startLesson: "c31" },
+  ];
+  
   useEffect(() => {
     if (isAuthenticated && progress) {
-      // For authenticated users, count completed lessons from database
+      // For authenticated users, count completed sections from database using sectionId
       const completedLessons = progress.filter(
         p => p.category === 'consonants' && p.type === 'lesson' && p.completed
       );
-      setCompletedSections(completedLessons.length);
+      // Get unique section IDs and find consecutive completed sections
+      const completedSectionIds = completedLessons.map(p => p.sectionId).filter(Boolean);
+      let maxCompleted = 0;
+      for (const section of sections) {
+        if (completedSectionIds.includes(section.id.toString())) {
+          maxCompleted = section.id;
+        } else {
+          // Stop at first incomplete section to enforce linear progression
+          break;
+        }
+      }
+      setCompletedSections(maxCompleted);
     } else if (!isAuthenticated) {
       // For unauthenticated users, fall back to localStorage
       const completed = parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
@@ -43,25 +73,6 @@ export default function ConsonantSectionsPage() {
       setShowCompletedModal(true);
     }
   };
-  
-  const sections = [
-    { id: 1, name: "क vs ख", startLesson: "c1" },
-    { id: 2, name: "ग vs घ", startLesson: "c3" },
-    { id: 3, name: "च vs छ", startLesson: "c5" },
-    { id: 4, name: "ज vs झ", startLesson: "c7" },
-    { id: 5, name: "ट vs ठ", startLesson: "c9" },
-    { id: 6, name: "ड vs ढ", startLesson: "c11" },
-    { id: 7, name: "त vs थ", startLesson: "c13" },
-    { id: 8, name: "द vs ध", startLesson: "c15" },
-    { id: 9, name: "प vs फ", startLesson: "c17" },
-    { id: 10, name: "ब vs भ", startLesson: "c19" },
-    { id: 11, name: "न vs म", startLesson: "c21" },
-    { id: 12, name: "य vs र", startLesson: "c23" },
-    { id: 13, name: "ल vs व", startLesson: "c25" },
-    { id: 14, name: "श vs ष", startLesson: "c27" },
-    { id: 15, name: "स vs ह", startLesson: "c29" },
-    { id: 16, name: "क्ष त्र ज्ञ", startLesson: "c31" },
-  ];
 
   return (
     <div className="h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col pb-nav">

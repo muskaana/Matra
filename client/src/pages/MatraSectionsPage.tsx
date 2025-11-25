@@ -16,6 +16,16 @@ export default function MatraSectionsPage() {
   const { isAuthenticated } = useAuth();
   const { progress, isLoading } = useProgress();
   
+  const sections = [
+    { id: 1, name: "Section 1: ◌ा", startLesson: "m1" },
+    { id: 2, name: "Section 2: i/ee", startLesson: "m2" },
+    { id: 3, name: "Section 3: u/oo", startLesson: "m4" },
+    { id: 4, name: "Section 4: e/ai", startLesson: "m7" },
+    { id: 5, name: "Section 5: o/ao", startLesson: "m9" },
+    { id: 6, name: "Section 6: ri/h", startLesson: "m6" },
+    { id: 7, name: "Section 7: Nasals", startLesson: "m11" },
+  ];
+  
   useEffect(() => {
     if (isAuthenticated && progress) {
       const matraLessons = progress.filter(p => 
@@ -23,7 +33,18 @@ export default function MatraSectionsPage() {
         p.type === 'lesson' && 
         p.completed
       );
-      setCompletedSections(matraLessons.length);
+      // Get unique section IDs and find consecutive completed sections
+      const completedSectionIds = matraLessons.map(p => p.sectionId).filter(Boolean);
+      let maxCompleted = 0;
+      for (const section of sections) {
+        if (completedSectionIds.includes(section.id.toString())) {
+          maxCompleted = section.id;
+        } else {
+          // Stop at first incomplete section to enforce linear progression
+          break;
+        }
+      }
+      setCompletedSections(maxCompleted);
     } else if (!isAuthenticated) {
       const completed = parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
       setCompletedSections(completed);
@@ -44,16 +65,6 @@ export default function MatraSectionsPage() {
       setShowCompletedModal(true);
     }
   };
-  
-  const sections = [
-    { id: 1, name: "Section 1: ◌ा", startLesson: "m1" },
-    { id: 2, name: "Section 2: i/ee", startLesson: "m2" },
-    { id: 3, name: "Section 3: u/oo", startLesson: "m4" },
-    { id: 4, name: "Section 4: e/ai", startLesson: "m7" },
-    { id: 5, name: "Section 5: o/ao", startLesson: "m9" },
-    { id: 6, name: "Section 6: ri/h", startLesson: "m6" },
-    { id: 7, name: "Section 7: Nasals", startLesson: "m11" },
-  ];
 
   return (
     <div className="h-screen bg-gradient-to-b from-orange-50 to-white flex flex-col">

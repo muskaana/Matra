@@ -132,10 +132,38 @@ export default function QuizPage() {
   const isSimilar = location.includes('/similar/');
   const isNumbers = location.includes('/numbers/');
 
+  // Handle invalid quiz IDs - redirect to correct quiz or sections page
+  useEffect(() => {
+    if (!quiz) {
+      // If quiz ID doesn't have a letter suffix, try adding 'a' (e.g., "1" -> "1a")
+      const hasLetterSuffix = /[a-z]$/i.test(quizId);
+      if (!hasLetterSuffix && quizId) {
+        const correctedId = quizId + 'a';
+        // Check if the corrected ID exists
+        if (allQuizzes[correctedId]) {
+          let basePath = '/script/lesson/vowels/quiz/';
+          if (location.includes('/consonants/')) basePath = '/script/lesson/consonants/quiz/';
+          if (location.includes('/matra/')) basePath = '/script/lesson/matra/quiz/';
+          if (location.includes('/similar/')) basePath = '/script/lesson/similar/quiz/';
+          if (location.includes('/numbers/')) basePath = '/script/lesson/numbers/quiz/';
+          setLocation(`${basePath}${correctedId}`);
+          return;
+        }
+      }
+      // If no valid quiz found, redirect to sections page
+      const sectionsPath = location.includes('/consonants/') ? '/script/consonants/sections' :
+                           location.includes('/matra/') ? '/script/matra/sections' :
+                           location.includes('/similar/') ? '/script/similar/sections' :
+                           location.includes('/numbers/') ? '/script/numbers/sections' :
+                           '/script/vowels/sections';
+      setLocation(sectionsPath);
+    }
+  }, [quiz, quizId, location, setLocation]);
+
   if (!quiz) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
-        <p>Quiz not found</p>
+        <Loader2 className="w-8 h-8 text-[#ff9930] animate-spin" />
       </div>
     );
   }

@@ -70,7 +70,12 @@ export default function QuizPage() {
   const params = useParams();
   const [, setLocation] = useLocation();
   const location = useLocation()[0];
-  const quizId = params.id as string;
+  const rawQuizId = params.id as string;
+  
+  // Check if quiz ID has a valid letter suffix (e.g., "1a", "2b")
+  // If not, this is an invalid ID like "1" that needs to be corrected to "1a"
+  const hasLetterSuffix = /[a-z]$/i.test(rawQuizId);
+  const quizId = hasLetterSuffix ? rawQuizId : rawQuizId + 'a';
   const quiz = allQuizzes[quizId];
   
   // Auth and database hooks
@@ -81,6 +86,19 @@ export default function QuizPage() {
   // Get quiz section ID (e.g., "1" from "1a", "1b", etc. or "2" from "s2a", "s2b")
   const quizSectionId = quizId.replace(/[a-z]/gi, '');
   const quizStorageKey = `quiz_${location.split('/')[3]}_section_${quizSectionId}`;
+  
+  // Redirect to correct URL if quiz ID was corrected (e.g., "/quiz/1" -> "/quiz/1a")
+  useEffect(() => {
+    if (!hasLetterSuffix && rawQuizId && quiz) {
+      let basePath = '/script/lesson/vowels/quiz/';
+      if (location.includes('/consonants/')) basePath = '/script/lesson/consonants/quiz/';
+      if (location.includes('/matra/')) basePath = '/script/lesson/matra/quiz/';
+      if (location.includes('/similar/')) basePath = '/script/lesson/similar/quiz/';
+      if (location.includes('/numbers/')) basePath = '/script/lesson/numbers/quiz/';
+      // Use window.location.replace to update the URL cleanly
+      window.location.replace(`${basePath}${quizId}`);
+    }
+  }, [hasLetterSuffix, rawQuizId, quizId, quiz, location]);
   
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -132,35 +150,23 @@ export default function QuizPage() {
   const isSimilar = location.includes('/similar/');
   const isNumbers = location.includes('/numbers/');
 
-  // Handle invalid quiz IDs - redirect to correct quiz or sections page
-  useEffect(() => {
-    if (!quiz) {
-      // If quiz ID doesn't have a letter suffix, try adding 'a' (e.g., "1" -> "1a")
-      const hasLetterSuffix = /[a-z]$/i.test(quizId);
-      if (!hasLetterSuffix && quizId) {
-        const correctedId = quizId + 'a';
-        // Check if the corrected ID exists
-        if (allQuizzes[correctedId]) {
-          let basePath = '/script/lesson/vowels/quiz/';
-          if (location.includes('/consonants/')) basePath = '/script/lesson/consonants/quiz/';
-          if (location.includes('/matra/')) basePath = '/script/lesson/matra/quiz/';
-          if (location.includes('/similar/')) basePath = '/script/lesson/similar/quiz/';
-          if (location.includes('/numbers/')) basePath = '/script/lesson/numbers/quiz/';
-          setLocation(`${basePath}${correctedId}`);
-          return;
-        }
-      }
-      // If no valid quiz found, redirect to sections page
-      const sectionsPath = location.includes('/consonants/') ? '/script/consonants/sections' :
-                           location.includes('/matra/') ? '/script/matra/sections' :
-                           location.includes('/similar/') ? '/script/similar/sections' :
-                           location.includes('/numbers/') ? '/script/numbers/sections' :
-                           '/script/vowels/sections';
-      setLocation(sectionsPath);
-    }
-  }, [quiz, quizId, location, setLocation]);
+  // Show loading state if redirecting due to missing letter suffix
+  if (!hasLetterSuffix && rawQuizId) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-[#ff9930] animate-spin" />
+      </div>
+    );
+  }
 
+  // Handle invalid quiz IDs - redirect to sections page
   if (!quiz) {
+    const sectionsPath = location.includes('/consonants/') ? '/script/consonants/sections' :
+                         location.includes('/matra/') ? '/script/matra/sections' :
+                         location.includes('/similar/') ? '/script/similar/sections' :
+                         location.includes('/numbers/') ? '/script/numbers/sections' :
+                         '/script/vowels/sections';
+    window.location.replace(sectionsPath);
     return (
       <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-[#ff9930] animate-spin" />

@@ -116,17 +116,25 @@ export default function ProfilePage() {
   const beginnerWordsCompleted = useMemo(() => {
     if (!isAuthenticated) return localBeginnerWords;
     if (!wordProgress) return 0;
-    // Count unique completed beginner word packs
-    const uniquePacks = new Set(wordProgress.filter(w => w.level === 'beginner' && w.mastered).map(w => w.wordId.split('-')[0]));
-    return uniquePacks.size;
+    // Import beginner packs to check completion properly
+    const { beginnerWordPacks } = require('../data/words/beginner');
+    const masteredWords = wordProgress.filter(w => w.level === 'beginner' && w.mastered);
+    // Count packs with at least one mastered word (handles hyphenated IDs)
+    return beginnerWordPacks.filter((pack: any) => 
+      masteredWords.some((w: any) => w.wordId.startsWith(pack.id + '-'))
+    ).length;
   }, [isAuthenticated, wordProgress, localBeginnerWords]);
 
   const advancedWordsCompleted = useMemo(() => {
     if (!isAuthenticated) return localAdvancedWords;
     if (!wordProgress) return 0;
-    // Count unique completed advanced word packs
-    const uniquePacks = new Set(wordProgress.filter(w => w.level === 'advanced' && w.mastered).map(w => w.wordId.split('-')[0]));
-    return uniquePacks.size;
+    // Import advanced packs to check completion properly
+    const { advancedWordPacks } = require('../data/words/advanced');
+    const masteredWords = wordProgress.filter(w => w.level === 'advanced' && w.mastered);
+    // Count packs with at least one mastered word (handles hyphenated IDs)
+    return advancedWordPacks.filter((pack: any) => 
+      masteredWords.some((w: any) => w.wordId.startsWith(pack.id + '-'))
+    ).length;
   }, [isAuthenticated, wordProgress, localAdvancedWords]);
 
   const sentencesCompleted = useMemo(() => {

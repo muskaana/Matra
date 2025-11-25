@@ -39,16 +39,15 @@ export default function AdvancedWordsPage() {
         wp => wp.level === 'advanced' && wp.mastered
       );
       
-      // Extract unique pack IDs from wordId format "${packId}-${word}"
-      const packIds = new Set<string>();
-      masteredAdvancedWords.forEach(wp => {
-        const packId = wp.wordId.split('-')[0];
-        if (packId) {
-          packIds.add(packId);
-        }
-      });
+      // Check which packs have at least one mastered word
+      // Use startsWith to handle pack IDs with hyphens
+      const completedPackIds = advancedWordPacks
+        .filter(pack => 
+          masteredAdvancedWords.some(wp => wp.wordId.startsWith(pack.id + '-'))
+        )
+        .map(pack => pack.id);
       
-      return Array.from(packIds);
+      return completedPackIds;
     }
     
     // Fall back to localStorage for unauthenticated users

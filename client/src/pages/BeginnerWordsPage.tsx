@@ -31,15 +31,13 @@ export default function BeginnerWordsPage() {
         wp => wp.level === 'beginner' && wp.mastered
       );
       
-      // Extract unique packIds from wordId (format is "${packId}-${word}")
-      const completedPackIds = Array.from(
-        new Set(
-          masteredBeginnerWords.map(wp => {
-            const packId = wp.wordId.split('-')[0];
-            return packId;
-          })
+      // Check which packs have at least one mastered word
+      // Use startsWith to handle pack IDs with hyphens (e.g., "nasal-words")
+      const completedPackIds = beginnerWordPacks
+        .filter(pack => 
+          masteredBeginnerWords.some(wp => wp.wordId.startsWith(pack.id + '-'))
         )
-      );
+        .map(pack => pack.id);
       
       setPacksCompleted(completedPackIds);
     } else if (!user) {

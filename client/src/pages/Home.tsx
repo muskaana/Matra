@@ -121,7 +121,7 @@ export default function Home() {
       </section>
 
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="max-w-sm mx-4 rounded-2xl">
+        <DialogContent className="max-w-sm rounded-2xl">
           <DialogHeader className="text-center">
             <div className="mx-auto mb-4">
               <img 

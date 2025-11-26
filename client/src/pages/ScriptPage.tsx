@@ -6,7 +6,7 @@ import BottomNav from '../components/BottomNav';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import { useAuth } from '@/hooks/useAuth';
-import { useProgress, useReadingProgress, useWordProgress, useSentenceProgress } from '@/hooks/useUserProgress';
+import { useProgress, useReadingProgress, useWordProgress, useSentenceProgress, useReviewItems } from '@/hooks/useUserProgress';
 import { beginnerWordPacks } from '@/data/words/beginner';
 import { advancedWordPacks } from '@/data/words/advanced';
 
@@ -16,8 +16,9 @@ export default function ScriptPage() {
   const { readingProgress } = useReadingProgress();
   const { wordProgress } = useWordProgress();
   const { sentenceProgress } = useSentenceProgress();
+  const { reviewItems } = useReviewItems();
   
-  const [reviewCount, setReviewCount] = useState<number>(0);
+  const [localReviewCount, setLocalReviewCount] = useState<number>(0);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
   
   const totalVowels = 5;
@@ -129,9 +130,25 @@ export default function ScriptPage() {
       setReadingIntroComplete(true);
     }
     
-    const dueItems = getItemsDueForReview();
-    setReviewCount(dueItems.length);
-  }, []);
+    // Only use localStorage for unauthenticated users
+    if (!user) {
+      const dueItems = getItemsDueForReview();
+      setLocalReviewCount(dueItems.length);
+    }
+  }, [user]);
+
+  // Calculate review count: use database for authenticated users, localStorage for guests
+  const reviewCount = useMemo(() => {
+    if (user && reviewItems) {
+      // Count items due for review from database
+      const now = new Date();
+      return reviewItems.filter(item => {
+        if (!item.nextReviewDate) return false;
+        return new Date(item.nextReviewDate) <= now;
+      }).length;
+    }
+    return localReviewCount;
+  }, [user, reviewItems, localReviewCount]);
   
   const isVowelsComplete = vowelsCompleted >= totalVowels;
   const isConsonantsComplete = consonantsCompleted >= totalConsonants;

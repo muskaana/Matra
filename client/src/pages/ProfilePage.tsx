@@ -90,29 +90,37 @@ export default function ProfilePage() {
     }
   }, [isAuthenticated]);
 
-  // Calculate counts from database data
+  // Calculate counts from database data - use unique sectionIds to prevent duplicate counting
   const vowelsCompleted = useMemo(() => {
     if (!isAuthenticated) return localVowels;
     if (!progress) return 0;
-    return progress.filter(p => p.category === 'vowels' && p.completed && p.type === 'lesson').length;
+    const completedLessons = progress.filter(p => p.category === 'vowels' && p.completed && p.type === 'lesson');
+    const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+    return Math.min(uniqueSections.size, totalVowels);
   }, [isAuthenticated, progress, localVowels]);
 
   const consonantsCompleted = useMemo(() => {
     if (!isAuthenticated) return localConsonants;
     if (!progress) return 0;
-    return progress.filter(p => p.category === 'consonants' && p.completed && p.type === 'lesson').length;
+    const completedLessons = progress.filter(p => p.category === 'consonants' && p.completed && p.type === 'lesson');
+    const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+    return Math.min(uniqueSections.size, totalConsonants);
   }, [isAuthenticated, progress, localConsonants]);
 
   const matraCompleted = useMemo(() => {
     if (!isAuthenticated) return localMatra;
     if (!progress) return 0;
-    return progress.filter(p => p.category === 'matra' && p.completed && p.type === 'lesson').length;
+    const completedLessons = progress.filter(p => p.category === 'matra' && p.completed && p.type === 'lesson');
+    const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+    return Math.min(uniqueSections.size, totalMatra);
   }, [isAuthenticated, progress, localMatra]);
 
   const similarCompleted = useMemo(() => {
     if (!isAuthenticated) return localSimilar;
     if (!progress) return 0;
-    return progress.filter(p => p.category === 'similar' && p.completed && p.type === 'lesson').length;
+    const completedLessons = progress.filter(p => p.category === 'similar' && p.completed && p.type === 'lesson');
+    const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+    return Math.min(uniqueSections.size, totalSimilar);
   }, [isAuthenticated, progress, localSimilar]);
 
   const beginnerWordsCompleted = useMemo(() => {

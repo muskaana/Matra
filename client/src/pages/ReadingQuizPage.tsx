@@ -12,7 +12,7 @@ import confetti from "canvas-confetti";
 import { readingContent } from '../data/reading/content';
 import { readingQuizzes } from '../data/reading/quizzes';
 import tigerExcited from '@assets/excited-jumping-tiger.png';
-import { awardQuizXP, awardXP } from '../lib/progress';
+import { awardQuizXP, awardXP, calculateStreakUpdate } from '../lib/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useReadingProgress } from '@/hooks/useUserProgress';
 
@@ -87,8 +87,14 @@ export default function ReadingQuizPage() {
             
             // Award only quiz XP (10) for replaying - story bonus already awarded
             if (profile) {
+              const { newStreak, today } = calculateStreakUpdate(
+                profile.currentStreak || 0,
+                profile.lastActiveDate
+              );
               await updateProfile({
                 xp: (profile.xp || 0) + 10,
+                currentStreak: newStreak,
+                lastActiveDate: today,
               });
             }
           } else {
@@ -102,8 +108,14 @@ export default function ReadingQuizPage() {
             
             // Award full XP for new completion (10 for quiz + 50 for story completion = 60 total)
             if (profile) {
+              const { newStreak, today } = calculateStreakUpdate(
+                profile.currentStreak || 0,
+                profile.lastActiveDate
+              );
               await updateProfile({
                 xp: (profile.xp || 0) + 60,
+                currentStreak: newStreak,
+                lastActiveDate: today,
               });
             }
           }

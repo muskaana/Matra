@@ -12,7 +12,7 @@ import confetti from "canvas-confetti";
 import { advancedWordPacks } from '../data/words/advanced';
 import { advancedWordQuizzes } from '../data/words/advancedQuizzes';
 import tigerExcited from '@assets/excited-jumping-tiger.png';
-import { awardQuizXP, awardUnitXP } from '../lib/progress';
+import { awardQuizXP, awardUnitXP, calculateStreakUpdate } from '../lib/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useWordProgress } from '@/hooks/useUserProgress';
 
@@ -117,8 +117,14 @@ export default function AdvancedWordQuizPage() {
             }
 
             if (profile) {
+              const { newStreak, today } = calculateStreakUpdate(
+                profile.currentStreak || 0,
+                profile.lastActiveDate
+              );
               await updateProfile({
                 xp: (profile.xp || 0) + xpToAward,
+                currentStreak: newStreak,
+                lastActiveDate: today,
               });
             }
           } catch (error) {

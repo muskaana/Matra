@@ -57,6 +57,43 @@ function isConsecutiveDay(lastDate: string, currentDate: string): boolean {
 }
 
 /**
+ * Calculate streak update for database users
+ * Returns { newStreak, today } to use with updateProfile
+ */
+export function calculateStreakUpdate(
+  currentStreak: number,
+  lastActiveDate: string | null | undefined
+): { newStreak: number; today: string } {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+  
+  let newStreak = currentStreak || 0;
+  
+  if (lastActiveDate === today) {
+    // Already practiced today - keep streak
+    newStreak = currentStreak || 0;
+  } else if (lastActiveDate) {
+    // Check if it's a consecutive day
+    const last = new Date(lastActiveDate);
+    const current = new Date(today);
+    const diffTime = current.getTime() - last.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 1) {
+      // Consecutive day - increment streak
+      newStreak = (currentStreak || 0) + 1;
+    } else {
+      // Missed days - reset streak to 1
+      newStreak = 1;
+    }
+  } else {
+    // First activity ever
+    newStreak = 1;
+  }
+  
+  return { newStreak, today };
+}
+
+/**
  * Award XP and update streak
  * @param amount - Amount of XP to award (10 for quiz, 15 for unit)
  */

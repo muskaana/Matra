@@ -29,7 +29,7 @@ import tigerSleeping from '@assets/sleeping-tiger.png';
 import { allQuizzes } from '../data/quizzes';
 import { ProgressBar } from '../components/shared/ProgressBar';
 import { recordAttempt, ContentType } from '../utils/smartReview';
-import { awardQuizXP } from '../lib/progress';
+import { awardQuizXP, calculateStreakUpdate } from '../lib/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useProgress } from '@/hooks/useUserProgress';
 
@@ -430,10 +430,16 @@ export default function QuizPage() {
               });
             }
             
-            // Update profile XP (quiz awards 10 XP)
-            const currentXP = profile?.xp || 0;
+            // Update profile XP and streak (quiz awards 10 XP)
+            const { newStreak, today } = calculateStreakUpdate(
+              profile?.currentStreak || 0,
+              profile?.lastActiveDate
+            );
+            
             await updateProfile({
-              xp: currentXP + 10,
+              xp: (profile?.xp || 0) + 10,
+              currentStreak: newStreak,
+              lastActiveDate: today,
             });
           } catch (error) {
             console.error('Failed to save progress to database:', error);

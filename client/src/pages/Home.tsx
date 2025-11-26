@@ -142,7 +142,7 @@ export default function Home() {
             <a href="/api/login" className="w-full">
               <button className="w-full inline-flex items-center justify-center gap-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300" data-testid="button-modal-login">
                 <LogIn className="w-5 h-5" />
-                Log In with Replit
+                Log In
               </button>
             </a>
             <button 

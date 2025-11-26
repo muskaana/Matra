@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
-import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User, RefreshCw, CloudUpload, Check } from "lucide-react";
+import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User, RefreshCw, CloudUpload, Check, Pencil, X } from "lucide-react";
 import { getProgress } from '../lib/progress';
 import { getItemsDueForReview, getReviewData } from '../utils/smartReview';
 import BottomNav from '../components/BottomNav';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useProgress, useWordProgress, useSentenceProgress, useReviewItems } from '@/hooks/useUserProgress';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
 import { beginnerWordPacks } from '@/data/words/beginner';
 import { advancedWordPacks } from '@/data/words/advanced';
 import { apiRequest, queryClient } from '@/lib/queryClient';
@@ -29,6 +30,11 @@ export default function ProfilePage() {
   const [migrationComplete, setMigrationComplete] = useState(false);
   const [localReviewItemCount, setLocalReviewItemCount] = useState(0);
   
+  // State for name editing
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editedName, setEditedName] = useState('');
+  const [isSavingName, setIsSavingName] = useState(false);
+  
   // State for localStorage fallback (when not authenticated)
   const [localXP, setLocalXP] = useState<number>(0);
   const [localStreak, setLocalStreak] = useState<number>(0);
@@ -44,9 +50,68 @@ export default function ProfilePage() {
   
   // Get user's name from email (extract part before @ and before .)
   const userEmail = (user as any)?.email || '';
-  const userName = userEmail 
+  const emailBasedName = userEmail 
     ? userEmail.split('@')[0].split('.')[0].charAt(0).toUpperCase() + userEmail.split('@')[0].split('.')[0].slice(1)
     : 'Your Profile';
+  
+  // Use display name from profile if available, otherwise fallback to email-based name
+  const userName = isAuthenticated && profile?.displayName 
+    ? profile.displayName 
+    : emailBasedName;
+  
+  // Handle name editing
+  const handleStartEditingName = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login required",
+        description: "Please log in to change your display name.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setEditedName(userName);
+    setIsEditingName(true);
+  };
+  
+  const handleCancelEditingName = () => {
+    setIsEditingName(false);
+    setEditedName('');
+  };
+  
+  const handleSaveName = async () => {
+    if (!user || !editedName.trim()) return;
+    
+    const trimmedName = editedName.trim();
+    if (trimmedName.length > 50) {
+      toast({
+        title: "Name too long",
+        description: "Please use a name with 50 characters or less.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsSavingName(true);
+    try {
+      await apiRequest('PATCH', `/api/profile/${(user as any).id}`, { displayName: trimmedName });
+      queryClient.invalidateQueries({ queryKey: [`/api/profile/${(user as any).id}`] });
+      setIsEditingName(false);
+      setEditedName('');
+      toast({
+        title: "Name updated!",
+        description: `Your display name is now "${trimmedName}".`,
+      });
+    } catch (error) {
+      console.error("Error saving name:", error);
+      toast({
+        title: "Failed to save",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingName(false);
+    }
+  };
 
   const totalVowels = 5;
   const totalConsonants = 16;
@@ -247,18 +312,65 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen-safe bg-gradient-to-b from-orange-50 to-white flex flex-col">
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-nav">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-8 rounded-xl shadow-xl mb-6">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+        {/* Header - Clickable to edit name */}
+        <div 
+          className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-8 rounded-xl shadow-xl mb-6 cursor-pointer active:opacity-90 transition-opacity"
+          onClick={!isEditingName ? handleStartEditingName : undefined}
+          data-testid="button-edit-name"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center flex-shrink-0">
               <User className="w-8 h-8 text-[#ff9930]" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold" data-testid="text-username">
-                {userName || 'Your Profile'}
-              </h1>
-              {placementLevel && (
-                <p className="text-sm opacity-90" data-testid="text-placement-level">{placementLevel}</p>
+            <div className="flex-1 min-w-0">
+              {isEditingName ? (
+                <div className="flex flex-col gap-2" onClick={(e) => e.stopPropagation()}>
+                  <Input
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="bg-white/90 text-gray-900 border-0 font-semibold text-lg h-10"
+                    maxLength={50}
+                    autoFocus
+                    data-testid="input-display-name"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      onClick={handleSaveName}
+                      disabled={isSavingName || !editedName.trim()}
+                      className="flex-1 bg-white text-[#ff9930] font-semibold py-2 px-4 rounded-lg flex items-center justify-center gap-1 disabled:opacity-50"
+                      data-testid="button-save-name"
+                    >
+                      {isSavingName ? (
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Check className="w-4 h-4" />
+                      )}
+                      Save
+                    </button>
+                    <button
+                      onClick={handleCancelEditingName}
+                      className="bg-white/20 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center gap-1"
+                      data-testid="button-cancel-edit-name"
+                    >
+                      <X className="w-4 h-4" />
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2">
+                    <h1 className="text-2xl font-bold truncate" data-testid="text-username">
+                      {userName || 'Your Profile'}
+                    </h1>
+                    <Pencil className="w-4 h-4 opacity-70 flex-shrink-0" />
+                  </div>
+                  {placementLevel && (
+                    <p className="text-sm opacity-90" data-testid="text-placement-level">{placementLevel}</p>
+                  )}
+                  <p className="text-xs opacity-70 mt-1">Tap to change name</p>
+                </>
               )}
             </div>
           </div>

@@ -31,6 +31,7 @@ export type User = typeof users.$inferSelect;
 // User profile and gamification data
 export const userProfiles = pgTable("user_profiles", {
   userId: varchar("user_id").primaryKey().references(() => users.id),
+  displayName: text("display_name"), // Custom display name set by user
   xp: integer("xp").notNull().default(0),
   currentStreak: integer("current_streak").notNull().default(0),
   lastActiveDate: text("last_active_date"),
@@ -40,6 +41,7 @@ export const userProfiles = pgTable("user_profiles", {
 
 export const insertUserProfileSchema = createInsertSchema(userProfiles).omit({ userId: true });
 export const updateUserProfileSchema = z.object({
+  displayName: z.string().min(1).max(50).optional(),
   xp: z.number().int().min(0).optional(),
   currentStreak: z.number().int().min(0).optional(),
   lastActiveDate: z.string().optional(),

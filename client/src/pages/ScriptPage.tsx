@@ -6,12 +6,16 @@ import BottomNav from '../components/BottomNav';
 import ProgressSummary from '../components/ProgressSummary';
 import SmartReviewSlot from '../components/SmartReviewSlot';
 import { useAuth } from '@/hooks/useAuth';
-import { useProgress, useReadingProgress } from '@/hooks/useUserProgress';
+import { useProgress, useReadingProgress, useWordProgress, useSentenceProgress } from '@/hooks/useUserProgress';
+import { beginnerWordPacks } from '@/data/words/beginner';
+import { advancedWordPacks } from '@/data/words/advanced';
 
 export default function ScriptPage() {
   const { user } = useAuth();
   const { progress } = useProgress();
   const { readingProgress } = useReadingProgress();
+  const { wordProgress } = useWordProgress();
+  const { sentenceProgress } = useSentenceProgress();
   
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [readingIntroComplete, setReadingIntroComplete] = useState(false);
@@ -21,74 +25,94 @@ export default function ScriptPage() {
   const totalMatra = 7;
   const totalSimilar = 5;
   const totalNumbers = 4;
-  const totalBeginnerPacks = 5;
-  const totalAdvancedPacks = 4;
+  const totalBeginnerPacks = beginnerWordPacks.length;
+  const totalAdvancedPacks = advancedWordPacks.length;
   const totalSentenceSections = 4;
   const totalReadingPieces = 14;
   
   // Calculate completion counts from database or localStorage
+  // Use unique sectionIds to prevent duplicate counting
   const vowelsCompleted = useMemo(() => {
     if (user && progress) {
-      return progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed).length;
+      const completedLessons = progress.filter(p => p.category === 'vowels' && p.type === 'lesson' && p.completed);
+      const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+      return Math.min(uniqueSections.size, totalVowels);
     }
     return parseInt(localStorage.getItem('vowelsQuizzesCompleted') || '0');
   }, [user, progress]);
   
   const consonantsCompleted = useMemo(() => {
     if (user && progress) {
-      return progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed).length;
+      const completedLessons = progress.filter(p => p.category === 'consonants' && p.type === 'lesson' && p.completed);
+      const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+      return Math.min(uniqueSections.size, totalConsonants);
     }
     return parseInt(localStorage.getItem('consonantsQuizzesCompleted') || '0');
   }, [user, progress]);
   
   const matraCompleted = useMemo(() => {
     if (user && progress) {
-      return progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed).length;
+      const completedLessons = progress.filter(p => p.category === 'matra' && p.type === 'lesson' && p.completed);
+      const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+      return Math.min(uniqueSections.size, totalMatra);
     }
     return parseInt(localStorage.getItem('matraQuizzesCompleted') || '0');
   }, [user, progress]);
   
   const similarCompleted = useMemo(() => {
     if (user && progress) {
-      return progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed).length;
+      const completedLessons = progress.filter(p => p.category === 'similar' && p.type === 'lesson' && p.completed);
+      const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+      return Math.min(uniqueSections.size, totalSimilar);
     }
     return parseInt(localStorage.getItem('similarQuizzesCompleted') || '0');
   }, [user, progress]);
   
   const numbersCompleted = useMemo(() => {
     if (user && progress) {
-      return progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed).length;
+      const completedLessons = progress.filter(p => p.category === 'numbers' && p.type === 'lesson' && p.completed);
+      const uniqueSections = new Set(completedLessons.map(p => p.sectionId).filter(Boolean));
+      return Math.min(uniqueSections.size, totalNumbers);
     }
     return parseInt(localStorage.getItem('numbersQuizzesCompleted') || '0');
   }, [user, progress]);
   
-  // Word/sentence pack completion: Use database for authenticated users, localStorage for guests
+  // Word pack completion: Use database for authenticated users, localStorage for guests
   const beginnerWordsCompleted = useMemo(() => {
-    if (user) {
-      // Database: count completed beginner word packs (currently 0 until we track pack completion)
-      return 0;
+    if (user && wordProgress) {
+      const masteredBeginner = wordProgress.filter(wp => wp.level === 'beginner' && wp.mastered);
+      // Count packs with at least one mastered word
+      return beginnerWordPacks.filter(pack => 
+        masteredBeginner.some(wp => wp.wordId.startsWith(pack.id + '-'))
+      ).length;
     }
     const local = localStorage.getItem('beginnerWordsCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, [user]);
+  }, [user, wordProgress]);
   
   const advancedWordsCompleted = useMemo(() => {
-    if (user) {
-      // Database: count completed advanced word packs (currently 0 until we track pack completion)
-      return 0;
+    if (user && wordProgress) {
+      const masteredAdvanced = wordProgress.filter(wp => wp.level === 'advanced' && wp.mastered);
+      // Count packs with at least one mastered word
+      return advancedWordPacks.filter(pack => 
+        masteredAdvanced.some(wp => wp.wordId.startsWith(pack.id + '-'))
+      ).length;
     }
     const local = localStorage.getItem('advancedWordsCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, [user]);
+  }, [user, wordProgress]);
   
   const sentencesCompleted = useMemo(() => {
-    if (user) {
-      // Database: count completed sentence sections (currently 0 until we track section completion)
-      return 0;
+    if (user && sentenceProgress) {
+      // Count unique themes/sections with mastered sentences
+      const uniqueThemes = new Set(
+        sentenceProgress.filter(sp => sp.mastered).map(sp => sp.theme || sp.sentenceId.split('-')[0])
+      );
+      return uniqueThemes.size;
     }
     const local = localStorage.getItem('sentencesCompleted');
     return local ? JSON.parse(local).length : 0;
-  }, [user]);
+  }, [user, sentenceProgress]);
   
   const readingCompleted = useMemo(() => {
     if (user && readingProgress) {

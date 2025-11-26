@@ -44,8 +44,8 @@ export default function ProfilePage() {
   const totalConsonants = 16;
   const totalMatra = 7;
   const totalSimilar = 5;
-  const totalBeginnerPacks = 5;
-  const totalAdvancedPacks = 4;
+  const totalBeginnerPacks = beginnerWordPacks.length;
+  const totalAdvancedPacks = advancedWordPacks.length;
   const totalSentenceSections = 4;
 
   // Load localStorage data when not authenticated

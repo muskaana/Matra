@@ -26,9 +26,8 @@ export default function BottomNav() {
       // For unauthenticated users, check localStorage
       const advancedCompleted = localStorage.getItem('advancedWordsCompleted');
       const advancedPacks = advancedCompleted ? JSON.parse(advancedCompleted) : [];
-      const totalAdvancedPacks = 3; // emotions, conversation, culture
       
-      setIsAdvancedComplete(advancedPacks.length >= totalAdvancedPacks);
+      setIsAdvancedComplete(advancedPacks.length >= advancedWordPacks.length);
     }
   }, [isAuthenticated, wordProgress]);
 

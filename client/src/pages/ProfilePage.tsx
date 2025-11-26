@@ -42,10 +42,10 @@ export default function ProfilePage() {
   const [localSentences, setLocalSentences] = useState<number>(0);
   const [localPlacementLevel, setLocalPlacementLevel] = useState<string>('');
   
-  // Get user's name from email (extract part before @)
+  // Get user's name from email (extract part before @ and before .)
   const userEmail = (user as any)?.email || '';
   const userName = userEmail 
-    ? userEmail.split('@')[0].charAt(0).toUpperCase() + userEmail.split('@')[0].slice(1)
+    ? userEmail.split('@')[0].split('.')[0].charAt(0).toUpperCase() + userEmail.split('@')[0].split('.')[0].slice(1)
     : 'Your Profile';
 
   const totalVowels = 5;

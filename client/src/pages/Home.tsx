@@ -138,21 +138,12 @@ export default function Home() {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="flex flex-col gap-3 mt-4">
-            <a href="/api/login" className="w-full">
-              <button className="w-full inline-flex items-center justify-center gap-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300" data-testid="button-modal-login">
-                <LogIn className="w-5 h-5" />
-                Log In
-              </button>
-            </a>
-            <button 
-              onClick={() => setShowLoginModal(false)}
-              className="text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors"
-              data-testid="button-modal-cancel"
-            >
-              Maybe later
+          <a href="/api/login" className="w-full">
+            <button className="w-full inline-flex items-center justify-center gap-2 bg-[#ff9930] hover:bg-[#CF7B24] text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300" data-testid="button-modal-login">
+              <LogIn className="w-5 h-5" />
+              Log In
             </button>
-          </div>
+          </a>
         </DialogContent>
       </Dialog>
     </div>

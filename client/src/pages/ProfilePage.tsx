@@ -314,7 +314,7 @@ export default function ProfilePage() {
       <div className="w-full max-w-sm mx-auto flex-1 flex flex-col px-6 py-6 pb-nav">
         {/* Header - Clickable to edit name */}
         <div 
-          className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-8 rounded-xl shadow-xl mb-6 cursor-pointer active:opacity-90 transition-opacity"
+          className="bg-gradient-to-r from-[#ff9930] to-[#ff7730] text-white px-6 py-4 rounded-xl shadow-xl mb-6 cursor-pointer active:opacity-90 transition-opacity"
           onClick={!isEditingName ? handleStartEditingName : undefined}
           data-testid="button-edit-name"
         >

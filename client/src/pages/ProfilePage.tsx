@@ -1,18 +1,21 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
-import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User } from "lucide-react";
+import { Star, Flame, Trophy, TrendingUp, Calendar, Award, User, RefreshCw, CloudUpload, Check } from "lucide-react";
 import { getProgress } from '../lib/progress';
-import { getItemsDueForReview } from '../utils/smartReview';
+import { getItemsDueForReview, getReviewData } from '../utils/smartReview';
 import BottomNav from '../components/BottomNav';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile, useProgress, useWordProgress, useSentenceProgress, useReviewItems } from '@/hooks/useUserProgress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { beginnerWordPacks } from '@/data/words/beginner';
 import { advancedWordPacks } from '@/data/words/advanced';
+import { apiRequest, queryClient } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const isAuthenticated = !!user;
+  const { toast } = useToast();
   
   // Fetch data from database when authenticated
   const { profile, isLoading: isLoadingProfile } = useUserProfile();
@@ -20,6 +23,11 @@ export default function ProfilePage() {
   const { wordProgress, isLoading: isLoadingWords } = useWordProgress();
   const { sentenceProgress, isLoading: isLoadingSentences } = useSentenceProgress();
   const { reviewItems, isLoading: isLoadingReview } = useReviewItems();
+  
+  // State for migration
+  const [isMigrating, setIsMigrating] = useState(false);
+  const [migrationComplete, setMigrationComplete] = useState(false);
+  const [localReviewItemCount, setLocalReviewItemCount] = useState(0);
   
   // State for localStorage fallback (when not authenticated)
   const [localXP, setLocalXP] = useState<number>(0);
@@ -89,6 +97,62 @@ export default function ProfilePage() {
       if (placement) setLocalPlacementLevel(placement);
     }
   }, [isAuthenticated]);
+
+  // Check for localStorage review items that can be migrated
+  useEffect(() => {
+    if (isAuthenticated) {
+      const reviewData = getReviewData();
+      const itemCount = Object.keys(reviewData.items || {}).length;
+      setLocalReviewItemCount(itemCount);
+    }
+  }, [isAuthenticated]);
+
+  // Handle migration of localStorage review items to database
+  const handleMigrateReviewItems = async () => {
+    if (!user || isMigrating) return;
+    
+    setIsMigrating(true);
+    try {
+      const reviewData = getReviewData();
+      const items = Object.values(reviewData.items || {});
+      
+      if (items.length === 0) {
+        toast({
+          title: "No items to migrate",
+          description: "Your local review data is empty.",
+        });
+        setIsMigrating(false);
+        return;
+      }
+
+      const response = await apiRequest('POST', `/api/review/import/${(user as any).id}`, { items });
+      const result = await response.json();
+      
+      if (result.success) {
+        // Clear localStorage after successful migration
+        localStorage.removeItem('smartReview');
+        setLocalReviewItemCount(0);
+        setMigrationComplete(true);
+        
+        // Invalidate the review items query to refresh from database
+        queryClient.invalidateQueries({ queryKey: [`/api/review/${(user as any).id}`] });
+        
+        toast({
+          title: "Migration complete!",
+          description: `${result.imported} items synced to your account.${result.skipped > 0 ? ` ${result.skipped} already existed.` : ''}`,
+        });
+      }
+    } catch (error) {
+      console.error("Migration error:", error);
+      toast({
+        title: "Migration failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsMigrating(false);
+    }
+  };
 
   // Calculate counts from database data - use unique sectionIds to prevent duplicate counting
   const vowelsCompleted = useMemo(() => {
@@ -384,6 +448,53 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
+
+        {/* Sync Review Data - Only show for authenticated users with local data */}
+        {isAuthenticated && localReviewItemCount > 0 && !migrationComplete && (
+          <div className="bg-blue-50 rounded-xl shadow-md border border-blue-200 p-6 mt-6">
+            <h2 className="text-lg font-bold text-black mb-2 flex items-center gap-2">
+              <CloudUpload className="w-5 h-5 text-blue-500" />
+              Sync Your Progress
+            </h2>
+            <p className="text-sm text-gray-600 mb-4">
+              You have {localReviewItemCount} review item{localReviewItemCount > 1 ? 's' : ''} saved on this device. 
+              Sync them to your account so they appear on all your devices.
+            </p>
+            <button
+              onClick={handleMigrateReviewItems}
+              disabled={isMigrating}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              data-testid="button-sync-review"
+            >
+              {isMigrating ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" />
+                  Syncing...
+                </>
+              ) : (
+                <>
+                  <CloudUpload className="w-5 h-5" />
+                  Sync to My Account
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
+        {/* Migration Complete Message */}
+        {migrationComplete && (
+          <div className="bg-green-50 rounded-xl shadow-md border border-green-200 p-6 mt-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                <Check className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-green-800">Sync Complete!</p>
+                <p className="text-sm text-green-600">Your review items are now available on all devices.</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom Navigation - Fixed */}

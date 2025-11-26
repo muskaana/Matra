@@ -150,6 +150,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Batch import review items from localStorage
+  app.post("/api/review/import/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { items } = req.body;
+      
+      if (!Array.isArray(items)) {
+        return res.status(400).json({ error: "Items must be an array" });
+      }
+
+      const imported: any[] = [];
+      const skipped: string[] = [];
+
+      for (const item of items) {
+        // Check if item already exists
+        const existing = await storage.getReviewItem(userId, item.character);
+        if (existing) {
+          skipped.push(item.character);
+          continue;
+        }
+
+        // Map localStorage format to database format
+        const reviewItem = {
+          userId,
+          character: item.character || item.contentId,
+          category: item.contentType || item.category || "unknown",
+          difficulty: item.difficulty || "medium",
+          consecutiveCorrect: item.streak || 0,
+          totalAttempts: (item.mistakeCount || 0) + (item.streak || 0),
+          correctAttempts: item.streak || 0,
+          nextReviewDate: item.nextReview ? new Date(item.nextReview) : null,
+          lastReviewedAt: item.lastReviewed ? new Date(item.lastReviewed) : null,
+          intervalDays: 1,
+          mastered: false,
+        };
+
+        const created = await storage.createReviewItem(reviewItem);
+        imported.push(created);
+      }
+
+      res.json({ 
+        success: true, 
+        imported: imported.length, 
+        skipped: skipped.length,
+        skippedItems: skipped 
+      });
+    } catch (error) {
+      console.error("Error importing review items:", error);
+      res.status(500).json({ error: "Failed to import review items" });
+    }
+  });
+
   // Word Progress Routes (with /progress/ path to match frontend)
   app.get("/api/words/progress/:userId", async (req, res) => {
     try {

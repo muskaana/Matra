@@ -291,9 +291,9 @@
   min-height: 100dvh;
 }
 
-/* Bottom nav safe area - accounts for fixed bottom navigation */
+/* Bottom nav safe area - accounts for fixed bottom navigation + iPhone safe area */
 .pb-nav {
-  padding-bottom: 80px;
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
 }
 
 /* For pages with bottom nav, use this to prevent content cutoff */

@@ -40,7 +40,7 @@ export default function BottomNav() {
   };
   
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
       <div className="w-full max-w-sm mx-auto px-6 py-3">
         <div className="flex justify-around items-center">
           <Link href="/script">
